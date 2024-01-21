@@ -4,13 +4,18 @@
   "description": "JavaScript date utility library for Temporal",
   "type": "module",
   "exports": {
-    ".": "./index.js"
+    ".": {
+      "import": "./dist/esm/index.js",
+      "types": "./dist/esm/index.d.ts"
+    }
   },
   "sideEffects": false,
   "engines": {
     "node": ">=18"
   },
+  "files": ["dist"],
   "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "homepage": "https://github.com/fabon-f/vremel#readme",
@@ -25,5 +30,10 @@
     "Temporal"
   ],
   "author": "fabon <syobon.hinata.public@gmail.com> (https://www.fabon.info/)",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/strictest": "^2.0.2",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
+  }
 }
