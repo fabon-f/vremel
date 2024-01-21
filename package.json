@@ -13,10 +13,12 @@
   "engines": {
     "node": ">=18"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest"
   },
   "homepage": "https://github.com/fabon-f/vremel#readme",
   "bugs": {
@@ -32,8 +34,11 @@
   "author": "fabon <syobon.hinata.public@gmail.com> (https://www.fabon.info/)",
   "license": "MIT",
   "devDependencies": {
+    "@js-temporal/polyfill": "^0.4.4",
     "@tsconfig/strictest": "^2.0.2",
     "rimraf": "^5.0.5",
-    "typescript": "^5.3.3"
+    "temporal-polyfill": "^0.2.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.1"
   }
 }
