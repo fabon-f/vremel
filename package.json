@@ -1,0 +1,29 @@
+{
+  "name": "vremel",
+  "version": "0.1.0",
+  "description": "JavaScript date utility library for Temporal",
+  "type": "module",
+  "exports": {
+    ".": "./index.js"
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://github.com/fabon-f/vremel#readme",
+  "bugs": {
+    "url": "https://github.com/fabon-f/vremel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabon-f/vremel.git"
+  },
+  "keywords": [
+    "Temporal"
+  ],
+  "author": "fabon <syobon.hinata.public@gmail.com> (https://www.fabon.info/)",
+  "license": "MIT"
+}
