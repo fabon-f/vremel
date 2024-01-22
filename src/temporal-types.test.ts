@@ -8,7 +8,8 @@ import {
   isPlainDate,
   isPlainTime,
   isPlainYearMonth,
-  isPlainMonthDay
+  isPlainMonthDay,
+  getConstructor
 } from './temporal-types.js'
 
 function createTypes(temporal: any) {
@@ -63,4 +64,20 @@ test('isPlainMonthDay', () => {
   const expected = [false, false, false, false, false, false, true]
   expect(createTypes(Temporal1).map(v => isPlainMonthDay(v))).toEqual(expected)
   expect(createTypes(Temporal2).map(v => isPlainMonthDay(v))).toEqual(expected)
+})
+
+test('getConstructor', () => {
+  const createExpected = (Temporal: any) => [
+    Temporal.Instant,
+    Temporal.ZonedDateTime,
+    Temporal.PlainDateTime,
+    Temporal.PlainDate,
+    Temporal.PlainTime,
+    Temporal.PlainYearMonth,
+    Temporal.PlainMonthDay
+  ]
+  expect(createTypes(Temporal1).map(v => getConstructor(v))).toEqual(createExpected(Temporal1))
+  expect(createTypes(Temporal2).map(v => getConstructor(v))).toEqual(createExpected(Temporal2))
+  expect(getConstructor(Temporal1.Duration.from({ seconds: 10 }))).toEqual(Temporal1.Duration)
+  expect(getConstructor(Temporal2.Duration.from({ seconds: 10 }))).toEqual(Temporal2.Duration)
 })
