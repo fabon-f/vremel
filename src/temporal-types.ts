@@ -37,12 +37,12 @@ export type ZonedDateTime = {
     isoYear: number,
     isoMonth: number,
     isoDay: number,
-    hour: number,
-    minute: number,
-    second: number,
-    millisecond: number,
-    microsecond: number,
-    nanosecond: number,
+    isoHour: number,
+    isoMinute: number,
+    isoSecond: number,
+    isoMillisecond: number,
+    isoMicrosecond: number,
+    isoNanosecond: number,
     offset: string,
     timeZone: string | object,
     calendar: string | object
@@ -68,10 +68,7 @@ export type PlainDate = {
     isoDay: number,
     calendar: string | object
   }
-  toZonedDateTime(item: {
-    plainTime?: object
-    timeZone: string | object
-  }): ZonedDateTime
+  toZonedDateTime(item: any): ZonedDateTime
 }
 
 export type PlainDateConstructor = {
@@ -95,7 +92,7 @@ export type PlainTime = {
     isoMicrosecond: number,
     isoNanosecond: number
   }
-  toZonedDateTime(item: { plainDate: object, timeZone: object | string }): ZonedDateTime
+  toZonedDateTime(item: any): ZonedDateTime
 }
 
 export type PlainTimeConstructor = {

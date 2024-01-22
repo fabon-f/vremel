@@ -9,7 +9,14 @@ import {
   isPlainTime,
   isPlainYearMonth,
   isPlainMonthDay,
-  getConstructor
+  getConstructor,
+  type Instant,
+  type ZonedDateTime,
+  type PlainDateTime,
+  type PlainDate,
+  type PlainTime,
+  type PlainYearMonth,
+  type PlainMonthDay
 } from './temporal-types.js'
 
 function createTypes(temporal: any) {
@@ -80,4 +87,34 @@ test('getConstructor', () => {
   expect(createTypes(Temporal2).map(v => getConstructor(v))).toEqual(createExpected(Temporal2))
   expect(getConstructor(Temporal1.Duration.from({ seconds: 10 }))).toEqual(Temporal1.Duration)
   expect(getConstructor(Temporal2.Duration.from({ seconds: 10 }))).toEqual(Temporal2.Duration)
+})
+
+test('type compatibility', () => {
+  const testFunc = (
+    _1: Instant,
+    _2: ZonedDateTime,
+    _3: PlainDateTime,
+    _4: PlainDate,
+    _5: PlainTime,
+    _6: PlainYearMonth,
+    _7: PlainMonthDay
+  ) => {}
+  testFunc(
+    Temporal1.Now.instant(),
+    Temporal1.Now.zonedDateTimeISO(),
+    Temporal1.Now.plainDateTimeISO(),
+    Temporal1.Now.plainDateISO(),
+    Temporal1.Now.plainTimeISO(),
+    Temporal1.Now.plainDateISO().toPlainYearMonth(),
+    Temporal1.Now.plainDateISO().toPlainMonthDay()
+  )
+  testFunc(
+    Temporal2.Now.instant(),
+    Temporal2.Now.zonedDateTimeISO(),
+    Temporal2.Now.plainDateTimeISO(),
+    Temporal2.Now.plainDateISO(),
+    Temporal2.Now.plainTimeISO(),
+    Temporal2.Now.plainDateISO().toPlainYearMonth(),
+    Temporal2.Now.plainDateISO().toPlainMonthDay()
+  )
 })
