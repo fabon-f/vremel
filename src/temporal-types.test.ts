@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest'
+import type { Temporal } from './temporal.d.ts'
 import { Temporal as Temporal1 } from 'temporal-polyfill'
 import { Temporal as Temporal2 } from '@js-temporal/polyfill'
 import {
@@ -10,13 +11,6 @@ import {
   isPlainYearMonth,
   isPlainMonthDay,
   getConstructor,
-  type Instant,
-  type ZonedDateTime,
-  type PlainDateTime,
-  type PlainDate,
-  type PlainTime,
-  type PlainYearMonth,
-  type PlainMonthDay
 } from './temporal-types.js'
 
 function createTypes(temporal: any) {
@@ -91,13 +85,13 @@ test('getConstructor', () => {
 
 test('type compatibility', () => {
   const testFunc = (
-    _1: Instant,
-    _2: ZonedDateTime,
-    _3: PlainDateTime,
-    _4: PlainDate,
-    _5: PlainTime,
-    _6: PlainYearMonth,
-    _7: PlainMonthDay
+    _1: Temporal.Instant,
+    _2: Temporal.ZonedDateTime,
+    _3: Temporal.PlainDateTime,
+    _4: Temporal.PlainDate,
+    _5: Temporal.PlainTime,
+    _6: Temporal.PlainYearMonth,
+    _7: Temporal.PlainMonthDay
   ) => {}
   testFunc(
     Temporal1.Now.instant(),

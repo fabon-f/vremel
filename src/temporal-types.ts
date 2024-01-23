@@ -1,213 +1,22 @@
-// When Temporal will be stage 4 and TypeScript will add its type definition,
-// these definitions will be unnecessary.
+import type { Temporal } from './temporal.d.ts'
 
-export type Instant = {
-  epochSeconds: number
-  epochMilliseconds: number
-  epochMicroseconds: bigint
-  epochNanoseconds: bigint
-}
+export type DateTimeType = Temporal.Instant | Temporal.ZonedDateTime | Temporal.PlainDate | Temporal.PlainTime | Temporal.PlainDateTime | Temporal.PlainYearMonth | Temporal.PlainMonthDay
 
-export type InstantConstructor = {
-  from(thing: any): Instant
-  compare(one: Instant | string, two: Instant | string): -1 | 0 | 1
-}
-
-export type ZonedDateTime = {
-  year: number
-  month: number
-  day: number
-  hour: number
-  minute: number
-  second: number
-  millisecond: number
-  microsecond: number
-  nanosecond: number
-  epochSeconds: number
-  epochMilliseconds: number
-  epochMicroseconds: bigint
-  epochNanoseconds: bigint
-  timeZoneId: string
-  era: string | undefined
-  eraYear: number | undefined
-  monthCode: string
-  offsetNanoseconds: number
-  offset: string
-  getISOFields(): {
-    isoYear: number,
-    isoMonth: number,
-    isoDay: number,
-    isoHour: number,
-    isoMinute: number,
-    isoSecond: number,
-    isoMillisecond: number,
-    isoMicrosecond: number,
-    isoNanosecond: number,
-    offset: string,
-    timeZone: string | object,
-    calendar: string | object
-  }
-  toInstant(): Instant
-}
-
-export type ZonedDateTimeConstructor = {
-  from(thing: any, options?: object): ZonedDateTime
-  compare(one: ZonedDateTime | object | string, two: ZonedDateTime | object | string): -1 | 0 | 1
-}
-
-export type PlainDate = {
-  year: number
-  month: number
-  monthCode: string
-  day: number
-  era: string | undefined
-  eraYear: number | undefined
-  getISOFields(): {
-    isoYear: number,
-    isoMonth: number,
-    isoDay: number,
-    calendar: string | object
-  }
-  toZonedDateTime(item: any): ZonedDateTime
-}
-
-export type PlainDateConstructor = {
-  new(isoYear: number, isoMonth: number, isoDay: number, calendar?: string | object): PlainDate
-  from(thing: any, options?: object): PlainDate
-  compare(one: PlainDate | object | string, two: PlainDate | object | string): -1 | 0 | 1
-}
-
-export type PlainTime = {
-  hour: number
-  minute: number
-  second: number
-  millisecond: number
-  microsecond: number
-  nanosecond: number
-  getISOFields(): {
-    isoHour: number,
-    isoMinute: number,
-    isoSecond: number,
-    isoMillisecond: number,
-    isoMicrosecond: number,
-    isoNanosecond: number
-  }
-  toZonedDateTime(item: any): ZonedDateTime
-}
-
-export type PlainTimeConstructor = {
-  from(thing: any, options?: object): PlainTime
-  compare(one: PlainTime | object | string, two: PlainTime | object | string): -1 | 0 | 1
-}
-
-export type PlainDateTime = {
-  year: number
-  month: number
-  monthCode: string
-  day: number
-  hour: number
-  minute: number
-  second: number
-  millisecond: number
-  microsecond: number
-  nanosecond: number
-  calendarId: string
-  era: string | undefined
-  eraYear: number | undefined
-  getISOFields(): {
-    isoHour: number,
-    isoMinute: number,
-    isoSecond: number,
-    isoMillisecond: number,
-    isoMicrosecond: number,
-    isoNanosecond: number
-  }
-  toZonedDateTime(timeZone: object | string, options?: object): ZonedDateTime
-}
-
-export type PlainDateTimeConstructor = {
-  from(thing: any, options?: object): PlainDateTime
-  compare(one: PlainDateTime | object | string, two: PlainDateTime | object | string): -1 | 0 | 1
-}
-
-export type PlainYearMonth = {
-  year: number
-  month: number
-  monthCode: string
-  era: string | undefined
-  eraYear: number | undefined
-  daysInMonth: number
-  daysInYear: number
-  monthsInYear: number
-  inLeapYear: boolean
-  getISOFields(): {
-    isoYear: number,
-    isoMonth: number,
-    isoDay: number,
-    calendar: string | object
-  }
-  toPlainDate({ day }: { day: number }): PlainDate
-}
-
-export type PlainYearMonthConstructor = {
-  from(thing: any, options?: object): PlainYearMonth
-  compare(one: PlainYearMonth | object | string, two: PlainYearMonth | object | string): -1 | 0 | 1
-}
-
-export type PlainMonthDay = {
-  monthCode: string
-  day: number
-  getISOFields(): {
-    isoYear: number,
-    isoMonth: number,
-    isoDay: number,
-    calendar: string | object
-  }
-  toPlainDate(options: object): PlainDate
-}
-
-export type PlainMonthDayConstructor = {
-  from(thing: any, options?: object): PlainMonthDay
-  compare(one: PlainMonthDay | object | string, two: PlainMonthDay | object | string): -1 | 0 | 1
-}
-
-export type Duration = {
-  years: number
-  months: number
-  weeks: number
-  days: number
-  hours: number
-  minutes: number
-  seconds: number
-  milliseconds: number
-  microseconds: number
-  nanoseconds: number
-  sign: -1 | 0 | 1
-  blank: boolean
-}
-
-export type DurationConstructor = {
-  from(thing: any): Duration
-  compare(one: Duration | object | string, two: Duration | object | string, options?: object) : -1 | 0 | 1
-}
-
-export type DateTimeType = Instant | ZonedDateTime | PlainDate | PlainTime | PlainDateTime | PlainYearMonth | PlainMonthDay
-
-export function isInstant(dt: DateTimeType): dt is Instant {
+export function isInstant(dt: DateTimeType): dt is Temporal.Instant {
   if ('epochSeconds' in dt && !('timeZoneId' in dt)) {
     return true
   }
   return false
 }
 
-export function isZonedDateTime(dt: DateTimeType): dt is ZonedDateTime {
+export function isZonedDateTime(dt: DateTimeType): dt is Temporal.ZonedDateTime {
   if ('timeZoneId' in dt) {
     return true
   }
   return false
 }
 
-export function isPlainDateTime(dt: DateTimeType): dt is PlainDateTime {
+export function isPlainDateTime(dt: DateTimeType): dt is Temporal.PlainDateTime {
   if (isZonedDateTime(dt)) {
     return false
   }
@@ -217,7 +26,7 @@ export function isPlainDateTime(dt: DateTimeType): dt is PlainDateTime {
   return false
 }
 
-export function isPlainTime(dt: DateTimeType): dt is PlainTime {
+export function isPlainTime(dt: DateTimeType): dt is Temporal.PlainTime {
   if ('second' in dt && !('year' in dt)) {
     dt
     return true
@@ -225,59 +34,59 @@ export function isPlainTime(dt: DateTimeType): dt is PlainTime {
   return false
 }
 
-export function isPlainDate(dt: DateTimeType): dt is PlainDate {
+export function isPlainDate(dt: DateTimeType): dt is Temporal.PlainDate {
   if ('year' in dt && 'day' in dt && !('second' in dt)) {
     return true
   }
   return false
 }
 
-export function isPlainYearMonth(dt: DateTimeType): dt is PlainYearMonth {
+export function isPlainYearMonth(dt: DateTimeType): dt is Temporal.PlainYearMonth {
   if ('year' in dt && !('day' in dt)) {
     return true
   }
   return false
 }
 
-export function isPlainMonthDay(dt: DateTimeType): dt is PlainMonthDay {
+export function isPlainMonthDay(dt: DateTimeType): dt is Temporal.PlainMonthDay {
   if ('day' in dt && !('year' in dt)) {
     return true
   }
   return false
 }
 
-export function getConstructor(dt: Instant): InstantConstructor
-export function getConstructor(dt: ZonedDateTime): ZonedDateTimeConstructor
-export function getConstructor(dt: PlainDate): PlainDateConstructor
-export function getConstructor(dt: PlainTime): PlainTimeConstructor
-export function getConstructor(dt: PlainDateTime): PlainDateTimeConstructor
-export function getConstructor(dt: PlainYearMonth): PlainYearMonthConstructor
-export function getConstructor(dt: PlainMonthDay): PlainMonthDayConstructor
-export function getConstructor(dt: Duration): DurationConstructor
-export function getConstructor(dt: DateTimeType | Duration) {
+export function getConstructor(dt: Temporal.Instant): typeof Temporal.Instant
+export function getConstructor(dt: Temporal.ZonedDateTime): typeof Temporal.ZonedDateTime
+export function getConstructor(dt: Temporal.PlainDate): typeof Temporal.PlainDate
+export function getConstructor(dt: Temporal.PlainTime): typeof Temporal.PlainTime
+export function getConstructor(dt: Temporal.PlainDateTime): typeof Temporal.PlainDateTime
+export function getConstructor(dt: Temporal.PlainYearMonth): typeof Temporal.PlainYearMonth
+export function getConstructor(dt: Temporal.PlainMonthDay): typeof Temporal.PlainMonthDay
+export function getConstructor(dt: Temporal.Duration): typeof Temporal.Duration
+export function getConstructor(dt: DateTimeType | Temporal.Duration) {
   if ('years' in dt) {
-    return dt.constructor as unknown as DurationConstructor
+    return dt.constructor as unknown as typeof Temporal.Duration
   }
   if (isInstant(dt)) {
-    return dt.constructor as unknown as InstantConstructor
+    return dt.constructor as unknown as typeof Temporal.Instant
   }
   if (isZonedDateTime(dt)) {
-    return dt.constructor as unknown as ZonedDateTimeConstructor
+    return dt.constructor as unknown as typeof Temporal.ZonedDateTime
   }
   if (isPlainDate(dt)) {
-    return dt.constructor as unknown as PlainDateConstructor
+    return dt.constructor as unknown as typeof Temporal.PlainDate
   }
   if (isPlainTime(dt)) {
-    return dt.constructor as unknown as PlainTimeConstructor
+    return dt.constructor as unknown as typeof Temporal.PlainTime
   }
   if (isPlainDateTime(dt)) {
-    return dt.constructor as unknown as PlainDateTimeConstructor
+    return dt.constructor as unknown as typeof Temporal.PlainDateTime
   }
   if (isPlainYearMonth(dt)) {
-    return dt.constructor as unknown as PlainYearMonthConstructor
+    return dt.constructor as unknown as typeof Temporal.PlainYearMonth
   }
   if (isPlainMonthDay(dt)) {
-    return dt.constructor as unknown as PlainMonthDayConstructor
+    return dt.constructor as unknown as typeof Temporal.PlainMonthDay
   }
   throw new Error(`Unknown object: ${dt}`)
 }
