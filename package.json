@@ -18,7 +18,8 @@
   ],
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",
-    "test": "vitest"
+    "test": "vitest",
+    "typecheck": "tsc"
   },
   "homepage": "https://github.com/fabon-f/vremel#readme",
   "bugs": {
