@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import type { Temporal } from './temporal.d.ts'
+import type { Temporal } from './types.js'
 import { Temporal as Temporal1 } from 'temporal-polyfill'
 import { Temporal as Temporal2 } from '@js-temporal/polyfill'
 import {
@@ -11,7 +11,7 @@ import {
   isPlainYearMonth,
   isPlainMonthDay,
   getConstructor,
-} from './temporal-types.js'
+} from './type-utils.js'
 
 function createTypes(temporal: any) {
   return [

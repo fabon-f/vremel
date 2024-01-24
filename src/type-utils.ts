@@ -1,8 +1,4 @@
-import type { Temporal } from './temporal.d.ts'
-
-export type DateTimeType = Temporal.Instant | Temporal.ZonedDateTime | Temporal.PlainDate | Temporal.PlainTime | Temporal.PlainDateTime | Temporal.PlainYearMonth | Temporal.PlainMonthDay
-export type TemporalType = DateTimeType | Temporal.Duration
-export type ComparableTemporalType = Temporal.Instant | Temporal.ZonedDateTime | Temporal.PlainDate | Temporal.PlainTime | Temporal.PlainDateTime | Temporal.PlainYearMonth | Temporal.Duration
+import type { Temporal, TemporalType } from './types.js'
 
 export function isInstant(dt: TemporalType): dt is Temporal.Instant {
   if ('epochSeconds' in dt && !('timeZoneId' in dt)) {
