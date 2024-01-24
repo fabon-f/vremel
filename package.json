@@ -20,7 +20,8 @@
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json && babel dist/esm -d dist/cjs --out-file-extension .cjs",
     "test": "vitest",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "repl": "vite-node script/repl.ts"
   },
   "homepage": "https://github.com/fabon-f/vremel#readme",
   "bugs": {
@@ -41,10 +42,13 @@
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@js-temporal/polyfill": "^0.4.4",
     "@tsconfig/strictest": "^2.0.2",
+    "@types/node": "^20.11.6",
     "babel-plugin-replace-import-extension": "^1.1.4",
+    "consola": "^3.2.3",
     "rimraf": "^5.0.5",
     "temporal-polyfill": "^0.2.0",
     "typescript": "^5.3.3",
+    "vite-node": "^1.2.1",
     "vitest": "^1.2.1"
   }
 }
