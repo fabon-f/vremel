@@ -6,6 +6,7 @@
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs",
       "types": "./dist/esm/index.d.ts"
     }
   },
@@ -17,7 +18,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "build": "rimraf dist && tsc -p tsconfig.build.json && babel dist/esm -d dist/cjs --out-file-extension .cjs",
     "test": "vitest",
     "typecheck": "tsc"
   },
@@ -35,8 +36,12 @@
   "author": "fabon <syobon.hinata.public@gmail.com> (https://www.fabon.info/)",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.7",
+    "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@js-temporal/polyfill": "^0.4.4",
     "@tsconfig/strictest": "^2.0.2",
+    "babel-plugin-replace-import-extension": "^1.1.4",
     "rimraf": "^5.0.5",
     "temporal-polyfill": "^0.2.0",
     "typescript": "^5.3.3",
