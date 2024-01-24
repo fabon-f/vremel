@@ -5,5 +5,6 @@
     "rootDir": "src",
     "outDir": "dist/esm",
     "declaration": true
-  }
+  },
+  "exclude": ["**/*.test.ts"]
 }
