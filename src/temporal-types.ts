@@ -1,22 +1,24 @@
 import type { Temporal } from './temporal.d.ts'
 
 export type DateTimeType = Temporal.Instant | Temporal.ZonedDateTime | Temporal.PlainDate | Temporal.PlainTime | Temporal.PlainDateTime | Temporal.PlainYearMonth | Temporal.PlainMonthDay
+export type TemporalType = DateTimeType | Temporal.Duration
+export type ComparableTemporalType = Temporal.Instant | Temporal.ZonedDateTime | Temporal.PlainDate | Temporal.PlainTime | Temporal.PlainDateTime | Temporal.PlainYearMonth | Temporal.Duration
 
-export function isInstant(dt: DateTimeType): dt is Temporal.Instant {
+export function isInstant(dt: TemporalType): dt is Temporal.Instant {
   if ('epochSeconds' in dt && !('timeZoneId' in dt)) {
     return true
   }
   return false
 }
 
-export function isZonedDateTime(dt: DateTimeType): dt is Temporal.ZonedDateTime {
+export function isZonedDateTime(dt: TemporalType): dt is Temporal.ZonedDateTime {
   if ('timeZoneId' in dt) {
     return true
   }
   return false
 }
 
-export function isPlainDateTime(dt: DateTimeType): dt is Temporal.PlainDateTime {
+export function isPlainDateTime(dt: TemporalType): dt is Temporal.PlainDateTime {
   if (isZonedDateTime(dt)) {
     return false
   }
@@ -26,30 +28,36 @@ export function isPlainDateTime(dt: DateTimeType): dt is Temporal.PlainDateTime 
   return false
 }
 
-export function isPlainTime(dt: DateTimeType): dt is Temporal.PlainTime {
+export function isPlainTime(dt: TemporalType): dt is Temporal.PlainTime {
   if ('second' in dt && !('year' in dt)) {
-    dt
     return true
   }
   return false
 }
 
-export function isPlainDate(dt: DateTimeType): dt is Temporal.PlainDate {
+export function isPlainDate(dt: TemporalType): dt is Temporal.PlainDate {
   if ('year' in dt && 'day' in dt && !('second' in dt)) {
     return true
   }
   return false
 }
 
-export function isPlainYearMonth(dt: DateTimeType): dt is Temporal.PlainYearMonth {
+export function isPlainYearMonth(dt: TemporalType): dt is Temporal.PlainYearMonth {
   if ('year' in dt && !('day' in dt)) {
     return true
   }
   return false
 }
 
-export function isPlainMonthDay(dt: DateTimeType): dt is Temporal.PlainMonthDay {
+export function isPlainMonthDay(dt: TemporalType): dt is Temporal.PlainMonthDay {
   if ('day' in dt && !('year' in dt)) {
+    return true
+  }
+  return false
+}
+
+export function isDuration(dt: TemporalType): dt is Temporal.Duration {
+  if ('seconds' in dt) {
     return true
   }
   return false
@@ -63,7 +71,7 @@ export function getConstructor(dt: Temporal.PlainDateTime): typeof Temporal.Plai
 export function getConstructor(dt: Temporal.PlainYearMonth): typeof Temporal.PlainYearMonth
 export function getConstructor(dt: Temporal.PlainMonthDay): typeof Temporal.PlainMonthDay
 export function getConstructor(dt: Temporal.Duration): typeof Temporal.Duration
-export function getConstructor(dt: DateTimeType | Temporal.Duration) {
+export function getConstructor(dt: TemporalType) {
   if ('years' in dt) {
     return dt.constructor as unknown as typeof Temporal.Duration
   }
