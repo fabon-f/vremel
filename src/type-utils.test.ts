@@ -91,7 +91,8 @@ test('type compatibility', () => {
     _4: Temporal.PlainDate,
     _5: Temporal.PlainTime,
     _6: Temporal.PlainYearMonth,
-    _7: Temporal.PlainMonthDay
+    _7: Temporal.PlainMonthDay,
+    _8: Temporal.Duration
   ) => {}
   testFunc(
     Temporal1.Now.instant(),
@@ -100,7 +101,8 @@ test('type compatibility', () => {
     Temporal1.Now.plainDateISO(),
     Temporal1.Now.plainTimeISO(),
     Temporal1.Now.plainDateISO().toPlainYearMonth(),
-    Temporal1.Now.plainDateISO().toPlainMonthDay()
+    Temporal1.Now.plainDateISO().toPlainMonthDay(),
+    Temporal1.Duration.from({ years: 2 })
   )
   testFunc(
     Temporal2.Now.instant(),
@@ -109,6 +111,7 @@ test('type compatibility', () => {
     Temporal2.Now.plainDateISO(),
     Temporal2.Now.plainTimeISO(),
     Temporal2.Now.plainDateISO().toPlainYearMonth(),
-    Temporal2.Now.plainDateISO().toPlainMonthDay()
+    Temporal2.Now.plainDateISO().toPlainMonthDay(),
+    Temporal1.Duration.from({ years: 2 })
   )
 })
