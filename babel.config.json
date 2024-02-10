@@ -1,17 +1,17 @@
 {
-  "plugins": [
-    [
-      "babel-plugin-replace-import-extension",
-      {
-        "extMapping": { ".js": ".cjs" }
-      }
-    ],
-    [
-      "@babel/plugin-transform-modules-commonjs",
-      {
-        "importInterop": "none",
-        "strict": true
-      }
-    ]
-  ]
+	"plugins": [
+		[
+			"babel-plugin-replace-import-extension",
+			{
+				"extMapping": { ".js": ".cjs" }
+			}
+		],
+		[
+			"@babel/plugin-transform-modules-commonjs",
+			{
+				"importInterop": "none",
+				"strict": true
+			}
+		]
+	]
 }
