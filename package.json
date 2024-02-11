@@ -1,7 +1,7 @@
 {
 	"name": "vremel",
 	"version": "0.1.0",
-	"description": "JavaScript date utility library for Temporal",
+	"description": "JavaScript date utility library for Temporal API",
 	"type": "module",
 	"exports": {
 		".": {
