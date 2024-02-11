@@ -1,17 +1,18 @@
-import { expect, test } from "vitest";
-import type { Temporal } from "./types.js";
-import { Temporal as Temporal1 } from "temporal-polyfill";
 import { Temporal as Temporal2 } from "@js-temporal/polyfill";
+import { Temporal as Temporal1 } from "temporal-polyfill";
+import { expect, test } from "vitest";
+
 import {
+	getConstructor,
 	isInstant,
-	isZonedDateTime,
-	isPlainDateTime,
 	isPlainDate,
+	isPlainDateTime,
+	isPlainMonthDay,
 	isPlainTime,
 	isPlainYearMonth,
-	isPlainMonthDay,
-	getConstructor,
+	isZonedDateTime,
 } from "./type-utils.js";
+import type { Temporal } from "./types.js";
 
 function createTypes(temporal: any) {
 	return [
