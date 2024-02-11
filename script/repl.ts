@@ -2,6 +2,7 @@ import repl from "node:repl";
 
 import { consola } from "consola";
 
+import * as vremelDuration from "../src/duration/index.js";
 import * as vremel from "../src/index.js";
 
 const choice = await consola.prompt("Select polyfill", {
@@ -13,3 +14,4 @@ const { Temporal } = await import(choice);
 const server = repl.start("> ");
 server.context["Temporal"] = Temporal;
 server.context["vremel"] = vremel;
+server.context["vremel"].duration = vremelDuration;
