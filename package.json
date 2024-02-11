@@ -8,6 +8,11 @@
 			"import": "./dist/esm/index.js",
 			"require": "./dist/cjs/index.cjs",
 			"types": "./dist/esm/index.d.ts"
+		},
+		"./duration": {
+			"import": "./dist/esm/duration/index.js",
+			"require": "./dist/cjs/duration/index.cjs",
+			"types": "./dist/esm/duration/index.d.ts"
 		}
 	},
 	"sideEffects": false,
