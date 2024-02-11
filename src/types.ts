@@ -11,6 +11,13 @@ export type DateTimeType =
 	| Temporal.PlainYearMonth
 	| Temporal.PlainMonthDay;
 export type TemporalType = DateTimeType | Temporal.Duration;
+export type ComparableDateTimeType =
+	| Temporal.Instant
+	| Temporal.ZonedDateTime
+	| Temporal.PlainDate
+	| Temporal.PlainTime
+	| Temporal.PlainDateTime
+	| Temporal.PlainYearMonth;
 export type ComparableTemporalType =
 	| Temporal.Instant
 	| Temporal.ZonedDateTime
