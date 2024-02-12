@@ -4,3 +4,4 @@ export { earliest } from "./earliest.js";
 export { isAfter } from "./isAfter.js";
 export { isBefore } from "./isBefore.js";
 export { latest } from "./latest.js";
+export { toDateFromClockTime } from "./toDateFromClockTime.js";

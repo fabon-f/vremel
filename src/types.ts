@@ -26,3 +26,16 @@ export type ComparableTemporalType =
 	| Temporal.PlainDateTime
 	| Temporal.PlainYearMonth
 	| Temporal.Duration;
+
+export interface GenericDateConstructor<DateType extends Date = Date> {
+	new (value?: Date | number | string): DateType;
+	new (
+		year: number,
+		month: number,
+		date?: number,
+		hours?: number,
+		minutes?: number,
+		seconds?: number,
+		ms?: number,
+	): DateType;
+}
