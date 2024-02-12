@@ -67,6 +67,46 @@ export function isDuration(dt: TemporalType): dt is Temporal.Duration {
 	return false;
 }
 
+export function isInstantArray(a: TemporalType[]): a is Temporal.Instant[] {
+	return a.every((dt) => isInstant(dt));
+}
+
+export function isZonedDateTimeArray(
+	a: TemporalType[],
+): a is Temporal.ZonedDateTime[] {
+	return a.every((dt) => isZonedDateTime(dt));
+}
+
+export function isPlainDateTimeArray(
+	a: TemporalType[],
+): a is Temporal.PlainDateTime[] {
+	return a.every((dt) => isPlainDateTime(dt));
+}
+
+export function isPlainDateArray(a: TemporalType[]): a is Temporal.PlainDate[] {
+	return a.every((dt) => isPlainDate(dt));
+}
+
+export function isPlainTimeArray(a: TemporalType[]): a is Temporal.PlainTime[] {
+	return a.every((dt) => isPlainTime(dt));
+}
+
+export function isPlainYearMonthArray(
+	a: TemporalType[],
+): a is Temporal.PlainYearMonth[] {
+	return a.every((dt) => isPlainYearMonth(dt));
+}
+
+export function isPlainMonthDayArray(
+	a: TemporalType[],
+): a is Temporal.PlainMonthDay[] {
+	return a.every((dt) => isPlainMonthDay(dt));
+}
+
+export function isDurationArray(a: TemporalType[]): a is Temporal.Duration[] {
+	return a.every((dt) => isDuration(dt));
+}
+
 export function getConstructor(dt: Temporal.Instant): typeof Temporal.Instant;
 export function getConstructor(
 	dt: Temporal.ZonedDateTime,

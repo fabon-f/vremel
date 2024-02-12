@@ -27,6 +27,14 @@ export type ComparableTemporalType =
 	| Temporal.PlainYearMonth
 	| Temporal.Duration;
 
+export type ComparableDateTimeTypeArray =
+	| Temporal.Instant[]
+	| Temporal.ZonedDateTime[]
+	| Temporal.PlainDate[]
+	| Temporal.PlainTime[]
+	| Temporal.PlainDateTime[]
+	| Temporal.PlainYearMonth[];
+
 export interface GenericDateConstructor<DateType extends Date = Date> {
 	new (value?: Date | number | string): DateType;
 	new (

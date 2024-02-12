@@ -1,3 +1,5 @@
+export { closestIndexTo } from "./closestIndexTo.js";
+export { closestTo } from "./closestTo.js";
 export { compareAsc } from "./compareAsc.js";
 export { compareDesc } from "./compareDesc.js";
 export { earliest } from "./earliest.js";
