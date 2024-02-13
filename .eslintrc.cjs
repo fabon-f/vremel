@@ -39,7 +39,10 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ["src/**/*.test.ts", "script/**/*.ts"],
+			files: ["src/**/*.test.ts", "script/**/*.{ts,js}"],
+			env: {
+				node: true,
+			},
 			rules: {
 				"no-console": "off",
 				"@typescript-eslint/ban-ts-comment": "off",
