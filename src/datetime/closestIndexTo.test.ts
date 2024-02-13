@@ -10,6 +10,15 @@ test("closestIndexTo() with Instant", () => {
 	const dt = Temporal.Instant.fromEpochSeconds(1640000000);
 	expect(closestIndexTo(dt, target)).toBe(2);
 });
+test("closestIndexTo() with Instants which differs few nanoseconds", () => {
+	const target = [
+		1700000000000000000n,
+		1700000000000000001n,
+		1700000000000000004n,
+	].map((t) => Temporal.Instant.fromEpochNanoseconds(t));
+	const dt = Temporal.Instant.fromEpochNanoseconds(1700000000000000003n);
+	expect(closestIndexTo(dt, target)).toBe(2);
+});
 test("closestIndexTo() with ZonedDateTime", () => {
 	const target = [
 		"2024-01-01T09:00:00+09:00[Asia/Tokyo]",

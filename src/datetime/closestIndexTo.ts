@@ -19,7 +19,7 @@ import type {
 	Temporal,
 } from "../types.js";
 
-function maxIndex(array: number[]) {
+function minIndex(array: number[]) {
 	return array.indexOf(array.reduce((a, b) => Math.min(a, b)));
 }
 
@@ -58,10 +58,8 @@ export function closestIndexTo(
 	dateTimes: ComparableDateTimeTypeArray,
 ) {
 	if (isInstant(dateTimeToCompare) && isInstantArray(dateTimes)) {
-		const diff = dateTimes.map((d) =>
-			Math.abs(d.epochSeconds - dateTimeToCompare.epochSeconds),
-		);
-		return maxIndex(diff);
+		const diff = dateTimes.map((d) => dateTimeToCompare.since(d).abs());
+		return diff.indexOf(shortest(diff));
 	}
 	if (isZonedDateTime(dateTimeToCompare) && isZonedDateTimeArray(dateTimes)) {
 		return closestIndexTo(
@@ -76,7 +74,7 @@ export function closestIndexTo(
 				basis.since(d.withCalendar("iso8601"), { largestUnit: "day" }).abs()
 					.days,
 		);
-		return maxIndex(diff);
+		return minIndex(diff);
 	}
 	if (isPlainTime(dateTimeToCompare) && isPlainTimeArray(dateTimes)) {
 		const diff = dateTimes.map((d) => dateTimeToCompare.since(d).abs());
@@ -93,7 +91,7 @@ export function closestIndexTo(
 		const diff = dateTimes.map(
 			(d) => dateTimeToCompare.since(d, { largestUnit: "month" }).abs().months,
 		);
-		return maxIndex(diff);
+		return minIndex(diff);
 	}
 	throw new Error("Invalid arguments");
 }
