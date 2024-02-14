@@ -1,3 +1,4 @@
+import { UTCDate, UTCDateMini } from "@date-fns/utc";
 import { Temporal } from "@js-temporal/polyfill";
 import { lightFormat } from "date-fns";
 import { expect, test } from "vitest";
@@ -39,4 +40,13 @@ test("timezone", () => {
 		Temporal.PlainDateTime.from("2023-03-12T02:30:00"),
 	);
 	expect(lightFormat(date, "yyyy-MM-dd HH:mm:ss")).toBe("2023-03-12 02:30:00");
+});
+
+test("date constructor type", () => {
+	expect(
+		toDateFromClockTime(Temporal.Now.plainDateISO(), UTCDate),
+	).toBeInstanceOf(UTCDate);
+	expect(toDateFromClockTime(Temporal.Now.plainDateISO())).toBeInstanceOf(
+		UTCDateMini,
+	);
 });
