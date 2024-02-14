@@ -62,3 +62,10 @@ test("isAfter() with PlainMonthDay", () => {
 		);
 	}).toThrow();
 });
+
+test("Typecheck", () => {
+	expect(() => {
+		// @ts-expect-error
+		isAfter(Temporal.Now.instant(), Temporal.Now.zonedDateTimeISO());
+	}).toThrow();
+});

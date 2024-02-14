@@ -13,11 +13,7 @@ import {
 	isZonedDateTime,
 	isZonedDateTimeArray,
 } from "../type-utils.js";
-import type {
-	ComparableDateTimeType,
-	ComparableDateTimeTypeArray,
-	Temporal,
-} from "../types.js";
+import type { ArrayOf, Temporal } from "../types.js";
 
 function minIndex(array: number[]) {
 	return array.indexOf(array.reduce((a, b) => Math.min(a, b)));
@@ -29,34 +25,15 @@ function minIndex(array: number[]) {
  * @param dateTimes array of datetime objects
  * @returns index of the closest datetime
  */
-export function closestIndexTo(
-	dateTimeToCompare: Temporal.Instant,
-	dateTimes: Temporal.Instant[],
-): number;
-export function closestIndexTo(
-	dateTimeToCompare: Temporal.ZonedDateTime,
-	dateTimes: Temporal.ZonedDateTime[],
-): number;
-export function closestIndexTo(
-	dateTimeToCompare: Temporal.PlainDate,
-	dateTimes: Temporal.PlainDate[],
-): number;
-export function closestIndexTo(
-	dateTimeToCompare: Temporal.PlainTime,
-	dateTimes: Temporal.PlainTime[],
-): number;
-export function closestIndexTo(
-	dateTimeToCompare: Temporal.PlainDateTime,
-	dateTimes: Temporal.PlainDateTime[],
-): number;
-export function closestIndexTo(
-	dateTimeToCompare: Temporal.PlainYearMonth,
-	dateTimes: Temporal.PlainYearMonth[],
-): number;
-export function closestIndexTo(
-	dateTimeToCompare: ComparableDateTimeType,
-	dateTimes: ComparableDateTimeTypeArray,
-) {
+export function closestIndexTo<
+	DateTime extends
+		| Temporal.Instant
+		| Temporal.ZonedDateTime
+		| Temporal.PlainDate
+		| Temporal.PlainTime
+		| Temporal.PlainDateTime
+		| Temporal.PlainYearMonth,
+>(dateTimeToCompare: DateTime, dateTimes: ArrayOf<DateTime>): number {
 	if (isInstant(dateTimeToCompare) && isInstantArray(dateTimes)) {
 		const diff = dateTimes.map((d) => dateTimeToCompare.since(d).abs());
 		return diff.indexOf(shortest(diff));

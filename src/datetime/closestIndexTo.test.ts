@@ -79,3 +79,13 @@ test("closestIndexTo() with PlainYearMonth of non-ISO calendar", () => {
 		closestIndexTo(Temporal.PlainYearMonth.from("2024-01"), target);
 	}).toThrowError(RangeError);
 });
+
+test("Typecheck", () => {
+	expect(() => {
+		closestIndexTo(
+			Temporal.Now.zonedDateTimeISO(),
+			// @ts-expect-error
+			[Temporal.Now.instant()],
+		);
+	}).toThrow();
+});

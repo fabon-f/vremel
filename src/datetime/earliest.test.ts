@@ -49,3 +49,13 @@ test("PlainMonthDay", () => {
 		earliest([Temporal.PlainMonthDay.from("12-03")]);
 	}).toThrow();
 });
+
+test("Typecheck", () => {
+	expect(() => {
+		// @ts-expect-error
+		earliest<Temporal.Instant | Temporal.ZonedDateTime>([
+			Temporal.Now.instant(),
+			Temporal.Now.zonedDateTimeISO(),
+		]);
+	}).toThrow();
+});

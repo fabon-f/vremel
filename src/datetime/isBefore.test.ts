@@ -62,3 +62,10 @@ test("isBefore() with PlainMonthDay", () => {
 		);
 	}).toThrow();
 });
+
+test("Typecheck", () => {
+	expect(() => {
+		// @ts-expect-error
+		isBefore(Temporal.Now.instant(), Temporal.Now.zonedDateTimeISO());
+	}).toThrow();
+});

@@ -1,4 +1,4 @@
-import type { ComparableDateTimeType, Temporal } from "../types.js";
+import type { Temporal } from "../types.js";
 import { compare } from "./_compare.js";
 
 /**
@@ -7,37 +7,14 @@ import { compare } from "./_compare.js";
  * @param b datetime object
  * @returns the result of the comparison
  */
-export function compareDesc(
-	a: Temporal.Instant,
-	b: Temporal.Instant,
-): -1 | 0 | 1;
-export function compareDesc(
-	a: Temporal.ZonedDateTime,
-	b: Temporal.ZonedDateTime,
-): -1 | 0 | 1;
-export function compareDesc(
-	a: Temporal.PlainDate,
-	b: Temporal.PlainDate,
-): -1 | 0 | 1;
-export function compareDesc(
-	a: Temporal.PlainTime,
-	b: Temporal.PlainTime,
-): -1 | 0 | 1;
-export function compareDesc(
-	a: Temporal.PlainDateTime,
-	b: Temporal.PlainDateTime,
-): -1 | 0 | 1;
-export function compareDesc(
-	a: Temporal.PlainYearMonth,
-	b: Temporal.PlainYearMonth,
-): -1 | 0 | 1;
-export function compareDesc(
-	a: ComparableDateTimeType,
-	b: ComparableDateTimeType,
-): -1 | 0 | 1;
-export function compareDesc(
-	a: ComparableDateTimeType,
-	b: ComparableDateTimeType,
-) {
+export function compareDesc<
+	DateTime extends
+		| Temporal.Instant
+		| Temporal.ZonedDateTime
+		| Temporal.PlainDate
+		| Temporal.PlainTime
+		| Temporal.PlainDateTime
+		| Temporal.PlainYearMonth,
+>(a: DateTime, b: DateTime): -1 | 0 | 1 {
 	return compare(b, a);
 }

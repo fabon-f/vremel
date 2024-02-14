@@ -52,3 +52,10 @@ test("compareAsc() with PlainMonthDay", () => {
 		);
 	}).toThrow();
 });
+
+test("Typecheck", () => {
+	expect(() => {
+		// @ts-expect-error
+		compareAsc(Temporal.Now.instant(), Temporal.Now.zonedDateTimeISO());
+	}).toThrow();
+});

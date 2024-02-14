@@ -1,5 +1,5 @@
 import { isPlainMonthDay } from "../type-utils.js";
-import type { Temporal } from "../types.js";
+import type { ArrayOf, Temporal } from "../types.js";
 import { compare } from "./_compare.js";
 
 /**
@@ -7,29 +7,17 @@ import { compare } from "./_compare.js";
  * @param dateTimes array of datetime objects
  * @returns the earliest of the datetime objects
  */
-export function earliest(dateTimes: Temporal.Instant[]): Temporal.Instant;
-export function earliest(
-	dateTimes: Temporal.ZonedDateTime[],
-): Temporal.ZonedDateTime;
-export function earliest(dateTimes: Temporal.PlainDate[]): Temporal.PlainDate;
-export function earliest(dateTimes: Temporal.PlainTime[]): Temporal.PlainTime;
-export function earliest(
-	dateTimes: Temporal.PlainDateTime[],
-): Temporal.PlainDateTime;
-export function earliest(
-	dateTimes: Temporal.PlainYearMonth[],
-): Temporal.PlainYearMonth;
-export function earliest(
-	dateTimes:
-		| Temporal.Instant[]
-		| Temporal.ZonedDateTime[]
-		| Temporal.PlainDate[]
-		| Temporal.PlainTime[]
-		| Temporal.PlainDateTime[]
-		| Temporal.PlainYearMonth[],
-) {
+export function earliest<
+	DateTime extends
+		| Temporal.Instant
+		| Temporal.ZonedDateTime
+		| Temporal.PlainDate
+		| Temporal.PlainTime
+		| Temporal.PlainDateTime
+		| Temporal.PlainYearMonth,
+>(dateTimes: ArrayOf<DateTime>): DateTime {
 	if (dateTimes.some(isPlainMonthDay)) {
 		throw new Error("Can't compare PlainMonthDay");
 	}
-	return dateTimes.reduce((a, b) => (compare(a, b) === 1 ? b : a));
+	return dateTimes.reduce((a, b) => (compare(a, b) === 1 ? b : a)) as DateTime;
 }
