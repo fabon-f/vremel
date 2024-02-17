@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { copyFile, readdir } from "node:fs/promises";
+import { copyFile, readdir, rm } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -33,9 +33,14 @@ async function check(dirname, moduleName) {
 		}
 	}
 	if (fail) {
-		process.exit(1);
+		throw new Error();
 	}
 }
 
-await check("datetime", "vremel");
-await check("duration", "vremel/duration");
+try {
+	await check("datetime", "vremel");
+	await check("duration", "vremel/duration");
+} catch {
+	await rm(path.join(srcPath, "../dist"), { recursive: true, force: true });
+	process.exit(1);
+}
