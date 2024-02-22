@@ -5,12 +5,19 @@ import { expect, test } from "vitest";
 import {
 	getConstructor,
 	isInstant,
+	isInstantConstructor,
 	isPlainDate,
+	isPlainDateConstructor,
 	isPlainDateTime,
+	isPlainDateTimeConstructor,
 	isPlainMonthDay,
+	isPlainMonthDayConstructor,
 	isPlainTime,
+	isPlainTimeConstructor,
 	isPlainYearMonth,
+	isPlainYearMonthConstructor,
 	isZonedDateTime,
+	isZonedDateTimeConstructor,
 } from "./type-utils.js";
 import type { Temporal } from "./types.js";
 
@@ -24,6 +31,18 @@ function createTypes(temporal: any) {
 		temporal.Now.plainDateISO().toPlainYearMonth(),
 		temporal.Now.plainDateISO().toPlainMonthDay(),
 		temporal.Duration.from({ seconds: 20 }),
+	];
+}
+
+function constructors(temporal: any) {
+	return [
+		temporal.Instant,
+		temporal.ZonedDateTime,
+		temporal.PlainDate,
+		temporal.PlainTime,
+		temporal.PlainDateTime,
+		temporal.PlainYearMonth,
+		temporal.PlainMonthDay,
 	];
 }
 
@@ -83,6 +102,76 @@ test("isPlainMonthDay", () => {
 	expect(createTypes(Temporal2).map((v) => isPlainMonthDay(v))).toEqual(
 		expected,
 	);
+});
+
+test("isInstantConstructor", () => {
+	const expected = [true, false, false, false, false, false, false];
+	expect(constructors(Temporal1).map((c) => isInstantConstructor(c))).toEqual(
+		expected,
+	);
+	expect(constructors(Temporal2).map((c) => isInstantConstructor(c))).toEqual(
+		expected,
+	);
+});
+
+test("isZonedDateTimeConstructor", () => {
+	const expected = [false, true, false, false, false, false, false];
+	expect(
+		constructors(Temporal1).map((c) => isZonedDateTimeConstructor(c)),
+	).toEqual(expected);
+	expect(
+		constructors(Temporal2).map((c) => isZonedDateTimeConstructor(c)),
+	).toEqual(expected);
+});
+
+test("isPlainDateConstructor", () => {
+	const expected = [false, false, true, false, false, false, false];
+	expect(constructors(Temporal1).map((c) => isPlainDateConstructor(c))).toEqual(
+		expected,
+	);
+	expect(constructors(Temporal2).map((c) => isPlainDateConstructor(c))).toEqual(
+		expected,
+	);
+});
+
+test("isPlainTimeConstructor", () => {
+	const expected = [false, false, false, true, false, false, false];
+	expect(constructors(Temporal1).map((c) => isPlainTimeConstructor(c))).toEqual(
+		expected,
+	);
+	expect(constructors(Temporal2).map((c) => isPlainTimeConstructor(c))).toEqual(
+		expected,
+	);
+});
+
+test("isPlainDateTimeConstructor", () => {
+	const expected = [false, false, false, false, true, false, false];
+	expect(
+		constructors(Temporal1).map((c) => isPlainDateTimeConstructor(c)),
+	).toEqual(expected);
+	expect(
+		constructors(Temporal2).map((c) => isPlainDateTimeConstructor(c)),
+	).toEqual(expected);
+});
+
+test("isPlainYearMonthConstructor", () => {
+	const expected = [false, false, false, false, false, true, false];
+	expect(
+		constructors(Temporal1).map((c) => isPlainYearMonthConstructor(c)),
+	).toEqual(expected);
+	expect(
+		constructors(Temporal2).map((c) => isPlainYearMonthConstructor(c)),
+	).toEqual(expected);
+});
+
+test("isPlainMonthDayConstructor", () => {
+	const expected = [false, false, false, false, false, false, true];
+	expect(
+		constructors(Temporal1).map((c) => isPlainMonthDayConstructor(c)),
+	).toEqual(expected);
+	expect(
+		constructors(Temporal2).map((c) => isPlainMonthDayConstructor(c)),
+	).toEqual(expected);
 });
 
 test("getConstructor", () => {

@@ -107,6 +107,97 @@ export function isDurationArray(a: TemporalType[]): a is Temporal.Duration[] {
 	return a.every((dt) => isDuration(dt));
 }
 
+export function isInstantConstructor(
+	c:
+		| typeof Temporal.Instant
+		| typeof Temporal.ZonedDateTime
+		| typeof Temporal.PlainDate
+		| typeof Temporal.PlainTime
+		| typeof Temporal.PlainDateTime
+		| typeof Temporal.PlainYearMonth
+		| typeof Temporal.PlainMonthDay,
+): c is typeof Temporal.Instant {
+	return isInstant(c.from("2024-01-01T00:00:00+00:00[Europe/London]"));
+}
+
+export function isZonedDateTimeConstructor(
+	c:
+		| typeof Temporal.Instant
+		| typeof Temporal.ZonedDateTime
+		| typeof Temporal.PlainDate
+		| typeof Temporal.PlainTime
+		| typeof Temporal.PlainDateTime
+		| typeof Temporal.PlainYearMonth
+		| typeof Temporal.PlainMonthDay,
+): c is typeof Temporal.ZonedDateTime {
+	return isZonedDateTime(c.from("2024-01-01T00:00:00+00:00[Europe/London]"));
+}
+
+export function isPlainDateConstructor(
+	c:
+		| typeof Temporal.Instant
+		| typeof Temporal.ZonedDateTime
+		| typeof Temporal.PlainDate
+		| typeof Temporal.PlainTime
+		| typeof Temporal.PlainDateTime
+		| typeof Temporal.PlainYearMonth
+		| typeof Temporal.PlainMonthDay,
+): c is typeof Temporal.PlainDate {
+	return isPlainDate(c.from("2024-01-01T00:00:00+00:00[Europe/London]"));
+}
+
+export function isPlainTimeConstructor(
+	c:
+		| typeof Temporal.Instant
+		| typeof Temporal.ZonedDateTime
+		| typeof Temporal.PlainDate
+		| typeof Temporal.PlainTime
+		| typeof Temporal.PlainDateTime
+		| typeof Temporal.PlainYearMonth
+		| typeof Temporal.PlainMonthDay,
+): c is typeof Temporal.PlainTime {
+	return isPlainTime(c.from("2024-01-01T00:00:00+00:00[Europe/London]"));
+}
+
+export function isPlainDateTimeConstructor(
+	c:
+		| typeof Temporal.Instant
+		| typeof Temporal.ZonedDateTime
+		| typeof Temporal.PlainDate
+		| typeof Temporal.PlainTime
+		| typeof Temporal.PlainDateTime
+		| typeof Temporal.PlainYearMonth
+		| typeof Temporal.PlainMonthDay,
+): c is typeof Temporal.PlainDateTime {
+	return isPlainDateTime(c.from("2024-01-01T00:00:00+00:00[Europe/London]"));
+}
+
+export function isPlainYearMonthConstructor(
+	c:
+		| typeof Temporal.Instant
+		| typeof Temporal.ZonedDateTime
+		| typeof Temporal.PlainDate
+		| typeof Temporal.PlainTime
+		| typeof Temporal.PlainDateTime
+		| typeof Temporal.PlainYearMonth
+		| typeof Temporal.PlainMonthDay,
+): c is typeof Temporal.PlainYearMonth {
+	return isPlainYearMonth(c.from("2024-01-01T00:00:00+00:00[Europe/London]"));
+}
+
+export function isPlainMonthDayConstructor(
+	c:
+		| typeof Temporal.Instant
+		| typeof Temporal.ZonedDateTime
+		| typeof Temporal.PlainDate
+		| typeof Temporal.PlainTime
+		| typeof Temporal.PlainDateTime
+		| typeof Temporal.PlainYearMonth
+		| typeof Temporal.PlainMonthDay,
+): c is typeof Temporal.PlainMonthDay {
+	return isPlainMonthDay(c.from("2024-01-01T00:00:00+00:00[Europe/London]"));
+}
+
 export function getConstructor(dt: Temporal.Instant): typeof Temporal.Instant;
 export function getConstructor(
 	dt: Temporal.ZonedDateTime,
