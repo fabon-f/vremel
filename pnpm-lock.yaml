@@ -16,6 +16,9 @@ devDependencies:
   '@babel/core':
     specifier: ^7.23.9
     version: 7.23.9
+  '@babel/plugin-transform-export-namespace-from':
+    specifier: ^7.23.4
+    version: 7.23.4(@babel/core@7.23.9)
   '@babel/plugin-transform-modules-commonjs':
     specifier: ^7.23.3
     version: 7.23.3(@babel/core@7.23.9)
@@ -270,6 +273,26 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.23.9
+    dev: true
+
+  /@babel/plugin-syntax-export-namespace-from@7.8.3(@babel/core@7.23.9):
+    resolution: {integrity: sha512-MXf5laXo6c1IbEbegDmzGPwGNTsHZmEy6QGznu5Sh2UCWvueywb2ee+CCE4zQiZstxU9BMoQO9i6zUFSY0Kj0Q==}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.23.9
+      '@babel/helper-plugin-utils': 7.22.5
+    dev: true
+
+  /@babel/plugin-transform-export-namespace-from@7.23.4(@babel/core@7.23.9):
+    resolution: {integrity: sha512-GzuSBcKkx62dGzZI1WVgTWvkkz84FZO5TC5T8dl/Tht/rAla6Dg/Mz9Yhypg+ezVACf/rgDuQt3kbWEv7LdUDQ==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.23.9
+      '@babel/helper-plugin-utils': 7.22.5
+      '@babel/plugin-syntax-export-namespace-from': 7.8.3(@babel/core@7.23.9)
     dev: true
 
   /@babel/plugin-transform-modules-commonjs@7.23.3(@babel/core@7.23.9):
