@@ -198,6 +198,34 @@ export function isPlainMonthDayConstructor(
 	return isPlainMonthDay(c.from("2024-01-01T00:00:00+00:00[Europe/London]"));
 }
 
+export function getTypeName(dt: TemporalType) {
+	if (isDuration(dt)) {
+		return "Temporal.Duration";
+	}
+	if (isInstant(dt)) {
+		return "Temporal.Instant";
+	}
+	if (isZonedDateTime(dt)) {
+		return "Temporal.ZonedDateTime";
+	}
+	if (isPlainDate(dt)) {
+		return "Temporal.PlainDate";
+	}
+	if (isPlainTime(dt)) {
+		return "Temporal.PlainTime";
+	}
+	if (isPlainDateTime(dt)) {
+		return "Temporal.PlainDateTime";
+	}
+	if (isPlainYearMonth(dt)) {
+		return "Temporal.PlainYearMonth";
+	}
+	if (isPlainMonthDay(dt)) {
+		return "Temporal.PlainMonthDay";
+	}
+	throw new Error("Unknown type");
+}
+
 export function getConstructor(dt: Temporal.Instant): typeof Temporal.Instant;
 export function getConstructor(
 	dt: Temporal.ZonedDateTime,
