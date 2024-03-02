@@ -28,7 +28,7 @@
 		"typecheck": "tsc",
 		"lint": "eslint . && prettier . --check",
 		"repl": "vite-node script/repl.ts",
-		"docs:generate": "typedoc --out _site/docs/api src/index.ts"
+		"docs:generate": "typedoc --out _site/docs/latest/api src/index.ts"
 	},
 	"homepage": "https://github.com/fabon-f/vremel#readme",
 	"bugs": {
