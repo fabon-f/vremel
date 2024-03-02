@@ -18,6 +18,7 @@ export default [
 	{
 		ignores: [
 			"dist",
+			"_site",
 			"eslint.config.js",
 			".prettierrc.js",
 			"src/temporal.d.ts",
