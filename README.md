@@ -27,3 +27,7 @@ isEqual(
 	Temporal.Duration.from({ hours: 3 }),
 ); // true
 ```
+
+## Docs
+
+- [API docs](https://lab.fabon.info/vremel/docs/latest/api/)
