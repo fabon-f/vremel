@@ -9,27 +9,27 @@ import {
 } from "../type-utils.js";
 import type { DateTimeType, Temporal } from "../types.js";
 
-export function equals(a: Temporal.Instant, b: Temporal.Instant): boolean;
-export function equals(
+export function isEqual(a: Temporal.Instant, b: Temporal.Instant): boolean;
+export function isEqual(
 	a: Temporal.ZonedDateTime,
 	b: Temporal.ZonedDateTime,
 ): boolean;
-export function equals(a: Temporal.PlainDate, b: Temporal.PlainDate): boolean;
-export function equals(a: Temporal.PlainTime, b: Temporal.PlainTime): boolean;
-export function equals(
+export function isEqual(a: Temporal.PlainDate, b: Temporal.PlainDate): boolean;
+export function isEqual(a: Temporal.PlainTime, b: Temporal.PlainTime): boolean;
+export function isEqual(
 	a: Temporal.PlainDateTime,
 	b: Temporal.PlainDateTime,
 ): boolean;
-export function equals(
+export function isEqual(
 	a: Temporal.PlainYearMonth,
 	b: Temporal.PlainYearMonth,
 ): boolean;
-export function equals(
+export function isEqual(
 	a: Temporal.PlainMonthDay,
 	b: Temporal.PlainMonthDay,
 ): boolean;
-export function equals(a: DateTimeType, b: DateTimeType): boolean;
-export function equals(a: DateTimeType, b: DateTimeType) {
+export function isEqual(a: DateTimeType, b: DateTimeType): boolean;
+export function isEqual(a: DateTimeType, b: DateTimeType) {
 	if (isInstant(a)) {
 		if (!isInstant(b)) {
 			throw new Error("Unmatched type");

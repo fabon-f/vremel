@@ -2,7 +2,7 @@ import { Temporal as Temporal2 } from "@js-temporal/polyfill";
 import { Temporal as Temporal1 } from "temporal-polyfill";
 import { expect } from "vitest";
 
-import { equals } from "./src/datetime/_equals.js";
+import { isEqual } from "./src/datetime/_equals.js";
 import { isEqual as isEqualDuration } from "./src/duration/isEqual.js";
 import { isDuration } from "./src/type-utils.js";
 import type { TemporalType } from "./src/types.js";
@@ -41,7 +41,7 @@ function areTemporalsEqual(a: unknown, b: unknown) {
 		if (isDuration(a) || isDuration(b)) {
 			return false;
 		}
-		return equals(a, b);
+		return isEqual(a, b);
 	} else if (!isATemporal && !isBTemporal) {
 		return undefined;
 	} else {
