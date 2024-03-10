@@ -48,5 +48,4 @@ export interface GenericDateConstructor<DateType extends Date = Date> {
 	): DateType;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ArrayOf<T> = T extends any ? T[] : never;
+export type ArrayOf<T> = T extends unknown ? T[] : never;
