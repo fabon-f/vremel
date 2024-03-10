@@ -6,3 +6,4 @@ export * from "./datetime/index.js";
  * ```
  */
 export * as duration from "./duration/index.js";
+export type { Interval } from "./types.js";

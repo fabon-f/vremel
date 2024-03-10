@@ -49,3 +49,21 @@ export interface GenericDateConstructor<DateType extends Date = Date> {
 }
 
 export type ArrayOf<T> = T extends unknown ? T[] : never;
+
+export type Interval<
+	DateTime =
+		| Temporal.Instant
+		| Temporal.ZonedDateTime
+		| Temporal.PlainDate
+		| Temporal.PlainTime
+		| Temporal.PlainDateTime
+		| Temporal.PlainYearMonth,
+> = DateTime extends
+	| Temporal.Instant
+	| Temporal.ZonedDateTime
+	| Temporal.PlainDate
+	| Temporal.PlainTime
+	| Temporal.PlainDateTime
+	| Temporal.PlainYearMonth
+	? { start: DateTime; end: DateTime }
+	: never;
