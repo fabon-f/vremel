@@ -18,7 +18,6 @@ import type { GenericDateConstructor, Temporal } from "../types.js";
  * but passing JavaScript's `Date` is **strongly discouraged** because `Date` is a hotbed of timezone troubles.
  *
  * @param dateTime datetime object
- * @param DateConstructor constructor of return value, UTCDateMini from "@date-fns/utc" as default
  */
 export function toDateFromClockTime(
 	dateTime:
@@ -30,6 +29,10 @@ export function toDateFromClockTime(
 		| Temporal.PlainMonthDay,
 ): UTCDateMini;
 
+/**
+ * @param dateTime datetime object
+ * @param DateConstructor constructor of return value, `UTCDateMini` from "@date-fns/utc" as default
+ */
 export function toDateFromClockTime<DateType extends Date>(
 	dateTime:
 		| Temporal.ZonedDateTime
