@@ -22,8 +22,8 @@ test("closestTo() with ZonedDateTime", () => {
 	expect(closestTo(dt, target)).toBe(target[1]);
 });
 test("closestTo() with PlainDate", () => {
-	const target = ["2024-01-01[u-ca=hebrew]", "2024-01-02", "2023-12-23"].map(
-		(t) => Temporal.PlainDate.from(t),
+	const target = ["2024-01-01", "2024-01-02", "2023-12-23"].map((t) =>
+		Temporal.PlainDate.from(t),
 	);
 	const dt = Temporal.PlainDate.from("2024-01-03");
 	expect(closestTo(dt, target)).toBe(target[1]);
@@ -38,7 +38,7 @@ test("closestTo() with PlainTime", () => {
 });
 test("closestTo() with PlainDateTime", () => {
 	const target = [
-		"2024-01-01T09:00:00+09:00[Asia/Tokyo][u-ca=japanese]",
+		"2024-01-01T09:00:00+09:00[Asia/Tokyo]",
 		"2024-01-01T03:00:00+01:00[Europe/Paris]",
 		"2024-01-01T00:00:00-05:00[America/Toronto]",
 	].map((t) => Temporal.PlainDateTime.from(t));

@@ -45,11 +45,8 @@ export function closestIndexTo<
 		);
 	}
 	if (isPlainDate(dateTimeToCompare) && isPlainDateArray(dateTimes)) {
-		const basis = dateTimeToCompare.withCalendar("iso8601");
 		const diff = dateTimes.map(
-			(d) =>
-				basis.since(d.withCalendar("iso8601"), { largestUnit: "day" }).abs()
-					.days,
+			(d) => dateTimeToCompare.since(d, { largestUnit: "day" }).abs().days,
 		);
 		return minIndex(diff);
 	}
@@ -58,9 +55,8 @@ export function closestIndexTo<
 		return diff.indexOf(shortest(diff));
 	}
 	if (isPlainDateTime(dateTimeToCompare) && isPlainDateTimeArray(dateTimes)) {
-		const basis = dateTimeToCompare.withCalendar("iso8601");
 		const diff = dateTimes.map((d) =>
-			basis.since(d.withCalendar("iso8601"), { largestUnit: "hour" }).abs(),
+			dateTimeToCompare.since(d, { largestUnit: "hour" }).abs(),
 		);
 		return diff.indexOf(shortest(diff));
 	}
