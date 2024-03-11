@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.3.0 (2024-03-11)
+
+### Added
+
+- `areIntervalsOverlapping`, `clamp`, `isWithinInterval` functions
+
+### Changed
+
+- Stop converting calendar automatically in `closestIndexTo` and `closestTo` for consistency with other functions. ([dcd1f37](https://github.com/fabon-f/vremel/commit/dcd1f37eb5c1de70a3bde61de88bce879e4aa8e8))
+
 ## 0.2.0 (2024-03-03)
 
 ### Added
