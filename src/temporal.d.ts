@@ -1,4 +1,4 @@
-// original: https://github.com/tc39/proposal-temporal/blob/ae85b3c695b7a93c39e9704ce751d36a5c01a1ca/polyfill/index.d.ts
+// original: https://github.com/tc39/proposal-temporal/blob/e78869aa86dffe0d05287d21484cb002ad00968d/polyfill/index.d.ts
 /*! Copyright (c) 2017, 2018, 2019, 2020, Ecma International. All rights reserved. | https://github.com/tc39/proposal-temporal/blob/main/LICENSE */
 
 export namespace Temporal {
@@ -413,8 +413,8 @@ export namespace Temporal {
          * This value must be either a `Temporal.PlainDateTime`, a
          * `Temporal.ZonedDateTime`, or a string or object value that can be
          * passed to `from()` of those types. Examples:
-         * - `'2020-01'01T00:00-08:00[America/Los_Angeles]'`
-         * - `'2020-01'01'`
+         * - `'2020-01-01T00:00-08:00[America/Los_Angeles]'`
+         * - `'2020-01-01'`
          * - `Temporal.PlainDate.from('2020-01-01')`
          *
          * `Temporal.ZonedDateTime` will be tried first because it's more
@@ -450,8 +450,8 @@ export namespace Temporal {
          * This value must be either a `Temporal.PlainDateTime`, a
          * `Temporal.ZonedDateTime`, or a string or object value that can be passed
          * to `from()` of those types. Examples:
-         * - `'2020-01'01T00:00-08:00[America/Los_Angeles]'`
-         * - `'2020-01'01'`
+         * - `'2020-01-01T00:00-08:00[America/Los_Angeles]'`
+         * - `'2020-01-01'`
          * - `Temporal.PlainDate.from('2020-01-01')`
          *
          * `Temporal.ZonedDateTime` will be tried first because it's more
@@ -478,8 +478,8 @@ export namespace Temporal {
      * This value must be either a `Temporal.PlainDateTime`, a
      * `Temporal.ZonedDateTime`, or a string or object value that can be passed
      * to `from()` of those types. Examples:
-     * - `'2020-01'01T00:00-08:00[America/Los_Angeles]'`
-     * - `'2020-01'01'`
+     * - `'2020-01-01T00:00-08:00[America/Los_Angeles]'`
+     * - `'2020-01-01'`
      * - `Temporal.PlainDate.from('2020-01-01')`
      *
      * `Temporal.ZonedDateTime` will be tried first because it's more
@@ -641,8 +641,8 @@ export namespace Temporal {
     eraYear(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number | undefined;
     dayOfWeek(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number;
     dayOfYear(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number;
-    weekOfYear(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number;
-    yearOfWeek(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number;
+    weekOfYear(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number | undefined;
+    yearOfWeek(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number | undefined;
     daysInWeek(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number;
     daysInMonth(
       date: Temporal.PlainDate | Temporal.PlainDateTime | Temporal.PlainYearMonth | PlainDateLike | string
@@ -732,8 +732,8 @@ export namespace Temporal {
     eraYear(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number | undefined;
     dayOfWeek(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number;
     dayOfYear(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number;
-    weekOfYear(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number;
-    yearOfWeek(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number;
+    weekOfYear(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number | undefined;
+    yearOfWeek(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number | undefined;
     daysInWeek(date: Temporal.PlainDate | Temporal.PlainDateTime | PlainDateLike | string): number;
     daysInMonth(
       date: Temporal.PlainDate | Temporal.PlainDateTime | Temporal.PlainYearMonth | PlainDateLike | string
@@ -819,8 +819,8 @@ export namespace Temporal {
     getCalendar(): CalendarProtocol;
     readonly dayOfWeek: number;
     readonly dayOfYear: number;
-    readonly weekOfYear: number;
-    readonly yearOfWeek: number;
+    readonly weekOfYear: number | undefined;
+    readonly yearOfWeek: number | undefined;
     readonly daysInWeek: number;
     readonly daysInYear: number;
     readonly daysInMonth: number;
@@ -935,8 +935,8 @@ export namespace Temporal {
     getCalendar(): CalendarProtocol;
     readonly dayOfWeek: number;
     readonly dayOfYear: number;
-    readonly weekOfYear: number;
-    readonly yearOfWeek: number;
+    readonly weekOfYear: number | undefined;
+    readonly yearOfWeek: number | undefined;
     readonly daysInWeek: number;
     readonly daysInYear: number;
     readonly daysInMonth: number;
@@ -1279,8 +1279,8 @@ export namespace Temporal {
     getCalendar(): CalendarProtocol;
     readonly dayOfWeek: number;
     readonly dayOfYear: number;
-    readonly weekOfYear: number;
-    readonly yearOfWeek: number;
+    readonly weekOfYear: number | undefined;
+    readonly yearOfWeek: number | undefined;
     readonly hoursInDay: number;
     readonly daysInWeek: number;
     readonly daysInMonth: number;
