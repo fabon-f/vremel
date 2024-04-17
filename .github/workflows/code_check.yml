@@ -7,13 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
+      - run: corepack enable
       - run: pnpm install
       - name: Lint
         run: pnpm run lint
@@ -21,13 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
+      - run: corepack enable
       - run: pnpm install
       - name: Typecheck
         run: pnpm run typecheck
@@ -35,13 +31,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
+      - run: corepack enable
       - run: pnpm install
       - name: Build
         run: pnpm run build
