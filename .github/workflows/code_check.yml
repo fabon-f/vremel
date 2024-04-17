@@ -7,9 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - run: corepack enable
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -21,9 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - run: corepack enable
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -35,9 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - run: corepack enable
       - uses: actions/setup-node@v4
         with:
           node-version: 20

@@ -13,13 +13,12 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-build
     steps:
       - uses: actions/checkout@v4
+      - run: corepack enable
       - uses: actions/setup-node@v4
         with:
           node-version: latest
-      - uses: pnpm/action-setup@v2
-        with:
-          version: latest
-          run_install: true
+          cache: pnpm
+      - run: pnpm install
       - name: Generate docs
         run: pnpm run docs:generate
       - name: Upload
