@@ -44,8 +44,8 @@
 	"author": "fabon <syobon.hinata.public@gmail.com> (https://www.fabon.info/)",
 	"license": "MIT",
 	"devDependencies": {
-		"@babel/cli": "^7.24.1",
-		"@babel/core": "^7.24.4",
+		"@babel/cli": "^7.24.5",
+		"@babel/core": "^7.24.5",
 		"@babel/plugin-transform-export-namespace-from": "^7.24.1",
 		"@babel/plugin-transform-modules-commonjs": "^7.24.1",
 		"@eslint/js": "^8.57.0",
@@ -59,14 +59,14 @@
 		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-simple-import-sort": "^12.1.0",
-		"globals": "^15.0.0",
+		"globals": "^15.1.0",
 		"prettier": "3.2.5",
 		"temporal-polyfill": "^0.2.4",
 		"typedoc": "^0.25.13",
 		"typescript": "^5.4.5",
-		"typescript-eslint": "^7.7.1",
-		"vite-node": "^1.5.2",
-		"vitest": "^1.5.2"
+		"typescript-eslint": "^7.8.0",
+		"vite-node": "^1.5.3",
+		"vitest": "^1.5.3"
 	},
 	"dependencies": {
 		"@date-fns/utc": "^1.2.0"
