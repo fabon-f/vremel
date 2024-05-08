@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.3.3 (2024-05-09)
+
+### Removed
+
+- Stop exporting `Temporal` type from main module because it messed up docs. ([1126424](https://github.com/fabon-f/vremel/commit/1126424c2cd077267080a1dfa7c966ae4b499192))
+
 ## 0.3.2 (2024-05-09)
 
 ### Added
