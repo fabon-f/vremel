@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.3.2 (2024-05-09)
+
+### Added
+
+- Export custom types and `Temporal` itself in main module. ([6765b8d](https://github.com/fabon-f/vremel/commit/6765b8dd0b5e6e22d5088bbb93f9a99c0acddb84))
+
+### Changed
+
+- Move API docs to [JSR](https://jsr.io/@fabon/vremel/doc).
+
+### Removed
+
+- Stop exporting the namespace `duration` from main module. You can still import functions from `vremel/duration`. ([ffc4687](https://github.com/fabon-f/vremel/commit/ffc468739ea977904ad10e2782c4b3b49634260e))
+
 ## 0.3.1 (2024-05-08)
 
 ### Changed
