@@ -294,7 +294,7 @@ export function formatWithoutLocale(
 		| Temporal.PlainYearMonth
 		| Temporal.PlainMonthDay,
 	format: string,
-) {
+): string {
 	if (!areSingleQuotesBalanced(format)) {
 		throw new Error(
 			"Unbalanced single quotes. Use single quotes for escaping and two single quotes to represent actual single quote.",

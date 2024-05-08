@@ -6,7 +6,7 @@ import type { Temporal } from "../types.js";
  * @param b duration
  * @returns whether two durations are equal
  */
-export function isEqual(a: Temporal.Duration, b: Temporal.Duration) {
+export function isEqual(a: Temporal.Duration, b: Temporal.Duration): boolean {
 	return (
 		a.years === b.years &&
 		a.months === b.months &&

@@ -33,7 +33,7 @@ export function areIntervalsOverlapping(
 		 */
 		inclusive?: boolean;
 	},
-) {
+): boolean {
 	assertValidInterval(interval1);
 	assertValidInterval(interval2);
 	assertSameType(interval1.start, interval2.start);

@@ -10,6 +10,6 @@ import { compare } from "./_compare.js";
 export function longest(
 	durations: Temporal.Duration[],
 	options?: Temporal.DurationArithmeticOptions,
-) {
+): Temporal.Duration {
 	return durations.reduce((a, b) => (compare(a, b, options) === -1 ? b : a));
 }
