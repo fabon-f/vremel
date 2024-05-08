@@ -49,4 +49,4 @@ isAfter(
 
 ## Docs
 
-- [API docs](https://lab.fabon.info/vremel/docs/latest/api/)
+- [API docs](https://jsr.io/@fabon/vremel/doc)

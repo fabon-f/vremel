@@ -28,8 +28,7 @@
 		"test": "vitest",
 		"typecheck": "tsc",
 		"lint": "eslint . && prettier . --check",
-		"repl": "vite-node script/repl.ts",
-		"docs:generate": "typedoc --out _site/docs/latest/api src/index.ts && mv _site/docs/latest/api/.nojekyll _site"
+		"repl": "vite-node script/repl.ts"
 	},
 	"homepage": "https://github.com/fabon-f/vremel#readme",
 	"bugs": {
@@ -63,7 +62,6 @@
 		"globals": "^15.1.0",
 		"prettier": "3.2.5",
 		"temporal-polyfill": "^0.2.4",
-		"typedoc": "^0.25.13",
 		"typescript": "^5.4.5",
 		"typescript-eslint": "^7.8.0",
 		"vite-node": "^1.6.0",
