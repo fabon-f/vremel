@@ -1,6 +1,6 @@
 {
 	"name": "@fabon/vremel",
-	"version": "0.3.1-alpha.0",
+	"version": "0.3.1",
 	"exports": {
 		".": "./src/index.ts",
 		"./duration": "./src/duration/index.ts"
