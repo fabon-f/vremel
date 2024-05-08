@@ -3,14 +3,16 @@
 JavaScript date utility library for [Temporal API](https://tc39.es/proposal-temporal/docs/) inspired by [date-fns](https://date-fns.org/).
 
 - Contains only pure functions, supports tree-shaking by default.
-- Supports every types of Temporal API (Instant, ZonedDateTime, PlainDate...) with strict TypeScript definition.
-- Handles timezone and calendar strictly.
+- Supports every types of Temporal API (`Instant`, `ZonedDateTime`, `PlainDate`...) with strict TypeScript definition.
+- Handles timezones and calendars strictly.
 - Works fine with any polyfills. You don't have to even load a polyfill globally.
 
 ## Install
 
 ```shell
 npm install vremel
+# or from JSR
+deno add @fabon/vremel
 ```
 
 ## Usage
