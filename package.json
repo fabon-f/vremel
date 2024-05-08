@@ -52,7 +52,7 @@
 		"@js-temporal/polyfill": "^0.4.4",
 		"@tsconfig/strictest": "^2.0.5",
 		"@types/eslint": "^8.56.10",
-		"@types/node": "^20.12.7",
+		"@types/node": "^20.12.10",
 		"babel-plugin-replace-import-extension": "^1.1.4",
 		"consola": "^3.2.3",
 		"date-fns": "^3.6.0",
@@ -65,11 +65,11 @@
 		"typedoc": "^0.25.13",
 		"typescript": "^5.4.5",
 		"typescript-eslint": "^7.8.0",
-		"vite-node": "^1.5.3",
-		"vitest": "^1.5.3"
+		"vite-node": "^1.6.0",
+		"vitest": "^1.6.0"
 	},
 	"dependencies": {
 		"@date-fns/utc": "^1.2.0"
 	},
-	"packageManager": "pnpm@9.0.6+sha512.f6d863130973207cb7a336d6b439a242a26ac8068077df530d6a86069419853dc1ffe64029ec594a9c505a3a410d19643c870aba6776330f5cfddcf10a9c1617"
+	"packageManager": "pnpm@9.1.0+sha512.67f5879916a9293e5cf059c23853d571beaf4f753c707f40cb22bed5fb1578c6aad3b6c4107ccb3ba0b35be003eb621a16471ac836c87beb53f9d54bb4612724"
 }
