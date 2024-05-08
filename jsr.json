@@ -1,0 +1,20 @@
+{
+	"name": "@fabon/vremel",
+	"version": "0.3.1-alpha.0",
+	"exports": {
+		".": "./src/index.ts",
+		"./duration": "./src/duration/index.ts"
+	},
+	"publish": {
+		"include": [
+			"CHANGELOG.md",
+			"README.md",
+			"LICENSE",
+			"src/**/*.ts",
+			"jsr.json"
+		],
+		"exclude": [
+			"**/*.test.ts"
+		]
+	}
+}
