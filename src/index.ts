@@ -14,4 +14,10 @@
  */
 
 export * from "./datetime/index.js";
-export type { Interval } from "./types.js";
+// export `Temporal` until Temporal API becomes stage 4 and appears on the MDN reference
+export type {
+	ArrayOf,
+	GenericDateConstructor,
+	Interval,
+	Temporal,
+} from "./types.js";
