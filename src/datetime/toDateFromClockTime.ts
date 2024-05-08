@@ -13,9 +13,7 @@ import type { GenericDateConstructor, Temporal } from "../types.js";
  * Returns `Date` which represents clock (local) time of given temporal object,
  * dropping timezone and calendar information.
  * When you pass `ZonedDateTime`, clock time will be unchanged but exact time will change.
- * This function is useful when you want to use formatting functions of "date-fns".
- * You can pass `DateConstructor` parameter to specify a constructor to build the date to return,
- * but passing JavaScript's `Date` is **strongly discouraged** because `Date` is a hotbed of timezone troubles.
+ * This function is useful when you want to use formatting functions of [date-fns](https://date-fns.org/).
  *
  * @param dateTime datetime object
  */
@@ -30,6 +28,19 @@ export function toDateFromClockTime(
 ): UTCDateMini;
 
 /**
+ * Returns `Date` which represents clock (local) time of given temporal object,
+ * dropping timezone and calendar information.
+ * When you pass `ZonedDateTime`, clock time will be unchanged but exact time will change.
+ * This function is useful when you want to use formatting functions of [date-fns](https://date-fns.org/).
+ * You can pass `DateConstructor` parameter to specify a constructor to build the date to return,
+ * but passing JavaScript's `Date` is **strongly discouraged** because `Date` is a hotbed of timezone troubles.
+ *
+ * @example
+ * ```typescript
+ * import { UTCDate } from "@date-fns/utc";
+ * toDateFromClockTime(Temporal.Now.plainDateISO(), UTCDate);
+ * ```
+ *
  * @param dateTime datetime object
  * @param DateConstructor constructor of return value, `UTCDateMini` from "@date-fns/utc" as default
  */

@@ -8,6 +8,7 @@ import { compare } from "./_compare.js";
  * You can pass the `inclusive` option to change this behavior.
  *
  * @example
+ * ```typescript
  * const interval1 = {
  *   start: Temporal.PlainTime.from("00:00:00"),
  *   end: Temporal.PlainTime.from("08:00:00"),
@@ -18,6 +19,7 @@ import { compare } from "./_compare.js";
  * };
  * areIntervalsOverlapping(interval1, interval2); // true
  * areIntervalsOverlapping(interval1, interval2, { inclusive: false }); // false
+ * ```
  *
  * @param interval1
  * @param interval2

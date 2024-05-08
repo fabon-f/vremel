@@ -5,6 +5,11 @@
  *
  * ```typescript
  * import { latest } from "vremel";
+ * latest([
+ *   Temporal.PlainDate.from("2024-01-01"),
+ *   Temporal.PlainDate.from("2024-02-01"),
+ *   Temporal.PlainDate.from("2023-11-30"),
+ * ]).toString(); // "2024-02-01"
  * ```
  */
 

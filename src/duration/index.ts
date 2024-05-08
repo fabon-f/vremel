@@ -5,6 +5,10 @@
  *
  * ```typescript
  * import { isEqual } from "vremel/duration";
+ * isEqual(
+ *   Temporal.Duration.from({ hours: 3 }),
+ *   Temporal.Duration.from({ hours: 3 }),
+ * ); // true
  * ```
  */
 
