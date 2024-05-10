@@ -1,5 +1,5 @@
 // original: https://github.com/tc39/proposal-temporal/blob/e78869aa86dffe0d05287d21484cb002ad00968d/polyfill/index.d.ts
-/*! Copyright (c) 2017, 2018, 2019, 2020, Ecma International. All rights reserved. | https://github.com/tc39/proposal-temporal/blob/main/LICENSE */
+/*! SPDX-License-Identifier: BSD-3-Clause */
 
 export namespace Temporal {
   export type ComparisonResult = -1 | 0 | 1;
