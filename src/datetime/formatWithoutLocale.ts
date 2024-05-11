@@ -49,7 +49,7 @@ function getNumericMonth(dateTime: DateTime) {
 		});
 		if (dateTime.calendarId === "iso8601") {
 			const monthNum = table[dateTime.monthCode];
-			if (!monthNum) {
+			if (monthNum === undefined) {
 				throw new Error(`Unknown month code: ${dateTime.monthCode}`);
 			}
 			return monthNum;

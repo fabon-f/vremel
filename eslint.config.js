@@ -42,18 +42,26 @@ export default [
 	{
 		rules: {
 			camelcase: "error",
-			"default-param-last": "error",
 			eqeqeq: "error",
 			"no-console": "error",
 			"no-eval": "error",
 			"@typescript-eslint/consistent-type-exports": "error",
 			"@typescript-eslint/consistent-type-imports": "error",
+			"@typescript-eslint/default-param-last": "error",
+			"@typescript-eslint/method-signature-style": "error",
+			"@typescript-eslint/no-import-type-side-effects": "error",
+			"@typescript-eslint/no-loop-func": "error",
+			"@typescript-eslint/no-require-imports": "error",
+			"@typescript-eslint/no-unsafe-unary-minus": "error",
+			"@typescript-eslint/require-array-sort-compare": "error",
 			"@typescript-eslint/restrict-template-expressions": [
 				"error",
 				{
 					allowNever: true,
 				},
 			],
+			"@typescript-eslint/strict-boolean-expressions": "error",
+			"@typescript-eslint/switch-exhaustiveness-check": "error",
 			"simple-import-sort/imports": "error",
 			"simple-import-sort/exports": "error",
 		},
