@@ -28,7 +28,8 @@
 		"test": "vitest",
 		"typecheck": "tsc",
 		"lint": "eslint . && prettier . --check",
-		"repl": "vite-node script/repl.ts"
+		"repl": "vite-node script/repl.ts",
+		"docs:generate": "deno doc --output=./_site --unstable-sloppy-imports --html src/index.ts src/duration/index.ts"
 	},
 	"homepage": "https://github.com/fabon-f/vremel#readme",
 	"bugs": {
