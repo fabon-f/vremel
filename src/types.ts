@@ -1,6 +1,6 @@
 import type { Temporal } from "./temporal.d.ts";
 
-export { Temporal };
+export type { Temporal };
 
 export type DateTimeType =
 	| Temporal.Instant
@@ -35,6 +35,9 @@ export type ComparableDateTimeTypeArray =
 	| Temporal.PlainDateTime[]
 	| Temporal.PlainYearMonth[];
 
+/**
+ * `Date` or extended `Date`
+ */
 export interface GenericDateConstructor<DateType extends Date = Date> {
 	new (value?: Date | number | string): DateType;
 	new (
@@ -48,8 +51,14 @@ export interface GenericDateConstructor<DateType extends Date = Date> {
 	): DateType;
 }
 
+/**
+ * Similar to `Array`, but with union distribution; `ArrayOf<A | B>` is `A[] | B[]`, not `(A|B)[]`.
+ */
 export type ArrayOf<T> = T extends unknown ? T[] : never;
 
+/**
+ * The object which represents an interval. `start` and `end` should have the same type.
+ */
 export type Interval<
 	DateTime =
 		| Temporal.Instant
