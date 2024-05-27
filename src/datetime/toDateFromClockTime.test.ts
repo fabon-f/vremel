@@ -42,6 +42,75 @@ test("timezone", () => {
 	expect(lightFormat(date, "yyyy-MM-dd HH:mm:ss")).toBe("2023-03-12 02:30:00");
 });
 
+test("PlainMonthDay with non-ISO calendar", () => {
+	const md = Temporal.PlainMonthDay.from({
+		monthCode: "M05L",
+		day: 13,
+		calendar: "hebrew",
+	});
+	const md2 = Temporal.PlainDate.from(
+		lightFormat(toDateFromClockTime(md), "yyyy-MM-dd"),
+	)
+		.withCalendar("hebrew")
+		.toPlainMonthDay();
+	expect(md).toEqual(md2);
+});
+
+test("PlainYearMonth with non-ISO calendar", () => {
+	const ym = Temporal.PlainYearMonth.from({
+		year: 5779,
+		monthCode: "M05L",
+		calendar: "hebrew",
+	});
+	const ym2 = Temporal.PlainDate.from(
+		lightFormat(toDateFromClockTime(ym), "yyyy-MM-dd"),
+	)
+		.withCalendar("hebrew")
+		.toPlainYearMonth();
+	expect(ym).toEqual(ym2);
+});
+
+test("PlainDate with non-ISO calendar", () => {
+	const pd = Temporal.PlainDate.from({
+		year: 5779,
+		monthCode: "M05L",
+		day: 13,
+		calendar: "hebrew",
+	});
+	const pd2 = Temporal.PlainDate.from(
+		lightFormat(toDateFromClockTime(pd), "yyyy-MM-dd"),
+	).withCalendar("hebrew");
+	expect(pd).toEqual(pd2);
+});
+
+test("PlainDateTime with non-ISO calendar", () => {
+	const pdt = Temporal.PlainDate.from({
+		year: 5779,
+		monthCode: "M05L",
+		day: 13,
+		calendar: "hebrew",
+	}).toPlainDateTime();
+	const pdt2 = Temporal.PlainDateTime.from(
+		lightFormat(toDateFromClockTime(pdt), "yyyy-MM-dd'T'HH:mm:ss"),
+	).withCalendar("hebrew");
+	expect(pdt).toEqual(pdt2);
+});
+
+test("ZonedDateTime with non-ISO calendar", () => {
+	const zdt = Temporal.PlainDate.from({
+		year: 5779,
+		monthCode: "M05L",
+		day: 13,
+		calendar: "hebrew",
+	})
+		.toPlainDateTime()
+		.toZonedDateTime("Asia/Tokyo");
+	const pdt2 = Temporal.PlainDateTime.from(
+		lightFormat(toDateFromClockTime(zdt), "yyyy-MM-dd'T'HH:mm:ss"),
+	).withCalendar("hebrew");
+	expect(zdt.toPlainDateTime()).toEqual(pdt2);
+});
+
 test("date constructor type", () => {
 	expect(
 		toDateFromClockTime(Temporal.Now.plainDateISO(), UTCDate),
