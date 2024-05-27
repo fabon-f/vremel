@@ -35,7 +35,7 @@ export function closestIndexTo<
 		| Temporal.PlainYearMonth,
 >(dateTimeToCompare: DateTime, dateTimes: ArrayOf<DateTime>): number {
 	if (isInstant(dateTimeToCompare) && isInstantArray(dateTimes)) {
-		const diff = dateTimes.map((d) => dateTimeToCompare.since(d).abs());
+		const diff = dateTimes.map((d) => dateTimeToCompare.until(d).abs());
 		return diff.indexOf(shortest(diff));
 	}
 	if (isZonedDateTime(dateTimeToCompare) && isZonedDateTimeArray(dateTimes)) {
@@ -46,23 +46,23 @@ export function closestIndexTo<
 	}
 	if (isPlainDate(dateTimeToCompare) && isPlainDateArray(dateTimes)) {
 		const diff = dateTimes.map(
-			(d) => dateTimeToCompare.since(d, { largestUnit: "day" }).abs().days,
+			(d) => dateTimeToCompare.until(d, { largestUnit: "day" }).abs().days,
 		);
 		return minIndex(diff);
 	}
 	if (isPlainTime(dateTimeToCompare) && isPlainTimeArray(dateTimes)) {
-		const diff = dateTimes.map((d) => dateTimeToCompare.since(d).abs());
+		const diff = dateTimes.map((d) => dateTimeToCompare.until(d).abs());
 		return diff.indexOf(shortest(diff));
 	}
 	if (isPlainDateTime(dateTimeToCompare) && isPlainDateTimeArray(dateTimes)) {
 		const diff = dateTimes.map((d) =>
-			dateTimeToCompare.since(d, { largestUnit: "hour" }).abs(),
+			dateTimeToCompare.until(d, { largestUnit: "hour" }).abs(),
 		);
 		return diff.indexOf(shortest(diff));
 	}
 	if (isPlainYearMonth(dateTimeToCompare) && isPlainYearMonthArray(dateTimes)) {
 		const diff = dateTimes.map(
-			(d) => dateTimeToCompare.since(d, { largestUnit: "month" }).abs().months,
+			(d) => dateTimeToCompare.until(d, { largestUnit: "month" }).abs().months,
 		);
 		return minIndex(diff);
 	}
