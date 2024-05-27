@@ -9,6 +9,22 @@ import {
 } from "../type-utils.js";
 import type { GenericDateConstructor, Temporal } from "../types.js";
 
+function parseIsoString(date: string) {
+	const res = date.match(/^(\d{4,})-(\d{2})-(\d{2})/);
+	if (res === null) {
+		throw new Error("Invalid format");
+	}
+	const [, y, m, d] = res;
+	if (y === undefined || m === undefined || d === undefined) {
+		throw new Error("Invalid format");
+	}
+	return {
+		year: parseInt(y, 10),
+		month: parseInt(m, 10),
+		day: parseInt(d, 10),
+	};
+}
+
 /**
  * Returns `Date` which represents clock (local) time of given temporal object,
  * dropping timezone and calendar information.
@@ -26,7 +42,6 @@ export function toDateFromClockTime(
 		| Temporal.PlainYearMonth
 		| Temporal.PlainMonthDay,
 ): UTCDateMini;
-
 /**
  * Returns `Date` which represents clock (local) time of given temporal object,
  * dropping timezone and calendar information.
@@ -65,45 +80,42 @@ export function toDateFromClockTime<DateType extends Date>(
 	DateConstructor?: GenericDateConstructor<DateType>,
 ) {
 	const DateConstructorFunction = DateConstructor ?? UTCDateMini;
-	if (isPlainYearMonth(dateTime) || isPlainMonthDay(dateTime)) {
-		const { isoYear, isoMonth, isoDay } = dateTime.getISOFields();
-		return new DateConstructorFunction(isoYear, isoMonth - 1, isoDay);
+	if (isPlainYearMonth(dateTime)) {
+		const pd = dateTime.toPlainDate({ day: 1 }).withCalendar("iso8601");
+		return new DateConstructorFunction(pd.year, pd.month - 1, pd.day);
+	}
+	if (isPlainMonthDay(dateTime)) {
+		if (dateTime.calendarId === "iso8601") {
+			const pd = dateTime.toPlainDate({ year: 1972 });
+			return new DateConstructorFunction(pd.year, pd.month - 1, pd.day);
+		}
+		const { year, month, day } = parseIsoString(dateTime.toString());
+		return new DateConstructorFunction(year, month - 1, day);
 	}
 	if (isPlainTime(dateTime)) {
-		const { isoHour, isoMinute, isoSecond, isoMillisecond } =
-			dateTime.getISOFields();
 		// Set default date to 2000-01-01
 		return new DateConstructorFunction(
 			2000,
 			0,
 			1,
-			isoHour,
-			isoMinute,
-			isoSecond,
-			isoMillisecond,
+			dateTime.hour,
+			dateTime.minute,
+			dateTime.second,
+			dateTime.millisecond,
 		);
 	}
 	const plainDateTime = isZonedDateTime(dateTime)
-		? dateTime.toPlainDateTime()
+		? dateTime.toPlainDateTime().withCalendar("iso8601")
 		: isPlainDate(dateTime)
-			? dateTime.toPlainDateTime()
-			: dateTime;
-	const {
-		isoYear,
-		isoMonth,
-		isoDay,
-		isoHour,
-		isoMinute,
-		isoSecond,
-		isoMillisecond,
-	} = plainDateTime.getISOFields();
-	return new (DateConstructor ?? UTCDateMini)(
-		isoYear,
-		isoMonth - 1,
-		isoDay,
-		isoHour,
-		isoMinute,
-		isoSecond,
-		isoMillisecond,
+			? dateTime.toPlainDateTime().withCalendar("iso8601")
+			: dateTime.withCalendar("iso8601");
+	return new DateConstructorFunction(
+		plainDateTime.year,
+		plainDateTime.month - 1,
+		plainDateTime.day,
+		plainDateTime.hour,
+		plainDateTime.minute,
+		plainDateTime.second,
+		plainDateTime.millisecond,
 	);
 }
