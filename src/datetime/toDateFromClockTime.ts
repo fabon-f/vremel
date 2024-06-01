@@ -10,7 +10,7 @@ import {
 import type { GenericDateConstructor, Temporal } from "../types.js";
 
 function parseIsoString(date: string) {
-	const res = date.match(/^(\d{4,})-(\d{2})-(\d{2})/);
+	const res = /^(\d{4,})-(\d{2})-(\d{2})/.exec(date);
 	if (res === null) {
 		throw new Error("Invalid format");
 	}
