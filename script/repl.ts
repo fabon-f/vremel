@@ -10,6 +10,11 @@ const choice = await consola.prompt("Select polyfill", {
 	options: ["temporal-polyfill", "@js-temporal/polyfill"],
 });
 
+if (typeof choice === "symbol") {
+	// Symbol(clack:cancel)
+	process.exit(0);
+}
+
 const { Temporal } = await import(choice);
 const server = repl.start("> ");
 server.context["Temporal"] = Temporal;
