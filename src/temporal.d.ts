@@ -1,4 +1,4 @@
-// original: https://github.com/tc39/proposal-temporal/blob/e78869aa86dffe0d05287d21484cb002ad00968d/polyfill/index.d.ts
+// original: https://github.com/tc39/proposal-temporal/blob/d4644973743cec929df2e0d63bee466bf98eb9f3/polyfill/index.d.ts
 /*! SPDX-License-Identifier: BSD-3-Clause */
 
 export namespace Temporal {
@@ -466,8 +466,7 @@ export namespace Temporal {
       };
 
   /**
-   * Options to control behavior of `Duration.compare()`, `Duration.add()`, and
-   * `Duration.subtract()`
+   * Options to control behavior of `Duration.compare()`
    */
   export interface DurationArithmeticOptions {
     /**
@@ -547,8 +546,8 @@ export namespace Temporal {
     negated(): Temporal.Duration;
     abs(): Temporal.Duration;
     with(durationLike: DurationLike): Temporal.Duration;
-    add(other: Temporal.Duration | DurationLike | string, options?: DurationArithmeticOptions): Temporal.Duration;
-    subtract(other: Temporal.Duration | DurationLike | string, options?: DurationArithmeticOptions): Temporal.Duration;
+    add(other: Temporal.Duration | DurationLike | string): Temporal.Duration;
+    subtract(other: Temporal.Duration | DurationLike | string): Temporal.Duration;
     round(roundTo: DurationRoundTo): Temporal.Duration;
     total(totalOf: DurationTotalOf): number;
     toLocaleString(locales?: string | string[], options?: Intl.DateTimeFormatOptions): string;
@@ -573,16 +572,12 @@ export namespace Temporal {
    * See https://tc39.es/proposal-temporal/docs/instant.html for more details.
    */
   export class Instant {
-    static fromEpochSeconds(epochSeconds: number): Temporal.Instant;
     static fromEpochMilliseconds(epochMilliseconds: number): Temporal.Instant;
-    static fromEpochMicroseconds(epochMicroseconds: bigint): Temporal.Instant;
     static fromEpochNanoseconds(epochNanoseconds: bigint): Temporal.Instant;
     static from(item: Temporal.Instant | string): Temporal.Instant;
     static compare(one: Temporal.Instant | string, two: Temporal.Instant | string): ComparisonResult;
     constructor(epochNanoseconds: bigint);
-    readonly epochSeconds: number;
     readonly epochMilliseconds: number;
-    readonly epochMicroseconds: bigint;
     readonly epochNanoseconds: bigint;
     equals(other: Temporal.Instant | string): boolean;
     add(
@@ -602,7 +597,6 @@ export namespace Temporal {
     round(
       roundTo: RoundTo<'hour' | 'minute' | 'second' | 'millisecond' | 'microsecond' | 'nanosecond'>
     ): Temporal.Instant;
-    toZonedDateTime(calendarAndTimeZone: { timeZone: TimeZoneLike; calendar: CalendarLike }): Temporal.ZonedDateTime;
     toZonedDateTimeISO(tzLike: TimeZoneLike): Temporal.ZonedDateTime;
     toLocaleString(locales?: string | string[], options?: Intl.DateTimeFormatOptions): string;
     toJSON(): string;
@@ -945,7 +939,6 @@ export namespace Temporal {
     equals(other: Temporal.PlainDateTime | PlainDateTimeLike | string): boolean;
     with(dateTimeLike: PlainDateTimeLike, options?: AssignmentOptions): Temporal.PlainDateTime;
     withPlainTime(timeLike?: Temporal.PlainTime | PlainTimeLike | string): Temporal.PlainDateTime;
-    withPlainDate(dateLike: Temporal.PlainDate | PlainDateLike | string): Temporal.PlainDateTime;
     withCalendar(calendar: CalendarLike): Temporal.PlainDateTime;
     add(durationLike: Temporal.Duration | DurationLike | string, options?: ArithmeticOptions): Temporal.PlainDateTime;
     subtract(
@@ -969,8 +962,6 @@ export namespace Temporal {
     ): Temporal.PlainDateTime;
     toZonedDateTime(tzLike: TimeZoneLike, options?: ToInstantOptions): Temporal.ZonedDateTime;
     toPlainDate(): Temporal.PlainDate;
-    toPlainYearMonth(): Temporal.PlainYearMonth;
-    toPlainMonthDay(): Temporal.PlainMonthDay;
     toPlainTime(): Temporal.PlainTime;
     getISOFields(): PlainDateTimeISOFields;
     toLocaleString(locales?: string | string[], options?: Intl.DateTimeFormatOptions): string;
@@ -1086,11 +1077,6 @@ export namespace Temporal {
     round(
       roundTo: RoundTo<'hour' | 'minute' | 'second' | 'millisecond' | 'microsecond' | 'nanosecond'>
     ): Temporal.PlainTime;
-    toPlainDateTime(temporalDate: Temporal.PlainDate | PlainDateLike | string): Temporal.PlainDateTime;
-    toZonedDateTime(timeZoneAndDate: {
-      timeZone: TimeZoneLike;
-      plainDate: Temporal.PlainDate | PlainDateLike | string;
-    }): Temporal.ZonedDateTime;
     getISOFields(): PlainTimeISOFields;
     toLocaleString(locales?: string | string[], options?: Intl.DateTimeFormatOptions): string;
     toJSON(): string;
@@ -1289,14 +1275,11 @@ export namespace Temporal {
     readonly inLeapYear: boolean;
     readonly offsetNanoseconds: number;
     readonly offset: string;
-    readonly epochSeconds: number;
     readonly epochMilliseconds: number;
-    readonly epochMicroseconds: bigint;
     readonly epochNanoseconds: bigint;
     equals(other: Temporal.ZonedDateTime | ZonedDateTimeLike | string): boolean;
     with(zonedDateTimeLike: ZonedDateTimeLike, options?: ZonedDateTimeAssignmentOptions): Temporal.ZonedDateTime;
     withPlainTime(timeLike?: Temporal.PlainTime | PlainTimeLike | string): Temporal.ZonedDateTime;
-    withPlainDate(dateLike: Temporal.PlainDate | PlainDateLike | string): Temporal.ZonedDateTime;
     withCalendar(calendar: CalendarLike): Temporal.ZonedDateTime;
     withTimeZone(timeZone: TimeZoneLike): Temporal.ZonedDateTime;
     add(durationLike: Temporal.Duration | DurationLike | string, options?: ArithmeticOptions): Temporal.ZonedDateTime;
@@ -1323,8 +1306,6 @@ export namespace Temporal {
     toInstant(): Temporal.Instant;
     toPlainDateTime(): Temporal.PlainDateTime;
     toPlainDate(): Temporal.PlainDate;
-    toPlainYearMonth(): Temporal.PlainYearMonth;
-    toPlainMonthDay(): Temporal.PlainMonthDay;
     toPlainTime(): Temporal.PlainTime;
     getISOFields(): ZonedDateTimeISOFields;
     toLocaleString(locales?: string | string[], options?: Intl.DateTimeFormatOptions): string;
@@ -1356,26 +1337,6 @@ export namespace Temporal {
     instant: () => Temporal.Instant;
 
     /**
-     * Get the current calendar date and clock time in a specific calendar and
-     * time zone.
-     *
-     * The `calendar` parameter is required. When using the ISO 8601 calendar or
-     * if you don't understand the need for or implications of a calendar, then
-     * a more ergonomic alternative to this method is
-     * `Temporal.Now.zonedDateTimeISO()`.
-     *
-     * @param {CalendarLike} [calendar] - calendar identifier, or
-     * a `Temporal.Calendar` instance, or an object implementing the calendar
-     * protocol.
-     * @param {TimeZoneLike} [tzLike] -
-     * {@link https://en.wikipedia.org/wiki/List_of_tz_database_time_zones|IANA time zone identifier}
-     * string (e.g. `'Europe/London'`), `Temporal.TimeZone` instance, or an
-     * object implementing the time zone protocol. If omitted, the environment's
-     * current time zone will be used.
-     */
-    zonedDateTime: (calendar: CalendarLike, tzLike?: TimeZoneLike) => Temporal.ZonedDateTime;
-
-    /**
      * Get the current calendar date and clock time in a specific time zone,
      * using the ISO 8601 calendar.
      *
@@ -1386,31 +1347,6 @@ export namespace Temporal {
      * current time zone will be used.
      */
     zonedDateTimeISO: (tzLike?: TimeZoneLike) => Temporal.ZonedDateTime;
-
-    /**
-     * Get the current calendar date and clock time in a specific calendar and
-     * time zone.
-     *
-     * The calendar is required. When using the ISO 8601 calendar or if you
-     * don't understand the need for or implications of a calendar, then a more
-     * ergonomic alternative to this method is `Temporal.Now.plainDateTimeISO`.
-     *
-     * Note that the `Temporal.PlainDateTime` type does not persist the time zone,
-     * but retaining the time zone is required for most time-zone-related use
-     * cases. Therefore, it's usually recommended to use
-     * `Temporal.Now.zonedDateTimeISO` or `Temporal.Now.zonedDateTime` instead
-     * of this function.
-     *
-     * @param {CalendarLike} [calendar] - calendar identifier, or
-     * a `Temporal.Calendar` instance, or an object implementing the calendar
-     * protocol.
-     * @param {TimeZoneLike} [tzLike] -
-     * {@link https://en.wikipedia.org/wiki/List_of_tz_database_time_zones|IANA time zone identifier}
-     * string (e.g. `'Europe/London'`), `Temporal.TimeZone` instance, or an
-     * object implementing the time zone protocol. If omitted,
-     * the environment's current time zone will be used.
-     */
-    plainDateTime: (calendar: CalendarLike, tzLike?: TimeZoneLike) => Temporal.PlainDateTime;
 
     /**
      * Get the current date and clock time in a specific time zone, using the
@@ -1428,24 +1364,6 @@ export namespace Temporal {
      * current time zone will be used.
      */
     plainDateTimeISO: (tzLike?: TimeZoneLike) => Temporal.PlainDateTime;
-
-    /**
-     * Get the current calendar date in a specific calendar and time zone.
-     *
-     * The calendar is required. When using the ISO 8601 calendar or if you
-     * don't understand the need for or implications of a calendar, then a more
-     * ergonomic alternative to this method is `Temporal.Now.plainDateISO`.
-     *
-     * @param {CalendarLike} [calendar] - calendar identifier, or
-     * a `Temporal.Calendar` instance, or an object implementing the calendar
-     * protocol.
-     * @param {TimeZoneLike} [tzLike] -
-     * {@link https://en.wikipedia.org/wiki/List_of_tz_database_time_zones|IANA time zone identifier}
-     * string (e.g. `'Europe/London'`), `Temporal.TimeZone` instance, or an
-     * object implementing the time zone protocol. If omitted,
-     * the environment's current time zone will be used.
-     */
-    plainDate: (calendar: CalendarLike, tzLike?: TimeZoneLike) => Temporal.PlainDate;
 
     /**
      * Get the current date in a specific time zone, using the ISO 8601
