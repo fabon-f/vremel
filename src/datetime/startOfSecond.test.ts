@@ -1,0 +1,16 @@
+import { Temporal } from "@js-temporal/polyfill";
+import { expect, test } from "vitest";
+
+import { startOfSecond } from "./startOfSecond.js";
+
+test("PlainDateTime", () => {
+	expect(
+		startOfSecond(Temporal.PlainDateTime.from("2024-01-01T12:34:56.789123456")),
+	).toEqual(Temporal.PlainDateTime.from("2024-01-01T12:34:56"));
+});
+
+test("PlainTime", () => {
+	expect(startOfSecond(Temporal.PlainTime.from("12:34:56.789123456"))).toEqual(
+		Temporal.PlainTime.from("12:34:56"),
+	);
+});
