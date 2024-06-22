@@ -2,12 +2,10 @@ import type { Temporal } from "../types.js";
 
 /**
  * Returns the start of a day for the given datetime
- * @param dt datetime object which includes time info
+ * @param dt datetime object which includes date and time info
  * @returns Temporal object which represents the start of a day
  */
-export function startOfDay<
-	DateTime extends Temporal.PlainTime | Temporal.PlainDateTime,
->(dt: DateTime): DateTime {
+export function startOfDay(dt: Temporal.PlainDateTime): Temporal.PlainDateTime {
 	return dt.with({
 		hour: 0,
 		minute: 0,
@@ -15,5 +13,5 @@ export function startOfDay<
 		millisecond: 0,
 		microsecond: 0,
 		nanosecond: 0,
-	}) as DateTime;
+	});
 }
