@@ -1,10 +1,12 @@
 // @ts-nocheck
 import { copyFile, readdir, rm } from "node:fs/promises";
+import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { consola } from "consola";
 
+const require = createRequire(import.meta.url);
 const srcPath = path.join(fileURLToPath(import.meta.url), "../../src");
 
 await copyFile("src/temporal.d.ts", "dist/esm/temporal.d.ts");
@@ -25,11 +27,22 @@ async function listFns(dirname) {
 async function check(dirname, moduleName) {
 	let fail = false;
 	const fns = await listFns(dirname);
-	const mod = await import(moduleName);
-	for (const fn of fns) {
-		if (typeof mod[fn] !== "function") {
-			consola.error(`Missing function in ${dirname}/index.ts: ${fn}`);
-			fail = true;
+	const mod1 = await import(moduleName);
+	const mod2 = require(moduleName);
+
+	for (const mod of [mod1, mod2]) {
+		for (const fnName of fns) {
+			const fn = mod[fnName];
+			if (typeof fn !== "function") {
+				consola.error(`Missing function in ${dirname}/index.ts: ${fnName}`);
+				fail = true;
+				continue;
+			}
+			if (fn.name !== fnName) {
+				consola.error(
+					`Incorrect function name in ${dirname}/index.ts: expected ${fnName}, actual ${fn.name}`,
+				);
+			}
 		}
 	}
 	if (fail) {
@@ -40,7 +53,8 @@ async function check(dirname, moduleName) {
 try {
 	await check("datetime", "vremel");
 	await check("duration", "vremel/duration");
-} catch {
+} catch (e) {
+	consola.error(e);
 	await rm(path.join(srcPath, "../dist"), { recursive: true, force: true });
 	process.exit(1);
 }
