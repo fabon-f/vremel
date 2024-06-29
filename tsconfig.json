@@ -4,7 +4,9 @@
 		"rootDir": ".",
 		"noEmit": true,
 		"module": "Node16",
-		"moduleResolution": "Node16"
+		"moduleResolution": "Node16",
+		"allowJs": true,
+		"checkJs": false
 	},
 	"exclude": ["dist", "_site"]
 }

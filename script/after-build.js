@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { copyFile, readdir, rm } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";

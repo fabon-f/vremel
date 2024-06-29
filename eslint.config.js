@@ -1,4 +1,3 @@
-// @ts-nocheck
 import eslint from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
