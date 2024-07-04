@@ -1,4 +1,4 @@
-// original: https://github.com/tc39/proposal-temporal/blob/d4644973743cec929df2e0d63bee466bf98eb9f3/polyfill/index.d.ts
+// original: https://github.com/tc39/proposal-temporal/blob/25d0b97e8bcb387073590f43b548b93a22f8a6e5/polyfill/index.d.ts
 /*! SPDX-License-Identifier: BSD-3-Clause */
 
 export namespace Temporal {
@@ -143,7 +143,7 @@ export namespace Temporal {
   /**
    * When the name of a unit is provided to a Temporal API as a string, it is
    * usually singular, e.g. 'day' or 'hour'. But plural unit names like 'days'
-   * or 'hours' are aso accepted too.
+   * or 'hours' are also accepted.
    * */
   export type PluralUnit<T extends DateTimeUnit> = {
     year: 'years';
