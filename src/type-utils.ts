@@ -1,70 +1,43 @@
 import type { Temporal, TemporalType } from "./types.js";
 
 export function isInstant(dt: TemporalType): dt is Temporal.Instant {
-	if ("epochSeconds" in dt && !("timeZoneId" in dt)) {
-		return true;
-	}
-	return false;
+	return "epochSeconds" in dt && !("timeZoneId" in dt);
 }
 
 export function isZonedDateTime(
 	dt: TemporalType,
 ): dt is Temporal.ZonedDateTime {
-	if ("timeZoneId" in dt) {
-		return true;
-	}
-	return false;
+	return "timeZoneId" in dt;
 }
 
 export function isPlainDateTime(
 	dt: TemporalType,
 ): dt is Temporal.PlainDateTime {
-	if (isZonedDateTime(dt)) {
-		return false;
-	}
-	if ("year" in dt && "second" in dt) {
-		return true;
-	}
-	return false;
+	return !("timeZoneId" in dt) && "year" in dt && "second" in dt;
 }
 
 export function isPlainTime(dt: TemporalType): dt is Temporal.PlainTime {
-	if ("second" in dt && !("year" in dt)) {
-		return true;
-	}
-	return false;
+	return "second" in dt && !("year" in dt);
 }
 
 export function isPlainDate(dt: TemporalType): dt is Temporal.PlainDate {
-	if ("year" in dt && "day" in dt && !("second" in dt)) {
-		return true;
-	}
-	return false;
+	return "year" in dt && "day" in dt && !("second" in dt);
 }
 
 export function isPlainYearMonth(
 	dt: TemporalType,
 ): dt is Temporal.PlainYearMonth {
-	if ("year" in dt && !("day" in dt)) {
-		return true;
-	}
-	return false;
+	return "year" in dt && !("day" in dt);
 }
 
 export function isPlainMonthDay(
 	dt: TemporalType,
 ): dt is Temporal.PlainMonthDay {
-	if ("day" in dt && !("year" in dt)) {
-		return true;
-	}
-	return false;
+	return "day" in dt && !("year" in dt);
 }
 
 export function isDuration(dt: TemporalType): dt is Temporal.Duration {
-	if ("seconds" in dt) {
-		return true;
-	}
-	return false;
+	return "seconds" in dt;
 }
 
 export function isInstantArray(a: TemporalType[]): a is Temporal.Instant[] {
