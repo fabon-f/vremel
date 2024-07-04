@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `startOfDay`, `startOfHour`, `startOfMinute`, `startOfSecond`, `endOfDay`, `endOfHour`, `endOfMinute`, `endOfSecond` functions
+- `startOfYear`, `startOfMonth`, `startOfDay`, `startOfHour`, `startOfMinute`, `startOfSecond`, `endOfYear`, `endOfMonth`, `endOfDay`, `endOfHour`, `endOfMinute`, `endOfSecond` functions
 
 ## 0.3.3 (2024-05-09)
 
