@@ -255,6 +255,74 @@ test("offset", () => {
 	}
 });
 
+test("ZonedDateTime with non-ISO calendar", () => {
+	expect(() => {
+		formatWithoutLocale(
+			Temporal.ZonedDateTime.from(target).withCalendar("hebrew"),
+			"yyyy/MM/dd",
+		);
+	}).toThrow();
+	expect(
+		formatWithoutLocale(
+			Temporal.ZonedDateTime.from(target).withCalendar("hebrew"),
+			"yyyy/MM/dd",
+			{ formatNonIsoDate: true },
+		),
+	).toEqual("5784/04/21");
+});
+
+test("PlainDateTime with non-ISO calendar", () => {
+	expect(() => {
+		formatWithoutLocale(
+			Temporal.PlainDateTime.from(target).withCalendar("hebrew"),
+			"yyyy/MM/dd",
+		);
+	}).toThrow();
+	expect(
+		formatWithoutLocale(
+			Temporal.PlainDateTime.from(target).withCalendar("hebrew"),
+			"yyyy/MM/dd",
+			{ formatNonIsoDate: true },
+		),
+	).toEqual("5784/04/21");
+});
+
+test("PlainDate with non-ISO calendar", () => {
+	expect(() => {
+		formatWithoutLocale(
+			Temporal.PlainDate.from(target).withCalendar("hebrew"),
+			"yyyy/MM/dd",
+		);
+	}).toThrow();
+	expect(
+		formatWithoutLocale(
+			Temporal.PlainDate.from(target).withCalendar("hebrew"),
+			"yyyy/MM/dd",
+			{ formatNonIsoDate: true },
+		),
+	).toEqual("5784/04/21");
+});
+
+test("PlainYearMonth with non-ISO calendar", () => {
+	expect(() => {
+		formatWithoutLocale(
+			Temporal.PlainDateTime.from(target)
+				.withCalendar("hebrew")
+				.toPlainYearMonth(),
+			"yyyy/MM",
+		);
+	}).toThrow();
+	expect(
+		formatWithoutLocale(
+			Temporal.PlainDateTime.from(target)
+				.withCalendar("hebrew")
+				.toPlainYearMonth(),
+			"yyyy/MM",
+			{ formatNonIsoDate: true },
+		),
+	).toEqual("5784/04");
+});
+
 test("PlainMonthDay with non-ISO calendar", () => {
 	const md = Temporal.PlainMonthDay.from({
 		// 15 Adar I
@@ -263,6 +331,6 @@ test("PlainMonthDay with non-ISO calendar", () => {
 		calendar: "hebrew",
 	});
 	expect(() => {
-		formatWithoutLocale(md, "MM");
+		formatWithoutLocale(md, "MM", { formatNonIsoDate: true });
 	}).toThrowError();
 });

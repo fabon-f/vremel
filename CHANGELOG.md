@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `startOfYear`, `startOfMonth`, `startOfDay`, `startOfHour`, `startOfMinute`, `startOfSecond`, `endOfYear`, `endOfMonth`, `endOfDay`, `endOfHour`, `endOfMinute`, `endOfSecond` functions
 
+### Changed
+
+- Make `formatWithoutLocale` not accept a temporal objects with non-ISO calendar by default. If you want to do that, please use `formatNonIsoDate` option.
+
 ## 0.3.3 (2024-05-09)
 
 ### Removed

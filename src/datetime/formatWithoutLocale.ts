@@ -10,9 +10,16 @@ type DateTime =
 	| Temporal.PlainYearMonth
 	| Temporal.PlainMonthDay;
 
-function year(dateTime: DateTime, token: string): string {
+function year(
+	dateTime: DateTime,
+	token: string,
+	formatNonIsoDate: boolean,
+): string {
 	if (!("year" in dateTime)) {
 		throw new Error(`${getTypeName(dateTime)} doesn't have year info`);
+	}
+	if (!formatNonIsoDate && dateTime.calendarId !== "iso8601") {
+		throw new Error("You can't format a year of non-ISO date");
 	}
 	const year = dateTime.year.toString();
 	if (token === "y") {
@@ -31,7 +38,14 @@ function year(dateTime: DateTime, token: string): string {
 	throw new Error(`Invalid token: ${token}`);
 }
 
-function getNumericMonth(dateTime: DateTime) {
+function getNumericMonth(
+	dateTime:
+		| Temporal.ZonedDateTime
+		| Temporal.PlainDate
+		| Temporal.PlainDateTime
+		| Temporal.PlainYearMonth
+		| Temporal.PlainMonthDay,
+) {
 	if (isPlainMonthDay(dateTime)) {
 		const table = Object.assign(Object.create(null) as Record<string, number>, {
 			M01: 1,
@@ -58,13 +72,20 @@ function getNumericMonth(dateTime: DateTime) {
 			`Can't get numeric month of PlainMonthDay with non-ISO calendars`,
 		);
 	}
-	if (!("month" in dateTime)) {
-		throw new Error(`${getTypeName(dateTime)} doesn't have month info`);
-	}
 	return dateTime.month;
 }
 
-function month(dateTime: DateTime, token: string): string {
+function month(
+	dateTime: DateTime,
+	token: string,
+	formatNonIsoDate: boolean,
+): string {
+	if (!("monthCode" in dateTime)) {
+		throw new Error(`${getTypeName(dateTime)} doesn't have month info`);
+	}
+	if (!formatNonIsoDate && dateTime.calendarId !== "iso8601") {
+		throw new Error("You can't format a month of non-ISO date");
+	}
 	const month = getNumericMonth(dateTime);
 	if (token === "M") {
 		return month.toString();
@@ -76,9 +97,16 @@ function month(dateTime: DateTime, token: string): string {
 	throw new Error(`Invalid token: ${token}`);
 }
 
-function day(dateTime: DateTime, token: string): string {
+function day(
+	dateTime: DateTime,
+	token: string,
+	formatNonIsoDate: boolean,
+): string {
 	if (!("day" in dateTime)) {
 		throw new Error(`${getTypeName(dateTime)} doesn't have day info`);
+	}
+	if (!formatNonIsoDate && dateTime.calendarId !== "iso8601") {
+		throw new Error("You can't format a month of non-ISO date");
 	}
 	if (token === "d") {
 		return dateTime.day.toString();
@@ -201,15 +229,19 @@ function offset(dateTime: DateTime, token: string) {
 	throw new Error(`Invalid token: ${token}`);
 }
 
-function formatToken(dateTime: DateTime, token: string) {
+function formatToken(
+	dateTime: DateTime,
+	token: string,
+	formatNonIsoDate: boolean,
+) {
 	if (/^y+$/.test(token)) {
-		return year(dateTime, token);
+		return year(dateTime, token, formatNonIsoDate);
 	}
 	if (token === "M" || token === "MM") {
-		return month(dateTime, token);
+		return month(dateTime, token, formatNonIsoDate);
 	}
 	if (token === "d" || token === "dd") {
-		return day(dateTime, token);
+		return day(dateTime, token, formatNonIsoDate);
 	}
 	if (token === "h" || token === "hh" || token === "H" || token === "HH") {
 		return hour(dateTime, token);
@@ -243,9 +275,21 @@ function unescapeTwoSingleQuotes(format: string) {
 	return format.replaceAll(`''`, `'`);
 }
 
+export interface FormatWithoutLocaleOptions {
+	/**
+	 * whether format numeric year/month/day for non-ISO calendar
+	 */
+	formatNonIsoDate?: boolean;
+}
+
 /**
  * Returns formatted date string of the Temporal object in the given format.
- * Available field patterns are subset of date field symbols in Unicode CLDR, see https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table for details.
+ * When formatting year, month, or day, this function only accepts a temporal object with ISO calendar by default.
+ * If you are 100% sure what you are doing and want to format numeric date info of non-ISO date intentionally,
+ * pass `formatNonIsoDate` option.
+ *
+ * Available field patterns are subset of date field symbols in Unicode CLDR,
+ * see https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table for details.
  *
  * Available patterns:
  * | unit               | pattern          | result examples                         |
@@ -294,6 +338,7 @@ export function formatWithoutLocale(
 		| Temporal.PlainYearMonth
 		| Temporal.PlainMonthDay,
 	format: string,
+	options?: FormatWithoutLocaleOptions,
 ): string {
 	if (!areSingleQuotesBalanced(format)) {
 		throw new Error(
@@ -308,6 +353,6 @@ export function formatWithoutLocale(
 		if (match.startsWith(`'`) && match.endsWith(`'`)) {
 			return unescapeTwoSingleQuotes(match.slice(1, match.length - 1));
 		}
-		return formatToken(dateTime, match);
+		return formatToken(dateTime, match, options?.formatNonIsoDate ?? false);
 	});
 }
