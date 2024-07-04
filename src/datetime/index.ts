@@ -1,3 +1,4 @@
+export type { GenericDateConstructor } from "../types.js";
 export { areIntervalsOverlapping } from "./areIntervalsOverlapping.js";
 export { clamp } from "./clamp.js";
 export { closestIndexTo } from "./closestIndexTo.js";
@@ -11,7 +12,10 @@ export { endOfMinute } from "./endOfMinute.js";
 export { endOfMonth } from "./endOfMonth.js";
 export { endOfSecond } from "./endOfSecond.js";
 export { endOfYear } from "./endOfYear.js";
-export { formatWithoutLocale } from "./formatWithoutLocale.js";
+export {
+	formatWithoutLocale,
+	type FormatWithoutLocaleOptions,
+} from "./formatWithoutLocale.js";
 export { isAfter } from "./isAfter.js";
 export { isBefore } from "./isBefore.js";
 export { isWithinInterval } from "./isWithinInterval.js";
