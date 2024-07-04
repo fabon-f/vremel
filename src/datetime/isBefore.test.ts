@@ -3,14 +3,14 @@ import { expect, test } from "vitest";
 
 import { isBefore } from "./isBefore.js";
 
-test("isBefore() with Instant", () => {
+test("Instant", () => {
 	const a = Temporal.Instant.fromEpochSeconds(1720000000);
 	const b = Temporal.Instant.fromEpochSeconds(1700000000);
 	expect(isBefore(a, b)).toBe(false);
 	expect(isBefore(b, a)).toBe(true);
 	expect(isBefore(a, a)).toBe(false);
 });
-test("isBefore() with ZonedDateTime", () => {
+test("ZonedDateTime", () => {
 	const a = Temporal.ZonedDateTime.from(
 		"2024-01-01T00:00:00-05:00[America/Toronto]",
 	);
@@ -21,21 +21,21 @@ test("isBefore() with ZonedDateTime", () => {
 	expect(isBefore(b, a)).toBe(true);
 	expect(isBefore(a, a)).toBe(false);
 });
-test("isBefore() with PlainDate", () => {
+test("PlainDate", () => {
 	const a = Temporal.PlainDate.from("2024-01-02");
 	const b = Temporal.PlainDate.from("2024-01-01[u-ca=hebrew]");
 	expect(isBefore(a, b)).toBe(false);
 	expect(isBefore(b, a)).toBe(true);
 	expect(isBefore(a, a)).toBe(false);
 });
-test("isBefore() with PlainTime", () => {
+test("PlainTime", () => {
 	const a = Temporal.PlainTime.from("23:45:00");
 	const b = Temporal.PlainTime.from("06:00:00");
 	expect(isBefore(a, b)).toBe(false);
 	expect(isBefore(b, a)).toBe(true);
 	expect(isBefore(a, a)).toBe(false);
 });
-test("isBefore() with PlainDateTime", () => {
+test("PlainDateTime", () => {
 	const a = Temporal.PlainDateTime.from(
 		"2024-01-01T09:00:00+09:00[Asia/Tokyo]",
 	);
@@ -46,14 +46,14 @@ test("isBefore() with PlainDateTime", () => {
 	expect(isBefore(b, a)).toBe(true);
 	expect(isBefore(a, a)).toBe(false);
 });
-test("isBefore() with PlainYearMonth", () => {
+test("PlainYearMonth", () => {
 	const a = Temporal.PlainYearMonth.from("2024-01");
 	const b = Temporal.PlainYearMonth.from("2023-12");
 	expect(isBefore(a, b)).toBe(false);
 	expect(isBefore(b, a)).toBe(true);
 	expect(isBefore(a, a)).toBe(false);
 });
-test("isBefore() with PlainMonthDay", () => {
+test("PlainMonthDay", () => {
 	expect(() => {
 		isBefore(
 			// @ts-expect-error

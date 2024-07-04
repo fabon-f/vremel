@@ -3,14 +3,14 @@ import { expect, test } from "vitest";
 
 import { closestIndexTo } from "./closestIndexTo.js";
 
-test("closestIndexTo() with Instant", () => {
+test("Instant", () => {
 	const target = [1700000000, 1720000000, 1600000000].map((t) =>
 		Temporal.Instant.fromEpochSeconds(t),
 	);
 	const dt = Temporal.Instant.fromEpochSeconds(1640000000);
 	expect(closestIndexTo(dt, target)).toBe(2);
 });
-test("closestIndexTo() with Instants which differs few nanoseconds", () => {
+test("Instants which differs few nanoseconds", () => {
 	const target = [
 		1700000000000000000n,
 		1700000000000000001n,
@@ -19,7 +19,7 @@ test("closestIndexTo() with Instants which differs few nanoseconds", () => {
 	const dt = Temporal.Instant.fromEpochNanoseconds(1700000000000000003n);
 	expect(closestIndexTo(dt, target)).toBe(2);
 });
-test("closestIndexTo() with ZonedDateTime", () => {
+test("ZonedDateTime", () => {
 	const target = [
 		"2024-01-01T09:00:00+09:00[Asia/Tokyo]",
 		"2024-01-01T03:00:00+01:00[Europe/Paris]",
@@ -30,7 +30,7 @@ test("closestIndexTo() with ZonedDateTime", () => {
 	);
 	expect(closestIndexTo(dt, target)).toBe(1);
 });
-test("closestIndexTo() with PlainDate", () => {
+test("PlainDate", () => {
 	const target = ["2024-01-01", "2024-01-02", "2023-12-23"].map((t) =>
 		Temporal.PlainDate.from(t),
 	);
@@ -38,14 +38,14 @@ test("closestIndexTo() with PlainDate", () => {
 	expect(closestIndexTo(dt, target)).toBe(1);
 });
 
-test("closestIndexTo() with PlainTime", () => {
+test("PlainTime", () => {
 	const target = ["03:00:00", "06:00:00", "23:45:00"].map((t) =>
 		Temporal.PlainTime.from(t),
 	);
 	const dt = Temporal.PlainTime.from("18:00:00");
 	expect(closestIndexTo(dt, target)).toBe(2);
 });
-test("closestIndexTo() with PlainDateTime", () => {
+test("PlainDateTime", () => {
 	const target = [
 		"2024-01-01T09:00:00+09:00[Asia/Tokyo]",
 		"2024-01-01T03:00:00+01:00[Europe/Paris]",
@@ -56,14 +56,14 @@ test("closestIndexTo() with PlainDateTime", () => {
 	);
 	expect(closestIndexTo(dt, target)).toBe(1);
 });
-test("closestIndexTo() with PlainYearMonth", () => {
+test("PlainYearMonth", () => {
 	const target = ["2023-12", "2024-01", "2023-08"].map((t) =>
 		Temporal.PlainYearMonth.from(t),
 	);
 	const dt = Temporal.PlainYearMonth.from("2023-11");
 	expect(closestIndexTo(dt, target)).toBe(0);
 });
-test("closestIndexTo() with PlainYearMonth of non-ISO calendar", () => {
+test("PlainYearMonth of non-ISO calendar", () => {
 	const target = [
 		{ year: 5784, monthCode: "M05L" },
 		{ year: 5784, monthCode: "M08" },

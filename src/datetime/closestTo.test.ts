@@ -3,14 +3,14 @@ import { expect, test } from "vitest";
 
 import { closestTo } from "./closestTo.js";
 
-test("closestTo() with Instant", () => {
+test("Instant", () => {
 	const target = [1700000000, 1720000000, 1600000000].map((t) =>
 		Temporal.Instant.fromEpochSeconds(t),
 	);
 	const dt = Temporal.Instant.fromEpochSeconds(1640000000);
 	expect(closestTo(dt, target)).toBe(target[2]);
 });
-test("closestTo() with ZonedDateTime", () => {
+test("ZonedDateTime", () => {
 	const target = [
 		"2024-01-01T09:00:00+09:00[Asia/Tokyo]",
 		"2024-01-01T03:00:00+01:00[Europe/Paris]",
@@ -21,7 +21,7 @@ test("closestTo() with ZonedDateTime", () => {
 	);
 	expect(closestTo(dt, target)).toBe(target[1]);
 });
-test("closestTo() with PlainDate", () => {
+test("PlainDate", () => {
 	const target = ["2024-01-01", "2024-01-02", "2023-12-23"].map((t) =>
 		Temporal.PlainDate.from(t),
 	);
@@ -29,14 +29,14 @@ test("closestTo() with PlainDate", () => {
 	expect(closestTo(dt, target)).toBe(target[1]);
 });
 
-test("closestTo() with PlainTime", () => {
+test("PlainTime", () => {
 	const target = ["03:00:00", "06:00:00", "23:45:00"].map((t) =>
 		Temporal.PlainTime.from(t),
 	);
 	const dt = Temporal.PlainTime.from("18:00:00");
 	expect(closestTo(dt, target)).toBe(target[2]);
 });
-test("closestTo() with PlainDateTime", () => {
+test("PlainDateTime", () => {
 	const target = [
 		"2024-01-01T09:00:00+09:00[Asia/Tokyo]",
 		"2024-01-01T03:00:00+01:00[Europe/Paris]",
@@ -47,14 +47,14 @@ test("closestTo() with PlainDateTime", () => {
 	);
 	expect(closestTo(dt, target)).toBe(target[1]);
 });
-test("closestTo() with PlainYearMonth", () => {
+test("PlainYearMonth", () => {
 	const target = ["2023-12", "2024-01", "2023-08"].map((t) =>
 		Temporal.PlainYearMonth.from(t),
 	);
 	const dt = Temporal.PlainYearMonth.from("2023-11");
 	expect(closestTo(dt, target)).toBe(target[0]);
 });
-test("closestTo() with PlainYearMonth of non-ISO calendar", () => {
+test("PlainYearMonth of non-ISO calendar", () => {
 	const target = [
 		{ year: 5784, monthCode: "M05L" },
 		{ year: 5784, monthCode: "M08" },
