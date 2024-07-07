@@ -1,5 +1,8 @@
 export type { GenericDateConstructor } from "../types.js";
-export { areIntervalsOverlapping } from "./areIntervalsOverlapping.js";
+export {
+	areIntervalsOverlapping,
+	type AreIntervalsOverlappingOptions,
+} from "./areIntervalsOverlapping.js";
 export { clamp } from "./clamp.js";
 export { closestIndexTo } from "./closestIndexTo.js";
 export { closestTo } from "./closestTo.js";

@@ -2,6 +2,13 @@ import { assertSameType, assertValidInterval } from "../assert.js";
 import type { Interval } from "../types.js";
 import { compare } from "./_compare.js";
 
+export interface AreIntervalsOverlappingOptions {
+	/**
+	 * Whether the comparison is inclusive or not. Default is `true`.
+	 */
+	inclusive?: boolean;
+}
+
 /**
  * Checks if the given two intervals are overlapping.
  * By default, it returns `true` if the end of one interval is exactly same time to the start of the other interval.
@@ -29,12 +36,7 @@ import { compare } from "./_compare.js";
 export function areIntervalsOverlapping(
 	interval1: Interval,
 	interval2: Interval,
-	options?: {
-		/**
-		 * Whether the comparison is inclusive or not. Default is `true`.
-		 */
-		inclusive?: boolean;
-	},
+	options?: AreIntervalsOverlappingOptions,
 ): boolean {
 	assertValidInterval(interval1);
 	assertValidInterval(interval2);
