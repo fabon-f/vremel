@@ -1,3 +1,4 @@
+/** @type {import("rollup").RollupOptions} */
 export default {
 	input: {
 		index: "dist/esm/index.js",
