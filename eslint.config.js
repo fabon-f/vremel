@@ -26,8 +26,8 @@ export default [
 	{
 		languageOptions: {
 			parser: tsEslint.parser,
+			ecmaVersion: "latest",
 			parserOptions: {
-				ecmaVersion: "latest",
 				projectService: true,
 				tsconfigRootDir: __dirname,
 			},
