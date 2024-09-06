@@ -17,4 +17,4 @@ jobs:
           cache: pnpm
       - run: pnpm install
       - name: Test
-        run: TZ="America/Chicago" pnpm test
+        run: pnpm test

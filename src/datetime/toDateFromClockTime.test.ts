@@ -3,7 +3,10 @@ import { Temporal } from "@js-temporal/polyfill";
 import { lightFormat } from "date-fns";
 import { expect, test } from "vitest";
 
+import { TimeZoneModifier } from "../test-helper.js";
 import { toDateFromClockTime } from "./toDateFromClockTime.js";
+
+const zoneModifier = new TimeZoneModifier();
 
 test("ZonedDateTime", () => {
 	const date = toDateFromClockTime(
@@ -35,11 +38,13 @@ test("PlainMonthDay", () => {
 });
 
 test("timezone", () => {
+	zoneModifier.set("America/Chicago");
 	const date = toDateFromClockTime(
 		// this datetime doesn't exist in USA due to DST
 		Temporal.PlainDateTime.from("2023-03-12T02:30:00"),
 	);
 	expect(lightFormat(date, "yyyy-MM-dd HH:mm:ss")).toBe("2023-03-12 02:30:00");
+	zoneModifier.restore();
 });
 
 test("PlainMonthDay with non-ISO calendar", () => {
