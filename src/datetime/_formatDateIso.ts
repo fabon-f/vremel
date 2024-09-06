@@ -1,11 +1,13 @@
+import { formatExactTimeIso } from "./_formatExactTimeIso.js";
+
 export function formatDateIso(date: Date) {
-	const year = date.getFullYear().toString();
-	const month = (date.getMonth() + 1).toString().padStart(2, "0");
-	const day = date.getDate().toString().padStart(2, "0");
-	const hour = date.getHours().toString().padStart(2, "0");
-	const minute = date.getMinutes().toString().padStart(2, "0");
-	const second = date.getSeconds().toString().padStart(2, "0");
-	const millisecond = date.getMilliseconds().toString().padStart(3, "0");
+	const year = date.getFullYear();
+	const month = date.getMonth() + 1;
+	const day = date.getDate();
+	const hour = date.getHours();
+	const minute = date.getMinutes();
+	const second = date.getSeconds();
+	const millisecond = date.getMilliseconds();
 
 	const offset = date.getTimezoneOffset();
 
@@ -15,5 +17,14 @@ export function formatDateIso(date: Date) {
 	const offsetMinutes = (Math.abs(offset) % 60).toString().padStart(2, "0");
 	const offsetString = `${offset > 0 ? "-" : "+"}${offsetHours}:${offsetMinutes}`;
 
-	return `${year}-${month}-${day}T${hour}:${minute}:${second}.${millisecond}${offsetString}`;
+	return formatExactTimeIso(
+		year,
+		month,
+		day,
+		hour,
+		minute,
+		second,
+		millisecond,
+		offsetString,
+	);
 }

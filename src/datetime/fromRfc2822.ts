@@ -3,6 +3,10 @@ import {
 	isPlainDateTimeConstructor,
 } from "../type-utils.js";
 import type { Temporal } from "../types.js";
+import { formatExactTimeIso } from "./_formatExactTimeIso.js";
+import { getDayOfWeekAbbreviationFromNumber } from "./_getDayOfWeekAbbreviationFromNumber.js";
+import { getDayOfWeekFromYmd } from "./_getDayOfWeekFromYmd.js";
+import { getMonthNumberFromAbbreviation } from "./_getMonthNumberFromAbbreviation.js";
 
 // spec: https://datatracker.ietf.org/doc/html/rfc2822#section-3.3 https://datatracker.ietf.org/doc/html/rfc2822#section-4.3
 
@@ -38,37 +42,6 @@ function fullYear(year: string) {
 		return yearNum;
 	}
 	return yearNum >= 50 ? 1900 + yearNum : 2000 + yearNum;
-}
-
-function getDayOfWeek(year: number, month: number, day: number) {
-	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-	const week = days[new Date(Date.UTC(year, month - 1, day)).getUTCDay()];
-	if (week === undefined) {
-		throw new Error("something wrong");
-	}
-	return week;
-}
-
-function monthNumber(monthName: string) {
-	const monthNum =
-		[
-			"Jan",
-			"Feb",
-			"Mar",
-			"Apr",
-			"May",
-			"Jun",
-			"Jul",
-			"Aug",
-			"Sep",
-			"Oct",
-			"Nov",
-			"Dec",
-		].indexOf(monthName) + 1;
-	if (monthNum === 0) {
-		throw new Error(`Invalid month name: ${monthName}`);
-	}
-	return monthNum;
 }
 
 function getOffset(timeZone: string): string {
@@ -127,7 +100,7 @@ function parse(date: string) {
 	}
 	return {
 		year: fullYear(year),
-		month: monthNumber(monthName),
+		month: getMonthNumberFromAbbreviation(monthName),
 		day: parseInt(day, 10),
 		hour: parseInt(hour, 10),
 		minute: parseInt(minute, 10),
@@ -135,24 +108,6 @@ function parse(date: string) {
 		dayOfWeek,
 		timeZone,
 	};
-}
-
-function formatInstantIso(
-	year: number,
-	month: number,
-	day: number,
-	hour: number,
-	minute: number,
-	second: number,
-	offsetString: string,
-) {
-	const yearStr = year.toString();
-	const monthStr = month.toString().padStart(2, "0");
-	const dayStr = day.toString().padStart(2, "0");
-	const hourStr = hour.toString().padStart(2, "0");
-	const minuteStr = minute.toString().padStart(2, "0");
-	const secondStr = second.toString().padStart(2, "0");
-	return `${yearStr}-${monthStr}-${dayStr}T${hourStr}:${minuteStr}:${secondStr}${offsetString}`;
 }
 
 /**
@@ -175,7 +130,10 @@ export function fromRfc2822<
 
 	const { year, month, day, hour, minute, second, dayOfWeek, timeZone } =
 		parse(dateWithoutComment);
-	if (dayOfWeek !== undefined && getDayOfWeek(year, month, day) !== dayOfWeek) {
+	const actualDayOfWeek = getDayOfWeekAbbreviationFromNumber(
+		getDayOfWeekFromYmd(year, month, day),
+	);
+	if (dayOfWeek !== undefined && actualDayOfWeek !== dayOfWeek) {
 		throw new Error(`Wrong day of week: ${dayOfWeek}`);
 	}
 
@@ -194,7 +152,7 @@ export function fromRfc2822<
 	const offsetIso = getOffset(timeZone);
 	if (isInstantConstructor(TemporalClass)) {
 		return TemporalClass.from(
-			formatInstantIso(year, month, day, hour, minute, second, offsetIso),
+			formatExactTimeIso(year, month, day, hour, minute, second, 0, offsetIso),
 		) as InstanceType<TemporalClassType>;
 	}
 	return TemporalClass.from({
