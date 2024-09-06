@@ -47,26 +47,25 @@ function getNumericMonth(
 		| Temporal.PlainMonthDay,
 ) {
 	if (isPlainMonthDay(dateTime)) {
-		const table = Object.assign(Object.create(null) as Record<string, number>, {
-			M01: 1,
-			M02: 2,
-			M03: 3,
-			M04: 4,
-			M05: 5,
-			M06: 6,
-			M07: 7,
-			M08: 8,
-			M09: 9,
-			M10: 10,
-			M11: 11,
-			M12: 12,
-		});
 		if (dateTime.calendarId === "iso8601") {
-			const monthNum = table[dateTime.monthCode];
-			if (monthNum === undefined) {
+			const index = [
+				"M01",
+				"M02",
+				"M03",
+				"M04",
+				"M05",
+				"M06",
+				"M07",
+				"M08",
+				"M09",
+				"M10",
+				"M11",
+				"M12",
+			].indexOf(dateTime.monthCode);
+			if (index === -1) {
 				throw new Error(`Unknown month code: ${dateTime.monthCode}`);
 			}
-			return monthNum;
+			return index + 1;
 		}
 		throw new Error(
 			`Can't get numeric month of PlainMonthDay with non-ISO calendars`,
