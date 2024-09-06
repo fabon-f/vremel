@@ -19,6 +19,7 @@ export {
 	formatWithoutLocale,
 	type FormatWithoutLocaleOptions,
 } from "./formatWithoutLocale.js";
+export { fromRfc2822 } from "./fromRfc2822.js";
 export { isAfter } from "./isAfter.js";
 export { isBefore } from "./isBefore.js";
 export { isWithinInterval } from "./isWithinInterval.js";
