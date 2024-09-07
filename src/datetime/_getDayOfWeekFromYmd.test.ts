@@ -22,6 +22,15 @@ test("result of getDayOfWeekFromYmd should match to Temporal's dayOfWeek", () =>
 	);
 });
 
+test("invalid date", () => {
+	expect(() => {
+		getDayOfWeekFromYmd(2024, 1, 366);
+	}).toThrowError();
+	expect(() => {
+		getDayOfWeekFromYmd(2023, 2, 29);
+	}).toThrowError();
+});
+
 test("getDayOfWeekFromYmd with a day which doesn't exist in local time zone", () => {
 	zoneModifier.set("Pacific/Apia");
 	// 2011/12/30 was skipped in Pacific/Apia due to offset change (UTC-11:00 -> UTC+13:00)
