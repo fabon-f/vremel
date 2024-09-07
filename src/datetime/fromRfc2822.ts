@@ -98,16 +98,16 @@ function parse(date: string) {
 	) {
 		throw new Error("something wrong");
 	}
-	return {
-		year: fullYear(year),
-		month: getMonthNumberFromAbbreviation(monthName),
-		day: parseInt(day, 10),
-		hour: parseInt(hour, 10),
-		minute: parseInt(minute, 10),
-		second: parseInt(second),
+	return [
+		fullYear(year),
+		getMonthNumberFromAbbreviation(monthName),
+		parseInt(day),
+		parseInt(hour, 10),
+		parseInt(minute, 10),
+		parseInt(second),
 		dayOfWeek,
 		timeZone,
-	};
+	] as const;
 }
 
 /**
@@ -128,7 +128,7 @@ export function fromRfc2822<
 ): InstanceType<TemporalClassType> {
 	const dateWithoutComment = date.includes("(") ? removeComment(date) : date;
 
-	const { year, month, day, hour, minute, second, dayOfWeek, timeZone } =
+	const [year, month, day, hour, minute, second, dayOfWeek, timeZone] =
 		parse(dateWithoutComment);
 	if (
 		dayOfWeek !== undefined &&
