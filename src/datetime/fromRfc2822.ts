@@ -4,8 +4,8 @@ import {
 } from "../type-utils.js";
 import type { Temporal } from "../types.js";
 import { formatExactTimeIso } from "./_formatExactTimeIso.js";
-import { getDayOfWeekAbbreviationFromNumber } from "./_getDayOfWeekAbbreviationFromNumber.js";
 import { getDayOfWeekFromYmd } from "./_getDayOfWeekFromYmd.js";
+import { getDayOfWeekNumberFromAbbreviation } from "./_getDayOfWeekNumberFromAbbreviation.js";
 import { getMonthNumberFromAbbreviation } from "./_getMonthNumberFromAbbreviation.js";
 
 // spec: https://datatracker.ietf.org/doc/html/rfc2822#section-3.3 https://datatracker.ietf.org/doc/html/rfc2822#section-4.3
@@ -34,7 +34,7 @@ function removeComment(str: string) {
 }
 
 const dateTimeFormatRegex =
-	/^[ \t\r\n]*(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),)?[ \t\r\n]*(\d\d)[ \t\r\n]+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[ \t\r\n]+(\d\d|\d\d\d\d)[ \t\r\n]+(\d\d):(\d\d)(?::(\d\d))?[ \t\r\n]+([+-]\d{4}|[A-Za-z]+)[ \t\r\n]*$/;
+	/^[ \t\r\n]*(?:([A-Za-z]{3}),)?[ \t\r\n]*(\d\d)[ \t\r\n]+([A-Za-z]{3})[ \t\r\n]+(\d\d|\d\d\d\d)[ \t\r\n]+(\d\d):(\d\d)(?::(\d\d))?[ \t\r\n]+([+-]\d{4}|[A-Za-z]+)[ \t\r\n]*$/;
 
 function fullYear(year: string) {
 	const yearNum = parseInt(year, 10);
@@ -130,10 +130,11 @@ export function fromRfc2822<
 
 	const { year, month, day, hour, minute, second, dayOfWeek, timeZone } =
 		parse(dateWithoutComment);
-	const actualDayOfWeek = getDayOfWeekAbbreviationFromNumber(
-		getDayOfWeekFromYmd(year, month, day),
-	);
-	if (dayOfWeek !== undefined && actualDayOfWeek !== dayOfWeek) {
+	if (
+		dayOfWeek !== undefined &&
+		getDayOfWeekFromYmd(year, month, day) !==
+			getDayOfWeekNumberFromAbbreviation(dayOfWeek)
+	) {
 		throw new Error(`Wrong day of week: ${dayOfWeek}`);
 	}
 

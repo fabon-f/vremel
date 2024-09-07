@@ -112,3 +112,15 @@ test("comment", () => {
 		),
 	).toEqual(Temporal.Instant.from("2024-01-01T01:23:45Z"));
 });
+
+test("invalid day of week", () => {
+	expect(() => {
+		fromRfc2822("Mot, 01 Jan 2024 01:23:45 +0900", Temporal.PlainDateTime);
+	}).toThrowError(/Mot/);
+});
+
+test("invalid month name", () => {
+	expect(() => {
+		fromRfc2822("Mon, 01 Jat 2024 01:23:45 +0900", Temporal.PlainDateTime);
+	}).toThrowError(/Jat/);
+});
