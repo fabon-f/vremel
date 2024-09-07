@@ -13,3 +13,7 @@ insert_final_newline = true
 
 [*.{yaml,yml}]
 indent_style = space
+
+[src/temporal.d.ts]
+indent_style = space
+indent_size = 2
