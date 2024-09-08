@@ -113,6 +113,15 @@ test("comment", () => {
 	).toEqual(Temporal.Instant.from("2024-06-07T01:23:45Z"));
 });
 
+test("unbalanced comment", () => {
+	expect(() =>
+		fromRfc2822("07 Jun 2024 01:23:45 +0000 (comment", Temporal.Instant),
+	).toThrowError();
+	expect(() =>
+		fromRfc2822("07 Jun 2024 (comment)) 01:23:45 +0000", Temporal.Instant),
+	).toThrowError();
+});
+
 test("invalid day of week", () => {
 	expect(() => {
 		fromRfc2822("Mot, 07 Jun 2024 01:23:45 +0900", Temporal.PlainDateTime);

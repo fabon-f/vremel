@@ -28,7 +28,13 @@ function removeComment(str: string) {
 				// comment ended
 				lastNonCommentStarted = m.index + 1;
 			}
+			if (commentNestLevel < 0) {
+				throw new Error("Unbalanced nested comment");
+			}
 		}
+	}
+	if (commentNestLevel !== 0) {
+		throw new Error("Unbalanced nested comment");
 	}
 	return res;
 }
