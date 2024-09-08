@@ -15,6 +15,7 @@ export { endOfMinute } from "./endOfMinute.js";
 export { endOfMonth } from "./endOfMonth.js";
 export { endOfSecond } from "./endOfSecond.js";
 export { endOfYear } from "./endOfYear.js";
+export { formatRfc7231 } from "./formatRfc7231.js";
 export {
 	formatWithoutLocale,
 	type FormatWithoutLocaleOptions,
