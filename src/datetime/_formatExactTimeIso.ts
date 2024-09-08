@@ -1,4 +1,5 @@
 import { formatDateIso } from "./_formatDateIso.js";
+import { padLeadingZeros } from "./_padLeadingZeros.js";
 
 export function formatExactTimeIso(
 	year: number,
@@ -10,9 +11,9 @@ export function formatExactTimeIso(
 	millisecond: number,
 	offsetString: string,
 ) {
-	const hourStr = hour.toString().padStart(2, "0");
-	const minuteStr = minute.toString().padStart(2, "0");
-	const secondStr = second.toString().padStart(2, "0");
-	const millisecondStr = millisecond.toString().padStart(3, "0");
+	const hourStr = padLeadingZeros(hour, 2);
+	const minuteStr = padLeadingZeros(minute, 2);
+	const secondStr = padLeadingZeros(second, 2);
+	const millisecondStr = padLeadingZeros(millisecond, 3);
 	return `${formatDateIso(year, month, day)}T${hourStr}:${minuteStr}:${secondStr}.${millisecondStr}${offsetString}`;
 }

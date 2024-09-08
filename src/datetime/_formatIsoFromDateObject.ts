@@ -1,4 +1,5 @@
 import { formatExactTimeIso } from "./_formatExactTimeIso.js";
+import { padLeadingZeros } from "./_padLeadingZeros.js";
 
 export function formatIsoFromDateObject(date: Date) {
 	const year = date.getFullYear();
@@ -11,10 +12,8 @@ export function formatIsoFromDateObject(date: Date) {
 
 	const offset = date.getTimezoneOffset();
 
-	const offsetHours = Math.floor(Math.abs(offset) / 60)
-		.toString()
-		.padStart(2, "0");
-	const offsetMinutes = (Math.abs(offset) % 60).toString().padStart(2, "0");
+	const offsetHours = padLeadingZeros(Math.floor(Math.abs(offset) / 60), 2);
+	const offsetMinutes = padLeadingZeros(Math.abs(offset) % 60, 2);
 	const offsetString = `${offset > 0 ? "-" : "+"}${offsetHours}:${offsetMinutes}`;
 
 	return formatExactTimeIso(

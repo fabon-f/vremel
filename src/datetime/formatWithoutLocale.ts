@@ -1,5 +1,6 @@
 import { getTypeName, isPlainMonthDay } from "../type-utils.js";
 import type { Temporal } from "../types.js";
+import { padLeadingZeros } from "./_padLeadingZeros.js";
 import { secondsToHms } from "./_secondsToHms.js";
 
 type DateTime =
@@ -26,11 +27,11 @@ function year(
 		return year;
 	}
 	if (token === "yy") {
-		return (dateTime.year % 100).toString().padStart(2, "0");
+		return padLeadingZeros(dateTime.year % 100, 2);
 	}
 	if (/^y+$/.test(token)) {
 		if (token.length > year.length) {
-			return year.padStart(token.length, "0");
+			return padLeadingZeros(year, token.length);
 		} else {
 			return year;
 		}
@@ -90,7 +91,7 @@ function month(
 		return month.toString();
 	}
 	if (token === "MM") {
-		return month.toString().padStart(2, "0");
+		return padLeadingZeros(month, 2);
 	}
 
 	throw new Error(`Invalid token: ${token}`);
@@ -111,7 +112,7 @@ function day(
 		return dateTime.day.toString();
 	}
 	if (token === "dd") {
-		return dateTime.day.toString().padStart(2, "0");
+		return padLeadingZeros(dateTime.day, 2);
 	}
 	throw new Error(`Invalid token: ${token}`);
 }
@@ -120,20 +121,18 @@ function hour(dateTime: DateTime, token: string): string {
 	if (!("hour" in dateTime)) {
 		throw new Error(`${getTypeName(dateTime)} doesn't have hour info`);
 	}
-	const hour12 = (
-		dateTime.hour % 12 === 0 ? 12 : dateTime.hour % 12
-	).toString();
+	const hour12 = dateTime.hour % 12 === 0 ? 12 : dateTime.hour % 12;
 	if (token === "h") {
-		return hour12;
+		return hour12.toString();
 	}
 	if (token === "hh") {
-		return hour12.padStart(2, "0");
+		return padLeadingZeros(hour12, 2);
 	}
 	if (token === "H") {
 		return dateTime.hour.toString();
 	}
 	if (token === "HH") {
-		return dateTime.hour.toString().padStart(2, "0");
+		return padLeadingZeros(dateTime.hour, 2);
 	}
 	throw new Error(`Invalid token: ${token}`);
 }
@@ -146,7 +145,7 @@ function minute(dateTime: DateTime, token: string): string {
 		return dateTime.minute.toString();
 	}
 	if (token === "mm") {
-		return dateTime.minute.toString().padStart(2, "0");
+		return padLeadingZeros(dateTime.minute, 2);
 	}
 	throw new Error(`Invalid token: ${token}`);
 }
@@ -159,7 +158,7 @@ function second(dateTime: DateTime, token: string): string {
 		return dateTime.second.toString();
 	}
 	if (token === "ss") {
-		return dateTime.second.toString().padStart(2, "0");
+		return padLeadingZeros(dateTime.second, 2);
 	}
 	throw new Error(`Invalid token: ${token}`);
 }
@@ -179,9 +178,9 @@ function fractionalSecond(dateTime: DateTime, token: string): string {
 	if (!/^S+$/.test(token)) {
 		throw new Error(`Invalid token: ${token}`);
 	}
-	const millisec = dateTime.millisecond.toString().padStart(3, "0");
-	const microsec = dateTime.microsecond.toString().padStart(3, "0");
-	const nanosec = dateTime.nanosecond.toString().padStart(3, "0");
+	const millisec = padLeadingZeros(dateTime.millisecond, 3);
+	const microsec = padLeadingZeros(dateTime.microsecond, 3);
+	const nanosec = padLeadingZeros(dateTime.nanosecond, 3);
 	const fracSec = `${millisec}${microsec}${nanosec}`;
 
 	if (token.length >= fracSec.length) {
@@ -203,9 +202,9 @@ function offset(dateTime: DateTime, token: string) {
 	}
 	const sign = offsetSeconds < 0 ? "-" : "+";
 	const hms = secondsToHms(Math.abs(offsetSeconds));
-	const hour = hms.hour.toString().padStart(2, "0");
-	const minute = hms.minute.toString().padStart(2, "0");
-	const second = hms.second.toString().padStart(2, "0");
+	const hour = padLeadingZeros(hms.hour, 2);
+	const minute = padLeadingZeros(hms.minute, 2);
+	const second = padLeadingZeros(hms.second, 2);
 	if (token === "X" || token === "x") {
 		return hms.minute === 0 ? `${sign}${hour}` : `${sign}${hour}${minute}`;
 	}
