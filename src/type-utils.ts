@@ -1,7 +1,7 @@
 import type { Temporal, TemporalType } from "./types.js";
 
 export function isInstant(dt: TemporalType): dt is Temporal.Instant {
-	return "epochSeconds" in dt && !("timeZoneId" in dt);
+	return "epochMilliseconds" in dt && !("timeZoneId" in dt);
 }
 
 export function isZonedDateTime(

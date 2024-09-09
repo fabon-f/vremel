@@ -5,9 +5,9 @@ import { closestTo } from "./closestTo.js";
 
 test("Instant", () => {
 	const target = [1700000000, 1720000000, 1600000000].map((t) =>
-		Temporal.Instant.fromEpochSeconds(t),
+		Temporal.Instant.fromEpochMilliseconds(t * 1000),
 	);
-	const dt = Temporal.Instant.fromEpochSeconds(1640000000);
+	const dt = Temporal.Instant.fromEpochMilliseconds(1640000000 * 1000);
 	expect(closestTo(dt, target)).toBe(target[2]);
 });
 test("ZonedDateTime", () => {

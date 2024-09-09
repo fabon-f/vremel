@@ -4,8 +4,8 @@ import { expect, test } from "vitest";
 import { isAfter } from "./isAfter.js";
 
 test("Instant", () => {
-	const a = Temporal.Instant.fromEpochSeconds(1720000000);
-	const b = Temporal.Instant.fromEpochSeconds(1700000000);
+	const a = Temporal.Instant.fromEpochMilliseconds(1720000000000);
+	const b = Temporal.Instant.fromEpochMilliseconds(1700000000000);
 	expect(isAfter(a, b)).toBe(true);
 	expect(isAfter(b, a)).toBe(false);
 	expect(isAfter(a, a)).toBe(false);

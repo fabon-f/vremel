@@ -5,7 +5,7 @@ import { earliest } from "./earliest.js";
 
 test("Instant", () => {
 	const target = [1700000000, 1720000000, 1600000000].map((t) =>
-		Temporal.Instant.fromEpochSeconds(t),
+		Temporal.Instant.fromEpochMilliseconds(t * 1000),
 	);
 	expect(earliest(target)).toBe(target[2]);
 });

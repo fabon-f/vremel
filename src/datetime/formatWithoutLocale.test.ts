@@ -306,17 +306,13 @@ test("PlainDate with non-ISO calendar", () => {
 test("PlainYearMonth with non-ISO calendar", () => {
 	expect(() => {
 		formatWithoutLocale(
-			Temporal.PlainDateTime.from(target)
-				.withCalendar("hebrew")
-				.toPlainYearMonth(),
+			Temporal.PlainDate.from(target).withCalendar("hebrew").toPlainYearMonth(),
 			"yyyy/MM",
 		);
 	}).toThrow();
 	expect(
 		formatWithoutLocale(
-			Temporal.PlainDateTime.from(target)
-				.withCalendar("hebrew")
-				.toPlainYearMonth(),
+			Temporal.PlainDate.from(target).withCalendar("hebrew").toPlainYearMonth(),
 			"yyyy/MM",
 			{ formatNonIsoDate: true },
 		),

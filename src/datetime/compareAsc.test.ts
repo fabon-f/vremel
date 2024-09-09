@@ -5,7 +5,7 @@ import { compareAsc } from "./compareAsc.js";
 
 test("Instant", () => {
 	const target = [1600000000, 1700000000, 1720000000].map((t) =>
-		Temporal.Instant.fromEpochSeconds(t),
+		Temporal.Instant.fromEpochMilliseconds(t * 1000),
 	);
 	expect([...target].sort(compareAsc)).toEqual(target);
 });
