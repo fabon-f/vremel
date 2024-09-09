@@ -23,3 +23,13 @@ test("Instant", () => {
 		"Fri, 07 Jun 2024 01:23:45 GMT",
 	);
 });
+
+test("fractional seconds", () => {
+	// units smaller than second is ignored
+	expect(
+		formatRfc7231(Temporal.Instant.from("2024-06-07T01:23:45.123456789Z")),
+	).toEqual("Fri, 07 Jun 2024 01:23:45 GMT");
+	expect(
+		formatRfc7231(Temporal.Instant.from("1968-06-07T01:23:45.123456789Z")),
+	).toEqual("Fri, 07 Jun 1968 01:23:45 GMT");
+});

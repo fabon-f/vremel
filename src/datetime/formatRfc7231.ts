@@ -7,6 +7,7 @@ import { padLeadingZeros } from "./_padLeadingZeros.js";
 
 /**
  * Returns a string in RFC 7231's format which represents an exact time of given temporal object.
+ * Units smaller than second are ignored (rounded down).
  *
  * @param dt temporal object which includes exact time info (`Instant` and `ZonedDateTime`)
  * @returns a string formatted according to RFC 7231
