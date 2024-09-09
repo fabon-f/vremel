@@ -1,5 +1,6 @@
 import { isInstant } from "../type-utils.js";
 import type { Temporal } from "../types.js";
+import { formatHmsIso } from "./_formatHmsIso.js";
 import { getDayOfWeekAbbreviationFromNumber } from "./_getDayOfWeekAbbreviationFromNumber.js";
 import { getMonthAbbreviationFromNumber } from "./_getMonthAbbreviationFromNumber.js";
 import { padLeadingZeros } from "./_padLeadingZeros.js";
@@ -19,8 +20,5 @@ export function formatRfc7231(
 	const year = padLeadingZeros(zdt.year, 4);
 	const day = padLeadingZeros(zdt.day, 2);
 	const month = getMonthAbbreviationFromNumber(zdt.month);
-	const hour = padLeadingZeros(zdt.hour, 2);
-	const minute = padLeadingZeros(zdt.minute, 2);
-	const second = padLeadingZeros(zdt.second, 2);
-	return `${dayOfWeek}, ${day} ${month} ${year} ${hour}:${minute}:${second} GMT`;
+	return `${dayOfWeek}, ${day} ${month} ${year} ${formatHmsIso(zdt.hour, zdt.minute, zdt.second)} GMT`;
 }
