@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `startOfYear`, `startOfMonth`, `startOfDay`, `startOfHour`, `startOfMinute`, `startOfSecond`, `endOfYear`, `endOfMonth`, `endOfDay`, `endOfHour`, `endOfMinute`, `endOfSecond` functions
-- `fromRfc2822`, `fromRfc7231`, `formatRfc7231`, `epochSeconds` functions
+- `fromRfc2822`, `fromRfc7231`, `formatRfc7231`, `epochSeconds`, `julianDay` functions
 
 ### Changed
 
