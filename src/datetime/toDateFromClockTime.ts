@@ -1,3 +1,4 @@
+import type { UTCDate } from "@date-fns/utc";
 import { UTCDateMini } from "@date-fns/utc";
 
 import {
@@ -41,7 +42,7 @@ export function toDateFromClockTime(
 		| Temporal.PlainDateTime
 		| Temporal.PlainYearMonth
 		| Temporal.PlainMonthDay,
-): UTCDateMini;
+): UTCDate;
 /**
  * Returns `Date` which represents clock (local) time of given temporal object,
  * dropping timezone and calendar information.

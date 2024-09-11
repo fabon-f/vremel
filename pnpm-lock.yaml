@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@date-fns/utc':
-        specifier: ^1.2.0
-        version: 1.2.0
+        specifier: ^2.0.1
+        version: 2.0.1
     devDependencies:
       '@eslint/js':
         specifier: ^9.10.0
@@ -70,8 +70,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@date-fns/utc@1.2.0':
-    resolution: {integrity: sha512-YLq+crMPJiBmIdkRmv9nZuZy1mVtMlDcUKlg4mvI0UsC/dZeIaGoGB5p/C4FrpeOhZ7zBTK03T58S0DFkRNMnw==}
+  '@date-fns/utc@2.0.1':
+    resolution: {integrity: sha512-q+kKovYp04cH+URAu7ePNr2CF8GAbCUkH/Euu1phBlb4hT9+JEMA6fAFesWMQnlZN01WQ/ztc7UFjwjh6Ys6Uw==}
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -1071,7 +1071,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@date-fns/utc@1.2.0': {}
+  '@date-fns/utc@2.0.1': {}
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
