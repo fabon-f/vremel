@@ -44,7 +44,8 @@ jobs:
       - name: Build
         run: pnpm run build
       - name: Publish package
-        run: pnpm publish
+        # https://github.com/pnpm/pnpm/issues/5894
+        run: pnpm publish --no-git-checks
         env:
           NPM_CONFIG_PROVENANCE: true
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
