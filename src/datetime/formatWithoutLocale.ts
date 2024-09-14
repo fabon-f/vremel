@@ -201,28 +201,28 @@ function offset(dateTime: DateTime, token: string) {
 		return "Z";
 	}
 	const sign = offsetSeconds < 0 ? "-" : "+";
-	const hms = secondsToHms(Math.abs(offsetSeconds));
-	const hour = padLeadingZeros(hms.hour, 2);
-	const minute = padLeadingZeros(hms.minute, 2);
-	const second = padLeadingZeros(hms.second, 2);
+	const [hour, minute, second] = secondsToHms(Math.abs(offsetSeconds));
+	const hourStr = padLeadingZeros(hour, 2);
+	const minuteStr = padLeadingZeros(minute, 2);
+	const secondStr = padLeadingZeros(second, 2);
 	if (token === "X" || token === "x") {
-		return hms.minute === 0 ? `${sign}${hour}` : `${sign}${hour}${minute}`;
+		return minute === 0 ? `${sign}${hourStr}` : `${sign}${hourStr}${minuteStr}`;
 	}
 	if (token === "XX" || token === "xx") {
-		return `${sign}${hour}${minute}`;
+		return `${sign}${hourStr}${minuteStr}`;
 	}
 	if (token === "XXX" || token === "xxx") {
-		return `${sign}${hour}:${minute}`;
+		return `${sign}${hourStr}:${minuteStr}`;
 	}
 	if (token === "XXXX" || token === "xxxx") {
-		return hms.second === 0
-			? `${sign}${hour}${minute}`
-			: `${sign}${hour}${minute}${second}`;
+		return second === 0
+			? `${sign}${hourStr}${minuteStr}`
+			: `${sign}${hourStr}${minuteStr}${secondStr}`;
 	}
 	if (token === "XXXXX" || token === "xxxxx") {
-		return hms.second === 0
-			? `${sign}${hour}:${minute}`
-			: `${sign}${hour}:${minute}:${second}`;
+		return second === 0
+			? `${sign}${hourStr}:${minuteStr}`
+			: `${sign}${hourStr}:${minuteStr}:${secondStr}`;
 	}
 	throw new Error(`Invalid token: ${token}`);
 }
