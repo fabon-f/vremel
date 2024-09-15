@@ -15,7 +15,7 @@
 		],
 		"exclude": [
 			"**/*.test.ts",
-			"src/test-helper.ts"
+			"src/_test"
 		]
 	}
 }

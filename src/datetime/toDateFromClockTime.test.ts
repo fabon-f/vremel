@@ -3,7 +3,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import { lightFormat } from "date-fns";
 import { expect, test } from "vitest";
 
-import { TimeZoneModifier } from "../test-helper.js";
+import { TimeZoneModifier } from "../_test/TimeZoneModifier.js";
 import { toDateFromClockTime } from "./toDateFromClockTime.js";
 
 const zoneModifier = new TimeZoneModifier();

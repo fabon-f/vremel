@@ -1,7 +1,7 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
 
-import { TimeZoneModifier } from "../test-helper.js";
+import { TimeZoneModifier } from "../_test/TimeZoneModifier.js";
 import { getDayOfWeekFromYmd } from "./_getDayOfWeekFromYmd.js";
 
 const zoneModifier = new TimeZoneModifier();

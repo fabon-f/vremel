@@ -9,5 +9,5 @@
 		"isolatedDeclarations": true
 	},
 	"include": ["src/**/*"],
-	"exclude": ["**/*.test.ts", "src/test-helper.ts"]
+	"exclude": ["**/*.test.ts", "src/_test"]
 }
