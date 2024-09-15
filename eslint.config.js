@@ -6,7 +6,7 @@ import tsEslint from "typescript-eslint";
 
 const __dirname = import.meta.dirname;
 
-/** @type {import("eslint").Linter.FlatConfig[]} */
+/** @type {import("eslint").Linter.Config[]} */
 export default [
 	{
 		plugins: {
