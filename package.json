@@ -20,6 +20,9 @@
 		"node": ">=18"
 	},
 	"files": [
+		"src/**/*.ts",
+		"!src/**/*.test.ts",
+		"!src/_test/**/*",
 		"dist",
 		"CHANGELOG.md"
 	],

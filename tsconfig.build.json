@@ -5,6 +5,8 @@
 		"rootDir": "src",
 		"outDir": "dist/esm",
 		"declaration": true,
+		"sourceMap": true,
+		"declarationMap": true,
 		"allowJs": false,
 		"isolatedDeclarations": true
 	},
