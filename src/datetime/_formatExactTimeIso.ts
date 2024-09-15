@@ -11,7 +11,7 @@ export function formatExactTimeIso(
 	second: number,
 	millisecond: number,
 	offsetString: string,
-) {
+): string {
 	const millisecondStr = padLeadingZeros(millisecond, 3);
 	return `${formatDateIso(year, month, day)}T${formatHmsIso(hour, minute, second)}.${millisecondStr}${offsetString}`;
 }

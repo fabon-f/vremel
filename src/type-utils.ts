@@ -171,7 +171,7 @@ export function isPlainMonthDayConstructor(
 	return isPlainMonthDay(c.from("2024-01-01T00:00:00+00:00[Europe/London]"));
 }
 
-export function getTypeName(dt: TemporalType) {
+export function getTypeName(dt: TemporalType): string {
 	if (isDuration(dt)) {
 		return "Temporal.Duration";
 	}

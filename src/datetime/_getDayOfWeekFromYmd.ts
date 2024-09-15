@@ -3,7 +3,11 @@ import { formatDateIso } from "./_formatDateIso.js";
 /**
  * same as temporal's spec, Monday: 1, Tuesday: 2, ... Sunday: 7
  */
-export function getDayOfWeekFromYmd(year: number, month: number, day: number) {
+export function getDayOfWeekFromYmd(
+	year: number,
+	month: number,
+	day: number,
+): number {
 	const date = new Date(Date.UTC(year, month - 1, day));
 	if (
 		date.getUTCFullYear() !== year ||

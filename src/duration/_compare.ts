@@ -5,7 +5,7 @@ export function compare(
 	one: Temporal.Duration,
 	two: Temporal.Duration,
 	options?: Temporal.DurationArithmeticOptions,
-) {
+): Temporal.ComparisonResult {
 	const Duration = getConstructor(one);
 	return Duration.compare(one, two, options);
 }
