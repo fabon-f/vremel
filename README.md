@@ -1,5 +1,7 @@
 # vremel
 
+[![npm](https://img.shields.io/npm/v/vremel)](https://www.npmjs.com/package/vremel) [![JSR](https://jsr.io/badges/@fabon/vremel)](https://jsr.io/@fabon/vremel)
+
 JavaScript date utility library for [Temporal API](https://tc39.es/proposal-temporal/docs/) inspired by [date-fns](https://date-fns.org/).
 
 - Contains only pure functions, supports tree-shaking by default.
