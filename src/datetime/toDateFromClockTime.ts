@@ -1,5 +1,4 @@
-import type { UTCDate } from "@date-fns/utc";
-import { UTCDateMini } from "@date-fns/utc";
+import { UTCDate } from "@date-fns/utc";
 
 import {
 	isPlainDate,
@@ -80,7 +79,7 @@ export function toDateFromClockTime<DateType extends Date>(
 		| Temporal.PlainMonthDay,
 	DateConstructor?: GenericDateConstructor<DateType>,
 ) {
-	const DateConstructorFunction = DateConstructor ?? UTCDateMini;
+	const DateConstructorFunction = DateConstructor ?? UTCDate;
 	if (isPlainYearMonth(dateTime)) {
 		const pd = dateTime.toPlainDate({ day: 1 }).withCalendar("iso8601");
 		return new DateConstructorFunction(pd.year, pd.month - 1, pd.day);

@@ -118,9 +118,9 @@ test("ZonedDateTime with non-ISO calendar", () => {
 
 test("date constructor type", () => {
 	expect(
-		toDateFromClockTime(Temporal.Now.plainDateISO(), UTCDate),
-	).toBeInstanceOf(UTCDate);
+		toDateFromClockTime(Temporal.Now.plainDateISO(), UTCDateMini),
+	).toBeInstanceOf(UTCDateMini);
 	expect(toDateFromClockTime(Temporal.Now.plainDateISO())).toBeInstanceOf(
-		UTCDateMini,
+		UTCDate,
 	);
 });
