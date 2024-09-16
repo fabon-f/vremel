@@ -1,6 +1,7 @@
 {
 	"extends": "@tsconfig/strictest/tsconfig.json",
 	"compilerOptions": {
+		"target": "ES2022",
 		"rootDir": ".",
 		"noEmit": true,
 		"module": "Node16",
