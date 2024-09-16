@@ -51,23 +51,23 @@
 		"@eslint/js": "^9.10.0",
 		"@js-temporal/polyfill": "^0.4.4",
 		"@tsconfig/strictest": "^2.0.5",
-		"@types/node": "^22.5.4",
+		"@types/node": "^22.5.5",
 		"consola": "^3.2.3",
-		"date-fns": "^3.6.0",
+		"date-fns": "^4.0.0",
 		"eslint": "^9.10.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"globals": "^15.9.0",
 		"prettier": "3.3.3",
-		"rollup": "^4.21.2",
+		"rollup": "^4.21.3",
 		"temporal-polyfill": "^0.2.5",
 		"typescript": "^5.6.2",
 		"typescript-eslint": "8.5.0",
-		"vite-node": "^2.0.5",
-		"vitest": "^2.0.5"
+		"vite-node": "^2.1.1",
+		"vitest": "^2.1.1"
 	},
 	"dependencies": {
-		"@date-fns/utc": "^2.0.1"
+		"@date-fns/utc": "^2.1.0"
 	},
 	"packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c"
 }
