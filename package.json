@@ -6,13 +6,11 @@
 	"exports": {
 		".": {
 			"import": "./dist/esm/index.js",
-			"require": "./dist/cjs/index.cjs",
-			"types": "./dist/esm/index.d.ts"
+			"require": "./dist/cjs/index.js"
 		},
 		"./duration": {
 			"import": "./dist/esm/duration/index.js",
-			"require": "./dist/cjs/duration/index.cjs",
-			"types": "./dist/esm/duration/index.d.ts"
+			"require": "./dist/cjs/duration/index.js"
 		}
 	},
 	"sideEffects": false,

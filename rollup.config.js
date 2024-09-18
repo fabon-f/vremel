@@ -8,8 +8,6 @@ export default {
 		dir: "dist/cjs",
 		format: "cjs",
 		preserveModules: true,
-		entryFileNames: "[name].cjs",
-		chunkFileNames: "[name]-[hash].cjs",
 	},
 	external: ["@date-fns/utc"],
 };
