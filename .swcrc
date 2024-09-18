@@ -1,0 +1,12 @@
+{
+	"exclude": ["\\.test.ts$", "\\.d.ts$", "_test/"],
+	"jsc": {
+		"parser": {
+			"syntax": "typescript"
+		}
+	},
+	"module": {
+		"type": "commonjs"
+	},
+	"sourceMaps": true
+}
