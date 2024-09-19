@@ -26,7 +26,7 @@ export { fromRfc7231 } from "./fromRfc7231.js";
 export { isAfter } from "./isAfter.js";
 export { isBefore } from "./isBefore.js";
 export { isWithinInterval } from "./isWithinInterval.js";
-export { julianDay } from "./julianDay.js";
+export { julianDate } from "./julianDate.js";
 export { latest } from "./latest.js";
 export { startOfDay } from "./startOfDay.js";
 export { startOfHour } from "./startOfHour.js";

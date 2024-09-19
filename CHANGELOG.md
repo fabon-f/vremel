@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `toDateFromClockTime` returns `UTCDate` instead of `UTCDateMini` by default. `UTCDate` is upward compatible to `UTCDateMini` so this change will hardly introduce troubles.
+- `julianDay` function is renamed to `julianDate` since the word 'julian day' is ambiguous.
 
 ## 0.3.4 (2024-09-12)
 

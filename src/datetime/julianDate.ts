@@ -2,12 +2,12 @@ import { getConstructor } from "../type-utils.js";
 import type { Temporal } from "../types.js";
 
 /**
- * Returns the julian day of the exact time which the given temporal object represents.
+ * Returns the julian date of the exact time which the given temporal object represents.
  *
  * @param instant instant
- * @returns julian day
+ * @returns julian date
  */
-export function julianDay(instant: Temporal.Instant): number {
+export function julianDate(instant: Temporal.Instant): number {
 	const Instant = getConstructor(instant);
 	// modified julian day epoch: 1858-11-17T00:00:00Z
 	return (
