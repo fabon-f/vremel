@@ -21,6 +21,7 @@ export {
 	formatWithoutLocale,
 	type FormatWithoutLocaleOptions,
 } from "./formatWithoutLocale.js";
+export { fromJulianDate } from "./fromJulianDate.js";
 export { fromRfc2822 } from "./fromRfc2822.js";
 export { fromRfc7231 } from "./fromRfc7231.js";
 export { isAfter } from "./isAfter.js";
