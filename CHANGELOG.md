@@ -7,10 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `fromJulianDate` function
+
 ### Changed
 
-- `toDateFromClockTime` returns `UTCDate` instead of `UTCDateMini` by default. `UTCDate` is upward compatible to `UTCDateMini` so this change will hardly introduce troubles.
-- `julianDay` function is renamed to `julianDate` since the word 'julian day' is ambiguous.
+- `toDateFromClockTime` returns `UTCDate` instead of `UTCDateMini` by default. `UTCDate` is upward compatible to `UTCDateMini` so this change will hardly introduce troubles. ([5c7ad45](https://github.com/fabon-f/vremel/commit/5c7ad45b49295ceca8732a285f5433dc3afe6a28))
+- `julianDay` function is renamed to `julianDate` since the word 'julian day' is ambiguous. ([f393c25](https://github.com/fabon-f/vremel/commit/f393c25b7fc2c32327d009cee4a5d8b3dfeb2ef9))
+
+### Fixed
+
+- Fix TypeScript error when using from CommonJS ([7823d45](https://github.com/fabon-f/vremel/commit/7823d451cd34faabeb84267c34c5a54046b735ca))
 
 ## 0.3.4 (2024-09-12)
 
