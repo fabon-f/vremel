@@ -30,6 +30,7 @@ export { isBefore } from "./isBefore.js";
 export { isWithinInterval } from "./isWithinInterval.js";
 export { julianDate } from "./julianDate.js";
 export { latest } from "./latest.js";
+export { modifiedJulianDate } from "./modifiedJulianDate.js";
 export { startOfDay } from "./startOfDay.js";
 export { startOfHour } from "./startOfHour.js";
 export { startOfMinute } from "./startOfMinute.js";
