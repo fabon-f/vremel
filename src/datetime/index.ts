@@ -38,4 +38,5 @@ export { startOfMonth } from "./startOfMonth.js";
 export { startOfSecond } from "./startOfSecond.js";
 export { startOfYear } from "./startOfYear.js";
 export { toDateFromClockTime } from "./toDateFromClockTime.js";
+export { toDateFromExactTime } from "./toDateFromExactTime.js";
 export { toTemporalFromClockTime } from "./toTemporalFromClockTime.js";
