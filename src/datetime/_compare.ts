@@ -1,5 +1,6 @@
 import {
 	getConstructor,
+	getTypeName,
 	isInstant,
 	isPlainDate,
 	isPlainDateTime,
@@ -39,44 +40,26 @@ export function compare(
 	b: ComparableDateTimeType,
 ): Temporal.ComparisonResult;
 export function compare(a: ComparableDateTimeType, b: ComparableDateTimeType) {
-	if (isInstant(a)) {
-		if (!isInstant(b)) {
-			throw new Error("Unmatched type");
-		}
+	if (isInstant(a) && isInstant(b)) {
 		return getConstructor(a).compare(a, b);
 	}
-	if (isZonedDateTime(a)) {
-		if (!isZonedDateTime(b)) {
-			throw new Error("Unmatched type");
-		}
+	if (isZonedDateTime(a) && isZonedDateTime(b)) {
 		return getConstructor(a).compare(a, b);
 	}
-	if (isPlainDate(a)) {
-		if (!isPlainDate(b)) {
-			throw new Error("Unmatched type");
-		}
+	if (isPlainDate(a) && isPlainDate(b)) {
 		return getConstructor(a).compare(a, b);
 	}
-	if (isPlainTime(a)) {
-		if (!isPlainTime(b)) {
-			throw new Error("Unmatched type");
-		}
+	if (isPlainTime(a) && isPlainTime(b)) {
 		return getConstructor(a).compare(a, b);
 	}
-	if (isPlainDateTime(a)) {
-		if (!isPlainDateTime(b)) {
-			throw new Error("Unmatched type");
-		}
+	if (isPlainDateTime(a) && isPlainDateTime(b)) {
 		return getConstructor(a).compare(a, b);
 	}
-	if (isPlainYearMonth(a)) {
-		if (!isPlainYearMonth(b)) {
-			throw new Error("Unmatched type");
-		}
+	if (isPlainYearMonth(a) && isPlainYearMonth(b)) {
 		return getConstructor(a).compare(a, b);
 	}
 	if (isPlainMonthDay(a) || isPlainMonthDay(b)) {
 		throw new Error("Can't compare PlainMonthDay");
 	}
-	throw new Error("Unknown type");
+	throw new Error(`Can't compare ${getTypeName(a)} and ${getTypeName(b)}`);
 }
