@@ -56,6 +56,9 @@ export function compare(a: ComparableDateTimeType, b: ComparableDateTimeType) {
 		return getConstructor(a).compare(a, b);
 	}
 	if (isPlainYearMonth(a) && isPlainYearMonth(b)) {
+		if (a.calendarId !== b.calendarId) {
+			throw new Error("Can't compare PlainYearMonth with different calendar");
+		}
 		return getConstructor(a).compare(a, b);
 	}
 	if (isPlainMonthDay(a) || isPlainMonthDay(b)) {
