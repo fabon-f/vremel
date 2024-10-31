@@ -261,7 +261,7 @@ function formatToken(
 
 function areSingleQuotesBalanced(format: string) {
 	let count = 0;
-	for (const char of [...format]) {
+	for (const char of format) {
 		if (char === `'`) {
 			count++;
 		}
