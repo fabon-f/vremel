@@ -78,7 +78,18 @@ function getOffset(timeZone: string): string {
 	throw new Error("Unknown time zone");
 }
 
-function parse(date: string) {
+function parse(
+	date: string,
+): [
+	year: number,
+	month: number,
+	day: number,
+	hour: number,
+	minute: number,
+	second: number,
+	dayOfWeek: string | undefined,
+	timeZone: string,
+] {
 	const result = dateTimeFormatRegex.exec(date);
 	if (result === null) {
 		throw new Error(`Invalid date and time format: ${date}`);
@@ -113,7 +124,7 @@ function parse(date: string) {
 		parseInt(second),
 		dayOfWeek,
 		timeZone,
-	] as const;
+	];
 }
 
 /**

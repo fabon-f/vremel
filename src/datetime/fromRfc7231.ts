@@ -11,7 +11,16 @@ import { getMonthNumberFromAbbreviation } from "./_getMonthNumberFromAbbreviatio
 const regex =
 	/^([A-Za-z]{3}), (\d\d) ([A-Za-z]{3}) (\d{4}) (\d\d):(\d\d):(\d\d) GMT$/;
 
-function parse(date: string) {
+function parse(
+	date: string,
+): [
+	year: number,
+	month: number,
+	day: number,
+	hour: number,
+	minute: number,
+	second: number,
+] {
 	const result = regex.exec(date);
 	if (result === null) {
 		throw new Error("Invalid format");
@@ -35,7 +44,7 @@ function parse(date: string) {
 	if (getDayOfWeekFromYmd(y, m, d) !== weekNum) {
 		throw new Error(`Wrong day of week: ${dayOfWeek}`);
 	}
-	return [y, m, d, parseInt(hour), parseInt(minute), parseInt(second)] as const;
+	return [y, m, d, parseInt(hour), parseInt(minute), parseInt(second)];
 }
 
 /**
