@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `toDateFromClockTime` returns `UTCDate` instead of `UTCDateMini` by default. `UTCDate` is upward compatible to `UTCDateMini` so this change will hardly introduce troubles. ([5c7ad45](https://github.com/fabon-f/vremel/commit/5c7ad45b49295ceca8732a285f5433dc3afe6a28))
 - `julianDay` function is renamed to `julianDate` since the word 'julian day' is ambiguous. ([f393c25](https://github.com/fabon-f/vremel/commit/f393c25b7fc2c32327d009cee4a5d8b3dfeb2ef9))
+- `areIntervalsOverlapping`, `clamp`, `compareAsc`, `compareDesc`, `earliest`, `isAfter`, `isBefore`, `isWithinInterval`, `latest` functions now reject `PlainYearMonth` with different calendar because it's semantically nonsense in most cases. ([197c7c9](https://github.com/fabon-f/vremel/commit/197c7c9e2507f3a68a047afc673fdb4f8bd81f89))
 
 ### Fixed
 
