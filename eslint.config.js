@@ -1,5 +1,4 @@
 import eslint from "@eslint/js";
-import eslintConfigPrettier from "eslint-config-prettier";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import globals from "globals";
 import tsEslint from "typescript-eslint";
@@ -36,7 +35,6 @@ export default [
 	eslint.configs.recommended,
 	...tsEslint.configs.strictTypeChecked,
 	...tsEslint.configs.stylisticTypeChecked,
-	eslintConfigPrettier,
 	{
 		rules: {
 			camelcase: "error",
