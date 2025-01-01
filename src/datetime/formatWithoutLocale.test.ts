@@ -255,6 +255,25 @@ test("offset", () => {
 	}
 });
 
+test("time zone ID", () => {
+	const dt = Temporal.ZonedDateTime.from(target);
+	expect(formatWithoutLocale(dt, "VV")).toEqual("Europe/London");
+
+	const ng = [
+		Temporal.PlainDate.from(target),
+		Temporal.PlainTime.from(target),
+		Temporal.PlainDateTime.from(target),
+		Temporal.PlainMonthDay.from(target),
+		Temporal.PlainYearMonth.from(target),
+	];
+
+	for (const dt of ng) {
+		expect(() => {
+			formatWithoutLocale(dt, "VV");
+		}).toThrowError();
+	}
+});
+
 test("ZonedDateTime with non-ISO calendar", () => {
 	expect(() => {
 		formatWithoutLocale(

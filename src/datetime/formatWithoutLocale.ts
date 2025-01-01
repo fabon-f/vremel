@@ -1,4 +1,8 @@
-import { getTypeName, isPlainMonthDay } from "../type-utils.js";
+import {
+	getTypeName,
+	isPlainMonthDay,
+	isZonedDateTime,
+} from "../type-utils.js";
 import type { Temporal } from "../types.js";
 import { padLeadingZeros } from "./_padLeadingZeros.js";
 import { secondsToHms } from "./_secondsToHms.js";
@@ -227,6 +231,15 @@ function offset(dateTime: DateTime, token: string) {
 	throw new Error(`Invalid token: ${token}`);
 }
 
+function timeZoneId(dateTime: DateTime) {
+	if (!isZonedDateTime(dateTime)) {
+		throw new Error(
+			`${getTypeName(dateTime)} doesn't have timezone and offset info`,
+		);
+	}
+	return dateTime.timeZoneId;
+}
+
 function formatToken(
 	dateTime: DateTime,
 	token: string,
@@ -255,6 +268,9 @@ function formatToken(
 	}
 	if (/^(x{1,5}|X{1,5})$/.test(token)) {
 		return offset(dateTime, token);
+	}
+	if (token === "VV") {
+		return timeZoneId(dateTime);
 	}
 	throw new Error(`Invalid token: ${token}`);
 }
@@ -322,6 +338,7 @@ export interface FormatWithoutLocaleOptions {
  * |                    | XXX              | -08:00, +05:30, Z                       |
  * |                    | XXXX             | -0800, +0530, Z, +123456                |
  * |                    | XXXXX            | -08:00, +05:30, Z, +12:34:56            |
+ * | time zone ID       | VV               | Europe/London, Etc/GMT+1                |
  *
  * @param dateTime Temporal object
  * @param format pattern string
@@ -343,7 +360,7 @@ export function formatWithoutLocale(
 			"Unbalanced single quotes. Use single quotes for escaping and two single quotes to represent actual single quote.",
 		);
 	}
-	const regex = /''|'(''|[^'])+'|y+|M+|d+|h+|H+|m+|s+|S+|x+|X+/g;
+	const regex = /''|'(''|[^'])+'|y+|M+|d+|h+|H+|m+|s+|S+|VV|x+|X+/g;
 	return format.replace(regex, (match) => {
 		if (match === `''`) {
 			return `'`;
