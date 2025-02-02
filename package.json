@@ -67,5 +67,5 @@
 	"dependencies": {
 		"@date-fns/utc": "^2.1.0"
 	},
-	"packageManager": "pnpm@10.0.0"
+	"packageManager": "pnpm@10.1.0"
 }
