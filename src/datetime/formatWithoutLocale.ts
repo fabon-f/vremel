@@ -302,6 +302,9 @@ export interface FormatWithoutLocaleOptions {
  * If you are 100% sure what you are doing and want to format numeric date info of non-ISO date intentionally,
  * pass `formatNonIsoDate` option.
  *
+ * Characters between two single quotes (`'`) in the format are escaped.
+ * Two consecutive single quotes (`''`) in the format always represents one single quote (`'`).
+ *
  * Available field patterns are subset of date field symbols in Unicode CLDR,
  * see https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table for details.
  *
