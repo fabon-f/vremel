@@ -5,14 +5,14 @@
 	"type": "module",
 	"exports": {
 		".": {
-			"import": "./dist/esm/index.js",
 			"module-sync": "./dist/esm/index.js",
-			"require": "./dist/cjs/index.js"
+			"require": "./dist/cjs/index.js",
+			"default": "./dist/esm/index.js"
 		},
 		"./duration": {
-			"import": "./dist/esm/duration/index.js",
 			"module-sync": "./dist/esm/duration/index.js",
-			"require": "./dist/cjs/duration/index.js"
+			"require": "./dist/cjs/duration/index.js",
+			"default": "./dist/esm/duration/index.js"
 		}
 	},
 	"sideEffects": false,
