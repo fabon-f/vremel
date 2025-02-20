@@ -20,6 +20,13 @@ test("single quotes", () => {
 	).toEqual(`'24 1 2'`);
 });
 
+test("unknown token", () => {
+	// pattern 'G' is for era name, not supported.
+	expect(() => {
+		formatWithoutLocale(Temporal.PlainDate.from(target), "G");
+	}).toThrow();
+});
+
 test("year", () => {
 	const ok = [
 		Temporal.ZonedDateTime.from(target),

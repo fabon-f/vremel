@@ -304,6 +304,7 @@ export interface FormatWithoutLocaleOptions {
  *
  * Characters between two single quotes (`'`) in the format are escaped.
  * Two consecutive single quotes (`''`) in the format always represents one single quote (`'`).
+ * Letters `A` to `Z` and `a` to `z` are reserved for use as pattern characters, unless they are escaped.
  *
  * Available field patterns are subset of date field symbols in Unicode CLDR,
  * see https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table for details.
@@ -363,7 +364,7 @@ export function formatWithoutLocale(
 			"Unbalanced single quotes. Use single quotes for escaping and two single quotes to represent actual single quote.",
 		);
 	}
-	const regex = /''|'(''|[^'])+'|y+|M+|d+|h+|H+|m+|s+|S+|VV|x+|X+/g;
+	const regex = /''|'(''|[^'])+'|(([a-zA-Z])\3*)/g;
 	return format.replace(regex, (match) => {
 		if (match === `''`) {
 			return `'`;
