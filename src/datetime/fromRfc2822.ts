@@ -3,6 +3,7 @@ import {
 	isPlainDateTimeConstructor,
 } from "../type-utils.js";
 import type { Temporal } from "../types.js";
+import { createRecord } from "./_createRecord.js";
 import { formatExactTimeIso } from "./_formatExactTimeIso.js";
 import { getDayOfWeekFromYmd } from "./_getDayOfWeekFromYmd.js";
 import { getDayOfWeekNumberFromAbbreviation } from "./_getDayOfWeekNumberFromAbbreviation.js";
@@ -62,7 +63,7 @@ function getOffset(timeZone: string): string {
 	if (/^[+-]\d{4}$/.test(timeZone)) {
 		return `${timeZone.slice(0, 3)}:${timeZone.slice(3)}`;
 	}
-	const table = Object.assign(Object.create(null) as Record<string, string>, {
+	const table = createRecord({
 		EDT: "-04:00",
 		EST: "-05:00",
 		CDT: "-05:00",

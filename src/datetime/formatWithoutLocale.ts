@@ -4,6 +4,7 @@ import {
 	isZonedDateTime,
 } from "../type-utils.js";
 import type { Temporal } from "../types.js";
+import { replaceToken } from "./_ldmrDatePattern.js";
 import { padLeadingZeros } from "./_padLeadingZeros.js";
 import { secondsToHms } from "./_secondsToHms.js";
 
@@ -275,20 +276,6 @@ function formatToken(
 	throw new Error(`Invalid token: ${token}`);
 }
 
-function areSingleQuotesBalanced(format: string) {
-	let count = 0;
-	for (const char of format) {
-		if (char === `'`) {
-			count++;
-		}
-	}
-	return count % 2 === 0;
-}
-
-function unescapeTwoSingleQuotes(format: string) {
-	return format.replaceAll(`''`, `'`);
-}
-
 export interface FormatWithoutLocaleOptions {
 	/**
 	 * whether format numeric year/month/day for non-ISO calendar
@@ -359,19 +346,7 @@ export function formatWithoutLocale(
 	format: string,
 	options?: FormatWithoutLocaleOptions,
 ): string {
-	if (!areSingleQuotesBalanced(format)) {
-		throw new Error(
-			"Unbalanced single quotes. Use single quotes for escaping and two single quotes to represent actual single quote.",
-		);
-	}
-	const regex = /''|'(''|[^'])+'|(([a-zA-Z])\3*)/g;
-	return format.replace(regex, (match) => {
-		if (match === `''`) {
-			return `'`;
-		}
-		if (match.startsWith(`'`) && match.endsWith(`'`)) {
-			return unescapeTwoSingleQuotes(match.slice(1, match.length - 1));
-		}
-		return formatToken(dateTime, match, options?.formatNonIsoDate ?? false);
-	});
+	return replaceToken(format, (token) =>
+		formatToken(dateTime, token, options?.formatNonIsoDate ?? false),
+	);
 }
