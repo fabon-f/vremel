@@ -1,3 +1,13 @@
+type Token =
+	| {
+			type: "literal";
+			value: string;
+	  }
+	| {
+			type: "field";
+			value: string;
+	  };
+
 const regex = /''|'(?:''|[^'])+'|([a-zA-Z])\1*/g;
 
 const unbalancedSingleQuotesErrorMessage =
@@ -33,4 +43,49 @@ export function replaceToken(
 		}
 		return replacer(match);
 	});
+}
+
+function pushLiteral(tokens: Token[], literal: string) {
+	const previousToken = tokens[tokens.length - 1];
+	if (previousToken !== undefined && previousToken.type === "literal") {
+		previousToken.value += literal;
+	} else {
+		tokens.push({
+			type: "literal",
+			value: literal,
+		});
+	}
+}
+
+export function tokenize(pattern: string): Token[] {
+	if (!areSingleQuotesBalanced(pattern)) {
+		throw new Error(unbalancedSingleQuotesErrorMessage);
+	}
+	let lastIndex = 0;
+	const tokens: Token[] = [];
+	for (const match of pattern.matchAll(regex)) {
+		if (match.index > lastIndex) {
+			pushLiteral(tokens, pattern.slice(lastIndex, match.index));
+		}
+		const fragment = match[0];
+		if (fragment === `''`) {
+			pushLiteral(tokens, `'`);
+		} else if (fragment.startsWith(`'`) && fragment.endsWith(`'`)) {
+			pushLiteral(
+				tokens,
+				unescapeTwoSingleQuotes(fragment.slice(1, fragment.length - 1)),
+			);
+		} else {
+			tokens.push({
+				type: "field",
+				value: fragment,
+			});
+		}
+		lastIndex = match.index + fragment.length;
+	}
+	if (lastIndex < pattern.length) {
+		// rest
+		pushLiteral(tokens, pattern.slice(lastIndex));
+	}
+	return tokens;
 }

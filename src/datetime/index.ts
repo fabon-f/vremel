@@ -32,6 +32,7 @@ export { isWithinInterval } from "./isWithinInterval.js";
 export { julianDate } from "./julianDate.js";
 export { latest } from "./latest.js";
 export { modifiedJulianDate } from "./modifiedJulianDate.js";
+export { type LocaleDataForParser, parse, type ParseResult } from "./parse.js";
 export { startOfDay } from "./startOfDay.js";
 export { startOfHour } from "./startOfHour.js";
 export { startOfMinute } from "./startOfMinute.js";
