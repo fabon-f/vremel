@@ -61,30 +61,27 @@ export interface LocaleDataForParser {
 		| undefined;
 }
 
-const fieldToRegExpMap = Object.assign(
-	Object.create(null) as Record<string, string>,
-	{
-		y: "(?<year>[1-9]\\d*)",
-		yyy: "(?<year>\\d{3,})",
-		yyyy: "(?<year>\\d{4,})",
-		M: "(?<monthNum>[1-9]\\d?)",
-		MM: "(?<monthNum>\\d{2})",
-		L: "(?<monthNum>[1-9]\\d?)",
-		LL: "(?<monthNum>\\d{2})",
-		d: "(?<day>[1-9]\\d?)",
-		dd: "(?<day>\\d{2})",
-		h: "(?<hour12>[1-9]|1[012])",
-		hh: "(?<hour12>0[1-9]|1[012])",
-		H: "(?<hour>1\\d?|2[0-3]?|\\d)",
-		HH: "(?<hour>[01]\\d|2[0-3])",
-		K: "(?<hour12>[0-9]|1[01])",
-		KK: "(?<hour12>0\\d|1[01])",
-		m: "(?<minute>0|[1-9]\\d?)",
-		mm: "(?<minute>\\d{2})",
-		s: "(?<second>0|[1-9]\\d?)",
-		ss: "(?<second>\\d{2})",
-	},
-);
+const fieldToRegExpMap = createRecord({
+	y: "(?<year>[1-9]\\d*)",
+	yyy: "(?<year>\\d{3,})",
+	yyyy: "(?<year>\\d{4,})",
+	M: "(?<monthNum>[1-9]\\d?)",
+	MM: "(?<monthNum>\\d{2})",
+	L: "(?<monthNum>[1-9]\\d?)",
+	LL: "(?<monthNum>\\d{2})",
+	d: "(?<day>[1-9]\\d?)",
+	dd: "(?<day>\\d{2})",
+	h: "(?<hour12>[1-9]|1[012])",
+	hh: "(?<hour12>0[1-9]|1[012])",
+	H: "(?<hour>1\\d?|2[0-3]?|\\d)",
+	HH: "(?<hour>[01]\\d|2[0-3])",
+	K: "(?<hour12>[0-9]|1[01])",
+	KK: "(?<hour12>0\\d|1[01])",
+	m: "(?<minute>0|[1-9]\\d?)",
+	mm: "(?<minute>\\d{2})",
+	s: "(?<second>0|[1-9]\\d?)",
+	ss: "(?<second>\\d{2})",
+});
 
 interface ReverseLookupTable {
 	era: Record<string, string>;
