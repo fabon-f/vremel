@@ -1,43 +1,43 @@
 import type { Temporal, TemporalType } from "./types.js";
 
 export function isInstant(dt: TemporalType): dt is Temporal.Instant {
-	return "epochMilliseconds" in dt && !("timeZoneId" in dt);
+	return dt[Symbol.toStringTag] === "Temporal.Instant";
 }
 
 export function isZonedDateTime(
 	dt: TemporalType,
 ): dt is Temporal.ZonedDateTime {
-	return "timeZoneId" in dt;
+	return dt[Symbol.toStringTag] === "Temporal.ZonedDateTime";
 }
 
 export function isPlainDateTime(
 	dt: TemporalType,
 ): dt is Temporal.PlainDateTime {
-	return !("timeZoneId" in dt) && "year" in dt && "second" in dt;
+	return dt[Symbol.toStringTag] === "Temporal.PlainDateTime";
 }
 
 export function isPlainTime(dt: TemporalType): dt is Temporal.PlainTime {
-	return "second" in dt && !("year" in dt);
+	return dt[Symbol.toStringTag] === "Temporal.PlainTime";
 }
 
 export function isPlainDate(dt: TemporalType): dt is Temporal.PlainDate {
-	return "year" in dt && "day" in dt && !("second" in dt);
+	return dt[Symbol.toStringTag] === "Temporal.PlainDate";
 }
 
 export function isPlainYearMonth(
 	dt: TemporalType,
 ): dt is Temporal.PlainYearMonth {
-	return "year" in dt && !("day" in dt);
+	return dt[Symbol.toStringTag] === "Temporal.PlainYearMonth";
 }
 
 export function isPlainMonthDay(
 	dt: TemporalType,
 ): dt is Temporal.PlainMonthDay {
-	return "day" in dt && !("year" in dt);
+	return dt[Symbol.toStringTag] === "Temporal.PlainMonthDay";
 }
 
 export function isDuration(dt: TemporalType): dt is Temporal.Duration {
-	return "seconds" in dt;
+	return dt[Symbol.toStringTag] === "Temporal.Duration";
 }
 
 export function isInstantArray(a: TemporalType[]): a is Temporal.Instant[] {
@@ -220,7 +220,7 @@ export function getConstructor(
 ): typeof Temporal.PlainMonthDay;
 export function getConstructor(dt: Temporal.Duration): typeof Temporal.Duration;
 export function getConstructor(dt: TemporalType) {
-	if ("years" in dt) {
+	if (isDuration(dt)) {
 		return dt.constructor as unknown as typeof Temporal.Duration;
 	}
 	if (isInstant(dt)) {
