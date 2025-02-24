@@ -8,9 +8,11 @@ import { fromModifiedJulianDate } from "./fromModifiedJulianDate.js";
  * @param Instant `Temporal.Instant` class
  * @returns `Temporal.Instant` which corresponds to the given julian date
  */
-export function fromJulianDate(
+export function fromJulianDate<
+	InstantClassType extends typeof Temporal.Instant,
+>(
 	julianDate: number,
-	Instant: typeof Temporal.Instant,
-): Temporal.Instant {
+	Instant: InstantClassType,
+): InstanceType<InstantClassType> {
 	return fromModifiedJulianDate(julianDate - 2400000.5, Instant);
 }

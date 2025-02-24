@@ -5,7 +5,9 @@ import type { Temporal } from "../types.js";
  * @param dt datetime object which includes date and time info
  * @returns Temporal object which represents the end of the day
  */
-export function endOfDay(dt: Temporal.PlainDateTime): Temporal.PlainDateTime {
+export function endOfDay<DateTime extends Temporal.PlainDateTime>(
+	dt: DateTime,
+): DateTime {
 	return dt.with({
 		hour: 23,
 		minute: 59,
@@ -13,5 +15,5 @@ export function endOfDay(dt: Temporal.PlainDateTime): Temporal.PlainDateTime {
 		millisecond: 999,
 		microsecond: 999,
 		nanosecond: 999,
-	});
+	}) as DateTime;
 }
