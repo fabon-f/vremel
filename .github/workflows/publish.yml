@@ -10,7 +10,7 @@ jobs:
   jsr:
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-build
+      group: ${{ github.workflow }}-jsr
     permissions:
       contents: read
       id-token: write
@@ -27,7 +27,7 @@ jobs:
   npm:
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-build
+      group: ${{ github.workflow }}-npm
     permissions:
       contents: read
       id-token: write
