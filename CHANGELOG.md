@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [unreleased]
+
+### Added
+
+- `startOfWeek` and `endOfWeek` functions
+- `parse` function
+
+### Changed
+
+- Latin alphabets (`A` to `Z` and `a` to `z`) in the given format are now reserved for use as pattern characters in `formatWithoutLocale`. If you want to treat them as literal, escape them. ([39f5f9d](https://github.com/fabon-f/vremel/commit/39f5f9d7c6c3585796301992285b5ddfcaed46a1))
+
+### Fixed
+
+- Fix wrong type annotation in some functions ([eb95c5a](https://github.com/fabon-f/vremel/commit/eb95c5a214526b8f950c3952190135467f220fe1))
+
 ## 0.4.0 (2025-02-02)
 
 ### Added
