@@ -220,14 +220,14 @@ function offset(dateTime: DateTime, token: string) {
 		return `${sign}${hourStr}:${minuteStr}`;
 	}
 	if (token === "XXXX" || token === "xxxx") {
-		return second === 0
-			? `${sign}${hourStr}${minuteStr}`
-			: `${sign}${hourStr}${minuteStr}${secondStr}`;
+		return second === 0 ?
+				`${sign}${hourStr}${minuteStr}`
+			:	`${sign}${hourStr}${minuteStr}${secondStr}`;
 	}
 	if (token === "XXXXX" || token === "xxxxx") {
-		return second === 0
-			? `${sign}${hourStr}:${minuteStr}`
-			: `${sign}${hourStr}:${minuteStr}:${secondStr}`;
+		return second === 0 ?
+				`${sign}${hourStr}:${minuteStr}`
+			:	`${sign}${hourStr}:${minuteStr}:${secondStr}`;
 	}
 	throw new Error(`Invalid token: ${token}`);
 }

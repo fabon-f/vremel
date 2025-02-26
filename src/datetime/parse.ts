@@ -174,11 +174,9 @@ function fieldToRegExp(
 
 	if (field.length <= 5) {
 		const type =
-			field.length <= 3
-				? "abbreviated"
-				: field.length === 4
-					? "wide"
-					: "narrow";
+			field.length <= 3 ? "abbreviated"
+			: field.length === 4 ? "wide"
+			: "narrow";
 		if (field.startsWith("G")) {
 			const [eraNames, table] = getEraNamesAndLookupTable(type, localeData);
 			lookupTable.era = table;

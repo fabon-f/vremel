@@ -104,11 +104,11 @@ export function toDateFromClockTime<DateType extends Date>(
 			dateTime.millisecond,
 		);
 	}
-	const plainDateTime = isZonedDateTime(dateTime)
-		? dateTime.toPlainDateTime().withCalendar("iso8601")
-		: isPlainDate(dateTime)
-			? dateTime.toPlainDateTime().withCalendar("iso8601")
-			: dateTime.withCalendar("iso8601");
+	const plainDateTime =
+		isZonedDateTime(dateTime) ?
+			dateTime.toPlainDateTime().withCalendar("iso8601")
+		: isPlainDate(dateTime) ? dateTime.toPlainDateTime().withCalendar("iso8601")
+		: dateTime.withCalendar("iso8601");
 	return new DateConstructorFunction(
 		plainDateTime.year,
 		plainDateTime.month - 1,
