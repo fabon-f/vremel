@@ -14,3 +14,23 @@ test("PlainTime", () => {
 		Temporal.PlainTime.from("12:34:00"),
 	);
 });
+
+test("ZonedDateTime and forward transition", () => {
+	expect(
+		startOfMinute(
+			Temporal.ZonedDateTime.from("1972-01-07T00:44:59+00:00[Africa/Monrovia]"),
+		),
+	).toEqual(
+		Temporal.ZonedDateTime.from("1972-01-07T00:44:30+00:00[Africa/Monrovia]"),
+	);
+});
+
+test("ZonedDateTime and backward transition", () => {
+	expect(
+		startOfMinute(
+			Temporal.ZonedDateTime.from("1952-10-15T23:59:50-11:20[Pacific/Niue]"),
+		),
+	).toEqual(
+		Temporal.ZonedDateTime.from("1952-10-15T23:59:00-11:19:40[Pacific/Niue]"),
+	);
+});

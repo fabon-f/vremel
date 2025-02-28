@@ -14,3 +14,15 @@ test("PlainTime", () => {
 		Temporal.PlainTime.from("12:34:56"),
 	);
 });
+
+test("ZonedDateTime", () => {
+	expect(
+		startOfSecond(
+			Temporal.ZonedDateTime.from(
+				"2024-01-01T12:34:56.789123456+09:00[Asia/Tokyo]",
+			),
+		),
+	).toEqual(
+		Temporal.ZonedDateTime.from("2024-01-01T12:34:56+09:00[Asia/Tokyo]"),
+	);
+});
