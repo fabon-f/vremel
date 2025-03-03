@@ -41,12 +41,10 @@ test("ZonedDateTime and backward transition", () => {
 	);
 	expect(
 		startOfHour(
-			Temporal.ZonedDateTime.from(
-				"1945-09-11T23:30:00+07:30[Asia/Kuala_Lumpur]",
-			),
+			Temporal.ZonedDateTime.from("2014-10-26T01:30:00+08:00[Asia/Chita]"),
 		),
 	).toEqual(
-		Temporal.ZonedDateTime.from("1945-09-11T23:00:00+09:00[Asia/Kuala_Lumpur]"),
+		Temporal.ZonedDateTime.from("2014-10-26T01:00:00+10:00[Asia/Chita]"),
 	);
 	expect(
 		startOfHour(
@@ -86,5 +84,12 @@ test("ZonedDateTime and forward transition", () => {
 		),
 	).toEqual(
 		Temporal.ZonedDateTime.from("1919-03-31T00:30:00-04:00[America/Toronto]"),
+	);
+	expect(
+		startOfHour(
+			Temporal.ZonedDateTime.from("1916-07-28T00:45:00+02:00[Europe/Athens]"),
+		),
+	).toEqual(
+		Temporal.ZonedDateTime.from("1916-07-28T00:00:00+01:34:52[Europe/Athens]"),
 	);
 });
