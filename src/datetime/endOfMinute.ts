@@ -1,4 +1,6 @@
+import { isZonedDateTime } from "../type-utils.js";
 import type { Temporal } from "../types.js";
+import { endOfTimeForZonedDateTime } from "./_endOfTimeForZonedDateTime.js";
 
 /**
  * Returns the end of a minute for the given datetime
@@ -6,12 +8,19 @@ import type { Temporal } from "../types.js";
  * @returns Temporal object which represents the end of the minute
  */
 export function endOfMinute<
-	DateTime extends Temporal.PlainTime | Temporal.PlainDateTime,
+	DateTime extends
+		| Temporal.PlainTime
+		| Temporal.PlainDateTime
+		| Temporal.ZonedDateTime,
 >(dt: DateTime): DateTime {
-	return dt.with({
+	const withArg = {
 		second: 59,
 		millisecond: 999,
 		microsecond: 999,
 		nanosecond: 999,
-	}) as DateTime;
+	};
+	if (!isZonedDateTime(dt)) {
+		return dt.with(withArg) as DateTime;
+	}
+	return endOfTimeForZonedDateTime(dt, withArg) as DateTime;
 }
