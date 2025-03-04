@@ -1,5 +1,10 @@
-import { isPlainDate, isPlainYearMonth } from "../type-utils.js";
+import {
+	isPlainDate,
+	isPlainYearMonth,
+	isZonedDateTime,
+} from "../type-utils.js";
 import type { Temporal } from "../types.js";
+import { startOfTimeForZonedDateTime } from "./_startOfTimeForZonedDateTime.js";
 
 /**
  * Returns the start of a year for the given datetime
@@ -10,7 +15,8 @@ export function startOfYear<
 	DateTime extends
 		| Temporal.PlainDate
 		| Temporal.PlainDateTime
-		| Temporal.PlainYearMonth,
+		| Temporal.PlainYearMonth
+		| Temporal.ZonedDateTime,
 >(dt: DateTime): DateTime {
 	if (isPlainYearMonth(dt)) {
 		return dt.with({ month: 1 }) as DateTime;
@@ -18,7 +24,7 @@ export function startOfYear<
 	if (isPlainDate(dt)) {
 		return dt.with({ month: 1, day: 1 }) as DateTime;
 	}
-	return dt.with({
+	const withArg = {
 		month: 1,
 		day: 1,
 		hour: 0,
@@ -27,5 +33,9 @@ export function startOfYear<
 		millisecond: 0,
 		microsecond: 0,
 		nanosecond: 0,
-	}) as DateTime;
+	};
+	if (!isZonedDateTime(dt)) {
+		return dt.with(withArg) as DateTime;
+	}
+	return startOfTimeForZonedDateTime(dt, withArg) as DateTime;
 }

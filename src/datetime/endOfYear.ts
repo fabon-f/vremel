@@ -1,5 +1,10 @@
-import { isPlainDate, isPlainYearMonth } from "../type-utils.js";
+import {
+	isPlainDate,
+	isPlainYearMonth,
+	isZonedDateTime,
+} from "../type-utils.js";
 import type { Temporal } from "../types.js";
+import { endOfTimeForZonedDateTime } from "./_endOfTimeForZonedDateTime.js";
 
 /**
  * Returns the end of a year for the given datetime
@@ -10,7 +15,8 @@ export function endOfYear<
 	DateTime extends
 		| Temporal.PlainDate
 		| Temporal.PlainDateTime
-		| Temporal.PlainYearMonth,
+		| Temporal.PlainYearMonth
+		| Temporal.ZonedDateTime,
 >(dt: DateTime): DateTime {
 	if (isPlainYearMonth(dt)) {
 		return dt.with({
@@ -23,7 +29,7 @@ export function endOfYear<
 			day: Number.MAX_VALUE,
 		}) as DateTime;
 	}
-	return dt.with({
+	const withArg = {
 		month: dt.monthsInYear,
 		day: Number.MAX_VALUE,
 		hour: 23,
@@ -32,5 +38,9 @@ export function endOfYear<
 		millisecond: 999,
 		microsecond: 999,
 		nanosecond: 999,
-	}) as DateTime;
+	};
+	if (!isZonedDateTime(dt)) {
+		return dt.with(withArg) as DateTime;
+	}
+	return endOfTimeForZonedDateTime(dt, withArg) as DateTime;
 }
