@@ -1,5 +1,6 @@
-import { isPlainDate } from "../type-utils.js";
+import { isPlainDate, isZonedDateTime } from "../type-utils.js";
 import type { Temporal } from "../types.js";
+import { startOfTimeForZonedDateTime } from "./_startOfTimeForZonedDateTime.js";
 
 export interface StartOfWeekOptions {
 	/**
@@ -7,6 +8,23 @@ export interface StartOfWeekOptions {
 	 * For example, in ISO calendar Monday is `1`, Sunday is `7`.
 	 */
 	firstDayOfWeek: number;
+}
+
+function startOfWeekWithDayPrecision(
+	dt: Temporal.PlainDate,
+	firstDayOfWeek: number,
+): Temporal.PlainDate;
+function startOfWeekWithDayPrecision(
+	dt: Temporal.PlainDateTime,
+	firstDayOfWeek: number,
+): Temporal.PlainDateTime;
+function startOfWeekWithDayPrecision(
+	dt: Temporal.PlainDate | Temporal.PlainDateTime,
+	firstDayOfWeek: number,
+) {
+	return dt.subtract({
+		days: (dt.dayOfWeek - firstDayOfWeek + dt.daysInWeek) % dt.daysInWeek,
+	});
 }
 
 /**
@@ -21,7 +39,10 @@ export interface StartOfWeekOptions {
  * @returns Temporal object which represents the start of a week
  */
 export function startOfWeek<
-	DateTime extends Temporal.PlainDate | Temporal.PlainDateTime,
+	DateTime extends
+		| Temporal.PlainDate
+		| Temporal.PlainDateTime
+		| Temporal.ZonedDateTime,
 >(dt: DateTime, options: StartOfWeekOptions): DateTime {
 	const firstDayOfWeek = options.firstDayOfWeek;
 	if (
@@ -31,19 +52,33 @@ export function startOfWeek<
 	) {
 		throw new Error(`${firstDayOfWeek} isn't a valid day of week`);
 	}
-	const startOfWeek = dt.subtract({
-		days: (dt.dayOfWeek - firstDayOfWeek + dt.daysInWeek) % dt.daysInWeek,
-	});
 
-	if (isPlainDate(dt)) {
-		return startOfWeek as DateTime;
-	}
-	return startOfWeek.with({
+	const timeArg = {
 		hour: 0,
 		minute: 0,
 		second: 0,
 		millisecond: 0,
 		microsecond: 0,
 		nanosecond: 0,
-	}) as DateTime;
+	};
+
+	if (isZonedDateTime(dt)) {
+		const startOfWeek = startOfWeekWithDayPrecision(
+			dt.toPlainDate(),
+			firstDayOfWeek,
+		);
+		return startOfTimeForZonedDateTime(dt, {
+			year: startOfWeek.year,
+			month: startOfWeek.month,
+			day: startOfWeek.day,
+			...timeArg,
+		}) as DateTime;
+	}
+
+	if (isPlainDate(dt)) {
+		return startOfWeekWithDayPrecision(dt, firstDayOfWeek) as DateTime;
+	}
+	return startOfWeekWithDayPrecision(dt, firstDayOfWeek).with(
+		timeArg,
+	) as DateTime;
 }
