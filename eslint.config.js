@@ -1,3 +1,4 @@
+import { defineConfig, globalIgnores } from "eslint/config";
 import eslint from "@eslint/js";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import globals from "globals";
@@ -5,23 +6,20 @@ import tsEslint from "typescript-eslint";
 
 const __dirname = import.meta.dirname;
 
-/** @type {import("eslint").Linter.Config[]} */
-export default [
+export default defineConfig([
 	{
 		plugins: {
 			"@typescript-eslint": tsEslint.plugin,
 			"simple-import-sort": simpleImportSort,
 		},
 	},
-	{
-		ignores: [
-			"dist",
-			"_site",
-			"eslint.config.js",
-			".prettierrc.js",
-			"src/temporal.d.ts",
-		],
-	},
+	globalIgnores([
+		"dist",
+		"_site",
+		"eslint.config.js",
+		".prettierrc.js",
+		"src/temporal.d.ts",
+	]),
 	{
 		languageOptions: {
 			parser: tsEslint.parser,
@@ -33,8 +31,8 @@ export default [
 		},
 	},
 	eslint.configs.recommended,
-	...tsEslint.configs.strictTypeChecked,
-	...tsEslint.configs.stylisticTypeChecked,
+	tsEslint.configs.strictTypeChecked,
+	tsEslint.configs.stylisticTypeChecked,
 	{
 		rules: {
 			camelcase: "error",
@@ -84,4 +82,4 @@ export default [
 			],
 		},
 	},
-];
+]);
