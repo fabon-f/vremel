@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [unreleased]
+
+### Added
+
+- Support passing `ZonedDateTime` to `startOf*` and `endOf*` functions ([4ab5e3c](https://github.com/fabon-f/vremel/commit/4ab5e3c217d6eea8b4c3b3e42451d06bfec4d6d0), [6f829a2](https://github.com/fabon-f/vremel/commit/6f829a233bcea99b3d29e4e1df4e69708f5ab72e), [4b2f1ba](https://github.com/fabon-f/vremel/commit/4b2f1ba6b8c273acda237ac13c2915f00b3aa3b1), [8d48511](https://github.com/fabon-f/vremel/commit/8d48511f57bd2752eb0737e0e20c17203e3f97cf))
+
 ## 0.5.0 (2025-02-27)
 
 ### Added
