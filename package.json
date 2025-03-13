@@ -60,7 +60,7 @@
 		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"globals": "^16.0.0",
 		"prettier": "3.5.3",
-		"temporal-polyfill": "^0.2.5",
+		"temporal-polyfill": "0.3.0-beta.1",
 		"typescript": "^5.8.2",
 		"typescript-eslint": "8.26.0",
 		"vite-node": "^3.0.8",
