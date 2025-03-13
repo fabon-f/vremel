@@ -43,3 +43,4 @@ export { startOfYear } from "./startOfYear.js";
 export { toDateFromClockTime } from "./toDateFromClockTime.js";
 export { toDateFromExactTime } from "./toDateFromExactTime.js";
 export { toTemporalFromClockTime } from "./toTemporalFromClockTime.js";
+export { withDayOfWeek, type WithDayOfWeekOptions } from "./withDayOfWeek.js";
