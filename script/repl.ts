@@ -20,3 +20,20 @@ const server = repl.start("> ");
 server.context["Temporal"] = Temporal;
 server.context["vremel"] = vremel;
 server.context["vremel"].duration = vremelDuration;
+
+const customInspectSymbol = Symbol.for("nodejs.util.inspect.custom");
+
+for (const type of [
+	Temporal.Instant,
+	Temporal.ZonedDateTime,
+	Temporal.PlainDateTime,
+	Temporal.PlainDate,
+	Temporal.PlainTime,
+	Temporal.PlainYearMonth,
+	Temporal.PlainMonthDay,
+	Temporal.Duration,
+]) {
+	type.prototype[customInspectSymbol] = function () {
+		return `${this[Symbol.toStringTag]}: ${this.toString()}`;
+	};
+}
