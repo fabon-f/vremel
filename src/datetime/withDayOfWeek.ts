@@ -34,20 +34,22 @@ function withDayOfWeekForClockTime(
  * Returns the datetime in the same week with specified day of a week.
  *
  * For `ZonedDateTime` this function behave like `Temporal.ZonedDateTime.prototype.with()`.
- * As well as `Temporal.ZonedDateTime.prototype.with()`,
- * for some edge cases with forward offset transition around midnight,
- * the result can be previous or next day of the desired day depending on the `disambiguation` option.
+ * As well as `Temporal.ZonedDateTime.prototype.with()`, the result can be previous or next day of the desired day
+ * depending on the `disambiguation` option for some edge cases.
  *
  * ```typescript
- * // In Greenland 2024-03-30T23:10:00 doesn't exist due to DST
- * Temporal.ZonedDateTime.from("2024-03-29T23:10:00-02:00[America/Nuuk]")
- *   .with({ day: 30 }); // 2024-03-31T00:10:00-01:00, not March 30!
- * // `withDayOfWeek` does the same thing
+ * // In Greenland, 2024-03-30T23:10:00 doesn't exist due to DST
  * withDayOfWeek(
  *   Temporal.ZonedDateTime.from("2024-03-29T23:10:00-02:00[America/Nuuk]"),
  *   6, // Saturday
- *   { firstDayOfWeek: 1 }
+ *   { firstDayOfWeek: 1, disambiguation: "compatible" }
  * ); // 2024-03-31T00:10:00-01:00, Sunday!
+ * // In Samoa, 2011-12-30 (Friday) is completely skipped due to an offset transition from `-10:00` to `+14:00`
+ * withDayOfWeek(
+ *   Temporal.ZonedDateTime.from("2011-12-29T00:00:00-10:00[Pacific/Apia]"),
+ *   5, // Friday
+ *   { firstDayOfWeek: 1, disambiguation: "compatible" }
+ * ); // 2011-12-31T00:00:00+14:00, Saturday!
  * ```
  *
  * 'same week' is ambiguous and locale-dependent,
