@@ -35,7 +35,7 @@ export function isSameWeek<
 		| Temporal.PlainDate
 		| Temporal.PlainDateTime
 		| Temporal.ZonedDateTime,
->(dt1: DateTime, dt2: DateTime, options: IsSameWeekOptions) {
+>(dt1: DateTime, dt2: DateTime, options: IsSameWeekOptions): boolean {
 	assertSameType(dt1, dt2);
 	const firstDayOfWeek = options.firstDayOfWeek;
 	if (

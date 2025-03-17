@@ -28,6 +28,7 @@ export { fromRfc2822 } from "./fromRfc2822.js";
 export { fromRfc7231 } from "./fromRfc7231.js";
 export { isAfter } from "./isAfter.js";
 export { isBefore } from "./isBefore.js";
+export { isSameWeek, type IsSameWeekOptions } from "./isSameWeek.js";
 export { isWithinInterval } from "./isWithinInterval.js";
 export { julianDate } from "./julianDate.js";
 export { latest } from "./latest.js";
