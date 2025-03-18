@@ -1,4 +1,4 @@
-import { copyFile, readdir, rm, writeFile } from "node:fs/promises";
+import { copyFile, readdir, rm } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,15 +8,7 @@ import { consola } from "consola";
 const require = createRequire(import.meta.url);
 const srcPath = path.join(fileURLToPath(import.meta.url), "../../src");
 
-const declarationFiles = (
-	await readdir("dist/esm", { recursive: true })
-).filter((f) => f.endsWith(".d.ts") || f.endsWith(".d.ts.map"));
-await Promise.all(
-	declarationFiles.map((f) => copyFile(`dist/esm/${f}`, `dist/cjs/${f}`)),
-);
-await writeFile("dist/cjs/package.json", JSON.stringify({ type: "commonjs" }));
 await copyFile("src/temporal.d.ts", "dist/esm/temporal.d.ts");
-await copyFile("src/temporal.d.ts", "dist/cjs/temporal.d.ts");
 
 async function listFns(dirname) {
 	const files = await readdir(path.join(srcPath, dirname));

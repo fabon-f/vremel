@@ -19,7 +19,7 @@
 		"CHANGELOG.md"
 	],
 	"scripts": {
-		"build": "node script/before-build.js && tsc -p tsconfig.build.json && swc src -d dist/cjs --strip-leading-paths && node script/after-build.js",
+		"build": "node script/before-build.js && tsc -p tsconfig.build.json && node script/after-build.js",
 		"test": "vitest",
 		"typecheck": "tsc",
 		"lint": "eslint . && prettier . --check",
@@ -42,8 +42,6 @@
 	"devDependencies": {
 		"@eslint/js": "^9.22.0",
 		"@js-temporal/polyfill": "^0.4.4",
-		"@swc/cli": "0.6.0",
-		"@swc/core": "^1.11.10",
 		"@tsconfig/strictest": "^2.0.5",
 		"@types/node": "^22.13.10",
 		"consola": "^3.4.1",
