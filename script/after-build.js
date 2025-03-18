@@ -1,12 +1,11 @@
 import { copyFile, readdir, rm } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
 import { consola } from "consola";
 
 const require = createRequire(import.meta.url);
-const srcPath = path.join(fileURLToPath(import.meta.url), "../../src");
+const srcPath = path.join(import.meta.dirname, "../src");
 
 await copyFile("src/temporal.d.ts", "dist/temporal.d.ts");
 
