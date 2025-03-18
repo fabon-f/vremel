@@ -17,6 +17,8 @@ npm install vremel
 deno add @fabon/vremel
 ```
 
+This package is ESM-only.
+
 ## Usage
 
 ```typescript
