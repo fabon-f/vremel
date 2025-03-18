@@ -4,8 +4,8 @@
 	"description": "JavaScript date utility library for Temporal API",
 	"type": "module",
 	"exports": {
-		".": "./dist/esm/index.js",
-		"./duration": "./dist/esm/duration/index.js"
+		".": "./dist/index.js",
+		"./duration": "./dist/duration/index.js"
 	},
 	"sideEffects": false,
 	"engines": {
