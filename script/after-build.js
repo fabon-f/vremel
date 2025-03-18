@@ -8,7 +8,7 @@ import { consola } from "consola";
 const require = createRequire(import.meta.url);
 const srcPath = path.join(fileURLToPath(import.meta.url), "../../src");
 
-await copyFile("src/temporal.d.ts", "dist/esm/temporal.d.ts");
+await copyFile("src/temporal.d.ts", "dist/temporal.d.ts");
 
 async function listFns(dirname) {
 	const files = await readdir(path.join(srcPath, dirname));
