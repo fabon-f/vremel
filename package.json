@@ -4,16 +4,8 @@
 	"description": "JavaScript date utility library for Temporal API",
 	"type": "module",
 	"exports": {
-		".": {
-			"module-sync": "./dist/esm/index.js",
-			"require": "./dist/cjs/index.js",
-			"default": "./dist/esm/index.js"
-		},
-		"./duration": {
-			"module-sync": "./dist/esm/duration/index.js",
-			"require": "./dist/cjs/duration/index.js",
-			"default": "./dist/esm/duration/index.js"
-		}
+		".": "./dist/esm/index.js",
+		"./duration": "./dist/esm/duration/index.js"
 	},
 	"sideEffects": false,
 	"engines": {
