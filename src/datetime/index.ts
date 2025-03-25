@@ -16,6 +16,7 @@ export { endOfMonth } from "./endOfMonth.js";
 export { endOfSecond } from "./endOfSecond.js";
 export { endOfWeek, type EndOfWeekOptions } from "./endOfWeek.js";
 export { endOfYear } from "./endOfYear.js";
+export { epochMicroseconds } from "./epochMicroseconds.js";
 export { epochSeconds } from "./epochSeconds.js";
 export { formatRfc7231 } from "./formatRfc7231.js";
 export {
