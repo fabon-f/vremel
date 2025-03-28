@@ -7,7 +7,7 @@ JavaScript date utility library for [Temporal API](https://tc39.es/proposal-temp
 - Contains only pure functions, supports tree-shaking by default.
 - Supports every types of Temporal API (`Instant`, `ZonedDateTime`, `PlainDate`...) with strict TypeScript definition.
 - Handles timezones and calendars strictly.
-- Works fine with any polyfills. You don't have to even load a polyfill globally.
+- Works fine with any polyfills and native implementations. You don't have to even load a polyfill globally.
 
 ## Install
 
@@ -52,6 +52,13 @@ isAfter(
 	Temporal.PlainDate.from("2024-02-01"),
 ); // false
 ```
+
+## Polyfill Support
+
+This package only supports latest `Temporal` polyfills following the latest spec:
+
+- `temporal-polyfill`: `0.3.0-beta.1` or above
+- `@js-temporal/polyfill`: `0.5.0` or above
 
 ## Docs
 
