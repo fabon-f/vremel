@@ -1,25 +1,7 @@
-// original: https://github.com/tc39/proposal-temporal/blob/7899d5933cb9e15e187ea5ef2d1876c0c5cef73c/polyfill/index.d.ts
+// original: https://github.com/tc39/proposal-temporal/blob/999937370cfd0f6d2ce3cc83a01ab82ab3771b46/polyfill/index.d.ts
 /*! Copyright (c) 2017, 2018, 2019, 2020
     Ecma International. All rights reserved. */
 /*! SPDX-License-Identifier: BSD-3-Clause */
-
-// this file is modified from the original to fix incompatibility
-// between official latest type definition and existing polyfills
-// due to API breaking chnages in June–September 2024.
-// modification:
-// 1. Make `getTimeZoneTransition` method of `ZonedDateTime` optional
-// 2. Add `LegacyCalendarProtocol` to `CalendarLike`
-// 3. Add `LegacyTimeZoneProtocol` to `TimeZoneLike`
-// 4. Allow passing `LegacyTimeZoneProtocol` to `timeZoneAndTime` arg of `PlainDate.prototype.toZonedDateTime`
-// 5. Use `LegacyDateTimeFormatOptions` instead of `globalThis.Intl.DateTimeFormatOptions` in `toLocaleString` methods
-
-// TODO: remove these interfaces after polyfills will support latest spec
-interface LegacyCalendarProtocol {}
-interface LegacyTimeZoneProtocol {}
-type LegacyDateTimeFormatOptions = Omit<globalThis.Intl.DateTimeFormatOptions, 'timeZone' | 'calendar'> & {
-  timeZone?: globalThis.Intl.DateTimeFormatOptions['timeZone'] | LegacyTimeZoneProtocol
-  calendar?: globalThis.Intl.DateTimeFormatOptions['calendar'] | LegacyCalendarProtocol
-}
 
 export namespace Temporal {
   export type ComparisonResult = -1 | 0 | 1;
@@ -575,7 +557,7 @@ export namespace Temporal {
     subtract(other: Temporal.Duration | DurationLike | string): Temporal.Duration;
     round(roundTo: DurationRoundTo): Temporal.Duration;
     total(totalOf: DurationTotalOf): number;
-    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: LegacyDateTimeFormatOptions): string;
+    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: globalThis.Intl.DateTimeFormatOptions): string;
     toJSON(): string;
     toString(options?: ToStringPrecisionOptions): string;
     valueOf(): never;
@@ -591,8 +573,8 @@ export namespace Temporal {
    * the {@link https://en.wikipedia.org/wiki/Unix_time|Unix epoch} (midnight
    * UTC on January 1, 1970). However, a `Temporal.Instant` can be created from
    * any of several expressions that refer to a single point in time, including
-   * an {@link https://en.wikipedia.org/wiki/ISO_8601|ISO 8601 string} with a
-   * time zone offset such as '2020-01-23T17:04:36.491865121-08:00'.
+   * an {@link https://datatracker.ietf.org/doc/html/rfc9557|RFC 9557 string}
+   * with a time zone offset such as '2020-01-23T17:04:36.491865121-08:00'.
    *
    * See https://tc39.es/proposal-temporal/docs/instant.html for more details.
    */
@@ -623,7 +605,7 @@ export namespace Temporal {
       roundTo: RoundTo<'hour' | 'minute' | 'second' | 'millisecond' | 'microsecond' | 'nanosecond'>
     ): Temporal.Instant;
     toZonedDateTimeISO(tzLike: TimeZoneLike): Temporal.ZonedDateTime;
-    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: LegacyDateTimeFormatOptions): string;
+    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: globalThis.Intl.DateTimeFormatOptions): string;
     toJSON(): string;
     toString(options?: InstantToStringOptions): string;
     valueOf(): never;
@@ -633,7 +615,7 @@ export namespace Temporal {
   /**
    * Any of these types can be passed to Temporal methods instead of a calendar ID.
    * */
-  export type CalendarLike = string | ZonedDateTime | PlainDateTime | PlainDate | PlainYearMonth | PlainMonthDay | LegacyCalendarProtocol;
+  export type CalendarLike = string | ZonedDateTime | PlainDateTime | PlainDate | PlainYearMonth | PlainMonthDay;
 
   export type PlainDateLike = {
     era?: string | undefined;
@@ -693,7 +675,6 @@ export namespace Temporal {
     toPlainDateTime(temporalTime?: Temporal.PlainTime | PlainTimeLike | string): Temporal.PlainDateTime;
     toZonedDateTime(
       timeZoneAndTime:
-        | LegacyTimeZoneProtocol
         | string
         | {
             timeZone: TimeZoneLike;
@@ -702,7 +683,7 @@ export namespace Temporal {
     ): Temporal.ZonedDateTime;
     toPlainYearMonth(): Temporal.PlainYearMonth;
     toPlainMonthDay(): Temporal.PlainMonthDay;
-    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: LegacyDateTimeFormatOptions): string;
+    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: globalThis.Intl.DateTimeFormatOptions): string;
     toJSON(): string;
     toString(options?: ShowCalendarOption): string;
     valueOf(): never;
@@ -805,7 +786,7 @@ export namespace Temporal {
     toZonedDateTime(tzLike: TimeZoneLike, options?: ToInstantOptions): Temporal.ZonedDateTime;
     toPlainDate(): Temporal.PlainDate;
     toPlainTime(): Temporal.PlainTime;
-    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: LegacyDateTimeFormatOptions): string;
+    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: globalThis.Intl.DateTimeFormatOptions): string;
     toJSON(): string;
     toString(options?: CalendarTypeToStringOptions): string;
     valueOf(): never;
@@ -841,7 +822,7 @@ export namespace Temporal {
     equals(other: Temporal.PlainMonthDay | PlainMonthDayLike | string): boolean;
     with(monthDayLike: PlainMonthDayLike, options?: AssignmentOptions): Temporal.PlainMonthDay;
     toPlainDate(year: { year: number }): Temporal.PlainDate;
-    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: LegacyDateTimeFormatOptions): string;
+    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: globalThis.Intl.DateTimeFormatOptions): string;
     toJSON(): string;
     toString(options?: ShowCalendarOption): string;
     valueOf(): never;
@@ -907,7 +888,7 @@ export namespace Temporal {
     round(
       roundTo: RoundTo<'hour' | 'minute' | 'second' | 'millisecond' | 'microsecond' | 'nanosecond'>
     ): Temporal.PlainTime;
-    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: LegacyDateTimeFormatOptions): string;
+    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: globalThis.Intl.DateTimeFormatOptions): string;
     toJSON(): string;
     toString(options?: ToStringPrecisionOptions): string;
     valueOf(): never;
@@ -917,7 +898,7 @@ export namespace Temporal {
   /**
    * Any of these types can be passed to Temporal methods instead of a time zone ID.
    * */
-  export type TimeZoneLike = string | ZonedDateTime | LegacyTimeZoneProtocol;
+  export type TimeZoneLike = string | ZonedDateTime;
 
   export type PlainYearMonthLike = {
     era?: string | undefined;
@@ -971,7 +952,7 @@ export namespace Temporal {
       options?: DifferenceOptions<'year' | 'month'>
     ): Temporal.Duration;
     toPlainDate(day: { day: number }): Temporal.PlainDate;
-    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: LegacyDateTimeFormatOptions): string;
+    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: globalThis.Intl.DateTimeFormatOptions): string;
     toJSON(): string;
     toString(options?: ShowCalendarOption): string;
     valueOf(): never;
@@ -1060,12 +1041,12 @@ export namespace Temporal {
       roundTo: RoundTo<'day' | 'hour' | 'minute' | 'second' | 'millisecond' | 'microsecond' | 'nanosecond'>
     ): Temporal.ZonedDateTime;
     startOfDay(): Temporal.ZonedDateTime;
-    getTimeZoneTransition?(direction: TransitionDirection): Temporal.ZonedDateTime | null;
+    getTimeZoneTransition(direction: TransitionDirection): Temporal.ZonedDateTime | null;
     toInstant(): Temporal.Instant;
     toPlainDateTime(): Temporal.PlainDateTime;
     toPlainDate(): Temporal.PlainDate;
     toPlainTime(): Temporal.PlainTime;
-    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: LegacyDateTimeFormatOptions): string;
+    toLocaleString(locales?: globalThis.Intl.LocalesArgument, options?: globalThis.Intl.DateTimeFormatOptions): string;
     toJSON(): string;
     toString(options?: ZonedDateTimeToStringOptions): string;
     valueOf(): never;

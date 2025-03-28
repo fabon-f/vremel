@@ -1,5 +1,4 @@
 import type { Temporal } from "../types.js";
-import { getTimeZoneTransition } from "./_getTimeZoneTransition.js";
 
 export function endOfTimeForZonedDateTime(
 	zdt: Temporal.ZonedDateTime,
@@ -18,7 +17,7 @@ export function endOfTimeForZonedDateTime(
 		return later;
 	} else {
 		// forward transition
-		const transition = getTimeZoneTransition(earlier, "next");
+		const transition = earlier.getTimeZoneTransition("next");
 		if (transition === null) {
 			throw new Error("Unknown error");
 		}

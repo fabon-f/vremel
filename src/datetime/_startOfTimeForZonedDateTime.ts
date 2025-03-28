@@ -1,5 +1,4 @@
 import type { Temporal } from "../types.js";
-import { getTimeZoneTransition } from "./_getTimeZoneTransition.js";
 
 export function startOfTimeForZonedDateTime(
 	zdt: Temporal.ZonedDateTime,
@@ -18,7 +17,7 @@ export function startOfTimeForZonedDateTime(
 		return earlier;
 	} else {
 		// forward transition
-		const start = getTimeZoneTransition(earlier, "next");
+		const start = earlier.getTimeZoneTransition("next");
 		if (start === null) {
 			throw new Error("Unknown error");
 		}
