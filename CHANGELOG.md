@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `epochMicroseconds` function
+
 ### Changed
 
 - Drop CommonJS support. ([#4](https://github.com/fabon-f/vremel/pull/4))
+- Drop support for outdated polyfills. ([f71e410](https://github.com/fabon-f/vremel/commit/f71e41070c2f75ff5761e025afeafb01e24ad07b))
 
 ## 0.5.1 (2025-03-18)
 
