@@ -57,7 +57,7 @@ isAfter(
 
 This package only supports latest `Temporal` polyfills following the latest spec:
 
-- `temporal-polyfill`: `0.3.0-beta.1` or above
+- `temporal-polyfill`: `0.3.0` or above
 - `@js-temporal/polyfill`: `0.5.0` or above
 
 ## Docs
