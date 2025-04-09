@@ -23,7 +23,7 @@
 		"test": "vitest",
 		"typecheck": "tsc",
 		"lint": "eslint . && prettier . --check",
-		"repl": "vite-node script/repl.ts",
+		"repl": "tsx script/repl.ts",
 		"docs:generate": "deno doc --output=./_site --unstable-byonm --unstable-sloppy-imports --html src/index.ts src/duration/index.ts"
 	},
 	"homepage": "https://github.com/fabon-f/vremel#readme",
@@ -51,9 +51,9 @@
 		"globals": "^16.0.0",
 		"prettier": "3.5.3",
 		"temporal-polyfill": "0.3.0",
+		"tsx": "^4.19.3",
 		"typescript": "^5.8.3",
 		"typescript-eslint": "8.29.0",
-		"vite-node": "^3.1.1",
 		"vitest": "^3.1.1"
 	},
 	"dependencies": {

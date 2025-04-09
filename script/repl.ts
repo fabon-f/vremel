@@ -19,7 +19,7 @@ const { Temporal } = await import(choice);
 const server = repl.start("> ");
 server.context["Temporal"] = Temporal;
 server.context["vremel"] = vremel;
-server.context["vremel"].duration = vremelDuration;
+server.context["vremelDuration"] = vremelDuration;
 
 const customInspectSymbol = Symbol.for("nodejs.util.inspect.custom");
 
