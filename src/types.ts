@@ -18,22 +18,6 @@ export type ComparableDateTimeType =
 	| Temporal.PlainTime
 	| Temporal.PlainDateTime
 	| Temporal.PlainYearMonth;
-export type ComparableTemporalType =
-	| Temporal.Instant
-	| Temporal.ZonedDateTime
-	| Temporal.PlainDate
-	| Temporal.PlainTime
-	| Temporal.PlainDateTime
-	| Temporal.PlainYearMonth
-	| Temporal.Duration;
-
-export type ComparableDateTimeTypeArray =
-	| Temporal.Instant[]
-	| Temporal.ZonedDateTime[]
-	| Temporal.PlainDate[]
-	| Temporal.PlainTime[]
-	| Temporal.PlainDateTime[]
-	| Temporal.PlainYearMonth[];
 
 /**
  * `Date` or extended `Date`
