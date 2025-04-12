@@ -1,4 +1,4 @@
-import { copyFile, readdir, rm } from "node:fs/promises";
+import { copyFile, glob, readdir, readFile, rm } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
 
@@ -8,6 +8,17 @@ const require = createRequire(import.meta.url);
 const srcPath = path.join(import.meta.dirname, "../src");
 
 await copyFile("src/temporal.d.ts", "dist/temporal.d.ts");
+
+// Remove empty declaration files
+for await (const dtsFile of glob("dist/**/*.d.ts")) {
+	const source = await readFile(dtsFile, "utf-8");
+	const match = /^export {};\n\/\/# sourceMappingURL=(.+)$/.exec(source);
+	if (match) {
+		const sourcemapPath = path.resolve(path.dirname(dtsFile), match[1]);
+		await rm(dtsFile);
+		await rm(sourcemapPath);
+	}
+}
 
 async function listFns(dirname) {
 	const files = await readdir(path.join(srcPath, dirname));

@@ -19,7 +19,7 @@
 		"CHANGELOG.md"
 	],
 	"scripts": {
-		"build": "node script/before-build.js && tsc -p tsconfig.build.json && node script/after-build.js",
+		"build": "node script/before-build.js && tsc -p tsconfig.build.json && node --disable-warning=ExperimentalWarning script/after-build.js",
 		"test": "vitest",
 		"typecheck": "tsc",
 		"lint": "eslint . && prettier . --check",
