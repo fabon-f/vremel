@@ -1,3 +1,4 @@
+/** @internal */
 export function secondsToHms(
 	sec: number,
 ): [hour: number, minute: number, second: number] {

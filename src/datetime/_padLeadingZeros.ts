@@ -1,3 +1,4 @@
+/** @internal */
 export function padLeadingZeros(
 	num: number | string,
 	maxLength: number,

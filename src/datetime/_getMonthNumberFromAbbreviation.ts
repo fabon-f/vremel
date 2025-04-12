@@ -1,3 +1,4 @@
+/** @internal */
 export function getMonthNumberFromAbbreviation(monthName: string): number {
 	const index = [
 		"Jan",

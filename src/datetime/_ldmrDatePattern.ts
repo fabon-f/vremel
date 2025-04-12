@@ -27,6 +27,7 @@ function unescapeTwoSingleQuotes(format: string) {
 	return format.replaceAll(`''`, `'`);
 }
 
+/** @internal */
 export function replaceToken(
 	pattern: string,
 	replacer: (token: string) => string,
@@ -57,6 +58,7 @@ function pushLiteral(tokens: Token[], literal: string) {
 	}
 }
 
+/** @internal */
 export function tokenize(pattern: string): Token[] {
 	if (!areSingleQuotesBalanced(pattern)) {
 		throw new Error(unbalancedSingleQuotesErrorMessage);

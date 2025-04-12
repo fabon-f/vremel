@@ -1,3 +1,4 @@
+/** @internal */
 export function createRecord<V>(
 	object: Record<string, V> = {},
 ): Record<string, V> {

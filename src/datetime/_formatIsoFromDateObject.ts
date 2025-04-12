@@ -1,6 +1,7 @@
 import { formatExactTimeIso } from "./_formatExactTimeIso.js";
 import { padLeadingZeros } from "./_padLeadingZeros.js";
 
+/** @internal */
 export function formatIsoFromDateObject(date: Date): string {
 	const year = date.getFullYear();
 	const month = date.getMonth() + 1;

@@ -1,5 +1,6 @@
 import type { Temporal } from "../types.js";
 
+/** @internal */
 export function endOfTimeForZonedDateTime(
 	zdt: Temporal.ZonedDateTime,
 	withArg: Temporal.PlainDateTimeLike,

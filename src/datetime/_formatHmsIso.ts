@@ -1,5 +1,6 @@
 import { padLeadingZeros } from "./_padLeadingZeros.js";
 
+/** @internal */
 export function formatHmsIso(
 	hour: number,
 	minute: number,

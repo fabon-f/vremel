@@ -1,6 +1,7 @@
 import { getConstructor } from "../type-utils.js";
 import type { Temporal } from "../types.js";
 
+/** @internal */
 export function compare(
 	one: Temporal.Duration,
 	two: Temporal.Duration,

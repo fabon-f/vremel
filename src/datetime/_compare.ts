@@ -11,30 +11,37 @@ import {
 } from "../type-utils.js";
 import type { ComparableDateTimeType, Temporal } from "../types.js";
 
+/** @internal */
 export function compare(
 	a: Temporal.Instant,
 	b: Temporal.Instant,
 ): Temporal.ComparisonResult;
+/** @internal */
 export function compare(
 	a: Temporal.ZonedDateTime,
 	b: Temporal.ZonedDateTime,
 ): Temporal.ComparisonResult;
+/** @internal */
 export function compare(
 	a: Temporal.PlainDate,
 	b: Temporal.PlainDate,
 ): Temporal.ComparisonResult;
+/** @internal */
 export function compare(
 	a: Temporal.PlainTime,
 	b: Temporal.PlainTime,
 ): Temporal.ComparisonResult;
+/** @internal */
 export function compare(
 	a: Temporal.PlainDateTime,
 	b: Temporal.PlainDateTime,
 ): Temporal.ComparisonResult;
+/** @internal */
 export function compare(
 	a: Temporal.PlainYearMonth,
 	b: Temporal.PlainYearMonth,
 ): Temporal.ComparisonResult;
+/** @internal */
 export function compare(
 	a: ComparableDateTimeType,
 	b: ComparableDateTimeType,

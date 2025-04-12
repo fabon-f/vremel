@@ -1,5 +1,6 @@
 import { padLeadingZeros } from "./_padLeadingZeros.js";
 
+/** @internal */
 export function formatDateIso(
 	year: number,
 	month: number,

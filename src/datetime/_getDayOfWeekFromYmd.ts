@@ -1,6 +1,7 @@
 import { formatDateIso } from "./_formatDateIso.js";
 
 /**
+ * @internal
  * same as temporal's spec, Monday: 1, Tuesday: 2, ... Sunday: 7
  */
 export function getDayOfWeekFromYmd(

@@ -2,6 +2,7 @@ import { formatDateIso } from "./_formatDateIso.js";
 import { formatHmsIso } from "./_formatHmsIso.js";
 import { padLeadingZeros } from "./_padLeadingZeros.js";
 
+/** @internal */
 export function formatExactTimeIso(
 	year: number,
 	month: number,

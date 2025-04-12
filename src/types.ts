@@ -2,6 +2,7 @@ import type { Temporal } from "./temporal.d.ts";
 
 export type { Temporal };
 
+/** @internal */
 export type DateTimeType =
 	| Temporal.Instant
 	| Temporal.ZonedDateTime
@@ -10,7 +11,9 @@ export type DateTimeType =
 	| Temporal.PlainDateTime
 	| Temporal.PlainYearMonth
 	| Temporal.PlainMonthDay;
+/** @internal */
 export type TemporalType = DateTimeType | Temporal.Duration;
+/** @internal */
 export type ComparableDateTimeType =
 	| Temporal.Instant
 	| Temporal.ZonedDateTime
