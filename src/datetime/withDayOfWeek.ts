@@ -85,8 +85,6 @@ export function withDayOfWeek<
 				month: date.month,
 				day: date.day,
 			},
-			// TODO: remove `@ts-expect-error`
-			// @ts-expect-error `exactOptionalPropertyTypes` problem
 			{ disambiguation: options.disambiguation, offset: options.offset },
 		) as DateTime;
 	}
