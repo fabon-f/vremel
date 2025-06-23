@@ -22,7 +22,7 @@
 		"build": "node --disable-warning=ExperimentalWarning script/build.js && node script/check-build.js",
 		"test": "vitest",
 		"typecheck": "tsc",
-		"lint": "eslint . && prettier . --check",
+		"lint": "eslint . && prettier . --check --experimental-cli",
 		"repl": "tsx script/repl.ts",
 		"docs:generate": "deno doc --output=./_site --unstable-byonm --unstable-sloppy-imports --html src/index.ts src/duration/index.ts"
 	},
