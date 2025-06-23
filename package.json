@@ -40,22 +40,22 @@
 	"author": "fabon <syobon.hinata.public@gmail.com> (https://www.fabon.info/)",
 	"license": "MIT",
 	"devDependencies": {
-		"@eslint/js": "^9.28.0",
+		"@eslint/js": "^9.29.0",
 		"@js-temporal/polyfill": "^0.5.1",
 		"@tsconfig/strictest": "^2.0.5",
-		"@types/node": "^24.0.0",
+		"@types/node": "^24.0.3",
 		"consola": "^3.4.2",
 		"date-fns": "^4.1.0",
-		"eslint": "^9.28.0",
+		"eslint": "^9.29.0",
 		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"globals": "^16.2.0",
-		"prettier": "3.5.3",
+		"prettier": "3.6.0",
 		"temporal-polyfill": "0.3.0",
 		"tinyexec": "^1.0.1",
-		"tsx": "^4.20.1",
+		"tsx": "^4.20.3",
 		"typescript": "^5.8.3",
-		"typescript-eslint": "8.34.0",
-		"vitest": "^3.2.3"
+		"typescript-eslint": "8.34.1",
+		"vitest": "^3.2.4"
 	},
 	"dependencies": {
 		"@date-fns/utc": "^2.1.0"
