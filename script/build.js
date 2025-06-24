@@ -10,7 +10,7 @@ await rm(distPath, { recursive: true, force: true });
 const res = await exec("tsc", ["-p", "tsconfig.build.json"]);
 if (res.exitCode !== 0) {
 	console.log(res.stdout);
-	process.exit(res.exitCode ?? -1);
+	process.exit(res.exitCode ?? 1);
 }
 
 await copyFile("src/temporal.d.ts", "dist/temporal.d.ts");
