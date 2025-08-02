@@ -44,5 +44,13 @@ export { startOfWeek, type StartOfWeekOptions } from "./startOfWeek.js";
 export { startOfYear } from "./startOfYear.js";
 export { toDateFromClockTime } from "./toDateFromClockTime.js";
 export { toDateFromExactTime } from "./toDateFromExactTime.js";
+export {
+	type PlainDateLike,
+	type PlainDateTimeLike,
+	type PlainMonthDayLike,
+	type PlainYearMonthLike,
+	toObject,
+	type ZonedDateTimeLike,
+} from "./toObject.js";
 export { toTemporalFromClockTime } from "./toTemporalFromClockTime.js";
 export { withDayOfWeek, type WithDayOfWeekOptions } from "./withDayOfWeek.js";
