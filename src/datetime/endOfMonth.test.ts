@@ -1,4 +1,3 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
 
 import { endOfMonth } from "./endOfMonth.js";

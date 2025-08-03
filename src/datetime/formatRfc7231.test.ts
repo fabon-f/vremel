@@ -1,4 +1,3 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
 
 import { formatRfc7231 } from "./formatRfc7231.js";

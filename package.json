@@ -20,7 +20,7 @@
 	],
 	"scripts": {
 		"build": "node script/build.js && node script/check-build.js",
-		"test": "vitest",
+		"test": "POLYFILL=@js-temporal/polyfill vitest",
 		"typecheck": "tsc",
 		"lint": "eslint . && prettier . --check --experimental-cli",
 		"repl": "tsx script/repl.ts",
@@ -51,6 +51,7 @@
 		"globals": "^16.3.0",
 		"prettier": "3.6.2",
 		"temporal-polyfill": "0.3.0",
+		"temporal-spec": "^0.3.0",
 		"tinyexec": "^1.0.1",
 		"tsx": "^4.20.3",
 		"typescript": "^5.8.3",

@@ -1,5 +1,4 @@
 import { UTCDate } from "@date-fns/utc";
-import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
 
 import { toDateFromExactTime } from "./toDateFromExactTime.js";

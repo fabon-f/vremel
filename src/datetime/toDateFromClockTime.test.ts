@@ -1,5 +1,4 @@
 import { UTCDate, UTCDateMini } from "@date-fns/utc";
-import { Temporal } from "@js-temporal/polyfill";
 import { lightFormat } from "date-fns";
 import { expect, test } from "vitest";
 

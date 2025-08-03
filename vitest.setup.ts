@@ -1,5 +1,5 @@
-import { Temporal as Temporal2 } from "@js-temporal/polyfill";
-import { Temporal as Temporal1 } from "temporal-polyfill";
+import "temporal-spec/global";
+
 import { expect } from "vitest";
 
 import { isEqual } from "./src/datetime/_equals.js";
@@ -7,24 +7,29 @@ import { isEqual as isEqualDuration } from "./src/duration/isEqual.js";
 import { isDuration } from "./src/type-utils.js";
 import type { TemporalType } from "./src/types.js";
 
+if (
+	process.env["POLYFILL"] === "temporal-polyfill" ||
+	process.env["POLYFILL"] === "@js-temporal/polyfill"
+) {
+	/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+	const { Intl, Temporal, toTemporalInstant } = await import(
+		process.env["POLYFILL"]
+	);
+	Object.assign(globalThis, { Intl, Temporal });
+	Date.prototype.toTemporalInstant = toTemporalInstant;
+	/* eslint-enable @typescript-eslint/no-unsafe-assignment */
+}
+
 function isTemporal(a: unknown): a is TemporalType {
 	return [
-		Temporal1.Instant,
-		Temporal1.ZonedDateTime,
-		Temporal1.PlainDate,
-		Temporal1.PlainTime,
-		Temporal1.PlainDateTime,
-		Temporal1.PlainYearMonth,
-		Temporal1.PlainMonthDay,
-		Temporal1.Duration,
-		Temporal2.Instant,
-		Temporal2.ZonedDateTime,
-		Temporal2.PlainDate,
-		Temporal2.PlainTime,
-		Temporal2.PlainDateTime,
-		Temporal2.PlainYearMonth,
-		Temporal2.PlainMonthDay,
-		Temporal2.Duration,
+		Temporal.Instant,
+		Temporal.ZonedDateTime,
+		Temporal.PlainDate,
+		Temporal.PlainTime,
+		Temporal.PlainDateTime,
+		Temporal.PlainYearMonth,
+		Temporal.PlainMonthDay,
+		Temporal.Duration,
 	].some((C) => a instanceof C);
 }
 
