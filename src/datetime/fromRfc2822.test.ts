@@ -43,8 +43,17 @@ test("obsolete 2-digit year", () => {
 		fromRfc2822("07 Jun 24 01:23:45 +0900", Temporal.PlainDateTime),
 	).toEqual(Temporal.PlainDateTime.from("2024-06-07T01:23:45"));
 	expect(
-		fromRfc2822("07 Jun 56 01:23:45 +0900", Temporal.PlainDateTime),
-	).toEqual(Temporal.PlainDateTime.from("1956-06-07T01:23:45"));
+		fromRfc2822("07 Jun 00 01:23:45 +0900", Temporal.PlainDateTime),
+	).toEqual(Temporal.PlainDateTime.from("2000-06-07T01:23:45"));
+	expect(
+		fromRfc2822("07 Jun 49 01:23:45 +0900", Temporal.PlainDateTime),
+	).toEqual(Temporal.PlainDateTime.from("2049-06-07T01:23:45"));
+	expect(
+		fromRfc2822("07 Jun 50 01:23:45 +0900", Temporal.PlainDateTime),
+	).toEqual(Temporal.PlainDateTime.from("1950-06-07T01:23:45"));
+	expect(
+		fromRfc2822("07 Jun 99 01:23:45 +0900", Temporal.PlainDateTime),
+	).toEqual(Temporal.PlainDateTime.from("1999-06-07T01:23:45"));
 });
 
 test.each([
