@@ -61,7 +61,11 @@ export default defineConfig([
 		},
 	},
 	{
-		files: ["src/**/*.test.ts", "script/**/*.{ts,js}"],
+		files: [
+			"src/**/*.test.ts",
+			"src/_test/**/*.{ts,js}",
+			"script/**/*.{ts,js}",
+		],
 		languageOptions: {
 			globals: globals.node,
 		},
@@ -78,7 +82,8 @@ export default defineConfig([
 			"@typescript-eslint/no-unsafe-return": "off",
 			"@typescript-eslint/no-unused-vars": [
 				"error",
-				{ argsIgnorePattern: "^_" },
+				// TODO: use `ignoreUsingDeclarations` instead of `varsIgnorePattern` after typescript-eslint supports it
+				{ argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
 			],
 		},
 	},
