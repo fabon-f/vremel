@@ -21,6 +21,7 @@
 	"scripts": {
 		"build": "node script/build.js && node script/check-build.js",
 		"test": "POLYFILL=@js-temporal/polyfill vitest",
+		"test-ci": "POLYFILL=@js-temporal/polyfill vitest && POLYFILL=temporal-polyfill vitest",
 		"typecheck": "tsc",
 		"lint": "eslint . && prettier . --check --experimental-cli",
 		"repl": "tsx script/repl.ts",
