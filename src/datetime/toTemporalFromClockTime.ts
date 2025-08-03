@@ -1,5 +1,5 @@
 import type { Temporal } from "../types.js";
-import { formatIsoFromDateObject } from "./_formatIsoFromDateObject.js";
+import { formatDateTimeIso } from "./_formatDateTimeIso.js";
 
 /**
  * Returns Temporal instance which represents clock (local) time of given date.
@@ -18,6 +18,21 @@ export function toTemporalFromClockTime<
 	date: Date,
 	TemporalClass: TemporalClassType,
 ): InstanceType<TemporalClassType> {
-	const dateIso = formatIsoFromDateObject(date);
+	const year = date.getFullYear();
+	const month = date.getMonth() + 1;
+	const day = date.getDate();
+	const hour = date.getHours();
+	const minute = date.getMinutes();
+	const second = date.getSeconds();
+	const millisecond = date.getMilliseconds();
+	const dateIso = formatDateTimeIso(
+		year,
+		month,
+		day,
+		hour,
+		minute,
+		second,
+		millisecond,
+	);
 	return TemporalClass.from(dateIso) as InstanceType<TemporalClassType>;
 }

@@ -1,6 +1,4 @@
-import { formatDateIso } from "./_formatDateIso.js";
-import { formatHmsIso } from "./_formatHmsIso.js";
-import { padLeadingZeros } from "./_padLeadingZeros.js";
+import { formatDateTimeIso } from "./_formatDateTimeIso.js";
 
 /** @internal */
 export function formatExactTimeIso(
@@ -13,6 +11,5 @@ export function formatExactTimeIso(
 	millisecond: number,
 	offsetString: string,
 ): string {
-	const millisecondStr = padLeadingZeros(millisecond, 3);
-	return `${formatDateIso(year, month, day)}T${formatHmsIso(hour, minute, second)}.${millisecondStr}${offsetString}`;
+	return `${formatDateTimeIso(year, month, day, hour, minute, second, millisecond)}${offsetString}`;
 }
