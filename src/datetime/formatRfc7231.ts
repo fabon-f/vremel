@@ -18,6 +18,9 @@ export function formatRfc7231(
 	// timeZone: 'UTC', calendar: 'iso8601'
 	const zdt = (isInstant(dt) ? dt : dt.toInstant()).toZonedDateTimeISO("UTC");
 	const dayOfWeek = getDayOfWeekAbbreviationFromNumber(zdt.dayOfWeek);
+	if (zdt.year < 0 || zdt.year > 9999) {
+		throw new Error(`RFC 7231 format can't represent year ${zdt.year}`);
+	}
 	const year = padLeadingZeros(zdt.year, 4);
 	const day = padLeadingZeros(zdt.day, 2);
 	const month = getMonthAbbreviationFromNumber(zdt.month);
