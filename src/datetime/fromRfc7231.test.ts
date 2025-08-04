@@ -61,3 +61,17 @@ test("invalid month", () => {
 		fromRfc7231("Mon, 07 Jut 2024 01:23:45 GMT", Temporal.ZonedDateTime);
 	}).toThrowError(/Jut/);
 });
+
+test("when year is not 4-digit", () => {
+	const rfc7231 = "Fri, 07 Jun 0824 01:23:45 GMT";
+	const iso8601 = "0824-06-07T01:23:45+00:00[UTC]";
+	expect(fromRfc7231(rfc7231, Temporal.Instant)).toEqual(
+		Temporal.Instant.from(iso8601),
+	);
+	expect(fromRfc7231(rfc7231, Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from(iso8601),
+	);
+	expect(fromRfc7231(rfc7231, Temporal.ZonedDateTime)).toEqual(
+		Temporal.ZonedDateTime.from(iso8601),
+	);
+});

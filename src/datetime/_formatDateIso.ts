@@ -6,5 +6,5 @@ export function formatDateIso(
 	month: number,
 	day: number,
 ): string {
-	return `${year.toString()}-${padLeadingZeros(month, 2)}-${padLeadingZeros(day, 2)}`;
+	return `${padLeadingZeros(year, 4)}-${padLeadingZeros(month, 2)}-${padLeadingZeros(day, 2)}`;
 }

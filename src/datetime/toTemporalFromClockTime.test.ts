@@ -46,3 +46,17 @@ test("to PlainMonthDay", () => {
 		),
 	).toEqual(Temporal.PlainMonthDay.from("01-01"));
 });
+
+test.for([
+	"0111-01-01T00:00:00",
+	"0011-01-01T00:00:00",
+	"0001-01-01T00:00:00",
+	"+010000-01-01T00:00:00",
+	"+100000-01-01T00:00:00",
+	"-000001-01-01T00:00:00",
+	"-200000-01-01T00:00:00",
+])("extreme range of year (%s)", (date) => {
+	expect(
+		toTemporalFromClockTime(new Date(date), Temporal.PlainDateTime),
+	).toEqual(Temporal.PlainDateTime.from(date));
+});
