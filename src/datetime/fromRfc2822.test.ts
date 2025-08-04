@@ -56,11 +56,11 @@ test("obsolete 2-digit year", () => {
 	).toEqual(Temporal.PlainDateTime.from("1999-06-07T01:23:45"));
 });
 
-test.each([
-	["07 Jun 2024 01:23:45 UT"],
-	["07 Jun 2024 01:23:45 GMT"],
-	["07 Jun 2024 01:23:45 Z"],
-	["07 Jun 2024 01:23:45 z"],
+test.for([
+	"07 Jun 2024 01:23:45 UT",
+	"07 Jun 2024 01:23:45 GMT",
+	"07 Jun 2024 01:23:45 Z",
+	"07 Jun 2024 01:23:45 z",
 ])("time zones with zero offset", (rfc2822) => {
 	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(
 		Temporal.Instant.from("2024-06-07T01:23:45+00:00"),
@@ -94,7 +94,7 @@ test("militatry time zone", () => {
 	}).toThrowError();
 });
 
-test.each([
+test.for([
 	["07 Jun 2024 01:23:45 EST", "2024-06-07T01:23:45-05:00[-05:00]"],
 	["07 Jun 2024 01:23:45 EDT", "2024-06-07T01:23:45-04:00[-04:00]"],
 	["07 Jun 2024 01:23:45 CST", "2024-06-07T01:23:45-06:00[-06:00]"],
@@ -103,7 +103,7 @@ test.each([
 	["07 Jun 2024 01:23:45 MDT", "2024-06-07T01:23:45-06:00[-06:00]"],
 	["07 Jun 2024 01:23:45 PST", "2024-06-07T01:23:45-08:00[-08:00]"],
 	["07 Jun 2024 01:23:45 PDT", "2024-06-07T01:23:45-07:00[-07:00]"],
-])("North American time zones", (rfc2822, iso8601) => {
+] as [string, string][])("North American time zones", ([rfc2822, iso8601]) => {
 	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(
 		Temporal.Instant.from(iso8601),
 	);

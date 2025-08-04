@@ -2,16 +2,16 @@ import { expect, test } from "vitest";
 
 import { withDayOfWeek } from "./withDayOfWeek.js";
 
-test.each([
+test.for([
 	["2025-01-06", 3, 5, "2025-01-08"],
 	["2025-01-06", 5, 3, "2025-01-03"],
 	["2025-01-08", 1, 5, "2025-01-06"],
 	["2025-01-08", 5, 1, "2025-01-10"],
 	["2025-01-10", 1, 3, "2025-01-13"],
 	["2025-01-10", 3, 1, "2025-01-08"],
-])(
+] as [string, number, number, string][])(
 	"PlainDate (%s, dayOfWeek: %d, firstDayOfWeek: %d)",
-	(date, dayOfWeek, firstDayOfWeek, expected) => {
+	([date, dayOfWeek, firstDayOfWeek, expected]) => {
 		expect(
 			withDayOfWeek(Temporal.PlainDate.from(date), dayOfWeek, {
 				firstDayOfWeek,

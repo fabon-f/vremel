@@ -232,7 +232,7 @@ const dayPeriods = {
 	},
 } satisfies LocaleDataForParser["dayPeriod"];
 
-test.each([
+test.for([
 	"GGGGGG",
 	"MMMMMM",
 	"LLLLLL",
