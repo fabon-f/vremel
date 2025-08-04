@@ -8,6 +8,10 @@ import { isEqual as isEqualDuration } from "./src/duration/isEqual.js";
 import { isDuration } from "./src/type-utils.js";
 import type { TemporalType } from "./src/types.js";
 
+// TODO: remove this after playwright starts using Firefox 141 or later
+// @ts-expect-error patching polyfill
+Symbol.dispose ??= Symbol.for("Symbol.dispose");
+
 async function loadPolyfill(packageName: unknown) {
 	if (packageName === undefined) {
 		return;
