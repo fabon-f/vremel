@@ -28,6 +28,11 @@ test("invalid date", () => {
 	}).toThrowError();
 });
 
+test("2-digit year", () => {
+	expect(getDayOfWeekFromYmd(0, 1, 1)).toEqual(6);
+	expect(getDayOfWeekFromYmd(99, 12, 31)).toEqual(4);
+});
+
 test("getDayOfWeekFromYmd with a day which doesn't exist in local time zone", () => {
 	using _modifier = modifyTimeZone("Pacific/Apia");
 	// 2011/12/30 was skipped in Pacific/Apia due to offset change (UTC-11:00 -> UTC+13:00)

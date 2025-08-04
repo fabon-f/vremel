@@ -1,4 +1,5 @@
 import { formatDateIso } from "./_formatDateIso.js";
+import { utcTimeStamp } from "./_utcTimeStamp.js";
 
 /**
  * @internal
@@ -9,7 +10,7 @@ export function getDayOfWeekFromYmd(
 	month: number,
 	day: number,
 ): number {
-	const date = new Date(Date.UTC(year, month - 1, day));
+	const date = new Date(utcTimeStamp(year, month, day));
 	if (
 		date.getUTCFullYear() !== year ||
 		date.getUTCMonth() !== month - 1 ||
