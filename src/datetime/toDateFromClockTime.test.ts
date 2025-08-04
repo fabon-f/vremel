@@ -57,6 +57,27 @@ test("PlainMonthDay with non-ISO calendar", () => {
 	expect(md).toEqual(md2);
 });
 
+test("PlainMonthDay when a referenceYear is far past", () => {
+	// This test case makes a sense only for current Firefox (SpiderMonkey) implementation, and can be meaningless in the near future.
+	// cf. https://github.com/tc39/proposal-intl-era-monthcode/issues/60
+
+	// -000179-02-18[u-ca=chinese] in SpiderMonkey
+	const md = Temporal.PlainMonthDay.from({
+		monthCode: "M12L",
+		day: 30,
+		calendar: "chinese",
+	});
+	const date = toDateFromClockTime(md);
+	const md2 = Temporal.PlainDate.from({
+		year: date.getFullYear(),
+		month: date.getMonth() + 1,
+		day: date.getDate(),
+	})
+		.withCalendar("chinese")
+		.toPlainMonthDay();
+	expect(md).toEqual(md2);
+});
+
 test("PlainYearMonth with non-ISO calendar", () => {
 	const ym = Temporal.PlainYearMonth.from({
 		year: 5779,
