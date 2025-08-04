@@ -92,7 +92,7 @@ export function toDateFromClockTime(
  * ```
  *
  * @param dateTime datetime object
- * @param DateConstructor constructor of return value, `UTCDateMini` from "@date-fns/utc" as default
+ * @param DateConstructor constructor of return value, `UTCDate` from "@date-fns/utc" as default
  */
 export function toDateFromClockTime<DateType extends Date>(
 	dateTime:
