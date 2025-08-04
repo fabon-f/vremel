@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import "temporal-spec/global";
 
 import { expect } from "vitest";
@@ -7,18 +8,29 @@ import { isEqual as isEqualDuration } from "./src/duration/isEqual.js";
 import { isDuration } from "./src/type-utils.js";
 import type { TemporalType } from "./src/types.js";
 
-if (
-	process.env["POLYFILL"] === "temporal-polyfill" ||
-	process.env["POLYFILL"] === "@js-temporal/polyfill"
-) {
-	/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-	const { Intl, Temporal, toTemporalInstant } = await import(
-		process.env["POLYFILL"]
-	);
-	Object.assign(globalThis, { Intl, Temporal });
+// TODO: remove this after playwright starts using Firefox 141 or later
+// @ts-expect-error patching polyfill
+Symbol.dispose ??= Symbol.for("Symbol.dispose");
+
+async function loadPolyfill(packageName: unknown) {
+	if (packageName === undefined) {
+		return;
+	}
+	if (
+		packageName !== "temporal-polyfill" &&
+		packageName !== "@js-temporal/polyfill"
+	) {
+		throw new Error("Unknown polyfill");
+	}
+	const { Temporal, toTemporalInstant } =
+		packageName === "temporal-polyfill" ?
+			await import("temporal-polyfill")
+		:	await import("@js-temporal/polyfill");
+	globalThis.Temporal = Temporal;
 	Date.prototype.toTemporalInstant = toTemporalInstant;
-	/* eslint-enable @typescript-eslint/no-unsafe-assignment */
 }
+
+await loadPolyfill(import.meta.env["POLYFILL"]);
 
 function isTemporal(a: unknown): a is TemporalType {
 	return [
