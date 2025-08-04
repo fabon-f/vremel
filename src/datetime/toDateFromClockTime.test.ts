@@ -57,8 +57,19 @@ test("PlainMonthDay with non-ISO calendar", () => {
 	expect(md).toEqual(md2);
 });
 
-test("PlainMonthDay when a referenceYear is far past", () => {
-	// This test case makes a sense only for current Firefox (SpiderMonkey) implementation, and can be meaningless in the near future.
+test("PlainMonthDay with a reference ISO year in the distant past or future", () => {
+	// note: using `PlainMonthDay` constructor directly is highly discouraged, therefore this is an extreme edge case.
+	expect(
+		toDateFromClockTime(new Temporal.PlainMonthDay(1, 27, "hebrew", -3)),
+	).toStrictEqual(new UTCDate("-000003-01-27T00:00:00Z"));
+	expect(
+		toDateFromClockTime(new Temporal.PlainMonthDay(1, 1, "hebrew", -270000)),
+	).toStrictEqual(new UTCDate("-270000-01-01T00:00:00Z"));
+	expect(
+		toDateFromClockTime(new Temporal.PlainMonthDay(1, 1, "hebrew", 270000)),
+	).toStrictEqual(new UTCDate("+270000-01-01T00:00:00Z"));
+
+	// The test case below makes a sense only for current Firefox (SpiderMonkey) implementation, and can be meaningless in the near future.
 	// cf. https://github.com/tc39/proposal-intl-era-monthcode/issues/60
 
 	// -000179-02-18[u-ca=chinese] in SpiderMonkey
@@ -145,11 +156,11 @@ test("date constructor type", () => {
 test("2-digit year", () => {
 	expect(
 		toDateFromClockTime(Temporal.PlainDateTime.from("0050-01-01")),
-	).toEqual(new UTCDate("0050-01-01T00:00:00Z"));
-	expect(toDateFromClockTime(Temporal.PlainDate.from("0050-01-01"))).toEqual(
-		new UTCDate("0050-01-01T00:00:00Z"),
-	);
+	).toStrictEqual(new UTCDate("0050-01-01T00:00:00Z"));
+	expect(
+		toDateFromClockTime(Temporal.PlainDate.from("0050-01-01")),
+	).toStrictEqual(new UTCDate("0050-01-01T00:00:00Z"));
 	expect(
 		toDateFromClockTime(Temporal.PlainYearMonth.from("0050-01-01")),
-	).toEqual(new UTCDate("0050-01-01T00:00:00Z"));
+	).toStrictEqual(new UTCDate("0050-01-01T00:00:00Z"));
 });

@@ -142,16 +142,21 @@ test("invalid month name", () => {
 	}).toThrowError(/Jat/);
 });
 
-test("when year is not 4-digit", () => {
-	const rfc2822 = "07 Jun 0824 01:23:45 +0900";
-	const iso8601 = "0824-06-07T01:23:45+09:00[+09:00]";
-	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(
-		Temporal.Instant.from(iso8601),
-	);
-	expect(fromRfc2822(rfc2822, Temporal.PlainDateTime)).toEqual(
-		Temporal.PlainDateTime.from(iso8601),
-	);
-	expect(fromRfc2822(rfc2822, Temporal.ZonedDateTime)).toEqual(
-		Temporal.ZonedDateTime.from(iso8601),
-	);
-});
+test.for([
+	["07 Jun 0824 01:23:45 +0900", "0824-06-07T01:23:45+09:00[+09:00]"],
+	["07 Jun 0024 01:23:45 +0900", "0024-06-07T01:23:45+09:00[+09:00]"],
+	["01 Jan 0000 01:23:45 +0900", "0000-01-01T01:23:45+09:00[+09:00]"],
+] as [string, string][])(
+	"when year is less than 1000",
+	([rfc2822, iso8601]) => {
+		expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(
+			Temporal.Instant.from(iso8601),
+		);
+		expect(fromRfc2822(rfc2822, Temporal.PlainDateTime)).toEqual(
+			Temporal.PlainDateTime.from(iso8601),
+		);
+		expect(fromRfc2822(rfc2822, Temporal.ZonedDateTime)).toEqual(
+			Temporal.ZonedDateTime.from(iso8601),
+		);
+	},
+);
