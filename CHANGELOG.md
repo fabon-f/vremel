@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- `formatRfc7231` function now throws on the date which can't be represented in RFC 7231 format (when ISO year is negative or 10000 or more), instead of returning invalid string. ([6cfa5f2](https://github.com/fabon-f/vremel/commit/6cfa5f2b1d70004ec7d7db208fe9225878b6efb4))
+- Fix a bug when a year of a date is not a 4-digit integer in `fromRfc2822`, `fromRfc7231` and `toTemporalFromClockTime` functions ([9a24610](https://github.com/fabon-f/vremel/commit/9a2461001be4883bd4ef8dd11a2591211a9f965f))
+- Fix an unexpected error when a date with a 2-digit year is passed to `fromRfc7231` ([3d68f92](https://github.com/fabon-f/vremel/commit/3d68f926086600898fdb031e02910b54ec863d9a))
+- Fix an unexpected error when `PlainMonthDay` passed to `toDateFromClockTime` has a reference ISO year in the distant past or future ([16e50e8](https://github.com/fabon-f/vremel/commit/16e50e848c59597d7c09f0f09464666a687d4d9b))
+- Fix a bug when a year passed to `toDateFromClockTime` is a 2-digit integer ([f916df9](https://github.com/fabon-f/vremel/commit/f916df924855ab6769d14a1f89a7efdabf65ac65))
+
 ## 0.6.1 (2025-08-03)
 
 ### Added
