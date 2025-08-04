@@ -8,6 +8,7 @@ import {
 	isZonedDateTime,
 } from "../type-utils.js";
 import type { GenericDateConstructor, Temporal } from "../types.js";
+import { createDateFromClockTime } from "./_createDateFromClockTime.js";
 
 function parseIsoString(date: string) {
 	const res = /^(\d{4,}|[+-]\d{6})-(\d{2})-(\d{2})/.exec(date);
@@ -23,6 +24,40 @@ function parseIsoString(date: string) {
 		month: parseInt(m, 10),
 		day: parseInt(d, 10),
 	};
+}
+
+// function to bypass an enigmatic TypeScript error "could be instantiated with a different subtype of constraint"
+function createDate<DateType extends Date>(
+	DateConstructor: GenericDateConstructor<DateType> | undefined,
+	year: number,
+	month: number,
+	day = 1,
+	hour = 0,
+	minute = 0,
+	second = 0,
+	millisecond = 0,
+) {
+	return DateConstructor ?
+			createDateFromClockTime(
+				DateConstructor,
+				year,
+				month,
+				day,
+				hour,
+				minute,
+				second,
+				millisecond,
+			)
+		:	createDateFromClockTime(
+				UTCDate,
+				year,
+				month,
+				day,
+				hour,
+				minute,
+				second,
+				millisecond,
+			);
 }
 
 /**
@@ -79,22 +114,22 @@ export function toDateFromClockTime<DateType extends Date>(
 		| Temporal.PlainMonthDay,
 	DateConstructor?: GenericDateConstructor<DateType>,
 ) {
-	const DateConstructorFunction = DateConstructor ?? UTCDate;
 	if (isPlainYearMonth(dateTime)) {
 		const pd = dateTime.toPlainDate({ day: 1 }).withCalendar("iso8601");
-		return new DateConstructorFunction(pd.year, pd.month - 1, pd.day);
+		return createDate(DateConstructor, pd.year, pd.month, pd.day);
 	}
 	if (isPlainMonthDay(dateTime)) {
 		if (dateTime.calendarId === "iso8601") {
 			const pd = dateTime.toPlainDate({ year: 1972 });
-			return new DateConstructorFunction(pd.year, pd.month - 1, pd.day);
+			return createDate(DateConstructor, pd.year, pd.month, pd.day);
 		}
 		const { year, month, day } = parseIsoString(dateTime.toString());
-		return new DateConstructorFunction(year, month - 1, day);
+		return createDate(DateConstructor, year, month, day);
 	}
 	if (isPlainTime(dateTime)) {
 		// Set default date to 2000-01-01
-		return new DateConstructorFunction(
+		return createDate(
+			DateConstructor,
 			2000,
 			0,
 			1,
@@ -109,9 +144,10 @@ export function toDateFromClockTime<DateType extends Date>(
 			dateTime.toPlainDateTime().withCalendar("iso8601")
 		: isPlainDate(dateTime) ? dateTime.toPlainDateTime().withCalendar("iso8601")
 		: dateTime.withCalendar("iso8601");
-	return new DateConstructorFunction(
+	return createDate(
+		DateConstructor,
 		plainDateTime.year,
-		plainDateTime.month - 1,
+		plainDateTime.month,
 		plainDateTime.day,
 		plainDateTime.hour,
 		plainDateTime.minute,

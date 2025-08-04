@@ -141,3 +141,15 @@ test("date constructor type", () => {
 		UTCDate,
 	);
 });
+
+test("2-digit year", () => {
+	expect(
+		toDateFromClockTime(Temporal.PlainDateTime.from("0050-01-01")),
+	).toEqual(new UTCDate("0050-01-01T00:00:00Z"));
+	expect(toDateFromClockTime(Temporal.PlainDate.from("0050-01-01"))).toEqual(
+		new UTCDate("0050-01-01T00:00:00Z"),
+	);
+	expect(
+		toDateFromClockTime(Temporal.PlainYearMonth.from("0050-01-01")),
+	).toEqual(new UTCDate("0050-01-01T00:00:00Z"));
+});
