@@ -19,15 +19,6 @@ test("result of getDayOfWeekFromYmd should match to Temporal's dayOfWeek", () =>
 	);
 });
 
-test("invalid date", () => {
-	expect(() => {
-		getDayOfWeekFromYmd(2024, 1, 366);
-	}).toThrowError();
-	expect(() => {
-		getDayOfWeekFromYmd(2023, 2, 29);
-	}).toThrowError();
-});
-
 test("2-digit year", () => {
 	expect(getDayOfWeekFromYmd(0, 1, 1)).toEqual(6);
 	expect(getDayOfWeekFromYmd(99, 12, 31)).toEqual(4);

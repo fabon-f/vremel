@@ -4,10 +4,14 @@ import {
 } from "../type-utils.js";
 import type { Temporal } from "../types.js";
 import { createRecord } from "./_createRecord.js";
+import { formatDateIso } from "./_formatDateIso.js";
 import { formatExactTimeIso } from "./_formatExactTimeIso.js";
+import { formatHmsIso } from "./_formatHmsIso.js";
 import { getDayOfWeekFromYmd } from "./_getDayOfWeekFromYmd.js";
 import { getDayOfWeekNumberFromAbbreviation } from "./_getDayOfWeekNumberFromAbbreviation.js";
 import { getMonthNumberFromAbbreviation } from "./_getMonthNumberFromAbbreviation.js";
+import { isValidHms } from "./_isValidHms.js";
+import { isValidYmd } from "./_isValidYmd.js";
 
 // spec: https://datatracker.ietf.org/doc/html/rfc2822#section-3.3 https://datatracker.ietf.org/doc/html/rfc2822#section-4.3
 
@@ -148,6 +152,12 @@ export function fromRfc2822<
 
 	const [year, month, day, hour, minute, second, dayOfWeek, timeZone] =
 		parse(dateWithoutComment);
+	if (!isValidYmd(year, month, day)) {
+		throw new Error(`Invalid date: ${formatDateIso(year, month, day)}`);
+	}
+	if (!isValidHms(hour, minute, second, true)) {
+		throw new Error(`Invalid time: ${formatHmsIso(hour, minute, second)}`);
+	}
 	if (
 		dayOfWeek !== undefined &&
 		getDayOfWeekFromYmd(year, month, day) !==

@@ -3,10 +3,14 @@ import {
 	isZonedDateTimeConstructor,
 } from "../type-utils.js";
 import type { Temporal } from "../types.js";
+import { formatDateIso } from "./_formatDateIso.js";
 import { formatExactTimeIso } from "./_formatExactTimeIso.js";
+import { formatHmsIso } from "./_formatHmsIso.js";
 import { getDayOfWeekFromYmd } from "./_getDayOfWeekFromYmd.js";
 import { getDayOfWeekNumberFromAbbreviation } from "./_getDayOfWeekNumberFromAbbreviation.js";
 import { getMonthNumberFromAbbreviation } from "./_getMonthNumberFromAbbreviation.js";
+import { isValidHms } from "./_isValidHms.js";
+import { isValidYmd } from "./_isValidYmd.js";
 
 const regex =
 	/^([A-Za-z]{3}), (\d\d) ([A-Za-z]{3}) (\d{4}) (\d\d):(\d\d):(\d\d) GMT$/;
@@ -25,9 +29,9 @@ function parse(
 	if (result === null) {
 		throw new Error("Invalid format");
 	}
-	const [, dayOfWeek, day, monthName, year, hour, minute, second] = result;
+	const [, dayOfWeekName, day, monthName, year, hour, minute, second] = result;
 	if (
-		dayOfWeek === undefined ||
+		dayOfWeekName === undefined ||
 		day === undefined ||
 		monthName === undefined ||
 		year === undefined ||
@@ -38,13 +42,23 @@ function parse(
 		throw new Error("something wrong");
 	}
 	const y = parseInt(year);
-	const m = getMonthNumberFromAbbreviation(monthName);
+	const mo = getMonthNumberFromAbbreviation(monthName);
 	const d = parseInt(day);
-	const weekNum = getDayOfWeekNumberFromAbbreviation(dayOfWeek);
-	if (getDayOfWeekFromYmd(y, m, d) !== weekNum) {
-		throw new Error(`Wrong day of week: ${dayOfWeek}`);
+	const h = parseInt(hour);
+	const mi = parseInt(minute);
+	const s = parseInt(second);
+	const dayOfWeek = getDayOfWeekNumberFromAbbreviation(dayOfWeekName);
+
+	if (!isValidYmd(y, mo, d)) {
+		throw new Error(`Invalid date: ${formatDateIso(y, mo, d)}`);
 	}
-	return [y, m, d, parseInt(hour), parseInt(minute), parseInt(second)];
+	if (!isValidHms(h, mi, s, true)) {
+		throw new Error(`Invalid time: ${formatHmsIso(h, mi, s)}`);
+	}
+	if (getDayOfWeekFromYmd(y, mo, d) !== dayOfWeek) {
+		throw new Error(`Wrong day of week: ${dayOfWeekName}`);
+	}
+	return [y, mo, d, h, mi, s];
 }
 
 /**

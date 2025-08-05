@@ -142,6 +142,52 @@ test("invalid month name", () => {
 	}).toThrowError(/Jat/);
 });
 
+test("leap second", () => {
+	const rfc2822 = "Fri, 07 Jun 2024 23:59:60 +0900";
+	const result = "2024-06-07T23:59:59+09:00[+09:00]";
+	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(
+		Temporal.Instant.from(result),
+	);
+	expect(fromRfc2822(rfc2822, Temporal.ZonedDateTime)).toEqual(
+		Temporal.ZonedDateTime.from(result),
+	);
+	expect(fromRfc2822(rfc2822, Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from(result),
+	);
+});
+
+test.for(["Sat, 29 Feb 2025", "29 Feb 2025", "32 Jan 2025"])(
+	"Invalid combination of year, month, and day (%s)",
+	(date) => {
+		const rfc2822 = `${date} 00:00:00 GMT`;
+		expect(() => {
+			fromRfc2822(rfc2822, Temporal.Instant);
+		}).toThrow();
+		expect(() => {
+			fromRfc2822(rfc2822, Temporal.PlainDateTime);
+		}).toThrow();
+		expect(() => {
+			fromRfc2822(rfc2822, Temporal.ZonedDateTime);
+		}).toThrow();
+	},
+);
+
+test.for(["24:00:00", "23:58:60", "12:60:00"])(
+	"Invalid hour, minute, and second (%s)",
+	(time) => {
+		const rfc2822 = `Fri, 07 Jun 2024 ${time} GMT`;
+		expect(() => {
+			fromRfc2822(rfc2822, Temporal.Instant);
+		}).toThrow();
+		expect(() => {
+			fromRfc2822(rfc2822, Temporal.PlainDateTime);
+		}).toThrow();
+		expect(() => {
+			fromRfc2822(rfc2822, Temporal.ZonedDateTime);
+		}).toThrow();
+	},
+);
+
 test.for([
 	["07 Jun 0824 01:23:45 +0900", "0824-06-07T01:23:45+09:00[+09:00]"],
 	["07 Jun 0024 01:23:45 +0900", "0024-06-07T01:23:45+09:00[+09:00]"],
