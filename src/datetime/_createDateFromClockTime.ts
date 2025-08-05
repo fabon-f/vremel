@@ -1,5 +1,6 @@
 import type { GenericDateConstructor } from "../types.js";
 
+/** @internal */
 export function createDateFromClockTime<DateType extends Date>(
 	DateConstructor: GenericDateConstructor<DateType>,
 	year: number,

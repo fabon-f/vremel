@@ -1,3 +1,4 @@
+/** @internal */
 export function utcTimeStamp(
 	year: number,
 	month = 1,
