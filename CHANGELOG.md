@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `fromRfc2822` and `fromRfc7231` functions now throw an error consistently on invalid inputs (such as "32 Jan 2025" or "25:00:00"). ([a1311d9](https://github.com/fabon-f/vremel/commit/a1311d9222c2fe0c44ec17f1aea71ba45d7c1729))
+
 ### Fixed
 
 - `formatRfc7231` function now throws on the date which can't be represented in RFC 7231 format (when ISO year is negative or 10000 or more), instead of returning invalid string. ([6cfa5f2](https://github.com/fabon-f/vremel/commit/6cfa5f2b1d70004ec7d7db208fe9225878b6efb4))
