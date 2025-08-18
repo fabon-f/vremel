@@ -4,9 +4,9 @@ import {
 	isZonedDateTime,
 } from "../type-utils.js";
 import type { Temporal } from "../types.js";
+import { formatOffsetIso } from "./_formatOffsetIso.js";
 import { replaceToken } from "./_ldmrDatePattern.js";
 import { padLeadingZeros } from "./_padLeadingZeros.js";
-import { secondsToHms } from "./_secondsToHms.js";
 
 type DateTime =
 	| Temporal.ZonedDateTime
@@ -205,29 +205,20 @@ function offset(dateTime: DateTime, token: string) {
 	if (offsetSeconds === 0 && /^X{1,5}$/.test(token)) {
 		return "Z";
 	}
-	const sign = offsetSeconds < 0 ? "-" : "+";
-	const [hour, minute, second] = secondsToHms(Math.abs(offsetSeconds));
-	const hourStr = padLeadingZeros(hour, 2);
-	const minuteStr = padLeadingZeros(minute, 2);
-	const secondStr = padLeadingZeros(second, 2);
 	if (token === "X" || token === "x") {
-		return minute === 0 ? `${sign}${hourStr}` : `${sign}${hourStr}${minuteStr}`;
+		return formatOffsetIso(offsetSeconds, false).slice(0, 5).replace(/00$/, "");
 	}
 	if (token === "XX" || token === "xx") {
-		return `${sign}${hourStr}${minuteStr}`;
+		return formatOffsetIso(offsetSeconds, false).slice(0, 5);
 	}
 	if (token === "XXX" || token === "xxx") {
-		return `${sign}${hourStr}:${minuteStr}`;
+		return formatOffsetIso(offsetSeconds, true).slice(0, 6);
 	}
 	if (token === "XXXX" || token === "xxxx") {
-		return second === 0 ?
-				`${sign}${hourStr}${minuteStr}`
-			:	`${sign}${hourStr}${minuteStr}${secondStr}`;
+		return formatOffsetIso(offsetSeconds, false).replace(/00$/, "");
 	}
 	if (token === "XXXXX" || token === "xxxxx") {
-		return second === 0 ?
-				`${sign}${hourStr}:${minuteStr}`
-			:	`${sign}${hourStr}:${minuteStr}:${secondStr}`;
+		return formatOffsetIso(offsetSeconds, true).replace(/:00$/, "");
 	}
 	throw new Error(`Invalid token: ${token}`);
 }
