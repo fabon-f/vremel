@@ -45,7 +45,7 @@ function removeComment(str: string) {
 }
 
 const dateTimeFormatRegex =
-	/^[ \t\r\n]*(?:([A-Za-z]{3}),)?[ \t\r\n]*(\d\d)[ \t\r\n]+([A-Za-z]{3})[ \t\r\n]+(\d\d|\d\d\d\d)[ \t\r\n]+(\d\d):(\d\d)(?::(\d\d))?[ \t\r\n]+([+-]\d{4}|[A-Za-z]+)[ \t\r\n]*$/;
+	/^[ \t\r\n]*(?:([A-Za-z]{3}),)?[ \t\r\n]*(\d\d)[ \t\r\n]+([A-Za-z]{3})[ \t\r\n]+(\d\d|\d\d\d\d)[ \t\r\n]+(\d\d):(\d\d)(?::(\d\d))?[ \t\r\n]+([+-]\d{4}|UT|GMT|[A-IK-Za-ik-z]|[ECMP][SD]T)[ \t\r\n]*$/;
 
 function fullYear(year: string) {
 	const yearNum = parseInt(year, 10);

@@ -112,6 +112,18 @@ test.for([
 	);
 });
 
+test("Invalid time zone", () => {
+	expect(() => {
+		fromRfc2822("07 Jun 2024 01:23:45 ABC", Temporal.ZonedDateTime);
+	}).toThrowError();
+	expect(() => {
+		fromRfc2822("07 Jun 2024 01:23:45 ABC", Temporal.Instant);
+	}).toThrowError();
+	expect(() => {
+		fromRfc2822("07 Jun 2024 01:23:45 ABC", Temporal.PlainDateTime);
+	}).toThrowError();
+});
+
 test("comment", () => {
 	expect(
 		fromRfc2822(
