@@ -12,5 +12,6 @@ test("isValidHms", () => {
 
 test("allowing leap second", () => {
 	expect(isValidHms(23, 59, 60, true)).toEqual(true);
-	expect(isValidHms(23, 58, 60, true)).toEqual(false);
+	expect(isValidHms(23, 58, 60, true)).toEqual(true);
+	expect(isValidHms(24, 0, 60, true)).toEqual(false);
 });

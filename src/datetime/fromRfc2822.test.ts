@@ -155,8 +155,8 @@ test("invalid month name", () => {
 });
 
 test("leap second", () => {
-	const rfc2822 = "Fri, 07 Jun 2024 23:59:60 +0900";
-	const result = "2024-06-07T23:59:59+09:00[+09:00]";
+	const rfc2822 = "Fri, 07 Jun 2024 08:59:60 +0900";
+	const result = "2024-06-07T08:59:59+09:00[+09:00]";
 	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(
 		Temporal.Instant.from(result),
 	);
@@ -184,7 +184,7 @@ test.for(["Sat, 29 Feb 2025", "29 Feb 2025", "32 Jan 2025"])(
 	},
 );
 
-test.for(["24:00:00", "23:58:60", "12:60:00"])(
+test.for(["24:00:00", "23:58:61", "12:60:00"])(
 	"Invalid hour, minute, and second (%s)",
 	(time) => {
 		const rfc2822 = `Fri, 07 Jun 2024 ${time} GMT`;

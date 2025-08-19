@@ -52,7 +52,8 @@ function parse(
 	if (!isValidYmd(y, mo, d)) {
 		throw new Error(`Invalid date: ${formatDateIso(y, mo, d)}`);
 	}
-	if (!isValidHms(h, mi, s, true)) {
+	// leap second should occur only in 23:59:60 UTC
+	if (!isValidHms(h, mi, s, true) || (s === 60 && (h !== 23 || mi !== 59))) {
 		throw new Error(`Invalid time: ${formatHmsIso(h, mi, s)}`);
 	}
 	if (getDayOfWeekFromYmd(y, mo, d) !== dayOfWeek) {
