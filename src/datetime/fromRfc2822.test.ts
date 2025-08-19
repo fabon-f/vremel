@@ -112,24 +112,15 @@ test.for([
 	);
 });
 
-test("Invalid time zone", () => {
+test.for(["ABC", "+0061", "-2400"])("Invalid time zone (%s)", (zone) => {
 	expect(() => {
-		fromRfc2822("07 Jun 2024 01:23:45 ABC", Temporal.ZonedDateTime);
+		fromRfc2822(`07 Jun 2024 01:23:45 ${zone}`, Temporal.ZonedDateTime);
 	}).toThrowError();
 	expect(() => {
-		fromRfc2822("07 Jun 2024 01:23:45 ABC", Temporal.Instant);
+		fromRfc2822(`07 Jun 2024 01:23:45 ${zone}`, Temporal.Instant);
 	}).toThrowError();
 	expect(() => {
-		fromRfc2822("07 Jun 2024 01:23:45 ABC", Temporal.PlainDateTime);
-	}).toThrowError();
-	expect(() => {
-		fromRfc2822("07 Jun 2024 01:23:45 +0061", Temporal.ZonedDateTime);
-	}).toThrowError();
-	expect(() => {
-		fromRfc2822("07 Jun 2024 01:23:45 +0061", Temporal.Instant);
-	}).toThrowError();
-	expect(() => {
-		fromRfc2822("07 Jun 2024 01:23:45 +0061", Temporal.PlainDateTime);
+		fromRfc2822(`07 Jun 2024 01:23:45 ${zone}`, Temporal.PlainDateTime);
 	}).toThrowError();
 });
 
