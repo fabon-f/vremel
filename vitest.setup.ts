@@ -1,10 +1,6 @@
 /// <reference types="vite/client" />
 import "temporal-spec/global";
 
-// TODO: remove this after playwright starts using Firefox 141 or later
-// @ts-expect-error patching polyfill
-Symbol.dispose ??= Symbol.for("Symbol.dispose");
-
 async function loadPolyfill(packageName: unknown) {
 	if (packageName === undefined) {
 		return;
