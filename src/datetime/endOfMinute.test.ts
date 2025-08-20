@@ -46,19 +46,9 @@ test("ZonedDateTime and backward transition", () => {
 			Temporal.ZonedDateTime.from("1952-10-15T23:59:00-11:19:40[Pacific/Niue]"),
 		),
 	).toEqual(
-		// TODO: use string if https://github.com/tc39/proposal-temporal/issues/3099 is fixed
-		Temporal.ZonedDateTime.from({
-			year: 1952,
-			month: 10,
-			day: 15,
-			hour: 23,
-			minute: 59,
-			second: 59,
-			millisecond: 999,
-			microsecond: 999,
-			nanosecond: 999,
-			offset: "-11:20:00",
-			timeZone: "Pacific/Niue",
-		}),
+		// TODO: create ZonedDateTime directly when https://github.com/tc39/proposal-temporal/issues/3099 is fixed in polyfills
+		Temporal.Instant.from(
+			"1952-10-15T23:59:59.999999999-11:20:00",
+		).toZonedDateTimeISO("Pacific/Niue"),
 	);
 });
