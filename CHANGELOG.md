@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `fromRfc2822` and `fromRfc7231` functions now throw an error consistently on invalid inputs (such as "32 Jan 2025" or "25:00:00"). ([a1311d9](https://github.com/fabon-f/vremel/commit/a1311d9222c2fe0c44ec17f1aea71ba45d7c1729))
+- `fromRfc2822` and `fromRfc7231` functions now throw an error consistently on invalid inputs (such as "32 Jan 2025" or "25:00:00"). ([a1311d9](https://github.com/fabon-f/vremel/commit/a1311d9222c2fe0c44ec17f1aea71ba45d7c1729), [c90b22c](https://github.com/fabon-f/vremel/commit/c90b22cd52835152c4ba9689a08a68f777a72e49), [48ea9b7](https://github.com/fabon-f/vremel/commit/48ea9b79a83a8ddca05692f541983253c29da379), [d5cc735](https://github.com/fabon-f/vremel/commit/d5cc73581ce9b5a1c8fd282663f6231eb8fbfb11), [23d8f7a](https://github.com/fabon-f/vremel/commit/23d8f7a9c48fa68caa0c2e3b12d8b3849ef6a170))
 
 ### Fixed
 
@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix an unexpected error when a date with a 2-digit year is passed to `fromRfc7231` ([3d68f92](https://github.com/fabon-f/vremel/commit/3d68f926086600898fdb031e02910b54ec863d9a))
 - Fix an unexpected error when `PlainMonthDay` passed to `toDateFromClockTime` has a reference ISO year in the distant past or future ([16e50e8](https://github.com/fabon-f/vremel/commit/16e50e848c59597d7c09f0f09464666a687d4d9b))
 - Fix a bug when a year passed to `toDateFromClockTime` is a 2-digit integer ([f916df9](https://github.com/fabon-f/vremel/commit/f916df924855ab6769d14a1f89a7efdabf65ac65))
+- Fix an incorrect result in `startOf...` and `endOf...` functions ([#7](https://github.com/fabon-f/vremel/pull/7))
 
 ## 0.6.1 (2025-08-03)
 
