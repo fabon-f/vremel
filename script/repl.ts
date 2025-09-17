@@ -1,7 +1,9 @@
 import repl from "node:repl";
 
 import { consola } from "consola";
+// @ts-ignore (type error when `dist` doesn't exist)
 import * as vremel from "vremel";
+// @ts-ignore (type error when `dist` doesn't exist)
 import * as vremelDuration from "vremel/duration";
 
 const choice = await consola.prompt("Select polyfill", {
