@@ -7,7 +7,7 @@ import { consola } from "consola";
 const require = createRequire(import.meta.url);
 const srcPath = path.join(import.meta.dirname, "../src");
 
-async function listFns(dirname) {
+async function listFns(dirname: string) {
 	const files = await readdir(path.join(srcPath, dirname));
 	return files
 		.filter(
@@ -20,7 +20,7 @@ async function listFns(dirname) {
 		.map((f) => f.replace(/\.ts$/, ""));
 }
 
-async function check(dirname, moduleName) {
+async function check(dirname: string, moduleName: string) {
 	let fail = false;
 	const fns = await listFns(dirname);
 	const mod1 = await import(moduleName);

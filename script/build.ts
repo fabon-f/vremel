@@ -20,7 +20,7 @@ for await (const dtsFile of glob("dist/**/*.d.ts")) {
 	const source = await readFile(dtsFile, "utf-8");
 	const match = /^export {};\n\/\/# sourceMappingURL=(.+)$/.exec(source);
 	if (match) {
-		const sourcemapPath = path.resolve(path.dirname(dtsFile), match[1]);
+		const sourcemapPath = path.resolve(path.dirname(dtsFile), match[1]!);
 		await rm(dtsFile);
 		await rm(sourcemapPath);
 	}

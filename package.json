@@ -19,7 +19,7 @@
 		"CHANGELOG.md"
 	],
 	"scripts": {
-		"build": "node script/build.js && node script/check-build.js",
+		"build": "node script/build.ts && node script/check-build.ts",
 		"test": "POLYFILL=@js-temporal/polyfill vitest",
 		"test-firefox": "playwright install --with-deps firefox && vitest --browser.enabled=true",
 		"test-ci": "POLYFILL=@js-temporal/polyfill vitest && POLYFILL=temporal-polyfill vitest",
