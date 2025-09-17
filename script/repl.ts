@@ -1,9 +1,8 @@
 import repl from "node:repl";
 
 import { consola } from "consola";
-
-import * as vremelDuration from "../src/duration/index.js";
-import * as vremel from "../src/index.js";
+import * as vremel from "vremel";
+import * as vremelDuration from "vremel/duration";
 
 const choice = await consola.prompt("Select polyfill", {
 	type: "select",
