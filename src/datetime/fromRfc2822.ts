@@ -45,7 +45,7 @@ function removeComment(str: string) {
 }
 
 const dateTimeFormatRegex =
-	/^[ \t\r\n]*(?:([A-Za-z]{3}),)?[ \t\r\n]*(\d\d)[ \t\r\n]+([A-Za-z]{3})[ \t\r\n]+(\d\d|\d\d\d\d)[ \t\r\n]+(\d\d):(\d\d)(?::(\d\d))?[ \t\r\n]+([+-]\d{4}|[A-Za-z]+)[ \t\r\n]*$/;
+	/^(?:[ \t\r\n]*([A-Za-z]{3}),)?[ \t\r\n]*(\d\d)[ \t\r\n]+([A-Za-z]{3})[ \t\r\n]+(\d\d|\d\d\d\d)[ \t\r\n]+(\d\d):(\d\d)(?::(\d\d))?[ \t\r\n]+([+-]\d{4}|[A-Za-z]+)[ \t\r\n]*$/;
 const timeZoneFormatRegex =
 	/^(?:[+-](?:[01]\d|2[0-3])[0-5]\d|UT|GMT|[A-IK-Za-ik-z]|[ECMP][SD]T)$/;
 

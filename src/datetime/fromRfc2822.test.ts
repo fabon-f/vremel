@@ -218,3 +218,10 @@ test.for([
 		);
 	},
 );
+
+test("ReDoS regression test", { timeout: 10 }, () => {
+	const payload = "\t".repeat(50000);
+	expect(() => {
+		fromRfc2822(payload, Temporal.Instant);
+	}).toThrow();
+});
