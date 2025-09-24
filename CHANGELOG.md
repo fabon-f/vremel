@@ -20,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix a bug when a year passed to `toDateFromClockTime` is a 2-digit integer ([f916df9](https://github.com/fabon-f/vremel/commit/f916df924855ab6769d14a1f89a7efdabf65ac65))
 - Fix an incorrect result in `startOf...` and `endOf...` functions ([#7](https://github.com/fabon-f/vremel/pull/7))
 
+### Security
+
+- Fix ReDoS vulnerability in `fromRfc2822` function ([63c87ad](https://github.com/fabon-f/vremel/commit/63c87ade9d1f34cb18d8a179e60ad7eeb35f4e97))
+
 ## 0.6.1 (2025-08-03)
 
 ### Added
