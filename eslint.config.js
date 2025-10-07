@@ -82,8 +82,7 @@ export default defineConfig([
 			"@typescript-eslint/no-unsafe-return": "off",
 			"@typescript-eslint/no-unused-vars": [
 				"error",
-				// TODO: use `ignoreUsingDeclarations` instead of `varsIgnorePattern` after typescript-eslint supports it
-				{ argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+				{ argsIgnorePattern: "^_", ignoreUsingDeclarations: true },
 			],
 		},
 	},
