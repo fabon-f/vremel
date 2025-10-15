@@ -48,7 +48,7 @@ export function replaceToken(
 
 function pushLiteral(tokens: Token[], literal: string) {
 	const previousToken = tokens[tokens.length - 1];
-	if (previousToken !== undefined && previousToken.type === "literal") {
+	if (previousToken?.type === "literal") {
 		previousToken.value += literal;
 	} else {
 		tokens.push({
