@@ -1,5 +1,5 @@
-import { defineConfig, globalIgnores } from "eslint/config";
 import eslint from "@eslint/js";
+import { defineConfig, globalIgnores } from "eslint/config";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import globals from "globals";
 import tsEslint from "typescript-eslint";
