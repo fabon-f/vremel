@@ -42,29 +42,29 @@
 	"author": "fabon <syobon.hinata.public@gmail.com> (https://www.fabon.info/)",
 	"license": "MIT",
 	"devDependencies": {
-		"@eslint/js": "^9.37.0",
+		"@eslint/js": "^9.38.0",
 		"@js-temporal/polyfill": "^0.5.1",
 		"@tsconfig/strictest": "^2.0.6",
-		"@types/node": "^24.7.2",
+		"@types/node": "^24.9.1",
 		"@typescript/native-preview": "latest",
 		"@vitest/browser": "^3.2.4",
 		"consola": "^3.4.2",
 		"date-fns": "^4.1.0",
-		"eslint": "^9.37.0",
+		"eslint": "^9.38.0",
 		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"globals": "^16.4.0",
-		"playwright": "^1.56.0",
+		"playwright": "^1.56.1",
 		"prettier": "3.6.2",
 		"temporal-polyfill": "0.3.0",
 		"temporal-spec": "^0.3.0",
 		"tinyexec": "^1.0.1",
 		"typescript": "^5.9.3",
-		"typescript-eslint": "8.46.1",
-		"vite": "^7.1.10",
+		"typescript-eslint": "8.46.2",
+		"vite": "^7.1.11",
 		"vitest": "^3.2.4"
 	},
 	"dependencies": {
 		"@date-fns/utc": "^2.1.1"
 	},
-	"packageManager": "pnpm@10.18.1"
+	"packageManager": "pnpm@10.19.0"
 }
