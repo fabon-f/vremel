@@ -47,7 +47,7 @@
 		"@tsconfig/strictest": "^2.0.6",
 		"@types/node": "^24.9.1",
 		"@typescript/native-preview": "latest",
-		"@vitest/browser": "^3.2.4",
+		"@vitest/browser": "^4.0.1",
 		"consola": "^3.4.2",
 		"date-fns": "^4.1.0",
 		"eslint": "^9.38.0",
@@ -61,7 +61,7 @@
 		"typescript": "^5.9.3",
 		"typescript-eslint": "8.46.2",
 		"vite": "^7.1.11",
-		"vitest": "^3.2.4"
+		"vitest": "^4.0.1"
 	},
 	"dependencies": {
 		"@date-fns/utc": "^2.1.1"
