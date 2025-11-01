@@ -86,4 +86,10 @@ export default defineConfig([
 			],
 		},
 	},
+	{
+		rules: {
+			// TODO: remove this line when https://github.com/eslint/eslint/issues/20272 is fixed
+			"@typescript-eslint/unified-signatures": "off",
+		},
+	},
 ]);
