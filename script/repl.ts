@@ -1,4 +1,5 @@
 import repl from "node:repl";
+import { inspect } from "node:util";
 
 import { consola } from "consola";
 // @ts-ignore (type error when `dist` doesn't exist)
@@ -22,8 +23,6 @@ server.context["Temporal"] = Temporal;
 server.context["vremel"] = vremel;
 server.context["vremelDuration"] = vremelDuration;
 
-const customInspectSymbol = Symbol.for("nodejs.util.inspect.custom");
-
 for (const type of [
 	Temporal.Instant,
 	Temporal.ZonedDateTime,
@@ -34,7 +33,7 @@ for (const type of [
 	Temporal.PlainMonthDay,
 	Temporal.Duration,
 ]) {
-	type.prototype[customInspectSymbol] = function () {
+	type.prototype[inspect.custom] = function () {
 		return `${this[Symbol.toStringTag]}: ${this.toString()}`;
 	};
 }
