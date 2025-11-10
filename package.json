@@ -47,7 +47,7 @@
 		"@tsconfig/strictest": "^2.0.7",
 		"@types/node": "^24.10.0",
 		"@typescript/native-preview": "latest",
-		"@vitest/browser-playwright": "^4.0.6",
+		"@vitest/browser-playwright": "^4.0.8",
 		"consola": "^3.4.2",
 		"date-fns": "^4.1.0",
 		"eslint": "^9.39.1",
@@ -57,14 +57,14 @@
 		"prettier": "3.6.2",
 		"temporal-polyfill": "0.3.0",
 		"temporal-spec": "^0.3.0",
-		"tinyexec": "^1.0.1",
+		"tinyexec": "^1.0.2",
 		"typescript": "^5.9.3",
-		"typescript-eslint": "8.46.3",
-		"vite": "^7.1.12",
-		"vitest": "^4.0.6"
+		"typescript-eslint": "8.46.4",
+		"vite": "^7.2.2",
+		"vitest": "^4.0.8"
 	},
 	"dependencies": {
 		"@date-fns/utc": "^2.1.1"
 	},
-	"packageManager": "pnpm@10.20.0"
+	"packageManager": "pnpm@10.21.0"
 }
