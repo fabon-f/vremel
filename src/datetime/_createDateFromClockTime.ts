@@ -13,8 +13,8 @@ export function createDateFromClockTime<DateType extends Date>(
 ): DateType {
 	if (year >= 0 && year <= 99) {
 		// assumption: there is no time zone transition in ancient times
-		// additionally (just in case) 2024-01-05T00:00:00 should exist in all time zones
-		const date = new DateConstructor(2024, 0, 5);
+		// therefore it's safe to run `setFullYear` and `setHours` separately
+		const date = new DateConstructor(500, 0, 1);
 		date.setFullYear(year, month - 1, day);
 		date.setHours(hour, minute, second, millisecond);
 		return date;
