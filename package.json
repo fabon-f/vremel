@@ -44,10 +44,10 @@
 	"devDependencies": {
 		"@eslint/js": "^9.39.1",
 		"@js-temporal/polyfill": "^0.5.1",
-		"@tsconfig/strictest": "^2.0.7",
-		"@types/node": "^24.10.0",
+		"@tsconfig/strictest": "^2.0.8",
+		"@types/node": "^24.10.1",
 		"@typescript/native-preview": "latest",
-		"@vitest/browser-playwright": "^4.0.8",
+		"@vitest/browser-playwright": "^4.0.10",
 		"consola": "^3.4.2",
 		"date-fns": "^4.1.0",
 		"eslint": "^9.39.1",
@@ -59,12 +59,12 @@
 		"temporal-spec": "^0.3.0",
 		"tinyexec": "^1.0.2",
 		"typescript": "^5.9.3",
-		"typescript-eslint": "8.46.4",
+		"typescript-eslint": "8.47.0",
 		"vite": "^7.2.2",
-		"vitest": "^4.0.8"
+		"vitest": "^4.0.10"
 	},
 	"dependencies": {
 		"@date-fns/utc": "^2.1.1"
 	},
-	"packageManager": "pnpm@10.21.0"
+	"packageManager": "pnpm@10.22.0"
 }
