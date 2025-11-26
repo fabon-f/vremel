@@ -68,25 +68,6 @@ test("PlainMonthDay with a reference ISO year in the distant past or future", ()
 	expect(
 		toDateFromClockTime(new Temporal.PlainMonthDay(1, 1, "hebrew", 270000)),
 	).toStrictEqual(new UTCDate("+270000-01-01T00:00:00Z"));
-
-	// The test case below makes a sense only for current Firefox (SpiderMonkey) implementation, and can be meaningless in the near future.
-	// cf. https://github.com/tc39/proposal-intl-era-monthcode/issues/60
-
-	// -000179-02-18[u-ca=chinese] in SpiderMonkey
-	const md = Temporal.PlainMonthDay.from({
-		monthCode: "M12L",
-		day: 30,
-		calendar: "chinese",
-	});
-	const date = toDateFromClockTime(md);
-	const md2 = Temporal.PlainDate.from({
-		year: date.getFullYear(),
-		month: date.getMonth() + 1,
-		day: date.getDate(),
-	})
-		.withCalendar("chinese")
-		.toPlainMonthDay();
-	expect(md).toEqual(md2);
 });
 
 test("PlainYearMonth with non-ISO calendar", () => {
