@@ -18,13 +18,7 @@ export function endOfHour<
 		nanosecond: 999,
 	};
 	if (!isZonedDateTime(dt)) {
-		return dt.with({
-			minute: 59,
-			second: 59,
-			millisecond: 999,
-			microsecond: 999,
-			nanosecond: 999,
-		}) as DateTime;
+		return dt.with(withArg) as DateTime;
 	}
 	return endOfTimeForZonedDateTime(dt, withArg) as DateTime;
 }
