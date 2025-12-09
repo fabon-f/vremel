@@ -24,7 +24,7 @@
 		"test-firefox": "playwright install --with-deps firefox && vitest --browser.enabled=true",
 		"test-ci": "POLYFILL=@js-temporal/polyfill vitest && POLYFILL=temporal-polyfill vitest",
 		"typecheck": "tsc",
-		"lint": "eslint . && prettier . --check --experimental-cli",
+		"lint": "eslint . && oxfmt . --check",
 		"repl": "node script/build.ts --dev && node script/repl.ts",
 		"docs:generate": "deno doc --output=./_site --unstable-byonm --unstable-sloppy-imports --html src/index.ts src/duration/index.ts"
 	},
