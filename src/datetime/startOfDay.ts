@@ -8,9 +8,9 @@ import { startOfTimeForZonedDateTime } from "./_startOfTimeForZonedDateTime.js";
  * @param dt datetime object which includes date and time info
  * @returns Temporal object which represents the start of a day
  */
-export function startOfDay<
-	DateTime extends Temporal.PlainDateTime | Temporal.ZonedDateTime,
->(dt: DateTime): DateTime {
+export function startOfDay<DateTime extends Temporal.PlainDateTime | Temporal.ZonedDateTime>(
+	dt: DateTime,
+): DateTime {
 	const withArg = {
 		hour: 0,
 		minute: 0,
@@ -21,8 +21,10 @@ export function startOfDay<
 	};
 	// `startOfDay` method can return wrong result in polyfill (see https://github.com/tc39/proposal-temporal/issues/3110)
 	return (
-		isZonedDateTime(dt) ?
-			isNativeMethod(dt, "startOfDay") ? dt.startOfDay()
-			:	startOfTimeForZonedDateTime(dt, withArg)
-		:	dt.with(withArg)) as DateTime;
+		isZonedDateTime(dt)
+			? isNativeMethod(dt, "startOfDay")
+				? dt.startOfDay()
+				: startOfTimeForZonedDateTime(dt, withArg)
+			: dt.with(withArg)
+	) as DateTime;
 }

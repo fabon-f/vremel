@@ -13,10 +13,7 @@ export function toTemporalFromClockTime<
 		| typeof Temporal.PlainDateTime
 		| typeof Temporal.PlainYearMonth
 		| typeof Temporal.PlainMonthDay,
->(
-	date: Date,
-	TemporalClass: TemporalClassType,
-): InstanceType<TemporalClassType> {
+>(date: Date, TemporalClass: TemporalClassType): InstanceType<TemporalClassType> {
 	return TemporalClass.from({
 		year: date.getFullYear(),
 		month: date.getMonth() + 1,

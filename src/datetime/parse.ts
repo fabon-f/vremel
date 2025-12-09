@@ -95,9 +95,7 @@ function getEraNamesAndLookupTable(
 ): [monthNames: string[], table: ReverseLookupTable["era"]] {
 	const eraNamesData = localeData.era?.[style];
 	if (!eraNamesData) {
-		throw new Error(
-			`locale data for ${style} style of the eras is not provided`,
-		);
+		throw new Error(`locale data for ${style} style of the eras is not provided`);
 	}
 	const table = createRecord<string>();
 	const monthNames = [] as string[];
@@ -116,9 +114,7 @@ function getMonthNamesAndLookupTable(
 ): [monthNames: string[], table: ReverseLookupTable["month"]] {
 	const monthNamesData = localeData.month?.[form]?.[style];
 	if (!monthNamesData) {
-		throw new Error(
-			`locale data for ${form} form + ${style} style of the months is not provided`,
-		);
+		throw new Error(`locale data for ${form} form + ${style} style of the months is not provided`);
 	}
 	const table = createRecord<string | number>();
 	const monthNames = [] as string[];
@@ -143,9 +139,7 @@ function getDayPeriodNamesAndLookupTable(
 ): [monthNames: string[], table: ReverseLookupTable["dayPeriod"]] {
 	const dayPeriodData = localeData.dayPeriod?.[style];
 	if (!dayPeriodData) {
-		throw new Error(
-			`locale data for ${style} style of the day periods is not provided`,
-		);
+		throw new Error(`locale data for ${style} style of the day periods is not provided`);
 	}
 	const table = createRecord<string>();
 	const dayPeriodNames = [] as string[];
@@ -173,38 +167,24 @@ function fieldToRegExp(
 	}
 
 	if (field.length <= 5) {
-		const type =
-			field.length <= 3 ? "abbreviated"
-			: field.length === 4 ? "wide"
-			: "narrow";
+		const type = field.length <= 3 ? "abbreviated" : field.length === 4 ? "wide" : "narrow";
 		if (field.startsWith("G")) {
 			const [eraNames, table] = getEraNamesAndLookupTable(type, localeData);
 			lookupTable.era = table;
 			return `(?<era>${unionRegExp(eraNames)})`;
 		}
 		if (field.startsWith("M")) {
-			const [monthNames, table] = getMonthNamesAndLookupTable(
-				"format",
-				type,
-				localeData,
-			);
+			const [monthNames, table] = getMonthNamesAndLookupTable("format", type, localeData);
 			lookupTable.month = table;
 			return `(?<monthName>${unionRegExp(monthNames)})`;
 		}
 		if (field.startsWith("L")) {
-			const [monthNames, table] = getMonthNamesAndLookupTable(
-				"standalone",
-				type,
-				localeData,
-			);
+			const [monthNames, table] = getMonthNamesAndLookupTable("standalone", type, localeData);
 			lookupTable.month = table;
 			return `(?<monthName>${unionRegExp(monthNames)})`;
 		}
 		if (field.startsWith("a")) {
-			const [eraNames, table] = getDayPeriodNamesAndLookupTable(
-				type,
-				localeData,
-			);
+			const [eraNames, table] = getDayPeriodNamesAndLookupTable(type, localeData);
 			lookupTable.dayPeriod = table;
 			return `(?<dayPeriod>${unionRegExp(eraNames)})`;
 		}
@@ -378,16 +358,9 @@ export function parse(
 		result.second = second;
 	}
 	if (matchGroups["fracSec"] !== undefined) {
-		const fractionalSecondsWithTrailingZero = matchGroups["fracSec"].padEnd(
-			9,
-			"0",
-		);
-		result.millisecond = parseInt(
-			fractionalSecondsWithTrailingZero.slice(0, 3),
-		);
-		result.microsecond = parseInt(
-			fractionalSecondsWithTrailingZero.slice(3, 6),
-		);
+		const fractionalSecondsWithTrailingZero = matchGroups["fracSec"].padEnd(9, "0");
+		result.millisecond = parseInt(fractionalSecondsWithTrailingZero.slice(0, 3));
+		result.microsecond = parseInt(fractionalSecondsWithTrailingZero.slice(3, 6));
 		result.nanosecond = parseInt(fractionalSecondsWithTrailingZero.slice(6, 9));
 	}
 	return result;

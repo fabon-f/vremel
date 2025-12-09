@@ -3,9 +3,9 @@ import { expect, test } from "vitest";
 import { startOfMonth } from "./startOfMonth.js";
 
 test("PlainDateTime", () => {
-	expect(
-		startOfMonth(Temporal.PlainDateTime.from("2024-01-23T12:34:56.789123456")),
-	).toEqual(Temporal.PlainDateTime.from("2024-01-01T00:00:00"));
+	expect(startOfMonth(Temporal.PlainDateTime.from("2024-01-23T12:34:56.789123456"))).toEqual(
+		Temporal.PlainDateTime.from("2024-01-01T00:00:00"),
+	);
 });
 
 test("PlainDate", () => {
@@ -23,22 +23,14 @@ test("PlainDate with non-ISO calendar", () => {
 
 test("ZonedDateTime without offset transition", () => {
 	expect(
-		startOfMonth(
-			Temporal.ZonedDateTime.from("2024-03-21T01:23:45+09:00[Asia/Tokyo]"),
-		),
-	).toEqual(
-		Temporal.ZonedDateTime.from("2024-03-01T00:00:00+09:00[Asia/Tokyo]"),
-	);
+		startOfMonth(Temporal.ZonedDateTime.from("2024-03-21T01:23:45+09:00[Asia/Tokyo]")),
+	).toEqual(Temporal.ZonedDateTime.from("2024-03-01T00:00:00+09:00[Asia/Tokyo]"));
 });
 
 test("ZonedDateTime and forward transition", () => {
 	expect(
-		startOfMonth(
-			Temporal.ZonedDateTime.from("2004-01-01T12:00:00+10:00[Asia/Khandyga]"),
-		),
-	).toEqual(
-		Temporal.ZonedDateTime.from("2004-01-01T01:00:00+10:00[Asia/Khandyga]"),
-	);
+		startOfMonth(Temporal.ZonedDateTime.from("2004-01-01T12:00:00+10:00[Asia/Khandyga]")),
+	).toEqual(Temporal.ZonedDateTime.from("2004-01-01T01:00:00+10:00[Asia/Khandyga]"));
 	expect(
 		startOfMonth(
 			Temporal.ZonedDateTime.from(
@@ -56,12 +48,8 @@ test("ZonedDateTime and forward transition", () => {
 
 test("ZonedDateTime and backward transition", () => {
 	expect(
-		startOfMonth(
-			Temporal.ZonedDateTime.from("2015-11-11T00:00:00-05:00[America/Havana]"),
-		),
-	).toEqual(
-		Temporal.ZonedDateTime.from("2015-11-01T00:00:00-04:00[America/Havana]"),
-	);
+		startOfMonth(Temporal.ZonedDateTime.from("2015-11-11T00:00:00-05:00[America/Havana]")),
+	).toEqual(Temporal.ZonedDateTime.from("2015-11-01T00:00:00-04:00[America/Havana]"));
 	expect(
 		startOfMonth(
 			Temporal.ZonedDateTime.from(

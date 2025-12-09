@@ -10,12 +10,8 @@ test("Instant", () => {
 	expect(isBefore(a, a)).toBe(false);
 });
 test("ZonedDateTime", () => {
-	const a = Temporal.ZonedDateTime.from(
-		"2024-01-01T00:00:00-05:00[America/Toronto]",
-	);
-	const b = Temporal.ZonedDateTime.from(
-		"2024-01-01T03:00:00+01:00[Europe/Paris]",
-	);
+	const a = Temporal.ZonedDateTime.from("2024-01-01T00:00:00-05:00[America/Toronto]");
+	const b = Temporal.ZonedDateTime.from("2024-01-01T03:00:00+01:00[Europe/Paris]");
 	expect(isBefore(a, b)).toBe(false);
 	expect(isBefore(b, a)).toBe(true);
 	expect(isBefore(a, a)).toBe(false);
@@ -35,12 +31,8 @@ test("PlainTime", () => {
 	expect(isBefore(a, a)).toBe(false);
 });
 test("PlainDateTime", () => {
-	const a = Temporal.PlainDateTime.from(
-		"2024-01-01T09:00:00+09:00[Asia/Tokyo]",
-	);
-	const b = Temporal.PlainDateTime.from(
-		"2024-01-01T03:00:00+01:00[Europe/Paris]",
-	);
+	const a = Temporal.PlainDateTime.from("2024-01-01T09:00:00+09:00[Asia/Tokyo]");
+	const b = Temporal.PlainDateTime.from("2024-01-01T03:00:00+01:00[Europe/Paris]");
 	expect(isBefore(a, b)).toBe(false);
 	expect(isBefore(b, a)).toBe(true);
 	expect(isBefore(a, a)).toBe(false);

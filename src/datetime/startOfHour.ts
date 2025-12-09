@@ -8,10 +8,7 @@ import { startOfTimeForZonedDateTime } from "./_startOfTimeForZonedDateTime.js";
  * @returns Temporal object which represents the start of a hour
  */
 export function startOfHour<
-	DateTime extends
-		| Temporal.PlainTime
-		| Temporal.PlainDateTime
-		| Temporal.ZonedDateTime,
+	DateTime extends Temporal.PlainTime | Temporal.PlainDateTime | Temporal.ZonedDateTime,
 >(dt: DateTime): DateTime {
 	const withArg = {
 		minute: 0,

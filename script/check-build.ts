@@ -11,11 +11,7 @@ async function listFns(dirname: string) {
 	const files = await readdir(path.join(srcPath, dirname));
 	return files
 		.filter(
-			(d) =>
-				d.endsWith(".ts") &&
-				!d.endsWith(".test.ts") &&
-				!d.startsWith("_") &&
-				d !== "index.ts",
+			(d) => d.endsWith(".ts") && !d.endsWith(".test.ts") && !d.startsWith("_") && d !== "index.ts",
 		)
 		.map((f) => f.replace(/\.ts$/, ""));
 }

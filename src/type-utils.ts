@@ -6,16 +6,12 @@ export function isInstant(dt: TemporalType): dt is Temporal.Instant {
 }
 
 /** @internal */
-export function isZonedDateTime(
-	dt: TemporalType,
-): dt is Temporal.ZonedDateTime {
+export function isZonedDateTime(dt: TemporalType): dt is Temporal.ZonedDateTime {
 	return dt[Symbol.toStringTag] === "Temporal.ZonedDateTime";
 }
 
 /** @internal */
-export function isPlainDateTime(
-	dt: TemporalType,
-): dt is Temporal.PlainDateTime {
+export function isPlainDateTime(dt: TemporalType): dt is Temporal.PlainDateTime {
 	return dt[Symbol.toStringTag] === "Temporal.PlainDateTime";
 }
 
@@ -30,16 +26,12 @@ export function isPlainDate(dt: TemporalType): dt is Temporal.PlainDate {
 }
 
 /** @internal */
-export function isPlainYearMonth(
-	dt: TemporalType,
-): dt is Temporal.PlainYearMonth {
+export function isPlainYearMonth(dt: TemporalType): dt is Temporal.PlainYearMonth {
 	return dt[Symbol.toStringTag] === "Temporal.PlainYearMonth";
 }
 
 /** @internal */
-export function isPlainMonthDay(
-	dt: TemporalType,
-): dt is Temporal.PlainMonthDay {
+export function isPlainMonthDay(dt: TemporalType): dt is Temporal.PlainMonthDay {
 	return dt[Symbol.toStringTag] === "Temporal.PlainMonthDay";
 }
 
@@ -54,16 +46,12 @@ export function isInstantArray(a: TemporalType[]): a is Temporal.Instant[] {
 }
 
 /** @internal */
-export function isZonedDateTimeArray(
-	a: TemporalType[],
-): a is Temporal.ZonedDateTime[] {
+export function isZonedDateTimeArray(a: TemporalType[]): a is Temporal.ZonedDateTime[] {
 	return a.every((dt) => isZonedDateTime(dt));
 }
 
 /** @internal */
-export function isPlainDateTimeArray(
-	a: TemporalType[],
-): a is Temporal.PlainDateTime[] {
+export function isPlainDateTimeArray(a: TemporalType[]): a is Temporal.PlainDateTime[] {
 	return a.every((dt) => isPlainDateTime(dt));
 }
 
@@ -78,16 +66,12 @@ export function isPlainTimeArray(a: TemporalType[]): a is Temporal.PlainTime[] {
 }
 
 /** @internal */
-export function isPlainYearMonthArray(
-	a: TemporalType[],
-): a is Temporal.PlainYearMonth[] {
+export function isPlainYearMonthArray(a: TemporalType[]): a is Temporal.PlainYearMonth[] {
 	return a.every((dt) => isPlainYearMonth(dt));
 }
 
 /** @internal */
-export function isPlainMonthDayArray(
-	a: TemporalType[],
-): a is Temporal.PlainMonthDay[] {
+export function isPlainMonthDayArray(a: TemporalType[]): a is Temporal.PlainMonthDay[] {
 	return a.every((dt) => isPlainMonthDay(dt));
 }
 
@@ -226,29 +210,17 @@ export function getTypeName(dt: TemporalType): string {
 /** @internal */
 export function getConstructor(dt: Temporal.Instant): typeof Temporal.Instant;
 /** @internal */
-export function getConstructor(
-	dt: Temporal.ZonedDateTime,
-): typeof Temporal.ZonedDateTime;
+export function getConstructor(dt: Temporal.ZonedDateTime): typeof Temporal.ZonedDateTime;
 /** @internal */
-export function getConstructor(
-	dt: Temporal.PlainDate,
-): typeof Temporal.PlainDate;
+export function getConstructor(dt: Temporal.PlainDate): typeof Temporal.PlainDate;
 /** @internal */
-export function getConstructor(
-	dt: Temporal.PlainTime,
-): typeof Temporal.PlainTime;
+export function getConstructor(dt: Temporal.PlainTime): typeof Temporal.PlainTime;
 /** @internal */
-export function getConstructor(
-	dt: Temporal.PlainDateTime,
-): typeof Temporal.PlainDateTime;
+export function getConstructor(dt: Temporal.PlainDateTime): typeof Temporal.PlainDateTime;
 /** @internal */
-export function getConstructor(
-	dt: Temporal.PlainYearMonth,
-): typeof Temporal.PlainYearMonth;
+export function getConstructor(dt: Temporal.PlainYearMonth): typeof Temporal.PlainYearMonth;
 /** @internal */
-export function getConstructor(
-	dt: Temporal.PlainMonthDay,
-): typeof Temporal.PlainMonthDay;
+export function getConstructor(dt: Temporal.PlainMonthDay): typeof Temporal.PlainMonthDay;
 /** @internal */
 export function getConstructor(dt: Temporal.Duration): typeof Temporal.Duration;
 export function getConstructor(dt: TemporalType) {

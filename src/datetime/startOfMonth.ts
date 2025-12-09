@@ -8,10 +8,7 @@ import { startOfTimeForZonedDateTime } from "./_startOfTimeForZonedDateTime.js";
  * @returns Temporal object which represents the start of a month
  */
 export function startOfMonth<
-	DateTime extends
-		| Temporal.PlainDate
-		| Temporal.PlainDateTime
-		| Temporal.ZonedDateTime,
+	DateTime extends Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime,
 >(dt: DateTime): DateTime {
 	if (isPlainDate(dt)) {
 		return dt.with({ day: 1 }) as DateTime;

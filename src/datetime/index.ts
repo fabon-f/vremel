@@ -19,10 +19,7 @@ export { endOfYear } from "./endOfYear.js";
 export { epochMicroseconds } from "./epochMicroseconds.js";
 export { epochSeconds } from "./epochSeconds.js";
 export { formatRfc7231 } from "./formatRfc7231.js";
-export {
-	formatWithoutLocale,
-	type FormatWithoutLocaleOptions,
-} from "./formatWithoutLocale.js";
+export { formatWithoutLocale, type FormatWithoutLocaleOptions } from "./formatWithoutLocale.js";
 export { fromJulianDate } from "./fromJulianDate.js";
 export { fromModifiedJulianDate } from "./fromModifiedJulianDate.js";
 export { fromRfc2822 } from "./fromRfc2822.js";

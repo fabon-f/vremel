@@ -169,9 +169,7 @@ test.for([
 	const original = Temporal.PlainDateTime.from(str);
 	const object = toObject(original);
 	expect(object).toEqual(expected);
-	expect(Temporal.PlainDateTime.from(object, { overflow: "reject" })).toEqual(
-		original,
-	);
+	expect(Temporal.PlainDateTime.from(object, { overflow: "reject" })).toEqual(original);
 });
 
 test.for([
@@ -218,9 +216,7 @@ test.for([
 	const original = Temporal.PlainDate.from(str);
 	const object = toObject(original);
 	expect(object).toEqual(expected);
-	expect(Temporal.PlainDate.from(object, { overflow: "reject" })).toEqual(
-		original,
-	);
+	expect(Temporal.PlainDate.from(object, { overflow: "reject" })).toEqual(original);
 });
 
 test("PlainTime", () => {
@@ -234,9 +230,7 @@ test("PlainTime", () => {
 		microsecond: 5,
 		nanosecond: 6,
 	});
-	expect(Temporal.PlainTime.from(object, { overflow: "reject" })).toEqual(
-		original,
-	);
+	expect(Temporal.PlainTime.from(object, { overflow: "reject" })).toEqual(original);
 });
 
 test.for([
@@ -280,9 +274,7 @@ test.for([
 	const original = Temporal.PlainYearMonth.from(str);
 	const object = toObject(original);
 	expect(object).toEqual(expected);
-	expect(Temporal.PlainYearMonth.from(object, { overflow: "reject" })).toEqual(
-		original,
-	);
+	expect(Temporal.PlainYearMonth.from(object, { overflow: "reject" })).toEqual(original);
 });
 
 test.for([
@@ -296,7 +288,5 @@ test.for([
 	const original = Temporal.PlainMonthDay.from(str);
 	const object = toObject(original);
 	expect(object).toEqual(expected);
-	expect(Temporal.PlainMonthDay.from(object, { overflow: "reject" })).toEqual(
-		original,
-	);
+	expect(Temporal.PlainMonthDay.from(object, { overflow: "reject" })).toEqual(original);
 });

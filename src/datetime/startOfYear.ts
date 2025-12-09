@@ -1,8 +1,4 @@
-import {
-	isPlainDate,
-	isPlainYearMonth,
-	isZonedDateTime,
-} from "../type-utils.js";
+import { isPlainDate, isPlainYearMonth, isZonedDateTime } from "../type-utils.js";
 import type { Temporal } from "../types.js";
 import { startOfTimeForZonedDateTime } from "./_startOfTimeForZonedDateTime.js";
 

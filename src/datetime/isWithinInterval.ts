@@ -19,8 +19,5 @@ export function isWithinInterval<
 >(dateTime: DateTime, interval: Interval<DateTime>): boolean {
 	assertValidInterval(interval);
 	assertSameType(dateTime, interval.start);
-	return (
-		compare(dateTime, interval.start) !== -1 &&
-		compare(dateTime, interval.end) !== 1
-	);
+	return compare(dateTime, interval.start) !== -1 && compare(dateTime, interval.end) !== 1;
 }

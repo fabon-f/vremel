@@ -11,12 +11,8 @@ test("Unbalanced single quotes", () => {
 });
 
 test("single quotes", () => {
-	expect(
-		formatWithoutLocale(Temporal.PlainDate.from(target), `'' 'dd'''`),
-	).toEqual(`' dd'`);
-	expect(
-		formatWithoutLocale(Temporal.PlainDate.from(target), `''yy M d''`),
-	).toEqual(`'24 1 2'`);
+	expect(formatWithoutLocale(Temporal.PlainDate.from(target), `'' 'dd'''`)).toEqual(`' dd'`);
+	expect(formatWithoutLocale(Temporal.PlainDate.from(target), `''yy M d''`)).toEqual(`'24 1 2'`);
 });
 
 test("unknown token", () => {
@@ -33,14 +29,9 @@ test("year", () => {
 		Temporal.PlainDateTime.from(target),
 		Temporal.PlainYearMonth.from(target),
 	];
-	const ng = [
-		Temporal.PlainTime.from(target),
-		Temporal.PlainMonthDay.from(target),
-	];
+	const ng = [Temporal.PlainTime.from(target), Temporal.PlainMonthDay.from(target)];
 	for (const dt of ok) {
-		expect(formatWithoutLocale(dt, "y yy yyy yyyy yyyyy")).toEqual(
-			"2024 24 2024 2024 02024",
-		);
+		expect(formatWithoutLocale(dt, "y yy yyy yyyy yyyyy")).toEqual("2024 24 2024 2024 02024");
 	}
 	for (const dt of ng) {
 		for (const p of ["y", "yy", "yyy", "yyyy"]) {
@@ -82,10 +73,7 @@ test("day", () => {
 		Temporal.PlainDateTime.from(target),
 		Temporal.PlainMonthDay.from(target),
 	];
-	const ng = [
-		Temporal.PlainTime.from(target),
-		Temporal.PlainYearMonth.from(target),
-	];
+	const ng = [Temporal.PlainTime.from(target), Temporal.PlainYearMonth.from(target)];
 	for (const dt of ok) {
 		expect(formatWithoutLocale(dt, "d dd")).toEqual("2 02");
 		expect(() => {
@@ -114,9 +102,7 @@ test("hour", () => {
 	];
 	for (const dt of ok) {
 		expect(formatWithoutLocale(dt, "h hh H HH")).toEqual("12 12 0 00");
-		expect(
-			formatWithoutLocale(Temporal.PlainTime.from("01:00:00"), "h hh"),
-		).toEqual("1 01");
+		expect(formatWithoutLocale(Temporal.PlainTime.from("01:00:00"), "h hh")).toEqual("1 01");
 		expect(() => {
 			formatWithoutLocale(dt, "HHH");
 		}).toThrowError();
@@ -197,29 +183,21 @@ test("fractional second", () => {
 		Temporal.PlainYearMonth.from(target),
 	];
 	for (const dt of ok) {
-		expect(formatWithoutLocale(dt, "S SSS SSSSSSSSSS")).toEqual(
-			"0 000 0000000000",
-		);
+		expect(formatWithoutLocale(dt, "S SSS SSSSSSSSSS")).toEqual("0 000 0000000000");
 	}
 	for (const dt of ng) {
 		expect(() => {
 			formatWithoutLocale(dt, "S");
 		}).toThrowError();
 	}
-	expect(
-		formatWithoutLocale(Temporal.PlainTime.from("00:00:00.12345"), "SSSS"),
-	).toEqual("1234");
+	expect(formatWithoutLocale(Temporal.PlainTime.from("00:00:00.12345"), "SSSS")).toEqual("1234");
 });
 
 test("offset", () => {
 	const dt = Temporal.ZonedDateTime.from(target);
-	expect(formatWithoutLocale(dt, "x xx xxx xxxx xxxxx")).toEqual(
-		"+00 +0000 +00:00 +0000 +00:00",
-	);
+	expect(formatWithoutLocale(dt, "x xx xxx xxxx xxxxx")).toEqual("+00 +0000 +00:00 +0000 +00:00");
 	expect(formatWithoutLocale(dt, "X XX XXX XXXX XXXXX")).toEqual("Z Z Z Z Z");
-	const dt2 = Temporal.ZonedDateTime.from(
-		"2024-01-01T00:00:00-09:30[Pacific/Marquesas]",
-	);
+	const dt2 = Temporal.ZonedDateTime.from("2024-01-01T00:00:00-09:30[Pacific/Marquesas]");
 	expect(formatWithoutLocale(dt2, "x xx xxx xxxx xxxxx")).toEqual(
 		"-0930 -0930 -09:30 -0930 -09:30",
 	);
@@ -241,18 +219,7 @@ test("offset", () => {
 		Temporal.PlainYearMonth.from(target),
 	];
 	for (const dt of ng) {
-		const patterns = [
-			"x",
-			"xx",
-			"xxx",
-			"xxxx",
-			"xxxxx",
-			"X",
-			"XX",
-			"XXX",
-			"XXXX",
-			"XXXXX",
-		];
+		const patterns = ["x", "xx", "xxx", "xxxx", "xxxxx", "X", "XX", "XXX", "XXXX", "XXXXX"];
 		for (const p of patterns) {
 			expect(() => {
 				formatWithoutLocale(dt, p);
@@ -282,49 +249,34 @@ test("time zone ID", () => {
 
 test("ZonedDateTime with non-ISO calendar", () => {
 	expect(() => {
-		formatWithoutLocale(
-			Temporal.ZonedDateTime.from(target).withCalendar("hebrew"),
-			"yyyy/MM/dd",
-		);
+		formatWithoutLocale(Temporal.ZonedDateTime.from(target).withCalendar("hebrew"), "yyyy/MM/dd");
 	}).toThrow();
 	expect(
-		formatWithoutLocale(
-			Temporal.ZonedDateTime.from(target).withCalendar("hebrew"),
-			"yyyy/MM/dd",
-			{ formatNonIsoDate: true },
-		),
+		formatWithoutLocale(Temporal.ZonedDateTime.from(target).withCalendar("hebrew"), "yyyy/MM/dd", {
+			formatNonIsoDate: true,
+		}),
 	).toEqual("5784/04/21");
 });
 
 test("PlainDateTime with non-ISO calendar", () => {
 	expect(() => {
-		formatWithoutLocale(
-			Temporal.PlainDateTime.from(target).withCalendar("hebrew"),
-			"yyyy/MM/dd",
-		);
+		formatWithoutLocale(Temporal.PlainDateTime.from(target).withCalendar("hebrew"), "yyyy/MM/dd");
 	}).toThrow();
 	expect(
-		formatWithoutLocale(
-			Temporal.PlainDateTime.from(target).withCalendar("hebrew"),
-			"yyyy/MM/dd",
-			{ formatNonIsoDate: true },
-		),
+		formatWithoutLocale(Temporal.PlainDateTime.from(target).withCalendar("hebrew"), "yyyy/MM/dd", {
+			formatNonIsoDate: true,
+		}),
 	).toEqual("5784/04/21");
 });
 
 test("PlainDate with non-ISO calendar", () => {
 	expect(() => {
-		formatWithoutLocale(
-			Temporal.PlainDate.from(target).withCalendar("hebrew"),
-			"yyyy/MM/dd",
-		);
+		formatWithoutLocale(Temporal.PlainDate.from(target).withCalendar("hebrew"), "yyyy/MM/dd");
 	}).toThrow();
 	expect(
-		formatWithoutLocale(
-			Temporal.PlainDate.from(target).withCalendar("hebrew"),
-			"yyyy/MM/dd",
-			{ formatNonIsoDate: true },
-		),
+		formatWithoutLocale(Temporal.PlainDate.from(target).withCalendar("hebrew"), "yyyy/MM/dd", {
+			formatNonIsoDate: true,
+		}),
 	).toEqual("5784/04/21");
 });
 

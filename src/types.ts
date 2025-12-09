@@ -54,14 +54,12 @@ export type Interval<
 		| Temporal.PlainTime
 		| Temporal.PlainDateTime
 		| Temporal.PlainYearMonth,
-> =
-	DateTime extends (
-		| Temporal.Instant
-		| Temporal.ZonedDateTime
-		| Temporal.PlainDate
-		| Temporal.PlainTime
-		| Temporal.PlainDateTime
-		| Temporal.PlainYearMonth
-	) ?
-		{ start: DateTime; end: DateTime }
-	:	never;
+> = DateTime extends
+	| Temporal.Instant
+	| Temporal.ZonedDateTime
+	| Temporal.PlainDate
+	| Temporal.PlainTime
+	| Temporal.PlainDateTime
+	| Temporal.PlainYearMonth
+	? { start: DateTime; end: DateTime }
+	: never;

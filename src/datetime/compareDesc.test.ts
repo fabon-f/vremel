@@ -17,15 +17,13 @@ test("ZonedDateTime", () => {
 	expect([...target].sort(compareDesc)).toEqual(target);
 });
 test("PlainDate", () => {
-	const target = ["2024-01-02", "2024-01-01[u-ca=hebrew]", "2023-12-23"].map(
-		(t) => Temporal.PlainDate.from(t),
+	const target = ["2024-01-02", "2024-01-01[u-ca=hebrew]", "2023-12-23"].map((t) =>
+		Temporal.PlainDate.from(t),
 	);
 	expect([...target].sort(compareDesc)).toEqual(target);
 });
 test("PlainTime", () => {
-	const target = ["23:45:00", "06:00:00", "03:00:00"].map((t) =>
-		Temporal.PlainTime.from(t),
-	);
+	const target = ["23:45:00", "06:00:00", "03:00:00"].map((t) => Temporal.PlainTime.from(t));
 	expect([...target].sort(compareDesc)).toEqual(target);
 });
 test("PlainDateTime", () => {
@@ -37,9 +35,7 @@ test("PlainDateTime", () => {
 	expect([...target].sort(compareDesc)).toEqual(target);
 });
 test("PlainYearMonth", () => {
-	const target = ["2024-01", "2023-12", "2023-11"].map((t) =>
-		Temporal.PlainYearMonth.from(t),
-	);
+	const target = ["2024-01", "2023-12", "2023-11"].map((t) => Temporal.PlainYearMonth.from(t));
 	expect([...target].sort(compareDesc)).toEqual(target);
 });
 test("PlainMonthDay", () => {

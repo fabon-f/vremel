@@ -3,9 +3,9 @@ import { expect, test } from "vitest";
 import { endOfYear } from "./endOfYear.js";
 
 test("PlainDateTime", () => {
-	expect(
-		endOfYear(Temporal.PlainDateTime.from("2024-02-23T12:34:56.789123456")),
-	).toEqual(Temporal.PlainDateTime.from("2024-12-31T23:59:59.999999999"));
+	expect(endOfYear(Temporal.PlainDateTime.from("2024-02-23T12:34:56.789123456"))).toEqual(
+		Temporal.PlainDateTime.from("2024-12-31T23:59:59.999999999"),
+	);
 });
 
 test("PlainDate", () => {
@@ -29,35 +29,21 @@ test("PlainDate with non-ISO calendar", () => {
 
 test("PlainYearMonth with non-ISO calendar", () => {
 	// Adar I 5784 -> Elul 5784
-	expect(
-		endOfYear(Temporal.PlainYearMonth.from("2024-02-28[u-ca=hebrew]")),
-	).toEqual(Temporal.PlainYearMonth.from("2024-10-02[u-ca=hebrew]"));
+	expect(endOfYear(Temporal.PlainYearMonth.from("2024-02-28[u-ca=hebrew]"))).toEqual(
+		Temporal.PlainYearMonth.from("2024-10-02[u-ca=hebrew]"),
+	);
 });
 
 test("ZonedDateTime without offset transition", () => {
-	expect(
-		endOfYear(
-			Temporal.ZonedDateTime.from("2024-03-21T01:23:45+09:00[Asia/Tokyo]"),
-		),
-	).toEqual(
-		Temporal.ZonedDateTime.from(
-			"2024-12-31T23:59:59.999999999+09:00[Asia/Tokyo]",
-		),
+	expect(endOfYear(Temporal.ZonedDateTime.from("2024-03-21T01:23:45+09:00[Asia/Tokyo]"))).toEqual(
+		Temporal.ZonedDateTime.from("2024-12-31T23:59:59.999999999+09:00[Asia/Tokyo]"),
 	);
 });
 
 test("ZonedDateTime with forward transition", () => {
 	expect(
-		endOfYear(
-			Temporal.ZonedDateTime.from(
-				"1994-12-29T00:00:00-10:00[Pacific/Kiritimati]",
-			),
-		),
-	).toEqual(
-		Temporal.ZonedDateTime.from(
-			"1994-12-30T23:59:59.999999999-10:00[Pacific/Kiritimati]",
-		),
-	);
+		endOfYear(Temporal.ZonedDateTime.from("1994-12-29T00:00:00-10:00[Pacific/Kiritimati]")),
+	).toEqual(Temporal.ZonedDateTime.from("1994-12-30T23:59:59.999999999-10:00[Pacific/Kiritimati]"));
 	expect(
 		endOfYear(
 			Temporal.ZonedDateTime.from(
@@ -75,14 +61,8 @@ test("ZonedDateTime with forward transition", () => {
 
 test("ZonedDateTime with backward transition", () => {
 	expect(
-		endOfYear(
-			Temporal.ZonedDateTime.from("1996-12-31T23:00:00-05:00[America/Managua]"),
-		),
-	).toEqual(
-		Temporal.ZonedDateTime.from(
-			"1996-12-31T23:59:59.999999999-06:00[America/Managua]",
-		),
-	);
+		endOfYear(Temporal.ZonedDateTime.from("1996-12-31T23:00:00-05:00[America/Managua]")),
+	).toEqual(Temporal.ZonedDateTime.from("1996-12-31T23:59:59.999999999-06:00[America/Managua]"));
 	expect(
 		endOfYear(
 			Temporal.ZonedDateTime.from(

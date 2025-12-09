@@ -1,7 +1,4 @@
-import {
-	isInstantConstructor,
-	isPlainDateTimeConstructor,
-} from "../type-utils.js";
+import { isInstantConstructor, isPlainDateTimeConstructor } from "../type-utils.js";
 import type { Temporal } from "../types.js";
 import { createRecord } from "./_createRecord.js";
 import { formatDateIso } from "./_formatDateIso.js";
@@ -46,8 +43,7 @@ function removeComment(str: string) {
 
 const dateTimeFormatRegex =
 	/^(?:[ \t\r\n]*([A-Za-z]{3}),)?[ \t\r\n]*(\d\d)[ \t\r\n]+([A-Za-z]{3})[ \t\r\n]+(\d\d|\d\d\d\d)[ \t\r\n]+(\d\d):(\d\d)(?::(\d\d))?[ \t\r\n]+([+-]\d{4}|[A-Za-z]+)[ \t\r\n]*$/;
-const timeZoneFormatRegex =
-	/^(?:[+-](?:[01]\d|2[0-3])[0-5]\d|UT|GMT|[A-IK-Za-ik-z]|[ECMP][SD]T)$/;
+const timeZoneFormatRegex = /^(?:[+-](?:[01]\d|2[0-3])[0-5]\d|UT|GMT|[A-IK-Za-ik-z]|[ECMP][SD]T)$/;
 
 function fullYear(year: string) {
 	const yearNum = parseInt(year, 10);
@@ -101,17 +97,7 @@ function parse(
 	if (result === null) {
 		throw new Error(`Invalid date and time format: ${date}`);
 	}
-	const [
-		,
-		dayOfWeek,
-		day,
-		monthName,
-		year,
-		hour,
-		minute,
-		second = "00",
-		timeZone,
-	] = result;
+	const [, dayOfWeek, day, monthName, year, hour, minute, second = "00", timeZone] = result;
 	if (
 		day === undefined ||
 		monthName === undefined ||
@@ -146,14 +132,10 @@ export function fromRfc2822<
 		| typeof Temporal.Instant
 		| typeof Temporal.ZonedDateTime
 		| typeof Temporal.PlainDateTime,
->(
-	date: string,
-	TemporalClass: TemporalClassType,
-): InstanceType<TemporalClassType> {
+>(date: string, TemporalClass: TemporalClassType): InstanceType<TemporalClassType> {
 	const dateWithoutComment = date.includes("(") ? removeComment(date) : date;
 
-	const [year, month, day, hour, minute, second, dayOfWeek, timeZone] =
-		parse(dateWithoutComment);
+	const [year, month, day, hour, minute, second, dayOfWeek, timeZone] = parse(dateWithoutComment);
 	if (!isValidYmd(year, month, day)) {
 		throw new Error(`Invalid date: ${formatDateIso(year, month, day)}`);
 	}
@@ -162,8 +144,7 @@ export function fromRfc2822<
 	}
 	if (
 		dayOfWeek !== undefined &&
-		getDayOfWeekFromYmd(year, month, day) !==
-			getDayOfWeekNumberFromAbbreviation(dayOfWeek)
+		getDayOfWeekFromYmd(year, month, day) !== getDayOfWeekNumberFromAbbreviation(dayOfWeek)
 	) {
 		throw new Error(`Wrong day of week: ${dayOfWeek}`);
 	}

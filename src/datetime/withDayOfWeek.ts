@@ -24,8 +24,7 @@ function withDayOfWeekForClockTime(
 	dayOfWeek: number,
 	firstDayOfWeek: number,
 ): Temporal.PlainDate | Temporal.PlainDateTime {
-	const current =
-		(dt.dayOfWeek - firstDayOfWeek + dt.daysInWeek) % dt.daysInWeek;
+	const current = (dt.dayOfWeek - firstDayOfWeek + dt.daysInWeek) % dt.daysInWeek;
 	const target = (dayOfWeek - firstDayOfWeek + dt.daysInWeek) % dt.daysInWeek;
 	return dt.add({ days: target - current });
 }
@@ -60,25 +59,14 @@ function withDayOfWeekForClockTime(
  * But it doesn't support a calendar which lacks a fixed number of days.
  */
 export function withDayOfWeek<
-	DateTime extends
-		| Temporal.PlainDate
-		| Temporal.PlainDateTime
-		| Temporal.ZonedDateTime,
+	DateTime extends Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime,
 >(dt: DateTime, dayOfWeek: number, options: WithDayOfWeekOptions): DateTime {
 	const firstDayOfWeek = options.firstDayOfWeek;
-	if (
-		!Number.isInteger(firstDayOfWeek) ||
-		firstDayOfWeek < 1 ||
-		firstDayOfWeek > dt.daysInWeek
-	) {
+	if (!Number.isInteger(firstDayOfWeek) || firstDayOfWeek < 1 || firstDayOfWeek > dt.daysInWeek) {
 		throw new Error(`${firstDayOfWeek} isn't a valid day of week`);
 	}
 	if (isZonedDateTime(dt)) {
-		const date = withDayOfWeekForClockTime(
-			dt.toPlainDate(),
-			dayOfWeek,
-			firstDayOfWeek,
-		);
+		const date = withDayOfWeekForClockTime(dt.toPlainDate(), dayOfWeek, firstDayOfWeek);
 		return dt.with(
 			{
 				year: date.year,
