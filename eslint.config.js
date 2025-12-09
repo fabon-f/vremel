@@ -13,7 +13,7 @@ export default defineConfig([
 			"simple-import-sort": simpleImportSort,
 		},
 	},
-	globalIgnores(["dist", "_site", "eslint.config.js", ".prettierrc.js", "src/temporal.d.ts"]),
+	globalIgnores(["dist", "_site", "eslint.config.js", "src/temporal.d.ts"]),
 	{
 		languageOptions: {
 			parser: tsEslint.parser,
