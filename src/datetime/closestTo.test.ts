@@ -15,23 +15,17 @@ test("ZonedDateTime", () => {
 		"2024-01-01T03:00:00+01:00[Europe/Paris]",
 		"2024-01-01T00:00:00-05:00[America/Toronto]",
 	].map((t) => Temporal.ZonedDateTime.from(t));
-	const dt = Temporal.ZonedDateTime.from(
-		"2024-01-01T11:30:00+09:00[Asia/Tokyo]",
-	);
+	const dt = Temporal.ZonedDateTime.from("2024-01-01T11:30:00+09:00[Asia/Tokyo]");
 	expect(closestTo(dt, target)).toBe(target[1]);
 });
 test("PlainDate", () => {
-	const target = ["2024-01-01", "2024-01-02", "2023-12-23"].map((t) =>
-		Temporal.PlainDate.from(t),
-	);
+	const target = ["2024-01-01", "2024-01-02", "2023-12-23"].map((t) => Temporal.PlainDate.from(t));
 	const dt = Temporal.PlainDate.from("2024-01-03");
 	expect(closestTo(dt, target)).toBe(target[1]);
 });
 
 test("PlainTime", () => {
-	const target = ["03:00:00", "06:00:00", "23:45:00"].map((t) =>
-		Temporal.PlainTime.from(t),
-	);
+	const target = ["03:00:00", "06:00:00", "23:45:00"].map((t) => Temporal.PlainTime.from(t));
 	const dt = Temporal.PlainTime.from("18:00:00");
 	expect(closestTo(dt, target)).toBe(target[2]);
 });
@@ -41,15 +35,11 @@ test("PlainDateTime", () => {
 		"2024-01-01T03:00:00+01:00[Europe/Paris]",
 		"2024-01-01T00:00:00-05:00[America/Toronto]",
 	].map((t) => Temporal.PlainDateTime.from(t));
-	const dt = Temporal.PlainDateTime.from(
-		"2024-01-01T04:00:00+03:00[Europe/Moscow]",
-	);
+	const dt = Temporal.PlainDateTime.from("2024-01-01T04:00:00+03:00[Europe/Moscow]");
 	expect(closestTo(dt, target)).toBe(target[1]);
 });
 test("PlainYearMonth", () => {
-	const target = ["2023-12", "2024-01", "2023-08"].map((t) =>
-		Temporal.PlainYearMonth.from(t),
-	);
+	const target = ["2023-12", "2024-01", "2023-08"].map((t) => Temporal.PlainYearMonth.from(t));
 	const dt = Temporal.PlainYearMonth.from("2023-11");
 	expect(closestTo(dt, target)).toBe(target[0]);
 });

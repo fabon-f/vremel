@@ -14,9 +14,7 @@ test("getDayOfWeekFromYmd", () => {
 });
 
 test("result of getDayOfWeekFromYmd should match to Temporal's dayOfWeek", () => {
-	expect(getDayOfWeekFromYmd(2024, 1, 7)).toEqual(
-		Temporal.PlainDate.from("2024-01-07").dayOfWeek,
-	);
+	expect(getDayOfWeekFromYmd(2024, 1, 7)).toEqual(Temporal.PlainDate.from("2024-01-07").dayOfWeek);
 });
 
 test("2-digit year", () => {

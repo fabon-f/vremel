@@ -28,10 +28,7 @@ function unescapeTwoSingleQuotes(format: string) {
 }
 
 /** @internal */
-export function replaceToken(
-	pattern: string,
-	replacer: (token: string) => string,
-): string {
+export function replaceToken(pattern: string, replacer: (token: string) => string): string {
 	if (!areSingleQuotesBalanced(pattern)) {
 		throw new Error(unbalancedSingleQuotesErrorMessage);
 	}
@@ -73,10 +70,7 @@ export function tokenize(pattern: string): Token[] {
 		if (fragment === `''`) {
 			pushLiteral(tokens, `'`);
 		} else if (fragment.startsWith(`'`) && fragment.endsWith(`'`)) {
-			pushLiteral(
-				tokens,
-				unescapeTwoSingleQuotes(fragment.slice(1, fragment.length - 1)),
-			);
+			pushLiteral(tokens, unescapeTwoSingleQuotes(fragment.slice(1, fragment.length - 1)));
 		} else {
 			tokens.push({
 				type: "field",

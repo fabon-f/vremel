@@ -6,11 +6,6 @@ import type { Temporal } from "../types.js";
  * @param dt Temporal object
  * @returns epoch microseconds
  */
-export function epochMicroseconds(
-	dt: Temporal.Instant | Temporal.ZonedDateTime,
-): bigint {
-	return (
-		(dt.epochNanoseconds - (((dt.epochNanoseconds % 1000n) + 1000n) % 1000n)) /
-		1000n
-	);
+export function epochMicroseconds(dt: Temporal.Instant | Temporal.ZonedDateTime): bigint {
+	return (dt.epochNanoseconds - (((dt.epochNanoseconds % 1000n) + 1000n) % 1000n)) / 1000n;
 }

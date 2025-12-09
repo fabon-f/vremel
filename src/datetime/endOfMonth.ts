@@ -8,10 +8,7 @@ import { endOfTimeForZonedDateTime } from "./_endOfTimeForZonedDateTime.js";
  * @returns Temporal object which represents the end of a month
  */
 export function endOfMonth<
-	DateTime extends
-		| Temporal.PlainDate
-		| Temporal.PlainDateTime
-		| Temporal.ZonedDateTime,
+	DateTime extends Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime,
 >(dt: DateTime): DateTime {
 	if (isPlainDate(dt)) {
 		return dt.with({

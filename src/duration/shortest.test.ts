@@ -3,9 +3,7 @@ import { expect, test } from "vitest";
 import { shortest } from "./shortest.js";
 
 test("shortest()", () => {
-	const a = ["PT3H29M", "PT208M", "PT210M"].map((d) =>
-		Temporal.Duration.from(d),
-	);
+	const a = ["PT3H29M", "PT208M", "PT210M"].map((d) => Temporal.Duration.from(d));
 	expect(shortest(a)).toBe(a[1]);
 });
 

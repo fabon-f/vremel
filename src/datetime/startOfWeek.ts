@@ -39,17 +39,10 @@ function startOfWeekWithDayPrecision(
  * @returns Temporal object which represents the start of a week
  */
 export function startOfWeek<
-	DateTime extends
-		| Temporal.PlainDate
-		| Temporal.PlainDateTime
-		| Temporal.ZonedDateTime,
+	DateTime extends Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime,
 >(dt: DateTime, options: StartOfWeekOptions): DateTime {
 	const firstDayOfWeek = options.firstDayOfWeek;
-	if (
-		!Number.isInteger(firstDayOfWeek) ||
-		firstDayOfWeek < 1 ||
-		firstDayOfWeek > dt.daysInWeek
-	) {
+	if (!Number.isInteger(firstDayOfWeek) || firstDayOfWeek < 1 || firstDayOfWeek > dt.daysInWeek) {
 		throw new Error(`${firstDayOfWeek} isn't a valid day of week`);
 	}
 
@@ -63,10 +56,7 @@ export function startOfWeek<
 	};
 
 	if (isZonedDateTime(dt)) {
-		const startOfWeek = startOfWeekWithDayPrecision(
-			dt.toPlainDate(),
-			firstDayOfWeek,
-		);
+		const startOfWeek = startOfWeekWithDayPrecision(dt.toPlainDate(), firstDayOfWeek);
 		return startOfTimeForZonedDateTime(dt, {
 			year: startOfWeek.year,
 			month: startOfWeek.month,
@@ -78,7 +68,5 @@ export function startOfWeek<
 	if (isPlainDate(dt)) {
 		return startOfWeekWithDayPrecision(dt, firstDayOfWeek) as DateTime;
 	}
-	return startOfWeekWithDayPrecision(dt, firstDayOfWeek).with(
-		timeArg,
-	) as DateTime;
+	return startOfWeekWithDayPrecision(dt, firstDayOfWeek).with(timeArg) as DateTime;
 }

@@ -11,13 +11,9 @@ test.for([
 	"PlainDate (%s and %s, firstDayOfWeek: %i)",
 	([date1, date2, firstDayOfWeek, expected]) => {
 		expect(
-			isSameWeek(
-				Temporal.PlainDate.from(date1),
-				Temporal.PlainDate.from(date2),
-				{
-					firstDayOfWeek,
-				},
-			),
+			isSameWeek(Temporal.PlainDate.from(date1), Temporal.PlainDate.from(date2), {
+				firstDayOfWeek,
+			}),
 		).toEqual(expected);
 	},
 );
@@ -46,9 +42,7 @@ test("ZonedDateTime", () => {
 	expect(
 		isSameWeek(
 			Temporal.ZonedDateTime.from("2025-01-12T23:00:00+09:00[Asia/Tokyo]"),
-			Temporal.ZonedDateTime.from(
-				"2025-01-06T00:00:00-08:00[America/Los_Angeles]",
-			),
+			Temporal.ZonedDateTime.from("2025-01-06T00:00:00-08:00[America/Los_Angeles]"),
 			{ firstDayOfWeek: 1 },
 		),
 	).toEqual(true);

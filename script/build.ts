@@ -14,10 +14,9 @@ async function build(isDevMode: boolean) {
 	}
 
 	// this script should be run within npm script
-	const res =
-		isDevMode ?
-			await exec("tsgo", ["-p", "tsconfig.build.json", "--noCheck"])
-		:	await exec("tsc", ["-p", "tsconfig.build.json"]);
+	const res = isDevMode
+		? await exec("tsgo", ["-p", "tsconfig.build.json", "--noCheck"])
+		: await exec("tsc", ["-p", "tsconfig.build.json"]);
 	if (res.exitCode !== 0) {
 		console.log(res.stdout);
 		process.exit(res.exitCode ?? 1);

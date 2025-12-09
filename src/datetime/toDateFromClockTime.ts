@@ -37,27 +37,9 @@ function createDate<DateType extends Date>(
 	second = 0,
 	millisecond = 0,
 ) {
-	return DateConstructor ?
-			createDateFromClockTime(
-				DateConstructor,
-				year,
-				month,
-				day,
-				hour,
-				minute,
-				second,
-				millisecond,
-			)
-		:	createDateFromClockTime(
-				UTCDate,
-				year,
-				month,
-				day,
-				hour,
-				minute,
-				second,
-				millisecond,
-			);
+	return DateConstructor
+		? createDateFromClockTime(DateConstructor, year, month, day, hour, minute, second, millisecond)
+		: createDateFromClockTime(UTCDate, year, month, day, hour, minute, second, millisecond);
 }
 
 /**
@@ -139,11 +121,11 @@ export function toDateFromClockTime<DateType extends Date>(
 			dateTime.millisecond,
 		);
 	}
-	const plainDateTime =
-		isZonedDateTime(dateTime) ?
-			dateTime.toPlainDateTime().withCalendar("iso8601")
-		: isPlainDate(dateTime) ? dateTime.toPlainDateTime().withCalendar("iso8601")
-		: dateTime.withCalendar("iso8601");
+	const plainDateTime = isZonedDateTime(dateTime)
+		? dateTime.toPlainDateTime().withCalendar("iso8601")
+		: isPlainDate(dateTime)
+			? dateTime.toPlainDateTime().withCalendar("iso8601")
+			: dateTime.withCalendar("iso8601");
 	return createDate(
 		DateConstructor,
 		plainDateTime.year,

@@ -1,0 +1,10 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"useTabs": true,
+	"tabWidth": 2,
+	"ignorePatterns": [
+		"pnpm-lock.yaml",
+		"*.json",
+		"src/temporal.d.ts"
+	]
+}

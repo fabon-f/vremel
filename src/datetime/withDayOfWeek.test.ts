@@ -30,63 +30,42 @@ test("PlainDateTime", () => {
 
 test("ZonedDateTime without offset transition", () => {
 	expect(
-		withDayOfWeek(
-			Temporal.ZonedDateTime.from("2025-01-01T12:00:00+09:00[Asia/Tokyo]"),
-			5,
-			{ firstDayOfWeek: 1 },
-		),
-	).toEqual(
-		Temporal.ZonedDateTime.from("2025-01-03T12:00:00+09:00[Asia/Tokyo]"),
-	);
+		withDayOfWeek(Temporal.ZonedDateTime.from("2025-01-01T12:00:00+09:00[Asia/Tokyo]"), 5, {
+			firstDayOfWeek: 1,
+		}),
+	).toEqual(Temporal.ZonedDateTime.from("2025-01-03T12:00:00+09:00[Asia/Tokyo]"));
 });
 
 test("ZonedDateTime and forward transition", () => {
 	expect(
-		withDayOfWeek(
-			Temporal.ZonedDateTime.from("2024-03-29T23:10:00-02:00[America/Nuuk]"),
-			6,
-			{ firstDayOfWeek: 1 },
-		),
-	).toEqual(
-		Temporal.ZonedDateTime.from("2024-03-31T00:10:00-01:00[America/Nuuk]"),
-	);
+		withDayOfWeek(Temporal.ZonedDateTime.from("2024-03-29T23:10:00-02:00[America/Nuuk]"), 6, {
+			firstDayOfWeek: 1,
+		}),
+	).toEqual(Temporal.ZonedDateTime.from("2024-03-31T00:10:00-01:00[America/Nuuk]"));
 	expect(
-		withDayOfWeek(
-			Temporal.ZonedDateTime.from("2024-03-29T23:10:00-02:00[America/Nuuk]"),
-			6,
-			{ firstDayOfWeek: 1, disambiguation: "earlier" },
-		),
-	).toEqual(
-		Temporal.ZonedDateTime.from("2024-03-30T22:10:00-02:00[America/Nuuk]"),
-	);
+		withDayOfWeek(Temporal.ZonedDateTime.from("2024-03-29T23:10:00-02:00[America/Nuuk]"), 6, {
+			firstDayOfWeek: 1,
+			disambiguation: "earlier",
+		}),
+	).toEqual(Temporal.ZonedDateTime.from("2024-03-30T22:10:00-02:00[America/Nuuk]"));
 });
 
 test("ZonedDateTime and backward transition", () => {
 	expect(
-		withDayOfWeek(
-			Temporal.ZonedDateTime.from("2024-10-23T01:30:00+01:00[Europe/London]"),
-			7,
-			{ firstDayOfWeek: 1 },
-		),
-	).toEqual(
-		Temporal.ZonedDateTime.from("2024-10-27T01:30:00+01:00[Europe/London]"),
-	);
+		withDayOfWeek(Temporal.ZonedDateTime.from("2024-10-23T01:30:00+01:00[Europe/London]"), 7, {
+			firstDayOfWeek: 1,
+		}),
+	).toEqual(Temporal.ZonedDateTime.from("2024-10-27T01:30:00+01:00[Europe/London]"));
 	expect(
-		withDayOfWeek(
-			Temporal.ZonedDateTime.from("2024-10-29T01:30:00+00:00[Europe/London]"),
-			7,
-			{ firstDayOfWeek: 7 },
-		),
-	).toEqual(
-		Temporal.ZonedDateTime.from("2024-10-27T01:30:00+00:00[Europe/London]"),
-	);
+		withDayOfWeek(Temporal.ZonedDateTime.from("2024-10-29T01:30:00+00:00[Europe/London]"), 7, {
+			firstDayOfWeek: 7,
+		}),
+	).toEqual(Temporal.ZonedDateTime.from("2024-10-27T01:30:00+00:00[Europe/London]"));
 	expect(
-		withDayOfWeek(
-			Temporal.ZonedDateTime.from("2024-10-23T01:30:00+01:00[Europe/London]"),
-			7,
-			{ firstDayOfWeek: 1, disambiguation: "later", offset: "ignore" },
-		),
-	).toEqual(
-		Temporal.ZonedDateTime.from("2024-10-27T01:30:00+00:00[Europe/London]"),
-	);
+		withDayOfWeek(Temporal.ZonedDateTime.from("2024-10-23T01:30:00+01:00[Europe/London]"), 7, {
+			firstDayOfWeek: 1,
+			disambiguation: "later",
+			offset: "ignore",
+		}),
+	).toEqual(Temporal.ZonedDateTime.from("2024-10-27T01:30:00+00:00[Europe/London]"));
 });

@@ -12,9 +12,7 @@ import { padLeadingZeros } from "./_padLeadingZeros.js";
  * @param dt temporal object which includes exact time info (`Instant` and `ZonedDateTime`)
  * @returns a string formatted according to RFC 7231
  */
-export function formatRfc7231(
-	dt: Temporal.Instant | Temporal.ZonedDateTime,
-): string {
+export function formatRfc7231(dt: Temporal.Instant | Temporal.ZonedDateTime): string {
 	// timeZone: 'UTC', calendar: 'iso8601'
 	const zdt = (isInstant(dt) ? dt : dt.toInstant()).toZonedDateTimeISO("UTC");
 	const dayOfWeek = getDayOfWeekAbbreviationFromNumber(zdt.dayOfWeek);

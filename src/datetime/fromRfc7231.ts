@@ -1,7 +1,4 @@
-import {
-	isInstantConstructor,
-	isZonedDateTimeConstructor,
-} from "../type-utils.js";
+import { isInstantConstructor, isZonedDateTimeConstructor } from "../type-utils.js";
 import type { Temporal } from "../types.js";
 import { formatDateIso } from "./_formatDateIso.js";
 import { formatExactTimeIso } from "./_formatExactTimeIso.js";
@@ -12,19 +9,11 @@ import { getMonthNumberFromAbbreviation } from "./_getMonthNumberFromAbbreviatio
 import { isValidHms } from "./_isValidHms.js";
 import { isValidYmd } from "./_isValidYmd.js";
 
-const regex =
-	/^([A-Za-z]{3}), (\d\d) ([A-Za-z]{3}) (\d{4}) (\d\d):(\d\d):(\d\d) GMT$/;
+const regex = /^([A-Za-z]{3}), (\d\d) ([A-Za-z]{3}) (\d{4}) (\d\d):(\d\d):(\d\d) GMT$/;
 
 function parse(
 	date: string,
-): [
-	year: number,
-	month: number,
-	day: number,
-	hour: number,
-	minute: number,
-	second: number,
-] {
+): [year: number, month: number, day: number, hour: number, minute: number, second: number] {
 	const result = regex.exec(date);
 	if (result === null) {
 		throw new Error("Invalid format");
@@ -76,10 +65,7 @@ export function fromRfc7231<
 		| typeof Temporal.Instant
 		| typeof Temporal.ZonedDateTime
 		| typeof Temporal.PlainDateTime,
->(
-	date: string,
-	TemporalClass: TemporalClassType,
-): InstanceType<TemporalClassType> {
+>(date: string, TemporalClass: TemporalClassType): InstanceType<TemporalClassType> {
 	const result = parse(date);
 	const [year, month, day, hour, minute, second] = result;
 	if (isInstantConstructor(TemporalClass)) {

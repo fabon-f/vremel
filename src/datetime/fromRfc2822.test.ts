@@ -3,9 +3,9 @@ import { expect, test } from "vitest";
 import { fromRfc2822 } from "./fromRfc2822.js";
 
 test("PlainDateTime", () => {
-	expect(
-		fromRfc2822("07 Jun 2024 01:23:45 +0900", Temporal.PlainDateTime),
-	).toEqual(Temporal.PlainDateTime.from("2024-06-07T01:23:45"));
+	expect(fromRfc2822("07 Jun 2024 01:23:45 +0900", Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from("2024-06-07T01:23:45"),
+	);
 });
 
 test("Instant", () => {
@@ -15,15 +15,15 @@ test("Instant", () => {
 });
 
 test("ZonedDateTime", () => {
-	expect(
-		fromRfc2822("07 Jun 2024 01:23:45 +0900", Temporal.ZonedDateTime),
-	).toEqual(Temporal.ZonedDateTime.from("2024-06-07T01:23:45+09:00[+09:00]"));
+	expect(fromRfc2822("07 Jun 2024 01:23:45 +0900", Temporal.ZonedDateTime)).toEqual(
+		Temporal.ZonedDateTime.from("2024-06-07T01:23:45+09:00[+09:00]"),
+	);
 });
 
 test("day of week", () => {
-	expect(
-		fromRfc2822("Fri, 07 Jun 2024 01:23:45 +0900", Temporal.PlainDateTime),
-	).toEqual(Temporal.PlainDateTime.from("2024-06-07T01:23:45"));
+	expect(fromRfc2822("Fri, 07 Jun 2024 01:23:45 +0900", Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from("2024-06-07T01:23:45"),
+	);
 });
 
 test("wrong day of week", () => {
@@ -33,27 +33,27 @@ test("wrong day of week", () => {
 });
 
 test("string without second", () => {
-	expect(
-		fromRfc2822("07 Jun 2024 01:23 +0900", Temporal.PlainDateTime),
-	).toEqual(Temporal.PlainDateTime.from("2024-06-07T01:23:00"));
+	expect(fromRfc2822("07 Jun 2024 01:23 +0900", Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from("2024-06-07T01:23:00"),
+	);
 });
 
 test("obsolete 2-digit year", () => {
-	expect(
-		fromRfc2822("07 Jun 24 01:23:45 +0900", Temporal.PlainDateTime),
-	).toEqual(Temporal.PlainDateTime.from("2024-06-07T01:23:45"));
-	expect(
-		fromRfc2822("07 Jun 00 01:23:45 +0900", Temporal.PlainDateTime),
-	).toEqual(Temporal.PlainDateTime.from("2000-06-07T01:23:45"));
-	expect(
-		fromRfc2822("07 Jun 49 01:23:45 +0900", Temporal.PlainDateTime),
-	).toEqual(Temporal.PlainDateTime.from("2049-06-07T01:23:45"));
-	expect(
-		fromRfc2822("07 Jun 50 01:23:45 +0900", Temporal.PlainDateTime),
-	).toEqual(Temporal.PlainDateTime.from("1950-06-07T01:23:45"));
-	expect(
-		fromRfc2822("07 Jun 99 01:23:45 +0900", Temporal.PlainDateTime),
-	).toEqual(Temporal.PlainDateTime.from("1999-06-07T01:23:45"));
+	expect(fromRfc2822("07 Jun 24 01:23:45 +0900", Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from("2024-06-07T01:23:45"),
+	);
+	expect(fromRfc2822("07 Jun 00 01:23:45 +0900", Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from("2000-06-07T01:23:45"),
+	);
+	expect(fromRfc2822("07 Jun 49 01:23:45 +0900", Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from("2049-06-07T01:23:45"),
+	);
+	expect(fromRfc2822("07 Jun 50 01:23:45 +0900", Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from("1950-06-07T01:23:45"),
+	);
+	expect(fromRfc2822("07 Jun 99 01:23:45 +0900", Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from("1999-06-07T01:23:45"),
+	);
 });
 
 test.for([
@@ -71,9 +71,9 @@ test.for([
 });
 
 test("time zone -0000", () => {
-	expect(
-		fromRfc2822("07 Jun 24 01:23:45 -0000", Temporal.PlainDateTime),
-	).toEqual(Temporal.PlainDateTime.from("2024-06-07T01:23:45"));
+	expect(fromRfc2822("07 Jun 24 01:23:45 -0000", Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from("2024-06-07T01:23:45"),
+	);
 	expect(() => {
 		fromRfc2822("07 Jun 2024 01:23:45 -0000", Temporal.Instant);
 	}).toThrowError();
@@ -104,9 +104,7 @@ test.for([
 	["07 Jun 2024 01:23:45 PST", "2024-06-07T01:23:45-08:00[-08:00]"],
 	["07 Jun 2024 01:23:45 PDT", "2024-06-07T01:23:45-07:00[-07:00]"],
 ] as [string, string][])("North American time zones", ([rfc2822, iso8601]) => {
-	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(
-		Temporal.Instant.from(iso8601),
-	);
+	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(Temporal.Instant.from(iso8601));
 	expect(fromRfc2822(rfc2822, Temporal.ZonedDateTime)).toEqual(
 		Temporal.ZonedDateTime.from(iso8601),
 	);
@@ -134,9 +132,7 @@ test("comment", () => {
 });
 
 test("unbalanced comment", () => {
-	expect(() =>
-		fromRfc2822("07 Jun 2024 01:23:45 +0000 (comment", Temporal.Instant),
-	).toThrowError();
+	expect(() => fromRfc2822("07 Jun 2024 01:23:45 +0000 (comment", Temporal.Instant)).toThrowError();
 	expect(() =>
 		fromRfc2822("07 Jun 2024 (comment)) 01:23:45 +0000", Temporal.Instant),
 	).toThrowError();
@@ -157,15 +153,9 @@ test("invalid month name", () => {
 test("leap second", () => {
 	const rfc2822 = "Fri, 07 Jun 2024 08:59:60 +0900";
 	const result = "2024-06-07T08:59:59+09:00[+09:00]";
-	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(
-		Temporal.Instant.from(result),
-	);
-	expect(fromRfc2822(rfc2822, Temporal.ZonedDateTime)).toEqual(
-		Temporal.ZonedDateTime.from(result),
-	);
-	expect(fromRfc2822(rfc2822, Temporal.PlainDateTime)).toEqual(
-		Temporal.PlainDateTime.from(result),
-	);
+	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(Temporal.Instant.from(result));
+	expect(fromRfc2822(rfc2822, Temporal.ZonedDateTime)).toEqual(Temporal.ZonedDateTime.from(result));
+	expect(fromRfc2822(rfc2822, Temporal.PlainDateTime)).toEqual(Temporal.PlainDateTime.from(result));
 });
 
 test.for(["Sat, 29 Feb 2025", "29 Feb 2025", "32 Jan 2025"])(
@@ -184,40 +174,32 @@ test.for(["Sat, 29 Feb 2025", "29 Feb 2025", "32 Jan 2025"])(
 	},
 );
 
-test.for(["24:00:00", "23:58:61", "12:60:00"])(
-	"Invalid hour, minute, and second (%s)",
-	(time) => {
-		const rfc2822 = `Fri, 07 Jun 2024 ${time} GMT`;
-		expect(() => {
-			fromRfc2822(rfc2822, Temporal.Instant);
-		}).toThrow();
-		expect(() => {
-			fromRfc2822(rfc2822, Temporal.PlainDateTime);
-		}).toThrow();
-		expect(() => {
-			fromRfc2822(rfc2822, Temporal.ZonedDateTime);
-		}).toThrow();
-	},
-);
+test.for(["24:00:00", "23:58:61", "12:60:00"])("Invalid hour, minute, and second (%s)", (time) => {
+	const rfc2822 = `Fri, 07 Jun 2024 ${time} GMT`;
+	expect(() => {
+		fromRfc2822(rfc2822, Temporal.Instant);
+	}).toThrow();
+	expect(() => {
+		fromRfc2822(rfc2822, Temporal.PlainDateTime);
+	}).toThrow();
+	expect(() => {
+		fromRfc2822(rfc2822, Temporal.ZonedDateTime);
+	}).toThrow();
+});
 
 test.for([
 	["07 Jun 0824 01:23:45 +0900", "0824-06-07T01:23:45+09:00[+09:00]"],
 	["07 Jun 0024 01:23:45 +0900", "0024-06-07T01:23:45+09:00[+09:00]"],
 	["01 Jan 0000 01:23:45 +0900", "0000-01-01T01:23:45+09:00[+09:00]"],
-] as [string, string][])(
-	"when year is less than 1000",
-	([rfc2822, iso8601]) => {
-		expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(
-			Temporal.Instant.from(iso8601),
-		);
-		expect(fromRfc2822(rfc2822, Temporal.PlainDateTime)).toEqual(
-			Temporal.PlainDateTime.from(iso8601),
-		);
-		expect(fromRfc2822(rfc2822, Temporal.ZonedDateTime)).toEqual(
-			Temporal.ZonedDateTime.from(iso8601),
-		);
-	},
-);
+] as [string, string][])("when year is less than 1000", ([rfc2822, iso8601]) => {
+	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(Temporal.Instant.from(iso8601));
+	expect(fromRfc2822(rfc2822, Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from(iso8601),
+	);
+	expect(fromRfc2822(rfc2822, Temporal.ZonedDateTime)).toEqual(
+		Temporal.ZonedDateTime.from(iso8601),
+	);
+});
 
 test("ReDoS regression test", { timeout: 10 }, () => {
 	const payload = "\t".repeat(50000);

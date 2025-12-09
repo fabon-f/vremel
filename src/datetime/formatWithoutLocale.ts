@@ -1,8 +1,4 @@
-import {
-	getTypeName,
-	isPlainMonthDay,
-	isZonedDateTime,
-} from "../type-utils.js";
+import { getTypeName, isPlainMonthDay, isZonedDateTime } from "../type-utils.js";
 import type { Temporal } from "../types.js";
 import { formatOffsetIso } from "./_formatOffsetIso.js";
 import { replaceToken } from "./_ldmrDatePattern.js";
@@ -16,11 +12,7 @@ type DateTime =
 	| Temporal.PlainYearMonth
 	| Temporal.PlainMonthDay;
 
-function year(
-	dateTime: DateTime,
-	token: string,
-	formatNonIsoDate: boolean,
-): string {
+function year(dateTime: DateTime, token: string, formatNonIsoDate: boolean): string {
 	if (!("year" in dateTime)) {
 		throw new Error(`${getTypeName(dateTime)} doesn't have year info`);
 	}
@@ -73,18 +65,12 @@ function getNumericMonth(
 			}
 			return index + 1;
 		}
-		throw new Error(
-			`Can't get numeric month of PlainMonthDay with non-ISO calendars`,
-		);
+		throw new Error(`Can't get numeric month of PlainMonthDay with non-ISO calendars`);
 	}
 	return dateTime.month;
 }
 
-function month(
-	dateTime: DateTime,
-	token: string,
-	formatNonIsoDate: boolean,
-): string {
+function month(dateTime: DateTime, token: string, formatNonIsoDate: boolean): string {
 	if (!("monthCode" in dateTime)) {
 		throw new Error(`${getTypeName(dateTime)} doesn't have month info`);
 	}
@@ -102,11 +88,7 @@ function month(
 	throw new Error(`Invalid token: ${token}`);
 }
 
-function day(
-	dateTime: DateTime,
-	token: string,
-	formatNonIsoDate: boolean,
-): string {
+function day(dateTime: DateTime, token: string, formatNonIsoDate: boolean): string {
 	if (!("day" in dateTime)) {
 		throw new Error(`${getTypeName(dateTime)} doesn't have day info`);
 	}
@@ -169,16 +151,8 @@ function second(dateTime: DateTime, token: string): string {
 }
 
 function fractionalSecond(dateTime: DateTime, token: string): string {
-	if (
-		!(
-			"millisecond" in dateTime &&
-			"nanosecond" in dateTime &&
-			"microsecond" in dateTime
-		)
-	) {
-		throw new Error(
-			`${getTypeName(dateTime)} doesn't have fractional second info`,
-		);
+	if (!("millisecond" in dateTime && "nanosecond" in dateTime && "microsecond" in dateTime)) {
+		throw new Error(`${getTypeName(dateTime)} doesn't have fractional second info`);
 	}
 	if (!/^S+$/.test(token)) {
 		throw new Error(`Invalid token: ${token}`);
@@ -197,9 +171,7 @@ function fractionalSecond(dateTime: DateTime, token: string): string {
 
 function offset(dateTime: DateTime, token: string) {
 	if (!("offsetNanoseconds" in dateTime)) {
-		throw new Error(
-			`${getTypeName(dateTime)} doesn't have timezone and offset info`,
-		);
+		throw new Error(`${getTypeName(dateTime)} doesn't have timezone and offset info`);
 	}
 	const offsetSeconds = Math.floor(dateTime.offsetNanoseconds / 1e9);
 	if (offsetSeconds === 0 && /^X{1,5}$/.test(token)) {
@@ -225,18 +197,12 @@ function offset(dateTime: DateTime, token: string) {
 
 function timeZoneId(dateTime: DateTime) {
 	if (!isZonedDateTime(dateTime)) {
-		throw new Error(
-			`${getTypeName(dateTime)} doesn't have timezone and offset info`,
-		);
+		throw new Error(`${getTypeName(dateTime)} doesn't have timezone and offset info`);
 	}
 	return dateTime.timeZoneId;
 }
 
-function formatToken(
-	dateTime: DateTime,
-	token: string,
-	formatNonIsoDate: boolean,
-) {
+function formatToken(dateTime: DateTime, token: string, formatNonIsoDate: boolean) {
 	if (/^y+$/.test(token)) {
 		return year(dateTime, token, formatNonIsoDate);
 	}

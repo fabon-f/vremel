@@ -55,9 +55,7 @@ export function closestIndexTo<
 		return diff.indexOf(shortest(diff));
 	}
 	if (isPlainDateTime(dateTimeToCompare) && isPlainDateTimeArray(dateTimes)) {
-		const diff = dateTimes.map((d) =>
-			dateTimeToCompare.until(d, { largestUnit: "hour" }).abs(),
-		);
+		const diff = dateTimes.map((d) => dateTimeToCompare.until(d, { largestUnit: "hour" }).abs());
 		return diff.indexOf(shortest(diff));
 	}
 	if (isPlainYearMonth(dateTimeToCompare) && isPlainYearMonthArray(dateTimes)) {

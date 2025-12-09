@@ -3,9 +3,7 @@ import { expect, test } from "vitest";
 import { longest } from "./longest.js";
 
 test("longest()", () => {
-	const a = ["PT3H29M", "PT208M", "PT210M"].map((d) =>
-		Temporal.Duration.from(d),
-	);
+	const a = ["PT3H29M", "PT208M", "PT210M"].map((d) => Temporal.Duration.from(d));
 	expect(longest(a)).toBe(a[2]);
 });
 

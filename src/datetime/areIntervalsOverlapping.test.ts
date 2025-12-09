@@ -47,18 +47,10 @@ test("Instant", () => {
 });
 
 test("ZonedDateTime", () => {
-	const t1 = Temporal.ZonedDateTime.from(
-		"2024-01-01T09:00:00+09:00[Asia/Tokyo]",
-	);
-	const t2 = Temporal.ZonedDateTime.from(
-		"2024-01-01T01:00:00+00:00[Europe/London]",
-	);
-	const t3 = Temporal.ZonedDateTime.from(
-		"2024-01-03T00:00:00+00:00[Europe/London]",
-	);
-	const t4 = Temporal.ZonedDateTime.from(
-		"2024-01-04T00:00:00+00:00[Europe/London]",
-	);
+	const t1 = Temporal.ZonedDateTime.from("2024-01-01T09:00:00+09:00[Asia/Tokyo]");
+	const t2 = Temporal.ZonedDateTime.from("2024-01-01T01:00:00+00:00[Europe/London]");
+	const t3 = Temporal.ZonedDateTime.from("2024-01-03T00:00:00+00:00[Europe/London]");
+	const t4 = Temporal.ZonedDateTime.from("2024-01-04T00:00:00+00:00[Europe/London]");
 
 	expect(
 		areIntervalsOverlapping(

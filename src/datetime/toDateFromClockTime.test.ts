@@ -20,9 +20,7 @@ test("PlainTime", () => {
 	expect(lightFormat(date, "HH:mm:ss")).toBe("04:00:00");
 });
 test("PlainDateTime", () => {
-	const date = toDateFromClockTime(
-		Temporal.PlainDateTime.from("2024-01-01T03:00:00"),
-	);
+	const date = toDateFromClockTime(Temporal.PlainDateTime.from("2024-01-01T03:00:00"));
 	expect(lightFormat(date, "yyyy-MM-dd HH:mm:ss")).toBe("2024-01-01 03:00:00");
 });
 test("PlainYearMonth", () => {
@@ -49,9 +47,7 @@ test("PlainMonthDay with non-ISO calendar", () => {
 		day: 13,
 		calendar: "hebrew",
 	});
-	const md2 = Temporal.PlainDate.from(
-		lightFormat(toDateFromClockTime(md), "yyyy-MM-dd"),
-	)
+	const md2 = Temporal.PlainDate.from(lightFormat(toDateFromClockTime(md), "yyyy-MM-dd"))
 		.withCalendar("hebrew")
 		.toPlainMonthDay();
 	expect(md).toEqual(md2);
@@ -59,15 +55,15 @@ test("PlainMonthDay with non-ISO calendar", () => {
 
 test("PlainMonthDay with a reference ISO year in the distant past or future", () => {
 	// note: using `PlainMonthDay` constructor directly is highly discouraged, therefore this is an extreme edge case.
-	expect(
-		toDateFromClockTime(new Temporal.PlainMonthDay(1, 27, "hebrew", -3)),
-	).toStrictEqual(new UTCDate("-000003-01-27T00:00:00Z"));
-	expect(
-		toDateFromClockTime(new Temporal.PlainMonthDay(1, 1, "hebrew", -270000)),
-	).toStrictEqual(new UTCDate("-270000-01-01T00:00:00Z"));
-	expect(
-		toDateFromClockTime(new Temporal.PlainMonthDay(1, 1, "hebrew", 270000)),
-	).toStrictEqual(new UTCDate("+270000-01-01T00:00:00Z"));
+	expect(toDateFromClockTime(new Temporal.PlainMonthDay(1, 27, "hebrew", -3))).toStrictEqual(
+		new UTCDate("-000003-01-27T00:00:00Z"),
+	);
+	expect(toDateFromClockTime(new Temporal.PlainMonthDay(1, 1, "hebrew", -270000))).toStrictEqual(
+		new UTCDate("-270000-01-01T00:00:00Z"),
+	);
+	expect(toDateFromClockTime(new Temporal.PlainMonthDay(1, 1, "hebrew", 270000))).toStrictEqual(
+		new UTCDate("+270000-01-01T00:00:00Z"),
+	);
 });
 
 test("PlainYearMonth with non-ISO calendar", () => {
@@ -76,9 +72,7 @@ test("PlainYearMonth with non-ISO calendar", () => {
 		monthCode: "M05L",
 		calendar: "hebrew",
 	});
-	const ym2 = Temporal.PlainDate.from(
-		lightFormat(toDateFromClockTime(ym), "yyyy-MM-dd"),
-	)
+	const ym2 = Temporal.PlainDate.from(lightFormat(toDateFromClockTime(ym), "yyyy-MM-dd"))
 		.withCalendar("hebrew")
 		.toPlainYearMonth();
 	expect(ym).toEqual(ym2);
@@ -126,22 +120,18 @@ test("ZonedDateTime with non-ISO calendar", () => {
 });
 
 test("date constructor type", () => {
-	expect(
-		toDateFromClockTime(Temporal.Now.plainDateISO(), UTCDateMini),
-	).toBeInstanceOf(UTCDateMini);
-	expect(toDateFromClockTime(Temporal.Now.plainDateISO())).toBeInstanceOf(
-		UTCDate,
-	);
+	expect(toDateFromClockTime(Temporal.Now.plainDateISO(), UTCDateMini)).toBeInstanceOf(UTCDateMini);
+	expect(toDateFromClockTime(Temporal.Now.plainDateISO())).toBeInstanceOf(UTCDate);
 });
 
 test("2-digit year", () => {
-	expect(
-		toDateFromClockTime(Temporal.PlainDateTime.from("0050-01-01")),
-	).toStrictEqual(new UTCDate("0050-01-01T00:00:00Z"));
-	expect(
-		toDateFromClockTime(Temporal.PlainDate.from("0050-01-01")),
-	).toStrictEqual(new UTCDate("0050-01-01T00:00:00Z"));
-	expect(
-		toDateFromClockTime(Temporal.PlainYearMonth.from("0050-01-01")),
-	).toStrictEqual(new UTCDate("0050-01-01T00:00:00Z"));
+	expect(toDateFromClockTime(Temporal.PlainDateTime.from("0050-01-01"))).toStrictEqual(
+		new UTCDate("0050-01-01T00:00:00Z"),
+	);
+	expect(toDateFromClockTime(Temporal.PlainDate.from("0050-01-01"))).toStrictEqual(
+		new UTCDate("0050-01-01T00:00:00Z"),
+	);
+	expect(toDateFromClockTime(Temporal.PlainYearMonth.from("0050-01-01"))).toStrictEqual(
+		new UTCDate("0050-01-01T00:00:00Z"),
+	);
 });

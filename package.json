@@ -24,7 +24,7 @@
 		"test-firefox": "playwright install --with-deps firefox && vitest --browser.enabled=true",
 		"test-ci": "POLYFILL=@js-temporal/polyfill vitest && POLYFILL=temporal-polyfill vitest",
 		"typecheck": "tsc",
-		"lint": "eslint . && prettier . --check --experimental-cli",
+		"lint": "eslint . && oxfmt . --check",
 		"repl": "node script/build.ts --dev && node script/repl.ts",
 		"docs:generate": "deno doc --output=./_site --unstable-byonm --unstable-sloppy-imports --html src/index.ts src/duration/index.ts"
 	},
@@ -53,8 +53,8 @@
 		"eslint": "^9.39.1",
 		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"globals": "^16.5.0",
+		"oxfmt": "0.17.0",
 		"playwright": "^1.57.0",
-		"prettier": "3.7.4",
 		"temporal-polyfill": "0.3.0",
 		"temporal-spec": "^0.3.0",
 		"tinyexec": "^1.0.2",

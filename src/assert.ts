@@ -5,9 +5,7 @@ import type { Interval, TemporalType } from "./types.js";
 /** @internal */
 export function assertSameType(a: TemporalType, b: TemporalType): void {
 	if (getTypeName(a) !== getTypeName(b)) {
-		throw new Error(
-			`Temporal type mismatch: ${getTypeName(a)} and ${getTypeName(b)}`,
-		);
+		throw new Error(`Temporal type mismatch: ${getTypeName(a)} and ${getTypeName(b)}`);
 	}
 }
 

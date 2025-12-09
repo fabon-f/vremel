@@ -6,8 +6,6 @@ import type { Temporal } from "../types.js";
  * @param dt Temporal object
  * @returns epoch seconds
  */
-export function epochSeconds(
-	dt: Temporal.Instant | Temporal.ZonedDateTime,
-): number {
+export function epochSeconds(dt: Temporal.Instant | Temporal.ZonedDateTime): number {
 	return Math.floor(dt.epochMilliseconds / 1000);
 }

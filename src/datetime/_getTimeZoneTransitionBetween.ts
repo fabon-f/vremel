@@ -29,9 +29,9 @@ export function getTimeZoneTransitionBetween(
 	let right = Math.floor(end.epochMilliseconds / 1000);
 	while (right - left > 1) {
 		const mid = Math.floor((left + right) / 2);
-		const midOffset = Instant.fromEpochMilliseconds(
-			mid * 1000,
-		).toZonedDateTimeISO(start).offsetNanoseconds;
+		const midOffset = Instant.fromEpochMilliseconds(mid * 1000).toZonedDateTimeISO(
+			start,
+		).offsetNanoseconds;
 		if (midOffset === start.offsetNanoseconds) {
 			left = mid;
 		} else {

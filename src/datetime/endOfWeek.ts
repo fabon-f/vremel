@@ -39,17 +39,10 @@ function endOfWeekWithDayPrecision(
  * @returns Temporal object which represents the end of a week
  */
 export function endOfWeek<
-	DateTime extends
-		| Temporal.PlainDate
-		| Temporal.PlainDateTime
-		| Temporal.ZonedDateTime,
+	DateTime extends Temporal.PlainDate | Temporal.PlainDateTime | Temporal.ZonedDateTime,
 >(dt: DateTime, options: EndOfWeekOptions): DateTime {
 	const firstDayOfWeek = options.firstDayOfWeek;
-	if (
-		!Number.isInteger(firstDayOfWeek) ||
-		firstDayOfWeek < 1 ||
-		firstDayOfWeek > dt.daysInWeek
-	) {
+	if (!Number.isInteger(firstDayOfWeek) || firstDayOfWeek < 1 || firstDayOfWeek > dt.daysInWeek) {
 		throw new Error(`${firstDayOfWeek} isn't a valid day of week`);
 	}
 
@@ -63,10 +56,7 @@ export function endOfWeek<
 	};
 
 	if (isZonedDateTime(dt)) {
-		const endOfWeek = endOfWeekWithDayPrecision(
-			dt.toPlainDate(),
-			firstDayOfWeek,
-		);
+		const endOfWeek = endOfWeekWithDayPrecision(dt.toPlainDate(), firstDayOfWeek);
 		return endOfTimeForZonedDateTime(dt, {
 			year: endOfWeek.year,
 			month: endOfWeek.month,
@@ -78,7 +68,5 @@ export function endOfWeek<
 	if (isPlainDate(dt)) {
 		return endOfWeekWithDayPrecision(dt, firstDayOfWeek) as DateTime;
 	}
-	return endOfWeekWithDayPrecision(dt, firstDayOfWeek).with(
-		timeArg,
-	) as DateTime;
+	return endOfWeekWithDayPrecision(dt, firstDayOfWeek).with(timeArg) as DateTime;
 }

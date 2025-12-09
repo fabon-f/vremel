@@ -19,13 +19,5 @@ export function createDateFromClockTime<DateType extends Date>(
 		date.setHours(hour, minute, second, millisecond);
 		return date;
 	}
-	return new DateConstructor(
-		year,
-		month - 1,
-		day,
-		hour,
-		minute,
-		second,
-		millisecond,
-	);
+	return new DateConstructor(year, month - 1, day, hour, minute, second, millisecond);
 }

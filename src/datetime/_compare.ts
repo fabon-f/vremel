@@ -12,25 +12,16 @@ import {
 import type { ComparableDateTimeType, Temporal } from "../types.js";
 
 /** @internal */
-export function compare(
-	a: Temporal.Instant,
-	b: Temporal.Instant,
-): Temporal.ComparisonResult;
+export function compare(a: Temporal.Instant, b: Temporal.Instant): Temporal.ComparisonResult;
 /** @internal */
 export function compare(
 	a: Temporal.ZonedDateTime,
 	b: Temporal.ZonedDateTime,
 ): Temporal.ComparisonResult;
 /** @internal */
-export function compare(
-	a: Temporal.PlainDate,
-	b: Temporal.PlainDate,
-): Temporal.ComparisonResult;
+export function compare(a: Temporal.PlainDate, b: Temporal.PlainDate): Temporal.ComparisonResult;
 /** @internal */
-export function compare(
-	a: Temporal.PlainTime,
-	b: Temporal.PlainTime,
-): Temporal.ComparisonResult;
+export function compare(a: Temporal.PlainTime, b: Temporal.PlainTime): Temporal.ComparisonResult;
 /** @internal */
 export function compare(
 	a: Temporal.PlainDateTime,

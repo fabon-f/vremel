@@ -8,10 +8,7 @@ import { endOfTimeForZonedDateTime } from "./_endOfTimeForZonedDateTime.js";
  * @returns Temporal object which represents the end of the minute
  */
 export function endOfMinute<
-	DateTime extends
-		| Temporal.PlainTime
-		| Temporal.PlainDateTime
-		| Temporal.ZonedDateTime,
+	DateTime extends Temporal.PlainTime | Temporal.PlainDateTime | Temporal.ZonedDateTime,
 >(dt: DateTime): DateTime {
 	const withArg = {
 		second: 59,

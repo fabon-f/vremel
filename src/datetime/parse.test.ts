@@ -27,9 +27,9 @@ describe("real-world examples", () => {
 				},
 			},
 		};
-		expect(
-			Temporal.PlainDate.from(parse("9 февраля 2025", "d MMMM y", locale)),
-		).toEqual(Temporal.PlainDate.from("2025-02-09"));
+		expect(Temporal.PlainDate.from(parse("9 февраля 2025", "d MMMM y", locale))).toEqual(
+			Temporal.PlainDate.from("2025-02-09"),
+		);
 	});
 });
 
@@ -109,20 +109,7 @@ const isoMonths = {
 			"Kkkkks",
 			"Llllls",
 		],
-		narrow: [
-			"As",
-			"Bs",
-			"Cs",
-			"Ds",
-			"Es",
-			"Fs",
-			"Gs",
-			"Hs",
-			"Is",
-			"Js",
-			"Ks",
-			"Ls",
-		],
+		narrow: ["As", "Bs", "Cs", "Ds", "Es", "Fs", "Gs", "Hs", "Is", "Js", "Ks", "Ls"],
 	},
 } satisfies LocaleDataForParser["month"];
 
@@ -232,22 +219,14 @@ const dayPeriods = {
 	},
 } satisfies LocaleDataForParser["dayPeriod"];
 
-test.for([
-	"GGGGGG",
-	"MMMMMM",
-	"LLLLLL",
-	"ddd",
-	"aaaaaa",
-	"hhh",
-	"HHH",
-	"KKK",
-	"mmm",
-	"sss",
-])("Invalid token %s", (token) => {
-	expect(() => {
-		parse("", token);
-	}).toThrow("Unknown field");
-});
+test.for(["GGGGGG", "MMMMMM", "LLLLLL", "ddd", "aaaaaa", "hhh", "HHH", "KKK", "mmm", "sss"])(
+	"Invalid token %s",
+	(token) => {
+		expect(() => {
+			parse("", token);
+		}).toThrow("Unknown field");
+	},
+);
 
 test("era", () => {
 	const expected = {
@@ -403,38 +382,28 @@ test("day period and 12-hour clock", () => {
 	const am1 = {
 		hour: 1,
 	};
-	expect(
-		parse(`${dayPeriods.abbreviated.am} 1`, "a h", { dayPeriod: dayPeriods }),
-	).toEqual(am1);
-	expect(
-		parse(`${dayPeriods.abbreviated.am} 1`, "aa h", { dayPeriod: dayPeriods }),
-	).toEqual(am1);
-	expect(
-		parse(`${dayPeriods.abbreviated.am} 1`, "aaa h", { dayPeriod: dayPeriods }),
-	).toEqual(am1);
-	expect(
-		parse(`${dayPeriods.wide.am} 1`, "aaaa h", { dayPeriod: dayPeriods }),
-	).toEqual(am1);
-	expect(
-		parse(`${dayPeriods.narrow.am} 1`, "aaaaa h", { dayPeriod: dayPeriods }),
-	).toEqual(am1);
+	expect(parse(`${dayPeriods.abbreviated.am} 1`, "a h", { dayPeriod: dayPeriods })).toEqual(am1);
+	expect(parse(`${dayPeriods.abbreviated.am} 1`, "aa h", { dayPeriod: dayPeriods })).toEqual(am1);
+	expect(parse(`${dayPeriods.abbreviated.am} 1`, "aaa h", { dayPeriod: dayPeriods })).toEqual(am1);
+	expect(parse(`${dayPeriods.wide.am} 1`, "aaaa h", { dayPeriod: dayPeriods })).toEqual(am1);
+	expect(parse(`${dayPeriods.narrow.am} 1`, "aaaaa h", { dayPeriod: dayPeriods })).toEqual(am1);
 
-	expect(
-		parse(`${dayPeriods.abbreviated.pm} 10`, "a h", { dayPeriod: dayPeriods }),
-	).toEqual({ hour: 22 });
+	expect(parse(`${dayPeriods.abbreviated.pm} 10`, "a h", { dayPeriod: dayPeriods })).toEqual({
+		hour: 22,
+	});
 
-	expect(
-		parse(`${dayPeriods.abbreviated.am} 12`, "a h", { dayPeriod: dayPeriods }),
-	).toEqual({ hour: 0 });
-	expect(
-		parse(`${dayPeriods.abbreviated.pm} 12`, "a h", { dayPeriod: dayPeriods }),
-	).toEqual({ hour: 12 });
-	expect(
-		parse(`${dayPeriods.abbreviated.am} 0`, "a K", { dayPeriod: dayPeriods }),
-	).toEqual({ hour: 0 });
-	expect(
-		parse(`${dayPeriods.abbreviated.pm} 0`, "a K", { dayPeriod: dayPeriods }),
-	).toEqual({ hour: 12 });
+	expect(parse(`${dayPeriods.abbreviated.am} 12`, "a h", { dayPeriod: dayPeriods })).toEqual({
+		hour: 0,
+	});
+	expect(parse(`${dayPeriods.abbreviated.pm} 12`, "a h", { dayPeriod: dayPeriods })).toEqual({
+		hour: 12,
+	});
+	expect(parse(`${dayPeriods.abbreviated.am} 0`, "a K", { dayPeriod: dayPeriods })).toEqual({
+		hour: 0,
+	});
+	expect(parse(`${dayPeriods.abbreviated.pm} 0`, "a K", { dayPeriod: dayPeriods })).toEqual({
+		hour: 12,
+	});
 });
 
 test("12-hour clock range", () => {

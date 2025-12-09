@@ -7,9 +7,9 @@ import { endOfTimeForZonedDateTime } from "./_endOfTimeForZonedDateTime.js";
  * @param dt datetime object which includes date and time info
  * @returns Temporal object which represents the end of the day
  */
-export function endOfDay<
-	DateTime extends Temporal.PlainDateTime | Temporal.ZonedDateTime,
->(dt: DateTime): DateTime {
+export function endOfDay<DateTime extends Temporal.PlainDateTime | Temporal.ZonedDateTime>(
+	dt: DateTime,
+): DateTime {
 	const withArg = {
 		hour: 23,
 		minute: 59,
