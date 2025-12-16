@@ -10,10 +10,10 @@ import * as vremelDuration from "vremel/duration";
 const choice = await consola.prompt("Select polyfill", {
 	type: "select",
 	options: ["temporal-polyfill", "@js-temporal/polyfill"],
+	cancel: "undefined",
 });
 
-if (typeof choice === "symbol") {
-	// Symbol(clack:cancel)
+if (choice === undefined) {
 	process.exit(0);
 }
 
