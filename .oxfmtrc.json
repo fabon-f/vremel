@@ -3,6 +3,7 @@
 	"ignorePatterns": [
 		"pnpm-lock.yaml",
 		"*.json",
-		"src/temporal.d.ts"
+		"src/temporal.d.ts",
+		"*.md"
 	]
 }
