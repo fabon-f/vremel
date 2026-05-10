@@ -7,7 +7,7 @@ const target = "2024-01-02T00:03:04+00:00[Europe/London]";
 test("Unbalanced single quotes", () => {
 	expect(() => {
 		formatWithoutLocale(Temporal.PlainDate.from(target), `'ab''''`);
-	}).toThrowError();
+	}).toThrow();
 });
 
 test("single quotes", () => {
@@ -37,7 +37,7 @@ test("year", () => {
 		for (const p of ["y", "yy", "yyy", "yyyy"]) {
 			expect(() => {
 				formatWithoutLocale(dt, p);
-			}).toThrowError();
+			}).toThrow();
 		}
 	}
 });
@@ -55,13 +55,13 @@ test("month", () => {
 		expect(formatWithoutLocale(dt, "M MM")).toEqual("1 01");
 		expect(() => {
 			formatWithoutLocale(dt, "MMM");
-		}).toThrowError();
+		}).toThrow();
 	}
 	for (const dt of ng) {
 		for (const p of ["M", "MM"]) {
 			expect(() => {
 				formatWithoutLocale(dt, p);
-			}).toThrowError();
+			}).toThrow();
 		}
 	}
 });
@@ -78,13 +78,13 @@ test("day", () => {
 		expect(formatWithoutLocale(dt, "d dd")).toEqual("2 02");
 		expect(() => {
 			formatWithoutLocale(dt, "ddd");
-		}).toThrowError();
+		}).toThrow();
 	}
 	for (const dt of ng) {
 		for (const p of ["d", "dd"]) {
 			expect(() => {
 				formatWithoutLocale(dt, p);
-			}).toThrowError();
+			}).toThrow();
 		}
 	}
 });
@@ -105,16 +105,16 @@ test("hour", () => {
 		expect(formatWithoutLocale(Temporal.PlainTime.from("01:00:00"), "h hh")).toEqual("1 01");
 		expect(() => {
 			formatWithoutLocale(dt, "HHH");
-		}).toThrowError();
+		}).toThrow();
 		expect(() => {
 			formatWithoutLocale(dt, "hhh");
-		}).toThrowError();
+		}).toThrow();
 	}
 	for (const dt of ng) {
 		for (const p of ["h", "hh", "H", "HH"]) {
 			expect(() => {
 				formatWithoutLocale(dt, p);
-			}).toThrowError();
+			}).toThrow();
 		}
 	}
 });
@@ -134,13 +134,13 @@ test("minute", () => {
 		expect(formatWithoutLocale(dt, "m mm")).toEqual("3 03");
 		expect(() => {
 			formatWithoutLocale(dt, "mmm");
-		}).toThrowError();
+		}).toThrow();
 	}
 	for (const dt of ng) {
 		for (const p of ["m", "mm"]) {
 			expect(() => {
 				formatWithoutLocale(dt, p);
-			}).toThrowError();
+			}).toThrow();
 		}
 	}
 });
@@ -160,13 +160,13 @@ test("second", () => {
 		expect(formatWithoutLocale(dt, "s ss")).toEqual("4 04");
 		expect(() => {
 			formatWithoutLocale(dt, "sss");
-		}).toThrowError();
+		}).toThrow();
 	}
 	for (const dt of ng) {
 		for (const p of ["s", "ss"]) {
 			expect(() => {
 				formatWithoutLocale(dt, p);
-			}).toThrowError();
+			}).toThrow();
 		}
 	}
 });
@@ -188,7 +188,7 @@ test("fractional second", () => {
 	for (const dt of ng) {
 		expect(() => {
 			formatWithoutLocale(dt, "S");
-		}).toThrowError();
+		}).toThrow();
 	}
 	expect(formatWithoutLocale(Temporal.PlainTime.from("00:00:00.12345"), "SSSS")).toEqual("1234");
 });
@@ -206,10 +206,10 @@ test("offset", () => {
 	);
 	expect(() => {
 		formatWithoutLocale(dt, "XXXXXX");
-	}).toThrowError();
+	}).toThrow();
 	expect(() => {
 		formatWithoutLocale(dt, "xxxxxx");
-	}).toThrowError();
+	}).toThrow();
 
 	const ng = [
 		Temporal.PlainDate.from(target),
@@ -223,7 +223,7 @@ test("offset", () => {
 		for (const p of patterns) {
 			expect(() => {
 				formatWithoutLocale(dt, p);
-			}).toThrowError();
+			}).toThrow();
 		}
 	}
 });
@@ -243,7 +243,7 @@ test("time zone ID", () => {
 	for (const dt of ng) {
 		expect(() => {
 			formatWithoutLocale(dt, "VV");
-		}).toThrowError();
+		}).toThrow();
 	}
 });
 
@@ -305,5 +305,5 @@ test("PlainMonthDay with non-ISO calendar", () => {
 	});
 	expect(() => {
 		formatWithoutLocale(md, "MM", { formatNonIsoDate: true });
-	}).toThrowError();
+	}).toThrow();
 });

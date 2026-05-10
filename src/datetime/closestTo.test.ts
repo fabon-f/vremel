@@ -57,7 +57,7 @@ test("PlainYearMonth of non-ISO calendar", () => {
 	expect(closestTo(dt, target)).toBe(target[0]);
 	expect(() => {
 		closestTo(Temporal.PlainYearMonth.from("2024-01"), target);
-	}).toThrowError(RangeError);
+	}).toThrow(RangeError);
 });
 
 test("Typecheck", () => {

@@ -29,7 +29,7 @@ test("day of week", () => {
 test("wrong day of week", () => {
 	expect(() => {
 		fromRfc2822("Tue, 07 Jun 2024 01:23:45 +0900", Temporal.PlainDateTime);
-	}).toThrowError(/Wrong day of week/);
+	}).toThrow(/Wrong day of week/);
 });
 
 test("string without second", () => {
@@ -76,10 +76,10 @@ test("time zone -0000", () => {
 	);
 	expect(() => {
 		fromRfc2822("07 Jun 2024 01:23:45 -0000", Temporal.Instant);
-	}).toThrowError();
+	}).toThrow();
 	expect(() => {
 		fromRfc2822("07 Jun 2024 01:23:45 -0000", Temporal.ZonedDateTime);
-	}).toThrowError();
+	}).toThrow();
 });
 
 test("militatry time zone", () => {
@@ -88,10 +88,10 @@ test("militatry time zone", () => {
 	);
 	expect(() => {
 		fromRfc2822("07 Jun 2024 01:23:45 A", Temporal.Instant);
-	}).toThrowError();
+	}).toThrow();
 	expect(() => {
 		fromRfc2822("07 Jun 2024 01:23:45 A", Temporal.ZonedDateTime);
-	}).toThrowError();
+	}).toThrow();
 });
 
 test.for([
@@ -113,13 +113,13 @@ test.for([
 test.for(["ABC", "+0061", "-2400"])("Invalid time zone (%s)", (zone) => {
 	expect(() => {
 		fromRfc2822(`07 Jun 2024 01:23:45 ${zone}`, Temporal.ZonedDateTime);
-	}).toThrowError();
+	}).toThrow();
 	expect(() => {
 		fromRfc2822(`07 Jun 2024 01:23:45 ${zone}`, Temporal.Instant);
-	}).toThrowError();
+	}).toThrow();
 	expect(() => {
 		fromRfc2822(`07 Jun 2024 01:23:45 ${zone}`, Temporal.PlainDateTime);
-	}).toThrowError();
+	}).toThrow();
 });
 
 test("comment", () => {
@@ -132,22 +132,20 @@ test("comment", () => {
 });
 
 test("unbalanced comment", () => {
-	expect(() => fromRfc2822("07 Jun 2024 01:23:45 +0000 (comment", Temporal.Instant)).toThrowError();
-	expect(() =>
-		fromRfc2822("07 Jun 2024 (comment)) 01:23:45 +0000", Temporal.Instant),
-	).toThrowError();
+	expect(() => fromRfc2822("07 Jun 2024 01:23:45 +0000 (comment", Temporal.Instant)).toThrow();
+	expect(() => fromRfc2822("07 Jun 2024 (comment)) 01:23:45 +0000", Temporal.Instant)).toThrow();
 });
 
 test("invalid day of week", () => {
 	expect(() => {
 		fromRfc2822("Mot, 07 Jun 2024 01:23:45 +0900", Temporal.PlainDateTime);
-	}).toThrowError(/Mot/);
+	}).toThrow(/Mot/);
 });
 
 test("invalid month name", () => {
 	expect(() => {
 		fromRfc2822("Mon, 01 Jat 2024 01:23:45 +0900", Temporal.PlainDateTime);
-	}).toThrowError(/Jat/);
+	}).toThrow(/Jat/);
 });
 
 test("leap second", () => {

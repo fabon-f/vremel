@@ -196,11 +196,11 @@ function compilePattern(
 	pattern: string,
 	localeData: LocaleDataForParser,
 ): [regexp: RegExp, table: ReverseLookupTable] {
-	const lookupTable = {
+	const lookupTable: ReverseLookupTable = {
 		era: {},
 		month: {},
 		dayPeriod: {},
-	} as ReverseLookupTable;
+	};
 	let regexpString = "";
 	for (const token of tokenize(pattern)) {
 		if (token.type === "literal") {

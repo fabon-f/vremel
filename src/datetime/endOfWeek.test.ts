@@ -61,10 +61,10 @@ test("PlainDate", () => {
 test("invalid day of week", () => {
 	expect(() => {
 		endOfWeek(Temporal.PlainDate.from("2024-01-01"), { firstDayOfWeek: 8 });
-	}).toThrowError();
+	}).toThrow();
 	expect(() => {
 		endOfWeek(Temporal.PlainDate.from("2024-01-01"), { firstDayOfWeek: -1 });
-	}).toThrowError();
+	}).toThrow();
 });
 
 test("ZonedDateTime without offset transition", () => {

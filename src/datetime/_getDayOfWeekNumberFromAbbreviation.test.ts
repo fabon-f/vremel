@@ -15,5 +15,5 @@ test("getDayOfWeekNumberFromAbbreviation", () => {
 test("getDayOfWeekNumberFromAbbreviation with unknown week of day", () => {
 	expect(() => {
 		getDayOfWeekNumberFromAbbreviation("Mo");
-	}).toThrowError();
+	}).toThrow();
 });
