@@ -56,8 +56,8 @@ test.for([
 		"ZonedDateTime with lunisolar calendar",
 		"2024-02-20T02:03:04.005006007-05:00[America/New_York][u-ca=hebrew]",
 		{
-			era: undefined,
-			eraYear: undefined,
+			era: "am",
+			eraYear: 5784,
 			year: 5784,
 			month: 6,
 			monthCode: "M05L",
@@ -131,8 +131,8 @@ test.for([
 		"PlainDateTime with lunisolar calendar",
 		"2024-02-20T02:03:04.005006007[u-ca=hebrew]",
 		{
-			era: undefined,
-			eraYear: undefined,
+			era: "am",
+			eraYear: 5784,
 			year: 5784,
 			month: 6,
 			monthCode: "M05L",
@@ -190,8 +190,8 @@ test.for([
 		"PlainDate with lunisolar calendar",
 		"2024-02-20[u-ca=hebrew]",
 		{
-			era: undefined,
-			eraYear: undefined,
+			era: "am",
+			eraYear: 5784,
 			year: 5784,
 			month: 6,
 			monthCode: "M05L",
@@ -250,8 +250,8 @@ test.for([
 		"PlainYearMonth with lunisolar calendar",
 		"2024-02-20[u-ca=hebrew]",
 		{
-			era: undefined,
-			eraYear: undefined,
+			era: "am",
+			eraYear: 5784,
 			year: 5784,
 			month: 6,
 			monthCode: "M05L",
