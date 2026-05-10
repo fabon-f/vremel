@@ -23,43 +23,43 @@ test("ZonedDateTime", () => {
 test("wrong format", () => {
 	expect(() => {
 		fromRfc7231("Fri, 7 Jun 2024 01:23:45 GMT", Temporal.Instant);
-	}).toThrowError();
+	}).toThrow();
 });
 
 test("wrong day of week", () => {
 	expect(() => {
 		fromRfc7231("Tue, 07 Jun 2024 01:23:45 GMT", Temporal.Instant);
-	}).toThrowError(/Tue/);
+	}).toThrow(/Tue/);
 	expect(() => {
 		fromRfc7231("Tue, 07 Jun 2024 01:23:45 GMT", Temporal.PlainDateTime);
-	}).toThrowError(/Tue/);
+	}).toThrow(/Tue/);
 	expect(() => {
 		fromRfc7231("Tue, 07 Jun 2024 01:23:45 GMT", Temporal.ZonedDateTime);
-	}).toThrowError(/Tue/);
+	}).toThrow(/Tue/);
 });
 
 test("invalid day of week", () => {
 	expect(() => {
 		fromRfc7231("Mot, 07 Jun 2024 01:23:45 GMT", Temporal.Instant);
-	}).toThrowError(/Mot/);
+	}).toThrow(/Mot/);
 	expect(() => {
 		fromRfc7231("Mot, 07 Jun 2024 01:23:45 GMT", Temporal.PlainDateTime);
-	}).toThrowError(/Mot/);
+	}).toThrow(/Mot/);
 	expect(() => {
 		fromRfc7231("Mot, 07 Jun 2024 01:23:45 GMT", Temporal.ZonedDateTime);
-	}).toThrowError(/Mot/);
+	}).toThrow(/Mot/);
 });
 
 test("invalid month", () => {
 	expect(() => {
 		fromRfc7231("Mon, 07 Jut 2024 01:23:45 GMT", Temporal.Instant);
-	}).toThrowError(/Jut/);
+	}).toThrow(/Jut/);
 	expect(() => {
 		fromRfc7231("Mon, 07 Jut 2024 01:23:45 GMT", Temporal.PlainDateTime);
-	}).toThrowError(/Jut/);
+	}).toThrow(/Jut/);
 	expect(() => {
 		fromRfc7231("Mon, 07 Jut 2024 01:23:45 GMT", Temporal.ZonedDateTime);
-	}).toThrowError(/Jut/);
+	}).toThrow(/Jut/);
 });
 
 test("leap second", () => {

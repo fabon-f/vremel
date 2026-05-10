@@ -20,5 +20,5 @@ test("getMonthNumberFromAbbreviation", () => {
 test("getMonthNumberFromAbbreviation with unknown month abbreviation", () => {
 	expect(() => {
 		getMonthNumberFromAbbreviation("Ja");
-	}).toThrowError(/Ja/);
+	}).toThrow(/Ja/);
 });
