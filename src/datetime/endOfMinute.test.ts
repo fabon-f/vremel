@@ -29,10 +29,5 @@ test("ZonedDateTime and forward transition", () => {
 test("ZonedDateTime and backward transition", () => {
 	expect(
 		endOfMinute(Temporal.ZonedDateTime.from("1952-10-15T23:59:00-11:19:40[Pacific/Niue]")),
-	).toEqual(
-		// TODO: create ZonedDateTime directly when https://github.com/tc39/proposal-temporal/issues/3099 is fixed in polyfills
-		Temporal.Instant.from("1952-10-15T23:59:59.999999999-11:20:00").toZonedDateTimeISO(
-			"Pacific/Niue",
-		),
-	);
+	).toEqual(Temporal.ZonedDateTime.from("1952-10-15T23:59:59.999999999-11:20:00[Pacific/Niue]"));
 });
