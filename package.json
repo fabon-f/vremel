@@ -45,27 +45,27 @@
 		"@eslint/js": "^10.0.1",
 		"@js-temporal/polyfill": "^0.5.1",
 		"@tsconfig/strictest": "^2.0.8",
-		"@types/node": "^25.9.3",
+		"@types/node": "^26.2.0",
 		"@typescript/native-preview": "latest",
-		"@vitest/browser-playwright": "^4.1.9",
+		"@vitest/browser-playwright": "^4.1.10",
 		"consola": "^3.4.2",
 		"date-fns": "^4.4.0",
-		"eslint": "^10.5.0",
-		"eslint-plugin-simple-import-sort": "^13.0.0",
-		"globals": "^17.6.0",
-		"oxfmt": "0.55.0",
-		"playwright": "^1.61.0",
+		"eslint": "^10.8.1",
+		"eslint-plugin-simple-import-sort": "^14.0.0",
+		"globals": "^17.9.0",
+		"oxfmt": "0.62.0",
+		"playwright": "^1.62.1",
 		"temporal-polyfill": "0.3.2",
-		"temporal-polyfill-lite": "^0.4.0",
+		"temporal-polyfill-lite": "^0.4.2",
 		"temporal-spec": "^0.3.1",
-		"tinyexec": "^1.2.4",
+		"tinyexec": "^1.3.0",
 		"typescript": "^6.0.3",
-		"typescript-eslint": "8.61.1",
-		"vite": "^8.0.16",
-		"vitest": "^4.1.9"
+		"typescript-eslint": "8.66.0",
+		"vite": "^8.2.1",
+		"vitest": "^4.1.10"
 	},
 	"dependencies": {
 		"@date-fns/utc": "^2.1.1"
 	},
-	"packageManager": "pnpm@11.7.0"
+	"packageManager": "pnpm@11.21.0"
 }
