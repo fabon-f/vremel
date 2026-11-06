@@ -1,5 +1,4 @@
 /// <reference types="vite/client" />
-import "temporal-spec/global";
 
 async function loadPolyfill(packageName: unknown) {
 	if (packageName === undefined) {

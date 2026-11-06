@@ -1,5 +1,6 @@
 import { Temporal as Temporal2 } from "@js-temporal/polyfill";
 import { Temporal as Temporal1 } from "temporal-polyfill";
+import { Temporal as Temporal3 } from "temporal-polyfill-lite";
 import { expect, test } from "vitest";
 
 import {
@@ -167,6 +168,7 @@ test("type compatibility", () => {
 		Temporal1.Duration.from({ years: 2 }),
 	);
 	testFunc(
+		// @ts-expect-error @js-temporal/polyfill uses old type definition
 		Temporal2.Now.instant(),
 		Temporal2.Now.zonedDateTimeISO(),
 		Temporal2.Now.plainDateTimeISO(),
@@ -175,5 +177,15 @@ test("type compatibility", () => {
 		Temporal2.Now.plainDateISO().toPlainYearMonth(),
 		Temporal2.Now.plainDateISO().toPlainMonthDay(),
 		Temporal1.Duration.from({ years: 2 }),
+	);
+	testFunc(
+		Temporal3.Now.instant(),
+		Temporal3.Now.zonedDateTimeISO(),
+		Temporal3.Now.plainDateTimeISO(),
+		Temporal3.Now.plainDateISO(),
+		Temporal3.Now.plainTimeISO(),
+		Temporal3.Now.plainDateISO().toPlainYearMonth(),
+		Temporal3.Now.plainDateISO().toPlainMonthDay(),
+		Temporal3.Duration.from({ years: 2 }),
 	);
 });

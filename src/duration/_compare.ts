@@ -5,8 +5,8 @@ import type { Temporal } from "../types.js";
 export function compare(
 	one: Temporal.Duration,
 	two: Temporal.Duration,
-	options?: Temporal.DurationArithmeticOptions,
-): Temporal.ComparisonResult {
+	options?: Temporal.DurationRelativeToOptions,
+): 1 | 0 | -1 {
 	const Duration = getConstructor(one);
-	return Duration.compare(one, two, options);
+	return Duration.compare(one, two, options) as 1 | 0 | -1;
 }
