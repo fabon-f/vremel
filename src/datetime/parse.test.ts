@@ -8,9 +8,9 @@ describe("real-world examples", () => {
 	test("japanese era", () => {
 		expect(
 			Temporal.PlainDate.from({
-				...parse("R1/8/1", "GGGGGy/M/d", {
+				...(parse("R1/8/1", "GGGGGy/M/d", {
 					era: { narrow: { reiwa: "R", heisei: "H", showa: "S" } },
-				}),
+				}) as { era: string; eraYear: number; month: number; day: number }),
 				calendar: "japanese",
 			}),
 		).toEqual(Temporal.PlainDate.from("2019-08-01[u-ca=japanese]"));
@@ -27,9 +27,11 @@ describe("real-world examples", () => {
 				},
 			},
 		};
-		expect(Temporal.PlainDate.from(parse("9 февраля 2025", "d MMMM y", locale))).toEqual(
-			Temporal.PlainDate.from("2025-02-09"),
-		);
+		expect(
+			Temporal.PlainDate.from(
+				parse("9 февраля 2025", "d MMMM y", locale) as { year: number; month: number; day: number },
+			),
+		).toEqual(Temporal.PlainDate.from("2025-02-09"));
 	});
 });
 

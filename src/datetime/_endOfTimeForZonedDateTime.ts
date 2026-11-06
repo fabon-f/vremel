@@ -4,7 +4,7 @@ import { getTimeZoneTransitionBetween } from "./_getTimeZoneTransitionBetween.js
 /** @internal */
 export function endOfTimeForZonedDateTime(
 	zdt: Temporal.ZonedDateTime,
-	withArg: Temporal.PlainDateTimeLike,
+	withArg: Partial<Temporal.DateTimeLikeObject>,
 ): Temporal.ZonedDateTime {
 	const [earlier, later] = (["earlier", "later"] as const).map((disambiguation) =>
 		zdt.with(withArg, {

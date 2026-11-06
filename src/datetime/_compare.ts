@@ -12,31 +12,19 @@ import {
 import type { ComparableDateTimeType, Temporal } from "../types.js";
 
 /** @internal */
-export function compare(a: Temporal.Instant, b: Temporal.Instant): Temporal.ComparisonResult;
+export function compare(a: Temporal.Instant, b: Temporal.Instant): 1 | 0 | -1;
 /** @internal */
-export function compare(
-	a: Temporal.ZonedDateTime,
-	b: Temporal.ZonedDateTime,
-): Temporal.ComparisonResult;
+export function compare(a: Temporal.ZonedDateTime, b: Temporal.ZonedDateTime): 1 | 0 | -1;
 /** @internal */
-export function compare(a: Temporal.PlainDate, b: Temporal.PlainDate): Temporal.ComparisonResult;
+export function compare(a: Temporal.PlainDate, b: Temporal.PlainDate): 1 | 0 | -1;
 /** @internal */
-export function compare(a: Temporal.PlainTime, b: Temporal.PlainTime): Temporal.ComparisonResult;
+export function compare(a: Temporal.PlainTime, b: Temporal.PlainTime): 1 | 0 | -1;
 /** @internal */
-export function compare(
-	a: Temporal.PlainDateTime,
-	b: Temporal.PlainDateTime,
-): Temporal.ComparisonResult;
+export function compare(a: Temporal.PlainDateTime, b: Temporal.PlainDateTime): 1 | 0 | -1;
 /** @internal */
-export function compare(
-	a: Temporal.PlainYearMonth,
-	b: Temporal.PlainYearMonth,
-): Temporal.ComparisonResult;
+export function compare(a: Temporal.PlainYearMonth, b: Temporal.PlainYearMonth): 1 | 0 | -1;
 /** @internal */
-export function compare(
-	a: ComparableDateTimeType,
-	b: ComparableDateTimeType,
-): Temporal.ComparisonResult;
+export function compare(a: ComparableDateTimeType, b: ComparableDateTimeType): 1 | 0 | -1;
 export function compare(a: ComparableDateTimeType, b: ComparableDateTimeType) {
 	if (isInstant(a) && isInstant(b)) {
 		return getConstructor(a).compare(a, b);
