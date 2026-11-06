@@ -168,6 +168,7 @@ test("type compatibility", () => {
 		Temporal1.Duration.from({ years: 2 }),
 	);
 	testFunc(
+		// @ts-expect-error @js-temporal/polyfill uses old type definition
 		Temporal2.Now.instant(),
 		Temporal2.Now.zonedDateTimeISO(),
 		Temporal2.Now.plainDateTimeISO(),
