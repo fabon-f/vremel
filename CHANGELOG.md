@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Make Temporal types compatible with built-in TypeScript ones ([#12](https://github.com/fabon-f/vremel/pull/12))
+- **BREAKING**: Make Temporal types compatible with built-in TypeScript ones ([#12](https://github.com/fabon-f/vremel/pull/12))
+- **BREAKING**: Update the supported minimum Node.js version to v22 ([#13](https://github.com/fabon-f/vremel/pull/13))
 
 ## 0.6.2 (2025-09-25)
 
