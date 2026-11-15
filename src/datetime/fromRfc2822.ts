@@ -41,9 +41,10 @@ function removeComment(str: string) {
 	return res;
 }
 
+// ASCII alphabets in RegExp does not match to characters outside ASCII under the single `i` flag, unlike `ui` flags.
 const dateTimeFormatRegex =
-	/^(?:[ \t\r\n]*([A-Za-z]{3}),)?[ \t\r\n]*(\d\d)[ \t\r\n]+([A-Za-z]{3})[ \t\r\n]+(\d\d|\d\d\d\d)[ \t\r\n]+(\d\d):(\d\d)(?::(\d\d))?[ \t\r\n]+([+-]\d{4}|[A-Za-z]+)[ \t\r\n]*$/;
-const timeZoneFormatRegex = /^(?:[+-](?:[01]\d|2[0-3])[0-5]\d|UT|GMT|[A-IK-Za-ik-z]|[ECMP][SD]T)$/;
+	/^(?:[ \t\r\n]*([A-Z]{3}),)?[ \t\r\n]*(\d\d?)[ \t\r\n]+([A-Z]{3})[ \t\r\n]+(\d\d|\d\d\d\d)[ \t\r\n]+(\d\d):(\d\d)(?::(\d\d))?[ \t\r\n]+([+-]\d{4}|[A-Z]{1,3})[ \t\r\n]*$/i;
+const timeZoneFormatRegex = /^(?:[+-](?:[01]\d|2[0-3])[0-5]\d|UT|GMT|[A-IK-Z]|[ECMP][SD]T)$/i;
 
 function fullYear(year: string) {
 	const yearNum = parseInt(year, 10);
@@ -54,15 +55,16 @@ function fullYear(year: string) {
 }
 
 function getOffset(timeZone: string): string {
-	if (["UT", "GMT", "z", "Z"].includes(timeZone)) {
+	const normalizedTimeZone = timeZone.toUpperCase();
+	if (["UT", "GMT", "Z"].includes(normalizedTimeZone)) {
 		return "+00:00";
 	}
-	if (timeZone === "-0000" || /^[A-IK-Za-ik-z]$/.test(timeZone)) {
+	if (normalizedTimeZone === "-0000" || /^[A-IK-Z]$/.test(normalizedTimeZone)) {
 		// according to the spec, military zone except 'Z' should be considered equivalent to "-0000",
 		// which means the date-time contains no information about the local time zone
 		throw new Error("No offset info");
 	}
-	if (/^[+-]\d{4}$/.test(timeZone)) {
+	if (/^[+-]\d{4}$/.test(normalizedTimeZone)) {
 		return `${timeZone.slice(0, 3)}:${timeZone.slice(3)}`;
 	}
 	const table = createRecord({
@@ -75,8 +77,8 @@ function getOffset(timeZone: string): string {
 		PDT: "-07:00",
 		PST: "-08:00",
 	});
-	if (table[timeZone] !== undefined) {
-		return table[timeZone];
+	if (table[normalizedTimeZone] !== undefined) {
+		return table[normalizedTimeZone];
 	}
 	throw new Error("Unknown time zone");
 }
@@ -110,14 +112,18 @@ function parse(
 	}
 	return [
 		fullYear(year),
-		getMonthNumberFromAbbreviation(monthName),
+		getMonthNumberFromAbbreviation(normalizeNameCase(monthName)),
 		parseInt(day),
 		parseInt(hour, 10),
 		parseInt(minute, 10),
 		parseInt(second),
-		dayOfWeek,
+		dayOfWeek === undefined ? undefined : normalizeNameCase(dayOfWeek),
 		timeZone,
 	];
+}
+
+function normalizeNameCase(name: string): string {
+	return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 }
 
 /**

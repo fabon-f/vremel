@@ -26,6 +26,26 @@ test("wrong format", () => {
 	}).toThrow();
 });
 
+test.for([
+	"fri, 07 Jun 2024 01:23:45 GMT",
+	"fRI, 07 Jun 2024 01:23:45 GMT",
+	"FRI, 07 Jun 2024 01:23:45 GMT",
+])("rejects non-canonical weekday casing (%s)", (date) => {
+	expect(() => fromRfc7231(date, Temporal.Instant)).toThrow();
+});
+
+test.for([
+	"Fri, 07 jun 2024 01:23:45 GMT",
+	"Fri, 07 JUN 2024 01:23:45 GMT",
+	"Fri, 07 jUN 2024 01:23:45 GMT",
+])("rejects non-canonical month casing (%s)", (date) => {
+	expect(() => fromRfc7231(date, Temporal.Instant)).toThrow();
+});
+
+test.for(["gmt", "Gmt"])("rejects non-canonical GMT casing (%s)", (timeZone) => {
+	expect(() => fromRfc7231(`Fri, 07 Jun 2024 01:23:45 ${timeZone}`, Temporal.Instant)).toThrow();
+});
+
 test("wrong day of week", () => {
 	expect(() => {
 		fromRfc7231("Tue, 07 Jun 2024 01:23:45 GMT", Temporal.Instant);
