@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fix negative modified Julian date conversion ([#16](https://github.com/fabon-f/vremel/pull/16)).
+- Fix negative modified Julian date conversion in `fromJulianDate` and `fromModifiedJulianDate` ([#16](https://github.com/fabon-f/vremel/pull/16)).
+- Fix RFC 2822 date parsing case handling and 1-digit days in `fromRfc2822` ([#17](https://github.com/fabon-f/vremel/pull/17)).
 
 ## 0.7.0 (2026-11-06)
 
