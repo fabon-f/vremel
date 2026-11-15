@@ -26,6 +26,29 @@ test("day of week", () => {
 	);
 });
 
+test.for([
+	["Mon, 1 Jan 2024 01:23:45 +0000", "2024-01-01T01:23:45Z"],
+	["1 Jan 2024 01:23:45 +0000", "2024-01-01T01:23:45Z"],
+] as [string, string][])("one-digit day", ([date, expected]) => {
+	expect(fromRfc2822(date, Temporal.Instant)).toEqual(Temporal.Instant.from(expected));
+});
+
+test.for([
+	["mON, 01 Jan 2024 01:23:45 +0000", "2024-01-01T01:23:45Z"],
+	["mon, 01 Jan 2024 01:23:45 +0000", "2024-01-01T01:23:45Z"],
+	["MON, 01 Jan 2024 01:23:45 +0000", "2024-01-01T01:23:45Z"],
+] as [string, string][])("case-insensitive weekday names", ([date, expected]) => {
+	expect(fromRfc2822(date, Temporal.Instant)).toEqual(Temporal.Instant.from(expected));
+});
+
+test.for([
+	["Mon, 01 jAN 2024 01:23:45 +0000", "2024-01-01T01:23:45Z"],
+	["Mon, 01 jan 2024 01:23:45 +0000", "2024-01-01T01:23:45Z"],
+	["Mon, 01 JAN 2024 01:23:45 +0000", "2024-01-01T01:23:45Z"],
+] as [string, string][])("case-insensitive RFC 2822 month names", ([date, expected]) => {
+	expect(fromRfc2822(date, Temporal.Instant)).toEqual(Temporal.Instant.from(expected));
+});
+
 test("wrong day of week", () => {
 	expect(() => {
 		fromRfc2822("Tue, 07 Jun 2024 01:23:45 +0900", Temporal.PlainDateTime);
@@ -56,19 +79,18 @@ test("obsolete 2-digit year", () => {
 	);
 });
 
-test.for([
-	"07 Jun 2024 01:23:45 UT",
-	"07 Jun 2024 01:23:45 GMT",
-	"07 Jun 2024 01:23:45 Z",
-	"07 Jun 2024 01:23:45 z",
-])("time zones with zero offset", (rfc2822) => {
-	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(
-		Temporal.Instant.from("2024-06-07T01:23:45+00:00"),
-	);
-	expect(fromRfc2822(rfc2822, Temporal.ZonedDateTime)).toEqual(
-		Temporal.ZonedDateTime.from("2024-06-07T01:23:45+00:00[+00:00]"),
-	);
-});
+test.for(["UT", "ut", "Ut", "uT", "GMT", "gmt", "gMT", "Z", "z"])(
+	"time zones with zero offset: %s",
+	(timeZone) => {
+		const rfc2822 = `07 Jun 2024 01:23:45 ${timeZone}`;
+		expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(
+			Temporal.Instant.from("2024-06-07T01:23:45+00:00"),
+		);
+		expect(fromRfc2822(rfc2822, Temporal.ZonedDateTime)).toEqual(
+			Temporal.ZonedDateTime.from("2024-06-07T01:23:45+00:00[+00:00]"),
+		);
+	},
+);
 
 test("time zone -0000", () => {
 	expect(fromRfc2822("07 Jun 24 01:23:45 -0000", Temporal.PlainDateTime)).toEqual(
@@ -86,29 +108,47 @@ test("militatry time zone", () => {
 	expect(fromRfc2822("07 Jun 24 01:23:45 A", Temporal.PlainDateTime)).toEqual(
 		Temporal.PlainDateTime.from("2024-06-07T01:23:45"),
 	);
+	expect(fromRfc2822("07 Jun 24 01:23:45 a", Temporal.PlainDateTime)).toEqual(
+		Temporal.PlainDateTime.from("2024-06-07T01:23:45"),
+	);
 	expect(() => {
 		fromRfc2822("07 Jun 2024 01:23:45 A", Temporal.Instant);
 	}).toThrow();
 	expect(() => {
 		fromRfc2822("07 Jun 2024 01:23:45 A", Temporal.ZonedDateTime);
 	}).toThrow();
+	expect(() => {
+		fromRfc2822("07 Jun 2024 01:23:45 J", Temporal.PlainDateTime);
+	}).toThrow();
 });
 
 test.for([
-	["07 Jun 2024 01:23:45 EST", "2024-06-07T01:23:45-05:00[-05:00]"],
-	["07 Jun 2024 01:23:45 EDT", "2024-06-07T01:23:45-04:00[-04:00]"],
-	["07 Jun 2024 01:23:45 CST", "2024-06-07T01:23:45-06:00[-06:00]"],
-	["07 Jun 2024 01:23:45 CDT", "2024-06-07T01:23:45-05:00[-05:00]"],
-	["07 Jun 2024 01:23:45 MST", "2024-06-07T01:23:45-07:00[-07:00]"],
-	["07 Jun 2024 01:23:45 MDT", "2024-06-07T01:23:45-06:00[-06:00]"],
-	["07 Jun 2024 01:23:45 PST", "2024-06-07T01:23:45-08:00[-08:00]"],
-	["07 Jun 2024 01:23:45 PDT", "2024-06-07T01:23:45-07:00[-07:00]"],
-] as [string, string][])("North American time zones", ([rfc2822, iso8601]) => {
-	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(Temporal.Instant.from(iso8601));
-	expect(fromRfc2822(rfc2822, Temporal.ZonedDateTime)).toEqual(
-		Temporal.ZonedDateTime.from(iso8601),
-	);
+	["EST", "-05:00"],
+	["EDT", "-04:00"],
+	["CST", "-06:00"],
+	["CDT", "-05:00"],
+	["MST", "-07:00"],
+	["MDT", "-06:00"],
+	["PST", "-08:00"],
+	["PDT", "-07:00"],
+	["Est", "-05:00"],
+	["est", "-05:00"],
+	["eST", "-05:00"],
+] as [string, string][])("North American time zones", ([timeZone, offsetTimeZone]) => {
+	const rfc2822 = `07 Jun 2024 01:23:45 ${timeZone}`;
+	const expected =
+		Temporal.PlainDateTime.from("2024-06-07T01:23:45").toZonedDateTime(offsetTimeZone);
+
+	expect(fromRfc2822(rfc2822, Temporal.Instant)).toEqual(expected.toInstant());
+	expect(fromRfc2822(rfc2822, Temporal.ZonedDateTime)).toEqual(expected);
 });
+
+test.for(["\u017fat, 08 Jun 2024 01:23:45 +0000", "07 Jun 2024 01:23:45 \u212a"])(
+	"rejects non-ASCII lookalikes in names (%s)",
+	(date) => {
+		expect(() => fromRfc2822(date, Temporal.PlainDateTime)).toThrow();
+	},
+);
 
 test.for(["ABC", "+0061", "-2400"])("Invalid time zone (%s)", (zone) => {
 	expect(() => {
