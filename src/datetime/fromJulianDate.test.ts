@@ -14,4 +14,7 @@ test("create Instant from julian date", () => {
 	expect(fromJulianDate(2399984.5, Temporal.Instant)).toEqual(
 		Temporal.Instant.from("1858-11-01T00:00:00Z"),
 	);
+	expect(fromJulianDate(2378497, Temporal.Instant)).toEqual(
+		Temporal.Instant.from("1800-01-01T12:00:00Z"),
+	);
 });

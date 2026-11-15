@@ -11,8 +11,8 @@ export function fromModifiedJulianDate<InstantClassType extends typeof Temporal.
 	modifiedJulianDate: number,
 	Instant: InstantClassType,
 ): InstanceType<InstantClassType> {
-	const modifiedJulianDayInt = Math.floor(modifiedJulianDate);
-	const nanoseconds = Math.floor((modifiedJulianDate - modifiedJulianDayInt) * 8.64e13);
+	const modifiedJulianDayInt = Math.trunc(modifiedJulianDate);
+	const nanoseconds = Math.trunc((modifiedJulianDate - modifiedJulianDayInt) * 8.64e13);
 	return Instant.from("1858-11-17T00:00:00Z").add({
 		hours: modifiedJulianDayInt * 24,
 		nanoseconds,
