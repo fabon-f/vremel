@@ -62,10 +62,7 @@ test("PlainYearMonth of non-ISO calendar", () => {
 
 test("Typecheck", () => {
 	expect(() => {
-		closestTo(
-			Temporal.Now.zonedDateTimeISO(),
-			// @ts-expect-error
-			[Temporal.Now.instant()],
-		);
+		// @ts-expect-error
+		closestTo(Temporal.Now.zonedDateTimeISO(), [Temporal.Now.instant()]);
 	}).toThrow();
 });
